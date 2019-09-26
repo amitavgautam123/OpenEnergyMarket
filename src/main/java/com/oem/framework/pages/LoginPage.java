@@ -1,6 +1,10 @@
 package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
+
+import java.io.FileInputStream;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
@@ -23,6 +27,27 @@ public class LoginPage extends BasePage {
         driver.get("https://portal.oem-testing.com/Account/Login");
         setValue(username,userName);
         setValue(pwd,password);
+        click(signInBtn);
+
+
+        if(isAdminDashboardPage())
+            return new AdminDashboardPage();
+
+        if(isCustomerDashboardPage())
+            return new CustomerDashboardPage();
+
+        //Failed login
+        return this;
+    }
+    
+    public BasePage login() throws Throwable  {
+    	String URL = getPropertyFileData("url");
+    	String EMAIL = getPropertyFileData("email");
+    	String PASSWORD = getPropertyFileData("password");
+    	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    	driver.get(URL);
+        setValue(username, EMAIL);
+        setValue(pwd, PASSWORD);
         click(signInBtn);
 
 

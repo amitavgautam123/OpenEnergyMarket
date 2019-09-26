@@ -3,9 +3,20 @@ package com.oem.framework.core.base;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.commons.collections4.bag.SynchronizedSortedBag;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
@@ -26,20 +37,31 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         driver = testExecutionContext.getDriver();
         testName = testExecutionContext.getTestName();
     }
-
+    
+    /**
+     * Set value of the webelement by passing locator and value
+     * @param by
+     * @param value
+     */
     public void setValue(By by, String value){
         waitForElementPresent(by);
         driver.findElement(by).clear();
         driver.findElement(by).sendKeys(value);
     }
     
-    //clearValue
+    /**
+     * clear data present in the webelement
+     * @param by
+     */
     public void clearValue(By by) {
     	waitForElementPresent(by);
         driver.findElement(by).clear();
     }
     
-
+    /**
+     * Click on a particular webelement by entering its locator as argument.
+     * @param by
+     */
     public void click(By by){
         waitForElementPresent(by);
         driver.findElement(by).click();
@@ -55,7 +77,19 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
         }
     }
+    /**
+     * Explicitely wait for an element to dissapear.
+     * @param locator
+     */
+    public void waitForElementInvisible(By locator) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
+        } catch (Exception e) {
+
+        }
+    }
 
     public void scrollToElement(By locator) {
         WebElement element = driver.findElement(locator);
@@ -109,11 +143,10 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(locator);
         new Select(driver.findElement(locator)).selectByValue(value);
     }
-    
-    
 
     public boolean isElementPresent(By locator) {
-        try {
+    	waitForElementPresent(locator);
+    	try {
             WebElement element = driver.findElement(locator);
             if (element == null)
                 return false;
@@ -124,6 +157,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         }
         return true;
     }
+    
     @Override
     protected void load() {
 
@@ -151,19 +185,28 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     protected void verifyElementPresent(By element){
         Assert.assertTrue(isElementPresent(element),"Element "+element +" doesn't exit");
     }
-
+    /**
+     * Used to enter data into a webelement based by passing locator and data as arguments
+     * @param locator
+     * @param keys
+     */
     public void sendSpecialKeys(By locator,Keys keys){
         driver.findElement(locator).clear();
     	driver.findElement(locator).sendKeys(keys);
     }
-    
-    public void selectFutureDateCalender()
+    /**
+     * Used to select a future date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
+     * @param dayOfMonth
+     * @param monthNumber
+     * @param year
+     */
+    public void selectFutureDateCalender(int dayOfMonth, int monthNumber, int year)
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '8' and @data-year = '2019']/a[text() = '25']")).click();//Sep 25, 2019
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//Sep 25, 2019
 				break;
 			}
 			catch(Exception e)
@@ -173,14 +216,19 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 			}
 		}
 	}
-    
-    public void selectPrevDateCalender() throws InterruptedException
+    /**
+     * Used to select a previous date from date picker by entering date, month and year as arguments. For selecting a month, enter 0 for January and 11 for December.
+     * @param dayOfMonth
+     * @param monthNumber
+     * @param year
+     */
+    public void selectPrevDateCalender(int dayOfMonth, int monthNumber, int year) 
 	{
 		int count = 0;
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '2' and @data-year = '2016']/a[text() = '7']")).click();//March 7, 2016
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//March 7, 2016
 				break;
 			}
 			catch(Exception e)
@@ -190,5 +238,77 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 			}
 		}
 	}
+    /**
+     * Get properties file key value based on your arguments
+     * @param key
+     * @return String
+     * @throws Throwable
+     */
+    public String getPropertyFileData(String key) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/commonData.properties");
+    	Properties pObj = new Properties();
+    	pObj.load(fObj);
+    	String data = pObj.getProperty(key);
+    	return data;
+    }
+    /**
+     * Used to read data from excel sheet based on your arguments (testScriptData.xlsx) 
+     * @param sheetNum
+     * @param rowNum
+     * @param cellNum
+     * @return String
+     * @throws Throwable
+     */
+    public String readExcelData(String sheetNum, int rowNum, int cellNum) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/testscriptdata.xlsx");
+    	Workbook wb = WorkbookFactory.create(fObj);
+    	Sheet sh = wb.getSheet(sheetNum);
+    	Row row = sh.getRow(rowNum);
+    	Cell cel = row.getCell(cellNum);
+    	String data = cel.getStringCellValue();
+    	return data;
+    }
+    /**
+     * Used to check if the dropdown contains the value
+     * @param locator of dropdown
+     * @param value
+     * @return boolean
+     */
+    public boolean isElementExistInDropDown(By locator, String value)
+    {
+    	List<WebElement> allElements = driver.findElements(locator);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+            if(element.getText().contains(value)==true) 
+            {
+            	status = true;
+            }
+        }
+    	return status;
+    }
+    /**
+     * Used to check if the list contains the value
+     * @param locator identifying all elements of list
+     * @param value
+     * @return boolean
+     */
+    public boolean isElementExistInList(By locator, String value)
+    {
+    	List<WebElement> allElements = driver.findElements(locator);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+            if(element.getText().contains(value)==true) 
+            {
+            	status = true;
+            }
+        }
+    	return status;
+    }
+    public void actionsClick(By locator) {
+    	Actions actions = new Actions(driver);
+    	actions.moveToElement((WebElement) locator).click().build().perform();
+    }
 }
 
