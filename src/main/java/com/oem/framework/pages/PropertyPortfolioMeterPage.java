@@ -1029,6 +1029,64 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on save contract history button.", true);
 		boolean ariaInvalidStatus = getAttribute(dateTraded, "aria-invalid").equals("true");
 		softAssertion.assertTrue(ariaInvalidStatus, "");
+		
+		if(getAttribute(dateTraded, "value").equals("")) {
+			String dateTradedStatus = getAttribute(dateTraded, "aria-invalid");
+			if(dateTradedStatus == null)
+				dateTradedStatus = "true";
+			softAssertion.assertTrue(dateTradedStatus.equals("true"), "Mandatory expression while validating Date Traded field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Date Traded field.", true);
+		}
+		if(getAttribute(contractStartDate, "value").equals("")) {
+			String contractStartDateFieldErrorStatus = getAttribute(contractStartDate, "aria-invalid");
+			if(contractStartDateFieldErrorStatus == null)
+				contractStartDateFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractStartDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract Start Date field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contract Start Date field.", true);
+		}
+		if(getAttribute(contractEndDate_ContractHist, "value").equals("")) {
+			String contractEndDateFieldErrorStatus = getAttribute(contractEndDate_ContractHist, "aria-invalid");
+			if(contractEndDateFieldErrorStatus == null)
+				contractEndDateFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contract End Date field.", true);
+		}
+		if(getAttribute(dayRate, "value").equals("")) {
+			String dayRateFieldErrorStatus = getAttribute(dayRate, "aria-invalid");
+			if(dayRateFieldErrorStatus == null)
+				dayRateFieldErrorStatus = "true";
+			softAssertion.assertTrue(dayRateFieldErrorStatus.equals("true"), "Mandatory expression while validating Day Rate field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Day Rate field.", true);
+		}
+		if(getAttribute(nightRate, "value").equals("")) {
+			String nightRateFieldErrorStatus = getAttribute(nightRate, "aria-invalid");
+			if(nightRateFieldErrorStatus == null)
+				nightRateFieldErrorStatus = "true";
+			softAssertion.assertTrue(nightRateFieldErrorStatus.equals("true"), "Mandatory expression while validating Night Rate field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Night Rate field.", true);
+		}
+		if(getAttribute(standingCharge, "value").equals("")) {
+			String standingChargeFieldErrorStatus = getAttribute(standingCharge, "aria-invalid");
+			if(standingChargeFieldErrorStatus == null)
+				standingChargeFieldErrorStatus = "true";
+			softAssertion.assertTrue(standingChargeFieldErrorStatus.equals("true"), "Mandatory expression while validating Standing Charge field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Standing Charge field.", true);
+		}
+		if(getAttribute(capacityCharge, "value").equals("")) {
+			String capacityChargeFieldErrorStatus = getAttribute(capacityCharge, "aria-invalid");
+			if(capacityChargeFieldErrorStatus == null)
+				capacityChargeFieldErrorStatus = "true";
+			softAssertion.assertTrue(capacityChargeFieldErrorStatus.equals("true"), "Mandatory expression while validating Capacity Charge field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Capacity Charge field.", true);
+		}
+		if(getAttribute(contractedAnnualSpend, "value").equals("")) {
+			String contractedAnnualSpendFieldErrorStatus = getAttribute(contractedAnnualSpend, "aria-invalid");
+			if(contractedAnnualSpendFieldErrorStatus == null)
+				contractedAnnualSpendFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractedAnnualSpendFieldErrorStatus.equals("true"), "Mandatory expression while validating Contracted Annual Spend field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contracted Annual Spend field.", true);
+		}
+		
 	}
 	
 	
