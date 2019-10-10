@@ -34,11 +34,22 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 
-	@Test
-	public void PM_PP_TC_033() throws Throwable {
+	@Test(dataProvider = "getHHcontractHistoryData")
+	public void addHHcontractHistoryUsingDataProviderTest(String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider(dayRate, nightRate, standingCharge, 
+				capacityCharge, contractedAnnualSpend);
+	}
+	@DataProvider
+	public Object[][] getHHcontractHistoryData() {
+		Object[][] data = {{"", "", "", "", ""},			//PM_PP_TC_034
+				{"20", "", "", "", ""},						//PM_PP_TC_037
+				{"", "18", "", "", ""},						//PM_PP_TC_038
+				{"", "", "120", "", ""},					//PM_PP_TC_039
+				{"", "", "", "140", ""}};					//PM_PP_TC_040
+		return data;
 	}
 }

@@ -146,6 +146,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By secondContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration2']");
 	By thirdContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration3']");
 	By fourthContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration4']");
+	
+	By numberOfSuppliers=By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li");
 
 	By choosSuppliers_Water = By.xpath("//div[@id='request-water-quote']//div[@id='selectall']");
 	By firstSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[1]//label[1]");
@@ -1038,9 +1040,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
 				"Error message is not displaying for not entering contract duration.");
-
-		// Assert.assertEquals(actual, expected)
-
 		softAssertion.assertAll();
 	}
 
@@ -2090,7 +2089,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("multiple", "multiple", "multiple");
 		ClickDate_Gas();
-		selectPrevDateCalender(18, 9, 2019);
+		selectPrevDateCalender(12, 9, 2019);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -2121,7 +2120,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softassertfor_(Meter, ContractDuration, Supplier);
 
 	}
-	public void verifyAlertMessageWhenSelected_SameContractDuration_Water(){
+
+	public void verifyAlertMessageWhenSelected_SameContractDuration_Water() {
 		SoftAssert softAssertion = new SoftAssert();
 		clickWaterUtility();
 		selectByIndex(firstContractDuration_Water, 02);
@@ -2130,13 +2130,83 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Clicked on add contract Duration", true);
 		selectByIndex(secondContractDuration_Water, 02);
 		Reporter.log("Selected second Contract Duration.", true);
-		
+
 		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
 				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
 		Reporter.log("Checked if error message for Selecting 2 same Contract Durations is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
 				"Error message is not displaying for selecting 2 same contract durations.");
 		softAssertion.assertAll();
+
+	}
+
+	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water(
+			String NoOfMeter, String NoOfContractDur, String NoOfSupplier) {
+		clickWaterUtility();
+		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
+		ClickTopSubmitButton();
+
+	}
+	public void verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndpreviousDate_Supplier_Water(
+			String NoOfMeter, String NoOfContractDur, String NoOfSupplier) {
+		SoftAssert softAssertion = new SoftAssert();
+		clickWaterUtility();
+		ClickDate_Water();
+		selectPrevDateCalender(05,9,2019);
+		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
+		ClickTopSubmitButton();
 		
+		boolean errorMessageDisplyStatusForEnteringwrongDate = getText(message)
+				.contains("Tender date must be at least five days in the future");
+		Reporter.log("Checked if error message for Entering wrong Date is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
+				"Error message is not displaying for Entring Wrong Date.");
+		// Assert.assertEquals(actual, expected)
+		softAssertion.assertAll();
+	}
+	public void verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndFutureDate_Supplier_Water(
+			String NoOfMeter, String NoOfContractDur, String NoOfSupplier) {
+		clickWaterUtility();
+		ClickDate_Water();
+		selectPrevDateCalender(15,9,2019);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ClickTopSubmitButton();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Water() {
+		SoftAssert softAssertion = new SoftAssert();
+		clickWaterUtility();
+		selectByIndex(firstContractDuration_Water, 02);
+		Reporter.log("Selected First Contract Duration.", true);
+		click(addNewContractDuration_Water);
+		Reporter.log("Clicked on add contract Duration", true);
+		selectByIndex(secondContractDuration_Water, 02);
+		Reporter.log("Selected second Contract Duration.", true);
+
+		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
+				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
+		Reporter.log("Checked if error message for Selecting 2 same Contract Durations is displaying.", true);
+		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
+				"Error message is not displaying for selecting 2 same contract durations.");
+
+		softAssertion.assertAll();
 	}
 }

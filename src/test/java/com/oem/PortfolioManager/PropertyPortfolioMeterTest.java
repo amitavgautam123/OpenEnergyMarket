@@ -126,18 +126,43 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
 	}
-	/*@Test
-	public void addHHcontractHistoryUsingDataProviderTest() throws Throwable {
+	
+	@Test(dataProvider = "getHHcontractHistoryData")
+	public void addHHcontractHistoryUsingDataProviderTest(String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopup();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider(dayRate, nightRate, standingCharge, 
+				capacityCharge, contractedAnnualSpend);
 	}
 	@DataProvider
 	public Object[][] getHHcontractHistoryData() {
-		Object[][] data = {{}};
+		Object[][] data = {{"", "", "", "", ""},			//PM_PP_TC_034
+				{"20", "", "", "", ""},						//PM_PP_TC_037
+				{"", "18", "", "", ""},						//PM_PP_TC_038
+				{"", "", "120", "", ""},					//PM_PP_TC_039
+				{"", "", "", "140", ""},					//PM_PP_TC_040
+				{"", "", "", "", "2400"}};
 		return data;
-	}*/
+	}
+	@Test
+	public void PM_PP_TC_035() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded();
+	}
+	@Test
+	public void PM_PP_TC_036() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDate();
+	}
+	
 
 	
 	
