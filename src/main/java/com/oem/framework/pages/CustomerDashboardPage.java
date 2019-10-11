@@ -22,7 +22,7 @@ public class CustomerDashboardPage extends BasePage {
     By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
     By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
-    public CustomerDashboardPage goToCompanyProfile(){
+    public CustomerDashboardPage goToCompanyProfile()	{
         click(portfolioMgr);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
