@@ -1070,7 +1070,71 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on save contract history button.", true);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 	}
-	
+	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDate() throws Throwable {
+		displayAddContractHistoryHHutilityPopup();
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(16, 2, 2018);		
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(22, 9, 2018);
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		
+		displayAddContractHistoryHHutilityPopup();
+		
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		
+		setValue(this.dayRate, dayRate);
+		setValue(this.nightRate, nightRate);
+		setValue(this.standingCharge, standingCharge);
+		setValue(this.capacityCharge, capacityCharge);
+		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
+		
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		
+		displayAddContractHistoryHHutilityPopup();
+		
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		Thread.sleep(1000);
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		
+		setValue(this.dayRate, dayRate);
+		setValue(this.nightRate, nightRate);
+		setValue(this.standingCharge, standingCharge);
+		setValue(this.capacityCharge, capacityCharge);
+		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
+		
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
 	
 	public void validateMandatoryFieldsErrorMessagesContractHistoryPopup() {
 		SoftAssert softAssertion = new SoftAssert();

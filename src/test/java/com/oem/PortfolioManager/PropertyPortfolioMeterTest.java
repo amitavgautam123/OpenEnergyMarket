@@ -162,7 +162,52 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDate();
 	}
-	
+	@Test
+	public void PM_PP_TC_041() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDate();
+	}
+	@Test(dataProvider = "getHHcontractHistoryData2")
+	public void addHHcontractHistoryUsingDataProviderTest2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider2(day, month, year, dayRate, nightRate, 
+				standingCharge, capacityCharge, contractedAnnualSpend);
+	}
+	@DataProvider
+	public Object[][] getHHcontractHistoryData2() {
+		Object[][] data = {{20, 02, 2018, "25", "", "", "", ""},		//PM_PP_TC_042
+				{14, 02, 2018, "", "28", "", "", ""},					//PM_PP_TC_043
+				{28, 05, 2018, "", "", "48", "", ""},					//PM_PP_TC_044
+				{10, 9, 2018, "", "", "", "35", ""}}; 					//PM_PP_TC_045
+		return data;
+	}
+	@Test(dataProvider = "getHHcontractHistoryData3")
+	public void addHHcontractHistoryUsingDataProviderTest3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider3(day, month, year, dayRate, nightRate, 
+				standingCharge, capacityCharge, contractedAnnualSpend);
+	}
+	@DataProvider
+	public Object[][] getHHcontractHistoryData3() {
+		Object[][] data = {{20, 02, 2018, "", "", "", "", ""},			//PM_PP_TC_041
+				{25, 4, 2018, "25", "", "", "", ""},					//PM_PP_TC_046
+				{14, 2, 2018, "", "28", "", "", ""},					//PM_PP_TC_047
+				{28, 5, 2018, "", "", "48", "", ""},					//PM_PP_TC_048
+				{10, 9, 2018, "", "", "", "35", ""}, 					//PM_PP_TC_049
+				{15, 7, 2018, "20", "18", "", "", ""},					//PM_PP_TC_050
+				{22, 1, 2018, "20", "", "32", "", ""},					//PM_PP_TC_051
+				{15, 7, 2018, "20", "", "", "45", ""}};					//PM_PP_TC_052
+		return data;
+	}
 
 	
 	

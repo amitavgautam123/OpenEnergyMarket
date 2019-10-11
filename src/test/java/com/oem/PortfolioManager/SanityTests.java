@@ -34,22 +34,22 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 
-	@Test(dataProvider = "getHHcontractHistoryData")
-	public void addHHcontractHistoryUsingDataProviderTest(String dayRate, String nightRate, String standingCharge, 
+	@Test(dataProvider = "getHHcontractHistoryData3")
+	public void addHHcontractHistoryUsingDataProviderTest3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider(dayRate, nightRate, standingCharge, 
-				capacityCharge, contractedAnnualSpend);
+		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider3(day, month, year, dayRate, nightRate, 
+				standingCharge, capacityCharge, contractedAnnualSpend);
 	}
 	@DataProvider
-	public Object[][] getHHcontractHistoryData() {
-		Object[][] data = {{"", "", "", "", ""},			//PM_PP_TC_034
-				{"20", "", "", "", ""},						//PM_PP_TC_037
-				{"", "18", "", "", ""},						//PM_PP_TC_038
-				{"", "", "120", "", ""},					//PM_PP_TC_039
-				{"", "", "", "140", ""}};					//PM_PP_TC_040
+	public Object[][] getHHcontractHistoryData3() {
+		Object[][] data = {{20, 02, 2018, "", "", "", "", ""},			//PM_PP_TC_041
+				{25, 04, 2018, "25", "", "", "", ""},					//PM_PP_TC_046
+				{14, 02, 2018, "", "28", "", "", ""},					//PM_PP_TC_047
+				{28, 05, 2018, "", "", "48", "", ""},					//PM_PP_TC_048
+				{10, 9, 2018, "", "", "", "35", ""}}; 					//PM_PP_TC_049
 		return data;
 	}
 }
