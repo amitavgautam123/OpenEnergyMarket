@@ -8,7 +8,9 @@ public class AdminDashboardPage extends BasePage {
 
     By impersonateUsername=By.id("ImpersonateUserName");
     By impersonateBtn=By.id("impersonateBtn");
-
+    By fixedProcurementAdmin=By.xpath("//*[@id=\"accordian-menu\"]//h3[text()='Fixed Procurement Admin']");
+    By tenderOpenQuotes=By.linkText("Tender Open Quotes");
+    By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
 
 
     public CustomerDashboardPage impersonate(String email){
@@ -23,8 +25,13 @@ public class AdminDashboardPage extends BasePage {
         click(impersonateBtn);
         return new SupplierDashboardPage();
     }
-    
-    
+
+    public TenderOpenQuotesPage navigateToTenderQuotes() throws Throwable{
+        click(fixedProcurementAdmin);
+        click(tenderOpenQuotes);
+        return new TenderOpenQuotesPage();
+    }
+
 
 
 

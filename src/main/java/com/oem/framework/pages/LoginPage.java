@@ -3,6 +3,7 @@ package com.oem.framework.pages;
 import com.oem.framework.core.base.BasePage;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -44,11 +45,7 @@ public class LoginPage extends BasePage {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("email");
     	String PASSWORD = getPropertyFileData("password");
-    	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    	driver.get(URL);
-        setValue(username, EMAIL);
-        setValue(pwd, PASSWORD);
-        click(signInBtn);
+        loginUsing(URL,EMAIL,PASSWORD);
 
 
         if(isAdminDashboardPage())
@@ -60,24 +57,24 @@ public class LoginPage extends BasePage {
         //Failed login
         return this;
     }
-    public BasePage loginAsAdmin() throws Throwable  {
+    public AdminDashboardPage loginAsAdmin() throws Throwable  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("adminEmail");
     	String PASSWORD = getPropertyFileData("adminPassword");
-    	driver.get(URL);
-        setValue(username, EMAIL);
-        setValue(pwd, PASSWORD);
-        click(signInBtn);
+    	loginUsing(URL,EMAIL,PASSWORD);
 
 
         if(isAdminDashboardPage())
             return new AdminDashboardPage();
+        else
+            throw new IOException("After login didn't show Admin Dashboard page");
+    }
 
-        if(isCustomerDashboardPage())
-            return new CustomerDashboardPage();
-
-        //Failed login
-        return this;
+    private void loginUsing(String url, String uname, String password){
+        driver.get(url);
+        setValue(username, uname);
+        setValue(pwd, password);
+        click(signInBtn);
     }
 
 
