@@ -42,6 +42,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By ContractDuration4 = By.xpath("//select[@id='ElectricityQuoteHh_Duration4']");
 
 	By SelectAllChooseSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//div[@id='selectall']");
+	By listOfHHsupplierCheckbox = By.xpath("//div[@id='request-electricity-hh-quote']//li[*]//label[1]");
 	By FirstSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[1]//label[1]");
 	By ThirdrdSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[3]//label[1]");
 	By FourthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[4]//label[1]");
@@ -156,6 +157,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By fourthSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[4]//label[1]");
 	By fifthSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[5]//label[1]");
 
+	//Tender Summary Page
+	By editCompanyDetailsTenderSummaryPage = By.xpath("//a[@title = 'Edit Company Details']");
+	By editAdditionalReqTenderSummaryPage = By.xpath("//a[@title = 'Edit Additional Requirements']");
+	
 	public void clickWaterUtility() {
 		click(filterByWaterUtility);
 		Reporter.log("Clicked on Water Utility.", true);
@@ -879,10 +884,15 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessage_IfNotSelectedAndempty() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
+		Reporter.log("Clicked on HH electricity filter.", true);
 		click(SelectAllChoosemeter);
+		Reporter.log("Clicked on Choose All Master", true);
 		clearValue(Date);
+		Reporter.log("Cleared  Date text box", true);
 		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on Choose All Suppliers", true);
 		click(TopSubmit);
+		Reporter.log("Clicked on SubmitButton", true);
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
 		Reporter.log("Checked if error message for not selecting any meter is displaying.", true);
@@ -900,20 +910,27 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
-		// Assert.assertEquals(actual, expected)
-
 		softAssertion.assertAll();
 	}
 
 	public void validatealertErrormessagewhenOnlyOneMeterisSelected() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
+		Reporter.log("clicked on HH Electricity", true);
 		click(SelectAllChoosemeter);
-		// click(MeterFirstElement);i am not able to find this element
+		Reporter.log("clicked on all Meter", true);
+		click(MeterFirstElement);
+		Reporter.log("clicked on First Meter", true);
 		clearValue(Date);
 		click(SelectAllChooseSupplier);
+		Reporter.log("clicked on All supplier", true);
 		click(TopSubmit);
-		click(OkAlert);
+		Reporter.log("clicked on Submit", true);
+		try {
+			click(OkAlert);
+		}
+		catch(Exception e)
+		{}
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message)
 				.contains("Please select contract duration");
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
@@ -933,10 +950,19 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessagewhenMoreThanOneMeterisSelected() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
+		Reporter.log("clicked on HH Electricity", true);
 		clearValue(Date);
+		Reporter.log("Cleared Date Text Box", true);
 		click(SelectAllChooseSupplier);
+		Reporter.log("clicked on All supplier to uncheck checkbox for all suppliers.", true);
 		click(TopSubmit);
-		click(OkAlert);
+		Reporter.log("clicked on Submit", true);
+		try {
+			click(OkAlert);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message)
 				.contains("Please select contract duration");
@@ -958,11 +984,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessagewhenOneContractDurationisSelected() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
+		Reporter.log("clicked on HH Electricity", true);
 		click(SelectAllChoosemeter);
+		Reporter.log("clicked on Choose All Meter", true);
 		selectByIndex(ContractDuration, 01);
+		Reporter.log("clicked on Contract Duration", true);
 		clearValue(Date);
+		Reporter.log("Cleared Date Text Box", true);
 		click(SelectAllChooseSupplier);
+		Reporter.log("clicked on All supplier", true);
 		click(TopSubmit);
+		Reporter.log("clicked on Submit", true);
 
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
@@ -984,13 +1016,20 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessagewhenMoreThanOneContractDurationisSelected() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
+		Reporter.log("clicked on HH Electricity", true);
 		click(SelectAllChoosemeter);
+		Reporter.log("clicked on Choose All Meter", true);
 		selectByIndex(ContractDuration, 01);
+		Reporter.log("clicked on Contract Duration", true);
 		click(AddNewContractDuration);
+		Reporter.log("clicked on Add New Contract Duration", true);
 		selectByIndex(ContractDuration2, 02);
+		Reporter.log("clicked on Contract Duration 2", true);
 		clearValue(Date);
+		Reporter.log("Cleared Date Text Box", true);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
+		Reporter.log("clicked on Submit", true);
 
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
@@ -1003,8 +1042,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
-		// Assert.assertEquals(actual, expected)
-
 		softAssertion.assertAll();
 	}
 
@@ -1060,9 +1097,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
 				"Error message is not displaying for not entering contract duration.");
-
-		// Assert.assertEquals(actual, expected)
-
 		softAssertion.assertAll();
 	}
 
@@ -1075,13 +1109,16 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clearValue(Date);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
-		// click(OkAlert2);
+		try {
+			click(OkAlert2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 				.contains("Please select at least one supplier for a quote request.");
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 	}
 
@@ -1105,7 +1142,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 	}
 
@@ -1140,17 +1176,34 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Clicked on Add New Contract Duration.", true);
 		selectByIndex(ContractDuration4, 05);
 		Reporter.log("Selected 4th contract duration.", true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		click(SelectAllChooseSupplier);
 		Reporter.log("Clicked on Choose Supplier All.", true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		click(TopSubmit);
 		Reporter.log("Clicked Submit Button.", true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 				.contains("Please select at least one supplier for a quote request.");
 		Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 	}
 
@@ -1158,7 +1211,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 
 		click(HHElectricity);
-		Reporter.log("Clicked on  HHE Electricity.", true);
+		Reporter.log("Clicked on  HH Electricity.", true);
 
 		click(SelectAllChoosemeter);
 		Reporter.log("Clicked on ChooseMeter All.", true);
@@ -1183,7 +1236,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any Meter.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 	}
 
@@ -1199,9 +1251,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any Meter.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
-
 	}
 
 	public void validatingErrorMessageAfterSelectingsinglecontractDurationAndmultipleSupplier() {
@@ -1216,7 +1266,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Checked if error message for not selecting Meter is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any Meter.");
-		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 
 	}
@@ -2209,4 +2258,113 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 		softAssertion.assertAll();
 	}
+	
+	public void verifyTheElemtsareCheckedOrNot(){
+		//driver.findElements(By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li"))
+		clickWaterUtility();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//selectingzerosupplier_Water();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		numberOfCheckListPresent(numberOfSuppliers);
+		
+	}
+	public void validateSelectAllSupplierCheckboxWhenUnChecked() {
+		click(filterByHHutility);
+		Reporter.log("Clicked on filter for HH Utility", true);
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on select all option for HH utility.", true);
+		List<WebElement> allElements = driver.findElements(listOfHHsupplierCheckbox);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+	       if(element.isSelected()==false) 
+	       {
+	    	   	System.out.println(element);
+	        	status = true;
+	       }
+	       else {
+	           	status = false;
+	           	Assert.assertTrue(status, "All checkbox are not unchecked.");
+	       }
+	   }
+    	Assert.assertTrue(status, "All checkbox are unchecked");
+	}
+	public void validateSelectAllSupplierCheckboxWhenChecked() {
+		click(filterByHHutility);
+		Reporter.log("Clicked on filter for HH Utility", true);
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on select all option for HH utility.", true);
+		List<WebElement> allElements = driver.findElements(listOfHHsupplierCheckbox);
+    	boolean status = false;
+    	for (WebElement element: allElements) {
+	       if(element.isSelected()==false) 
+	       {
+	    	   	System.out.println(element);
+	        	status = true;
+	       }
+	       else {
+	           	status = false;
+	           	Assert.assertTrue(status, "All checkbox are not unchecked.");
+	       }
+	   }
+    	Assert.assertTrue(status, "All checkbox are unchecked");
+	}
+	public void validateCheckboxClickableTest() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert(); 
+		click(filterByHHutility);
+		Reporter.log("Clicked on filter for HH Utility", true);
+		click(SelectAllChooseSupplier);
+		Reporter.log("Clicked on select all option for HH utility.", true);
+		click(FirstSupplier);
+		Reporter.log("Clicked the checkbox for British gas business.", true);
+		Thread.sleep(1000);
+		boolean checkboxCheckedstatusforBritishGasBusiness = driver.findElement(FirstSupplier).isSelected();
+		softAssertion.assertFalse(checkboxCheckedstatusforBritishGasBusiness, "Checkbox is unchecked for British Gas Business.");
+		click(ThirdrdSupplier);
+		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(ThirdrdSupplier).isSelected();
+		softAssertion.assertFalse(checkboxCheckedstatusForCoronaEnergy, "Checkbox is unchecked for Corona Energy.");
+		//FourthSupplier
+		softAssertion.assertAll();
+	}
+	public void validateTenderSummaryPageDisplay() throws Throwable {
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		Thread.sleep(3000);
+		boolean verifyTenderRequestSummaryURL = driver.getCurrentUrl().contains("RequestQuoteSubmit");
+		Assert.assertTrue(verifyTenderRequestSummaryURL, "Incorrect URL is displaying.");
+	}
+	public void validateEditCompanyProfileOption() throws Throwable {
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		Thread.sleep(3000);
+		click(editCompanyDetailsTenderSummaryPage);
+		Thread.sleep(2000);
+		boolean verifyCompanyProfileURL = driver.getCurrentUrl().contains("CompanyProfile");
+		Assert.assertTrue(verifyCompanyProfileURL, "Incorrect URL is displaying.");
+	}
+	public void validateEditAdditionalReqOptionTenderSummaryPage() throws Throwable {
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		Thread.sleep(3000);
+		click(editAdditionalReqTenderSummaryPage);
+		Thread.sleep(2000);
+		boolean verifyCompanyProfileURL = driver.getCurrentUrl().contains("CompanyProfile");
+		Assert.assertTrue(verifyCompanyProfileURL, "Incorrect URL is displaying.");
+	}
+	
 }

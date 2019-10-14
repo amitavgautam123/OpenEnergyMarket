@@ -310,5 +310,32 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	Actions actions = new Actions(driver);
     	actions.moveToElement((WebElement) locator).click().build().perform();
     }
+    
+    public void numberOfCheckListPresent(By locator){
+    	List<WebElement> els = driver.findElements(locator);
+    	int i=1;
+    	int selected=0;
+    	int notSelected=0;
+    	System.out.println("Number Of Elemnts present in List is  "+els.size());
+    	for ( WebElement el : els ) {
+    		System.out.println("Elemnt "+i+" is : "+el.getText());
+    	    if ( el.isSelected() ) {
+    	    	selected++;
+    	    
+    	    }
+    	    else{
+    	    	notSelected++;
+    	    }
+    	    i++;
+    	    }
+    	if(selected>notSelected){
+    		System.out.println("All the items are selected"+selected);
+    	}
+    	else
+    		System.out.println("All the items are Not selected"+notSelected);
+		
+    	
+    	
+    }
 }
 

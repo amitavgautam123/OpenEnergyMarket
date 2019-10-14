@@ -10,32 +10,30 @@ import com.oem.framework.pages.TendersAndAlertsPage;
 
 public class TendersAndAlertsTest extends BaseTest {
 	
-	@Test
-	public void QT_RAQ_TC_003() throws Throwable
-	{
+	public TendersAndAlertsPage generic() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
 		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
 		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
-		tendersAndAlertsPage.validateQuoteRequestStatusDropdownPresence();
+		return tendersAndAlertsPage;
+	}
+	@Test
+	public void QT_RAQ_TC_003() throws Throwable
+	{
+		TendersAndAlertsPage t = generic();
+		t.validateQuoteRequestStatusDropdownPresence();
 	}
 	@Test
 	public void QT_RAQ_TC_004() throws Throwable
 	{
-		LoginPage loginPage = new LoginPage();
-		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
-		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
-		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
-		tendersAndAlertsPage.validatingPresenceOfUtilities();
+		TendersAndAlertsPage t = generic();
+		t.validatingPresenceOfUtilities();
 	}
 	@Test
 	public void QT_RAQ_TC_005() throws Throwable
 	{
-		LoginPage loginPage = new LoginPage();
-		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
-		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
-		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
-		tendersAndAlertsPage.validateQuoteRequestStatusDropdown();
+		TendersAndAlertsPage t = generic();
+		t.validateQuoteRequestStatusDropdown();	
 	}
 	
 	/*public void QT_RAQ_TC_019() throws Throwable

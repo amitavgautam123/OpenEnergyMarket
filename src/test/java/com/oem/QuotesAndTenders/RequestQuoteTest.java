@@ -21,7 +21,7 @@ public class RequestQuoteTest extends BaseTest {
 	}
 
 	/*
-	 * @Test public void QT_RAQ_TC_004() throws Throwable { LoginPage loginPage
+	 * @Test public void QT_RAQ_TC_005() throws Throwable { LoginPage loginPage
 	 * = new LoginPage(); CustomerDashboardPage customerDashboardPage =
 	 * (CustomerDashboardPage)loginPage.login(); PropertyPortfolioPage
 	 * propertyPortfolioPage =
@@ -745,12 +745,62 @@ public class RequestQuoteTest extends BaseTest {
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndFutureDate_Supplier_Water("multiple", "multiple", "multiple");
 	}*/
-	//@Test
+	@Test
 	public void QT_RAQ_TC_116() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Water();
 	}
+	@Test	
+	public void QT_RAQ_TC_117() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.verifyTheElemtsareCheckedOrNot();
+	}
+	@Test	
+	public void QT_RAQ_TC_118() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateSelectAllSupplierCheckboxWhenUnChecked();
+	}
+	@Test	
+	public void QT_RAQ_TC_119() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateSelectAllSupplierCheckboxWhenChecked();
+	}
+	@Test	
+	public void QT_RAQ_TC_120() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateCheckboxClickableTest();
+	}
+	@Test	
+	public void QT_RAQ_TC_121() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateTenderSummaryPageDisplay();
+	}
+	@Test	
+	public void QT_RAQ_TC_122() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateEditCompanyProfileOption();
+	}
+	@Test	
+	public void QT_RAQ_TC_123() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateEditAdditionalReqOptionTenderSummaryPage();
+	}
+	
 	
 }

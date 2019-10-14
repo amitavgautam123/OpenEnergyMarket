@@ -31,7 +31,6 @@ public class DriverManager implements Base {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
         options.addArguments("--start-maximized");
-
         if(StringUtils.isEmpty(chromeDriverPath)) {
             if (StringUtils.isEmpty(Globals.getConfig("chrome.driver.path")))
                 chromeDriverPath = getDriverPath();

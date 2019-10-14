@@ -34,22 +34,11 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 
-	@Test(dataProvider = "getHHcontractHistoryData3")
-	public void addHHcontractHistoryUsingDataProviderTest3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
-			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+	@Test	
+	public void QT_RAQ_TC_120() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupDataProvider3(day, month, year, dayRate, nightRate, 
-				standingCharge, capacityCharge, contractedAnnualSpend);
-	}
-	@DataProvider
-	public Object[][] getHHcontractHistoryData3() {
-		Object[][] data = {{20, 02, 2018, "", "", "", "", ""},			//PM_PP_TC_041
-				{25, 04, 2018, "25", "", "", "", ""},					//PM_PP_TC_046
-				{14, 02, 2018, "", "28", "", "", ""},					//PM_PP_TC_047
-				{28, 05, 2018, "", "", "48", "", ""},					//PM_PP_TC_048
-				{10, 9, 2018, "", "", "", "35", ""}}; 					//PM_PP_TC_049
-		return data;
+		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
+		requestQuotePage.validateCheckboxClickableTest();
 	}
 }
