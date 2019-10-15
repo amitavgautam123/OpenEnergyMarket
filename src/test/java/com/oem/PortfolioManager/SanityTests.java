@@ -34,11 +34,12 @@ public class SanityTests extends BaseTest {
 		companyProfilePage.fillCompanyProfile();
 	}*/
 
-	@Test	
-	public void QT_RAQ_TC_120() throws Throwable {
+	@Test
+	public void PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
-		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
-		requestQuotePage.validateCheckboxClickableTest();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateLOAPreviousDateSelectPreviousDateTest();
 	}
 }

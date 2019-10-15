@@ -1,6 +1,11 @@
 package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
@@ -38,11 +43,18 @@ public class CustomerDashboardPage extends BasePage {
         return portfolioCalendarPage;
     }
     
-    public CustomerDashboardPage goToPropertyPortfolio(){
+    public CustomerDashboardPage goToPropertyPortfolio() throws AWTException{
         click(portfolioMgr);
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
+        Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
         return propertyPortfolioPage;
     }
 
@@ -59,6 +71,13 @@ public class CustomerDashboardPage extends BasePage {
 		}
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
+        Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
         return propertyPortfolioMeterPage; 
     }
     

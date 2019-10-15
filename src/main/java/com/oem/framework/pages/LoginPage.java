@@ -2,6 +2,8 @@ package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +51,7 @@ public class LoginPage extends BasePage {
         setValue(username, EMAIL);
         setValue(pwd, PASSWORD);
         click(signInBtn);
-
+        
 
         if(isAdminDashboardPage())
             return new AdminDashboardPage();

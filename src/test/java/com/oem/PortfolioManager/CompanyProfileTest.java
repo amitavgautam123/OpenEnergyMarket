@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class CompanyProfileTest extends BaseTest { 
 
 	@Test
-	public void PM_CP_TC_003() throws Throwable {
+	public void PM_CP_TC_003_verifyPortfolioManagerElementExistsTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
@@ -21,7 +21,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_004() throws Throwable {
+	public void PM_CP_TC_004_verifyRegisteredAddressInputsTest() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 
@@ -31,7 +31,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_005() throws Throwable {
+	public void PM_CP_TC_005_verifyRegisteredAddressErrorTest() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -42,7 +42,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_006() throws Throwable {
+	public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -52,7 +52,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_007() throws Throwable {
+	public void PM_CP_TC_007_verifyCompanyNameErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -61,7 +61,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_008() throws Throwable {
+	public void PM_CP_TC_008_validateCompanyNameAlphabeticAcceptanceTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -70,7 +70,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_009() throws Throwable {
+	public void PM_CP_TC_009_verifyBlankPostcodeErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -79,7 +79,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_010() throws Throwable {
+	public void PM_CP_TC_010_validatePostcodeSpecialSymbolTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -88,7 +88,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_011() throws Throwable {
+	public void PM_CP_TC_011_validatePostcodeNumericDataTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -96,7 +96,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.validatePostcodeNumericDataTest();
 	}
 	@Test
-	public void PM_CP_TC_012() throws Throwable {
+	public void PM_CP_TC_012_validateIfPhoneFieldMandatoryTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -104,7 +104,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.validateIfPhoneFieldMandatory();
 	}
 	@Test
-	public void PM_CP_TC_013() throws Throwable {
+	public void PM_CP_TC_013_validatePhoneFieldAlphabeticTestData() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -112,7 +112,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.validatePhoneFieldAlphabeticTestData();
 	}
 	@Test
-	public void PM_CP_TC_014() throws Throwable {
+	public void PM_CP_TC_014_validatePhoneFieldNumericTestData() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -121,7 +121,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_015() throws Throwable {
+	public void PM_CP_TC_015_verifyCompRegistrationNumberErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -129,8 +129,8 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.verifyCompRegistrationNumberError("Company registration number field is required");
 	}
 
-	@Test
-	public void PM_CP_TC_018() throws Throwable {
+	//@Test
+	public void PM_CP_TC_018_uploadLogoTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -139,7 +139,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_019() throws Throwable
+	public void PM_CP_TC_019_validateOptionsSupplierInvoiceToTest() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -148,7 +148,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.validateOptionsSupplierInvoiceTo();
 	}
 	@Test
-	public void PM_CP_TC_021() throws Throwable
+	public void PM_CP_TC_021_validateOptionsPrefferedSupplierPaymentTest() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -157,7 +157,7 @@ public class CompanyProfileTest extends BaseTest {
 		companyProfilePage.validateOptionsPrefferedSupplierPayment();
 	}
 	@Test
-	public void PM_CP_TC_022() throws Throwable
+	public void PM_CP_TC_022_validateMandatoryPrefferedSupplierPaymentTest() throws Throwable
 	{
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -167,7 +167,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_026() throws Throwable {
+	public void PM_CP_TC_026_verifyLOATemplateDisplayTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -176,7 +176,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_027() throws Throwable {
+	public void PM_CP_TC_027_verifyExistingLOADisplayTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -185,37 +185,34 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_028() throws Throwable {
+	public void PM_CP_TC_028_verifyDatePickerDisplayLOAExpiresDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		// companyProfilePage.click(By.id("LOAExpiresDate"));
 		companyProfilePage.verifyDatePickerDisplayLOAExpiresDate();
 	}
 
 	@Test
-	public void PM_CP_TC_029() throws Throwable {
+	public void PM_CP_TC_029_LOAExpiresDateSelectFutureDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.click(By.id("LOAExpiresDate"));
-		companyProfilePage.selectFutureDateCalender(27, 10, 2021);
+		companyProfilePage.validateLOAExpiresDateSelectFutureDateTest();
 	}
 
 	@Test
-	public void PM_CP_TC_030() throws Throwable {
+	public void PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.click(By.id("LOAExpiresDate"));
-		companyProfilePage.selectPrevDateCalender(12, 5, 2017);
+		companyProfilePage.validateLOAPreviousDateSelectPreviousDateTest();
 	}
 
 	@Test
-	public void PM_CP_TC_031() throws Throwable {
+	public void PM_CP_TC_031_verifyRegisteredAddressErrorSpaceTestDataTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -224,7 +221,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_032() throws Throwable {
+	public void PM_CP_TC_032_verifyPostcodeWithSpaceTestDataTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();

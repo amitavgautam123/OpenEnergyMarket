@@ -160,6 +160,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	//Tender Summary Page
 	By editCompanyDetailsTenderSummaryPage = By.xpath("//a[@title = 'Edit Company Details']");
 	By editAdditionalReqTenderSummaryPage = By.xpath("//a[@title = 'Edit Additional Requirements']");
+	By editMeterDetailsTenderSummaryPage = By.id("edit-quote-request");
 	
 	public void clickWaterUtility() {
 		click(filterByWaterUtility);
@@ -2365,6 +2366,25 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(2000);
 		boolean verifyCompanyProfileURL = driver.getCurrentUrl().contains("CompanyProfile");
 		Assert.assertTrue(verifyCompanyProfileURL, "Incorrect URL is displaying.");
+	}
+	public void validateEditQuoteOptionTenderSummaryPage() throws Throwable {
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingSingleSupplier();
+		ClickTopSubmitButton();
+		Thread.sleep(3000);
+		click(editMeterDetailsTenderSummaryPage);
+		Thread.sleep(2000);
+		boolean verifyEditRequestQuoteURL = driver.getCurrentUrl().contains("Quote/EditRequestQuote");
+		Assert.assertTrue(verifyEditRequestQuoteURL, "Incorrect URL is displaying.");
+	}
+	public void verifySupplierSelectionInTenderSummaryPage() throws Throwable {
+		SelectingSingleMeter();
+		SelectingSingleContractDuration();
+		SelectingMultipleSupplier();
+		ClickTopSubmitButton();
+		Thread.sleep(3000);
+		
 	}
 	
 }

@@ -14,7 +14,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
 	@Test
-	public void PM_PP_TC_015() throws Throwable {
+	public void PM_PP_TC_015_validateAddHHMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -62,7 +62,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_026() throws Throwable {
+	public void PM_PP_TC_026_addHHMeterUsingValidTestDataTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -70,7 +70,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.addHHMeterUsingValidTestData();
 	}
 	@Test
-	public void PM_PP_TC_027() throws Throwable {
+	public void PM_PP_TC_027_addValidHHmeterGenericTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -78,7 +78,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.addValidHHmeterGeneric();
 	}
 	@Test
-	public void PM_PP_TC_028() throws Throwable {
+	public void PM_PP_TC_028_checkSavedDetailsAfterAddingHHMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -86,7 +86,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingHHMeter();
 	}
 	@Test
-	public void PM_PP_TC_029() throws Throwable {
+	public void PM_PP_TC_029_validateEditHHmeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -94,7 +94,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateEditHHmeterPopup();
 	}
 	@Test
-	public void PM_PP_TC_030() throws Throwable {
+	public void PM_PP_TC_030_validateEditHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -102,7 +102,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateEditHHmeter();
 	}
 	@Test
-	public void PM_PP_TC_031() throws Throwable {
+	public void PM_PP_TC_031_validateHHdeleteMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -110,7 +110,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateHHdeleteMeterPopup();
 	}
 	@Test
-	public void PM_PP_TC_032() throws Throwable {
+	public void PM_PP_TC_032_validateDeleteHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -120,7 +120,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
 	@Test
-	public void PM_PP_TC_033() throws Throwable {
+	public void PM_PP_TC_033_validateAddContractHistoryPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
@@ -147,7 +147,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_035() throws Throwable {
+	public void PM_PP_TC_035_validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -155,7 +155,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded();
 	}
 	@Test
-	public void PM_PP_TC_036() throws Throwable {
+	public void PM_PP_TC_036_validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -163,7 +163,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDate();
 	}
 	@Test
-	public void PM_PP_TC_041() throws Throwable {
+	public void PM_PP_TC_041_validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -213,7 +213,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
 	@Test
-	public void PM_PP_TC_065() throws Throwable {
+	public void PM_PP_TC_065_validateAddnHHMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -241,7 +241,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_071() throws Throwable {
+	public void PM_PP_TC_071_validateExpectedConsumptionMandatoryFieldAddNHHPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -249,7 +249,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateExpectedConsumptionMandatoryFieldAddNHHPopup();
 	}
 	@Test
-	public void PM_PP_TC_072() throws Throwable {
+	public void PM_PP_TC_072_checkSavedDetailsAfterAddingNHHMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -257,7 +257,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
 	}
 	@Test
-	public void PM_PP_TC_074() throws Throwable {
+	public void PM_PP_TC_074_addExpiredNHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -265,7 +265,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.addExpiredNHHmeter();
 	}
 	@Test
-	public void PM_PP_TC_075() throws Throwable {
+	public void PM_PP_TC_075_checkSavedDetailsAfterAddingNHHMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -281,7 +281,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter();
 	}*/
 	@Test
-	public void PM_PP_TC_078() throws Throwable {
+	public void PM_PP_TC_078_validateNHHdeleteMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -289,7 +289,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateNHHdeleteMeterPopup();
 	}
 	@Test
-	public void PM_PP_TC_079() throws Throwable {
+	public void PM_PP_TC_079_validateDeleteNHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -321,63 +321,63 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_080() throws Throwable {
+	public void PM_PP_TC_080_validateAddGasMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.validateAddGasMeterPopup();
 	}
 	@Test
-	public void PM_PP_TC_086() throws Throwable {
+	public void PM_PP_TC_086_addGasMeterUsingValidTestDataTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.addGasMeterUsingValidTestData();
 	}
 	@Test 
-	public void PM_PP_TC_087() throws Throwable {
+	public void PM_PP_TC_087_addExpiredGasMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.addExpiredGasMeter();
 	}
 	@Test 
-	public void PM_PP_TC_088() throws Throwable {
+	public void PM_PP_TC_088_checkSavedDetailsAfterAddingGasMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.checkSavedDetailsAfterAddingGasMeter();
 	}
 	@Test 
-	public void PM_PP_TC_089() throws Throwable {
+	public void PM_PP_TC_089_validateEditGasMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.validateEditGasMeterPopup();
 	}
 	@Test 
-	public void PM_PP_TC_090() throws Throwable {
+	public void PM_PP_TC_090_validateEditGasMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.validateEditGasMeter();
 	}
 	@Test 
-	public void PM_PP_TC_091() throws Throwable {
+	public void PM_PP_TC_091_validateGasDeleteMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.validateGasDeleteMeterPopup();
 	}
 	@Test 
-	public void PM_PP_TC_092() throws Throwable {
+	public void PM_PP_TC_092_validateDeleteGasMeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.validateDeleteGasMeter();
 	}
 	@Test 
-	public void PM_PP_TC_106() throws Throwable {
+	public void PM_PP_TC_106_validateMeterRevertDeletionTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
