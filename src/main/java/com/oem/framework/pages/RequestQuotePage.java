@@ -1,6 +1,8 @@
 package com.oem.framework.pages;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,8 +10,20 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
-public class RequestQuotePage extends CustomerDashboardPage {
+import com.oem.framework.core.base.BasePage;
 
+public class RequestQuotePage extends CustomerDashboardPage {
+	
+	//login
+	By username=By.id("Email");
+    By pwd=By.id("Password");
+    By signInBtn=By.xpath("//input[@value='Sign in']");
+	
+	By logoutDropdown = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a");
+	By logoutLink = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]//ul/li/a[text() = 'Log out']");
+	
+	By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
+	
 	By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");
 	By reviewQuotesLink = By.xpath("//li[@data-action = 'QuoteOverview']/a");
 
@@ -32,7 +46,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 																								// continuously
 	By MeterSecondElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_1_']");
 	By MeterThridElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_2_']");
-	By MeterFourElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_3_']");
+	By MeterFourthElement = By.xpath("//div[@id='collapseElectricityQuoteHh_SiteMeters_3_']");
 
 	By ContractDuration = By.xpath("//select[@id='ElectricityQuoteHh_ContractDurationInMonths']");
 	By AddNewContractDuration = By.xpath(
@@ -44,14 +58,14 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By SelectAllChooseSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//div[@id='selectall']");
 	By listOfHHsupplierCheckbox = By.xpath("//div[@id='request-electricity-hh-quote']//li[*]//label[1]");
 	By FirstSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[1]//label[1]");
-	By ThirdrdSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[3]//label[1]");
+	By ThirdSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[3]//label[1]");
 	By FourthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[4]//label[1]");
 	By FifthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[5]//label[1]");
 	By SixthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[6]//label[1]");
 
 	By HHElectricity = By.xpath("//a[@id='request-electricity-hh-quote-a']");
 
-	By Date = By.xpath("//input[@id='ElectricityQuoteHh_TenderDate']");
+	By tenderDateHH = By.xpath("//input[@id='ElectricityQuoteHh_TenderDate']");
 	By RenewableEnergy = By
 			.xpath("//div[@id='request-electricity-hh-quote']//label[contains(text(),'Renewable energy')]");
 
@@ -165,6 +179,22 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By editMeterDetailsTenderSummaryPage = By.id("edit-quote-request");
 	By invitedSuppliersHeading_TenderSummaryPage = By.xpath("//h4[text() = 'Invited Suppliers']");
 	By invitedSuppliers_TenderSummaryPage = By.xpath("//h4[text() = 'Invited Suppliers']/following-sibling::div/table/tbody/tr/td");
+	
+	By confirmAndSubmit = By.xpath("//button[text() = 'Confirm and Submit']");
+	By quoteSubmitSuccessPopup = By.xpath("//p[text() = 'Your request for a quote has been submitted. You will receive feedback from the Supplier shortly.']");
+	By okBtn_TenderSummaryPage = By.xpath("//a[text() = 'Ok']");
+	
+	//Verify Tenders
+	By filterAllUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[1]");
+	By filterHHutility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[2]");
+	By filterNHHutility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[3]");
+	By filterGasUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[4]");
+	By filterWaterUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");
+	By allowSelectedBtn = By.xpath("//input[@value = 'Allow Selected']");
+	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
+	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
+	
+	
 	
 	public void clickWaterUtility() {
 		click(filterByWaterUtility);
@@ -533,7 +563,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void SelectingMultipleSupplier() {
 		click(SelectAllChooseSupplier);
 		click(FirstSupplier);
-		click(ThirdrdSupplier);
+		click(ThirdSupplier);
 		click(FourthSupplier);
 		click(FifthSupplier);
 	}
@@ -559,8 +589,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 
 	public void EnterDate(String value) {
-		clearValue(Date);
-		setValue(Date, value);
+		clearValue(tenderDateHH);
+		setValue(tenderDateHH, value);
 	}
 
 	public void ClickRenewableEnergy() {
@@ -739,7 +769,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
@@ -764,7 +794,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
 		click(MeterFirstElement);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 		try {
@@ -789,7 +819,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validatealertErrormessagewhenMoreThanOneMeterisSelected() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 		try {
@@ -819,7 +849,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
 		selectByIndex(ContractDuration, 01);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 
@@ -845,7 +875,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectByIndex(ContractDuration, 01);
 		click(AddNewContractDuration);
 		selectByIndex(ContractDuration2, 02);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 
@@ -879,7 +909,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(TopSubmit);
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
@@ -897,7 +927,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(TopSubmit);
 		boolean errorMessageDisplayStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
@@ -917,7 +947,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(SelectAllChoosemeter);
 		click(MeterFirstElement);
 		selectByIndex(ContractDuration, 02);
-		clearValue(Date);
+		clearValue(tenderDateHH);
 		click(SelectAllChooseSupplier);
 		click(TopSubmit);
 		try {
@@ -962,7 +992,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(MeterFirstElement);
 		click(MeterSecondElement);
 		click(MeterThridElement);
-		click(MeterFourElement);
+		click(MeterFourthElement);
 
 		selectByIndex(ContractDuration, 02);
 		click(AddNewContractDuration);
@@ -1009,7 +1039,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectByIndex(ContractDuration, 02);
 
 		click(SelectAllChooseSupplier);
-		click(ThirdrdSupplier);
+		click(ThirdSupplier);
 		click(FourthSupplier);
 		click(FifthSupplier);
 
@@ -2076,8 +2106,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		boolean checkboxCheckedstatusforBritishGasBusiness = driver.findElement(FirstSupplier).isSelected();
 		softAssertion.assertFalse(checkboxCheckedstatusforBritishGasBusiness, "Checkbox is unchecked for British Gas Business.");
-		click(ThirdrdSupplier);
-		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(ThirdrdSupplier).isSelected();
+		click(ThirdSupplier);
+		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(ThirdSupplier).isSelected();
 		softAssertion.assertFalse(checkboxCheckedstatusForCoronaEnergy, "Checkbox is unchecked for Corona Energy.");
 		//FourthSupplier
 		softAssertion.assertAll();
@@ -2126,11 +2156,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 	public void verifySupplierSelectionInTenderSummaryPage() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
+		String companyName = "AGB3";
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
+		click(tenderDateHH);
+		Thread.sleep(1000);
+		String tenderDate = "12/11/2019";
+		selectFutureDateCalender(12, 10, 2019);
 		SelectingMultipleSupplier();
+		
 		String firstSelectedSupplierName = getText(FirstSupplier);
-		String secondSelectedSupplierName = getText(ThirdrdSupplier);
+		String secondSelectedSupplierName = getText(ThirdSupplier);
 		String thirdSelectedSupplierName = getText(FourthSupplier);
 		String fourthSelectedSupplierName = getText(FifthSupplier);
 		ClickTopSubmitButton();
@@ -2145,6 +2181,126 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(thirdSupplierPresenceStatus, "Selected supplier is not displaying.");
 		boolean fourthSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage, fourthSelectedSupplierName);
 		softAssertion.assertTrue(fourthSupplierPresenceStatus, "Selected supplier is not displaying.");
+		scrollToElement(confirmAndSubmit);
+		click(confirmAndSubmit);
+		Reporter.log("Clicked on confirm and submit button.", true);
+		Thread.sleep(2000);
+		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
+		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus, "Tender Submit Success Popup is not displaying.");
+		click(okBtn_TenderSummaryPage);
+		Reporter.log("Clicked on Ok button.", true);
+		logout();
+		driver.get(getPropertyFileData("url"));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		loginAsAdmin();
+		click(verifyTenders);
+		boolean verifyTendersDisplayStatus = driver.getCurrentUrl().contains("/VerifyTenders");
+		Reporter.log("Checked if verify tenders page is displaying.", true);
+		softAssertion.assertTrue(verifyTendersDisplayStatus, "Verify Tenders page is not displaying.");//VT_TC_003
+		verifyUtilityFilterPresenceVerifyTenders();//VT_TC_004
+		Reporter.log("Checked presence of filters.", true);
+		click(allowSelectedBtn);
+		boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007
+		click(okBtn);
+		click(blockSelectedBtn);
+		alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008
+		click(okBtn);
+    	scrollToElement(findQuote(companyName));
+    	boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
+    	softAssertion.assertTrue(downloadTenderPresenceStatus, "Download tender button is not displaying.");//VT_TC_005 
+		boolean supplier1PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
+		boolean supplier2PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), secondSelectedSupplierName);
+		boolean supplier3PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), thirdSelectedSupplierName);
+		boolean supplier4PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), fourthSelectedSupplierName);
+		boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus && supplier3PresenceStatus && supplier4PresenceStatus;
+		softAssertion.assertTrue(allSuppliersDisplayStatus, "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006
+		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxSupplierList(companyName));
+		Reporter.log("Checked if all the checkbox for the suppliers are enabled in suppliers list.", true);
+		softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, "All checkbox for the suppliers are not enabled in suppliers list for the quote.");//VT_TC_009
+		boolean allCheckBoxMatrixPriceListEnabledStatus = checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
+		Reporter.log("Checked if all the checkbox for the suppliers are enabled in matrix price list.", true);
+		softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
+		
+		softAssertion.assertAll();
 	}
-	
+	public void logout() throws Throwable {
+		click(logoutDropdown);
+		Thread.sleep(1000);
+		click(logoutLink);
+	}
+	public void loginAsAdmin() throws Throwable  {
+    	String URL = getPropertyFileData("url");
+    	String EMAIL = getPropertyFileData("adminEmail");
+    	String PASSWORD = getPropertyFileData("adminPassword");
+    	driver.get(URL);
+        setValue(username, EMAIL);
+        setValue(pwd, PASSWORD);
+        click(signInBtn);
+	}
+	public String currentDate() {
+		LocalDate myObj1 = LocalDate.now(); // Create a date object
+		
+		Object d1 = myObj1;
+		String date = d1.toString();
+		
+		int day = Integer.parseInt(date.substring(8, 10));
+		int month = Integer.parseInt(date.substring(5, 7));
+		int year = Integer.parseInt(date.substring(0, 4));
+		String currentDate = day +"/"+month+"/"+ year;
+		return currentDate;
+	}
+	public void verifyUtilityFilterPresenceVerifyTenders() {
+		SoftAssert softAssertion = new SoftAssert();
+		boolean allFilterPresenceStatus = isElementPresent(filterAllUtility_VerifyTender);
+		softAssertion.assertTrue(allFilterPresenceStatus, "All utilities filter is not displaying.");
+		boolean hhFilterPresenceStatus = isElementPresent(filterHHutility_VerifyTender);
+		softAssertion.assertTrue(hhFilterPresenceStatus, "HH utility filter is not displaying.");
+		boolean nhhFilterPresenceStatus = isElementPresent(filterNHHutility_VerifyTender);
+		softAssertion.assertTrue(nhhFilterPresenceStatus, "NHH utility filter is not displaying.");
+		boolean gasFilterPresenceStatus = isElementPresent(filterGasUtility_VerifyTender);
+		softAssertion.assertTrue(gasFilterPresenceStatus, "Gas utility filter is not displaying.");
+		boolean waterFilterPresenceStatus = isElementPresent(filterWaterUtility_VerifyTender);
+		softAssertion.assertTrue(waterFilterPresenceStatus, "Water utility filter is not displaying.");
+		softAssertion.assertAll();
+	}
+	/**
+	 * Looks for the HH quote in verify tenders by using current date, company name
+	 * @param companyName
+	 * @return
+	 */
+	public By findQuote(String companyName) {
+		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']");
+		return quote;
+	}
+	public By downloadTenderDetailsButton(String companyName) {
+		By downloadBtn = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[3]/a");
+		return downloadBtn;
+	}
+	/**
+	 * Consists of list of suppliers which were selected while requesting a quote for the quote in verify tenders. 
+	 * @param companyName
+	 * @return
+	 */
+	public By suppliersListForQuote(String companyName) {
+		By suppliers = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[5]/label");
+		return suppliers;
+	}
+	/**
+	 * Returns the list of locators of check box for the all the suppliers in Supplier column. 
+	 * @return
+	 */
+	public By checkboxSupplierList(String companyName) {
+		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[5]/input");
+		return checkboxLst;
+	}
+	/**
+	 * Returns the list of locators of check box for the all the suppliers in Matrix Price column. 
+	 * @return
+	 */
+	public By checkboxMatrixPriceList(String companyName) {
+		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[4]/input");
+		return checkboxLst;
+	}
 }

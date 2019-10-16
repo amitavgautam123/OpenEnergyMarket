@@ -310,7 +310,22 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	Actions actions = new Actions(driver);
     	actions.moveToElement((WebElement) locator).click().build().perform();
     }
-    
+    /**
+     * Returns true if all the check box in the list is enabled.
+     * @param locator
+     */
+    public boolean checkboxListEnabledStatus(By locator) {
+	   	List<WebElement> allElements = driver.findElements(locator);
+	    boolean status = true;
+	   	for (WebElement element: allElements) {
+	        if(element.isEnabled()==false) 
+	            {
+	            	status = false;
+	            	break;
+	            }
+	        }
+	return status;
+	}
     public void numberOfCheckListPresent(By locator){
     	List<WebElement> els = driver.findElements(locator);
     	int i=1;
