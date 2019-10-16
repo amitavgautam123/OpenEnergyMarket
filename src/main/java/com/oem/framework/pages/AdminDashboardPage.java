@@ -8,7 +8,8 @@ public class AdminDashboardPage extends BasePage {
 
     By impersonateUsername=By.id("ImpersonateUserName");
     By impersonateBtn=By.id("impersonateBtn");
-
+    By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
+    
 
 
     public CustomerDashboardPage impersonate(String email){
@@ -24,7 +25,12 @@ public class AdminDashboardPage extends BasePage {
         return new SupplierDashboardPage();
     }
     
-    
+    public AdminDashboardPage goToVerifyTenders(){
+        click(verifyTenders);
+        VerifyTendersPage verifyTendersPage=new VerifyTendersPage();
+        verifyTendersPage.isLoaded();
+        return new VerifyTendersPage();
+    }
 
 
 
