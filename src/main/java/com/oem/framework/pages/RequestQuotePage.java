@@ -1,11 +1,18 @@
 package com.oem.framework.pages;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
@@ -18,9 +25,108 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By username=By.id("Email");
     By pwd=By.id("Password");
     By signInBtn=By.xpath("//input[@value='Sign in']");
-	
+	//Logout
 	By logoutDropdown = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a");
 	By logoutLink = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]//ul/li/a[text() = 'Log out']");
+	
+	//Company Profile
+	By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
+    By companyProfile=By.linkText("Company Profile");
+	
+	By saveBtn = By.id("submit");
+	By saveSuccessMsg = By.id("global-message-text");
+    By companyName=By.id("Name");
+    By companyRegisteredAddress=By.id("RegisteredAddress");
+    By compPostCode=By.id("Postcode");
+    By companyNameError = By.id("Name-error");
+    By registeredAddressError=By.id("RegisteredAddress-error");
+    By registeredAddressBlankError = By.id("RegisteredAddress-error");
+    By postCodeError = By.id("Postcode-error");
+    By phone = By.id("ContactPhone");
+    By companyRegNum = By.id("CompanyRegistrationNumber");
+    By companyRegNumError = By.id("CompanyRegistrationNumber-error");
+    By CompanyLogo = By.id("CompanyLogo");
+    By supplierInvoicingTo = By.id("InvoiceHeadOffice");
+    By preferredSupplierPayment = By.id("PreferredSupplierPayment");
+    By preferredSupplierPaymentError = By.id("PreferredSupplierPayment-error");
+    By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
+    By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
+    By LOAExpiresDate = By.id("LOAExpiresDate");
+    By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
+	
+    //Property Portfolio
+    By propertyPortfolio = By.linkText("Property Portfolio");
+    
+    By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
+	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
+	By saveSiteDataBtn = By.id("save-btn"); 
+	By siteName = By.id("NewSite_Name");
+	By siteName_Error = By.id("NewSite_Name-error");
+	By address1 = By.id("NewSite_Address1");
+	By address1Error = By.id("NewSite_Address1-error");
+	By postcode = By.id("NewSite_Postcode");
+	By postcodeError = By.id("NewSite_Postcode-error");
+	By siteContactName = By.id("NewSite_ContactName");
+	By contactPhoneNo = By.id("NewSite_PhoneNo");
+	By contactEmail = By.id("NewSite_Email");
+	By siteID = By.id("NewSite_SiteId");
+	By address2 = By.id("NewSite_Address2");
+	By address3 = By.id("NewSite_Address3");
+	By address4 = By.id("NewSite_Address4");
+	By siteArea = By.id("NewSite_SiteArea");
+	
+	By siteNameList = By.xpath("//div[@id = 'divSitesOverview']/hgroup[*]/table/tbody/tr/td[2]/div[1]");
+    
+	//Meter Page
+	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
+	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	By tipCloseBtn = By.xpath("//p[contains(text(), 'Tip')]/following-sibling::a");
+	
+	By addMeter = By.id("add-meter-button");
+	By meterUtilitiesInAddMeterDropdown = By.xpath("//div[@id = 'add-meter-button']/ul/li[*]");
+	By addHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[1]");
+	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
+	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
+	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]"); 
+	By saveMeterBtn = By.id("save-meter-button");
+	/*Add HH & nHH Meter popup*/
+	By meterNumDropdownField = By.id("profileClass");
+	By meterNumSecondField = By.id("meterTimeSwitchCode");
+	By meterNumThirdField = By.id("lineLossFactor");
+	By meterNumFourthField = By.id("distributionId");
+	By meterNumFifthField = By.id("meterPointIdNumber1");
+	By meterNumSixthField = By.id("meterPointIdNumber2");
+	By meterNumSeventhField = By.id("checkDigit");
+	By invalidMPANNumberIcon = By.id("checksum-fail");
+	By verifiedMPANNumberIcon = By.xpath("//div[@id = 'checksum-pass']/i");
+	
+	By procurementType = By.id("procurementType");
+	By expectedConsumption = By.id("expectedConsumption");
+	By currentSupplier = By.id("electricitySuppliers");
+	By contractEndDate = By.id("contractEndDateForMeterModel");
+	By capacity = By.id("capacity");
+	By currentAnnualSpend = By.id("currentAnnualSpend");
+	By includeClimateChangeLevy = By.id("isCCLInclusive");
+	By currentMeterOperator = By.id("meterOperator");
+	By meterOperatorEndDate = By.id("meterOperatorEndDateForMeterModel");
+	By currentDataCollector = By.id("dataCollector");
+	By dataCollectorEndDate = By.id("dataCollectorEndDateForMeterModel");
+	//Contract History
+	By addContractHistoryPopup = By.xpath("//h3[text() = 'Add new Contract History details']");
+	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
+	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
+	By dateTraded = By.id("dateTraded");
+	By contractStartDate = By.id("contractStartDate");
+	By contractEndDate_ContractHist = By.id("contractEndDate");
+	By dayRate = By.id("dayRate");
+	By nightRate = By.id("nightRate");
+	By standingCharge = By.id("standingCharge");
+	By capacityCharge = By.id("capacityCharge");
+	By contractedAnnualSpend = By.id("contractedAnnualSpend");
+	By contractedConsumption = By.id("contractedConsumption");
+	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
+	By supplierProductDDwn = By.id("supplierProductForContractHistory");
+	By uploadContractBtn = By.id("btnShowContractUploadModal");
 	
 	By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
 	
@@ -90,7 +196,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	By submit = By.xpath("btn btn-primary pull-right");
 	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
-	By okBtn = By.xpath("//button[text() = 'OK']");
+	By okBtn = By.xpath("//button[text() = '-']");
 
 	// -------------These are for nHH Electricity----------------------------
 
@@ -193,6 +299,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By allowSelectedBtn = By.xpath("//input[@value = 'Allow Selected']");
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
 	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
+	
 	
 	
 	
@@ -600,7 +707,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Request a Quote Page");
-		Assert.assertTrue(isElementPresent(filterByHHutility), "Request a Quote Page didnt appear.");
+		Assert.assertTrue(isElementPresent(companyProfile), "Request a Quote Page didnt appear.");
 	}
 
 	public void validatePresenceOfRequestQuoteAndReviewQuotes() {
@@ -2156,6 +2263,21 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 	public void verifySupplierSelectionInTenderSummaryPage() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
+		//navigateToCompanyProfile();
+		fillCompanyProfile();
+		Thread.sleep(1000);
+		click(propertyPortfolio);
+		Thread.sleep(2000);
+		addSite();
+		Thread.sleep(2000);
+		addContractHistory();
+		try {
+			click(okBtn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		click(quotesAndTenders);
+        click(requestAQuoteLink);
 		String companyName = "AGB3";
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -2203,10 +2325,16 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
 		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007
 		click(okBtn);
+		Reporter.log("Clicked on Ok button", true);
+		Thread.sleep(1000);
 		click(blockSelectedBtn);
+		Reporter.log("Clicked on Block selected button", true);
 		alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		Reporter.log("Checked if the alert message is displaying.", true);
 		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008
 		click(okBtn);
+		Reporter.log("Clicked on Ok button", true);
+		Thread.sleep(1000);
     	scrollToElement(findQuote(companyName));
     	boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
     	softAssertion.assertTrue(downloadTenderPresenceStatus, "Download tender button is not displaying.");//VT_TC_005 
@@ -2216,19 +2344,43 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean supplier4PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), fourthSelectedSupplierName);
 		boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus && supplier3PresenceStatus && supplier4PresenceStatus;
 		softAssertion.assertTrue(allSuppliersDisplayStatus, "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006
-		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxSupplierList(companyName));
+		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxAllSupplierList(companyName));
 		Reporter.log("Checked if all the checkbox for the suppliers are enabled in suppliers list.", true);
 		softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, "All checkbox for the suppliers are not enabled in suppliers list for the quote.");//VT_TC_009
 		boolean allCheckBoxMatrixPriceListEnabledStatus = checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
 		Reporter.log("Checked if all the checkbox for the suppliers are enabled in matrix price list.", true);
 		softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
-		
+		//block supplier
+		click(checkboxSupplier(companyName, secondSelectedSupplierName));
+		Reporter.log("Clicked on the checkbox for the supplier.", true);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,-2000)");
+		//scrollToElement(blockSelectedBtn);
+		click(blockSelectedBtn);
+		Reporter.log("Clicked on block selected button.", true);
+		Thread.sleep(2000);
+		scrollToElement(findQuote(companyName));
+		boolean supplierPresenceInListStatusAfterBlock = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
+		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
+		softAssertion.assertFalse(supplierPresenceInListStatusAfterBlock, "Supplier name is still displaying after blocking it.");
+		//allow supplier
+		click(checkboxSupplier(companyName, thirdSelectedSupplierName));
+		Reporter.log("Clicked on the checkbox for the supplier.", true);
+		jse.executeScript("window.scrollBy(0,-2000)");
+		click(allowSelectedBtn);
+		Reporter.log("Clicked on allow selected button.", true);
+		Thread.sleep(2000);
+		scrollToElement(findQuote(companyName));
+		boolean supplierPresenceInListStatusAfterAllow = isElementExistInList(suppliersListForQuote(companyName), thirdSelectedSupplierName);
+		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
+		softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");
 		softAssertion.assertAll();
 	}
 	public void logout() throws Throwable {
-		click(logoutDropdown);
-		Thread.sleep(1000);
-		click(logoutLink);
+		Actions action  = new Actions(driver);
+		WebElement accountSettingsBtn = driver.findElement(By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a"));
+		WebElement logoutBtn = driver.findElement(By.xpath("//a[text() = 'Log out']"));
+		action.moveToElement(accountSettingsBtn).moveToElement(logoutBtn).click().build().perform();
 	}
 	public void loginAsAdmin() throws Throwable  {
     	String URL = getPropertyFileData("url");
@@ -2291,7 +2443,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	 * Returns the list of locators of check box for the all the suppliers in Supplier column. 
 	 * @return
 	 */
-	public By checkboxSupplierList(String companyName) {
+	public By checkboxAllSupplierList(String companyName) {
 		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[5]/input");
 		return checkboxLst;
 	}
@@ -2302,5 +2454,143 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public By checkboxMatrixPriceList(String companyName) {
 		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[4]/input");
 		return checkboxLst;
+	}
+	/**
+	 * Returns the locator of the checkbox for the supplier in supplier list in verify tenders.
+	 * @param companyName
+	 * @param supplierName
+	 */
+	public By checkboxSupplier(String companyName, String supplierName) {
+		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+currentDate()+"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[4]/label[text() = '"+supplierName+"']/preceding-sibling::input[1]");
+		return supCheckbox;
+	}
+	public void navigateToCompanyProfile() {
+		click(portfolioMgr);
+		click(companyProfile);
+	}
+	public void fillCompanyProfile() throws Throwable {
+		setValue(companyName, "AGB3");
+    	setValue(companyRegisteredAddress, "Bangalore");
+        
+        setValue(compPostCode, "2983472");
+        setValue(phone, "8923472834");
+        setValue(companyRegNum, "8173812323");
+        click(saveBtn);
+        Thread.sleep(2000);
+        click(okBtn_TenderSummaryPage);
+	}
+	public void addSite() throws Throwable {
+			click(addSite);
+			Reporter.log("Clicked Add Site button", true);
+			Thread.sleep(2000);
+			setValue(siteName, "Domlur");
+			setValue(address1, "G R Complex, No. 31, Ground & 1st Floor");
+			setValue(postcode, "560071");
+			setValue(siteContactName, "Amitav");
+			setValue(contactPhoneNo, "9823423412");
+			setValue(contactEmail, "andola.amitav@gmail.com");
+			setValue(siteID, "555");
+			setValue(address2, "Kempegowda Service Rd");
+			setValue(address3, "Bengaluru");
+			setValue(address4, "Karnataka");
+			setValue(siteArea, "100");
+			Reporter.log("Entered data in various fields in 'Add Site' popup", true);
+			click(saveSiteDataBtn);
+			Thread.sleep(2000);
+			try {
+				click(tipCloseBtn);
+			}
+			catch(Exception e) {
+				System.out.println("Couldn't close 'Tip' message");
+			}
+	}
+	public String addValidHHmeterGeneric() throws Throwable {
+		
+		Random random = new Random();
+		//int cellNum = random.nextInt(1568);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
+		Thread.sleep(2000);
+		click(addMeter);
+		Reporter.log("Clicked on add meter dropdown.", true);
+		click(addHHMeter);
+		Reporter.log("Clicked on HH Meter in add meter dropdown", true);
+		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
+		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
+		setValue(meterNumFifthField, mpanNumber.substring(2, 6));
+		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
+		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
+		Reporter.log("Entered data in 6 fields for meter number", true);
+		setValue(expectedConsumption, readExcelData("Sheet3", 8, 2));
+		Reporter.log("Entered value in expected consumption", true);
+		click(contractEndDate);
+		Reporter.log("Clicked on contract end date field", true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(14, random.nextInt(12), 2020);
+		Reporter.log("Entered date in the date picker", true);
+		setValue(capacity, readExcelData("Sheet3", 8, 3));
+		Reporter.log("Entered data in capacity field.", true);
+		selectByVisibleText(currentSupplier, "Gazprom");
+		Reporter.log("Selected current supplier from supplier dropdown", true);
+		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		Reporter.log("Entered data in 'Current Annual Spent'", true);
+		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
+		Reporter.log("Selected value from 'Current Meter Operator' dropdown", true);
+		selectByVisibleText(currentDataCollector, "Morrison Data Services");
+		Reporter.log("Selected value from 'Current Data Collector' dropdown", true);
+		click(meterOperatorEndDate);
+		Reporter.log("Clicked on Meter Operator End date", true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(26, 2, 2020);
+		Reporter.log("Selected date from date picker", true);
+		click(dataCollectorEndDate);
+		Reporter.log("Clicked on Data Collector End date", true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(21, 7, 2020);
+		Reporter.log("Selected date from date picker", true);
+		
+		click(saveMeterBtn);
+		Reporter.log("Clicked on 'Save Meter Data' button", true);
+		Thread.sleep(2000);
+		click(okBtn);
+		Reporter.log("Clicked on Ok button in meter saved successfully popup.", true);
+		Thread.sleep(2000);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
+		return mpanNumber;
+	}
+	public void addContractHistory() throws Throwable {
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
+		viewMeterDetails(mpanNumber);
+		Thread.sleep(1000);
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Reporter.log("Clicked on the 'Add Contract History' button.", true);
+		
+		setValue(dayRate, "320");
+		setValue(nightRate, "300");
+		setValue(standingCharge, "1200");
+		setValue(capacityCharge, "1400");
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(16, 2, 2018);		
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(22, 9, 2018);
+		click(saveContractHistoryBtn);
+		Thread.sleep(2000);
+		
+	}
+	public void viewMeterDetails(String meterNumber) {
+		By meterNumb = By.xpath("//div[contains(text(), '" + meterNumber + "')]");
+		click(meterNumb);
+		Reporter.log("Clicked on the meter number to view the detail section.", true);
+	}
+	public By addHHcontractHistoryBtn(String mpanNumber) {
+		By addContractHistBtn = By.xpath("//div[contains(text(), '"+ mpanNumber +"')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[6]/button");
+		return addContractHistBtn;
 	}
 }

@@ -128,14 +128,18 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	public void validateCloseIconEditEventPopup() throws InterruptedException
 	{
 		click(editEntry);
-		Reporter.log("clicked 'Edit Entry' button for first row");
+		Reporter.log("clicked 'Edit Entry' button for first row",true);
 		Thread.sleep(1000);
+		//boolean editPopUpDisplayStatus1=driver.findElement(saveBtn).isDisplayed();
+		//System.out.println(editPopUpDisplayStatus1);
 		click(close_PortfolioCalendarEntryPopup);
-		Reporter.log("Clicked close icon in edit entry popup");
+		Reporter.log("Clicked close icon in edit entry popup",true);
 		Thread.sleep(2000);
-		boolean editPopUpDisplayStatus = isElementPresent(edit_popup);
-		Reporter.log("Checked if edit popup is still displaying");
-		Assert.assertFalse(editPopUpDisplayStatus, "Edit popup is still displaying after closing it.");		
+		boolean editPopUpDisplayStatus=driver.findElement(saveBtn).isDisplayed();//Checking for the Save Button which is inside PopUp Is Displayed Or Not
+		//System.out.println(editPopUpDisplayStatus);
+		Reporter.log("Checked if edit popup is still displaying",true);
+		Assert.assertFalse(editPopUpDisplayStatus, "Edit popup is still displaying after closing it.");	
+		
 	}
 	public void validateEditEventChangingDate() throws InterruptedException
 	{
@@ -166,6 +170,46 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		boolean status = getText(eventDes_firstRecord).equals("Bank holiday") && getText(eventDate).equals(date);
 		Reporter.log("Compared data in event date and description after editing");
+	}
+	public void validateErrorMessageAfterEnteringDuplicateCalenderEvents() throws Throwable{
+		click(addCalendarEntry);
+		Reporter.log("Clicked On Add Calender Entry",true);
+		Thread.sleep(1000);
+		click(eventDate);
+		
+		Reporter.log("Clicked On Event Date ",true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(20,11,2020);
+		Reporter.log("Selected Future Date",true);
+		Thread.sleep(1000);
+		driver.findElement(eventDescription).sendKeys("2025 year Event");
+		Reporter.log("Entered Text In Event Description Text Box",true);
+		Thread.sleep(1000);
+		click(saveBtn);
+		Reporter.log("Clicked On Save Button",true);
+		//Entering date and Description For the second time with same Data 
+		click(addCalendarEntry);
+		Reporter.log("Clicked On Add Calender Entry",true);
+		Thread.sleep(1000);
+		click(eventDate);
+		Reporter.log("Clicked On Event Date ",true);
+		Thread.sleep(1000);
+		selectFutureDateCalender(20,11,2020);
+		Reporter.log("Selected Future Date",true);
+		Thread.sleep(1000);
+		driver.findElement(eventDescription).sendKeys("2025 year Event");
+		Reporter.log("Entered Text In Event Description Text Box",true);
+		Thread.sleep(1000);
+		click(saveBtn);
+		Reporter.log("Clicked On Save Button",true);
+		
+		boolean text=driver.findElement(addCalendarEntry).isDisplayed();
+		Reporter.log("Cheked for the Alert Message After Entering Duplicate Event Dates ",true);
+
+		Assert.assertFalse(text, "No Alert Message Is Shown, Even After Entering Duplicate Event Dates ");	
+
+		
+		
 	}
 	
 }

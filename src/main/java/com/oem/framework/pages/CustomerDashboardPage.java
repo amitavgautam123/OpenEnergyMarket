@@ -48,13 +48,6 @@ public class CustomerDashboardPage extends BasePage {
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
-        Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
         return propertyPortfolioPage;
     }
 
@@ -82,8 +75,11 @@ public class CustomerDashboardPage extends BasePage {
     }
     
     public CustomerDashboardPage goToRequestQuote(){
-        click(quotesAndTenders);
-        click(requestAQuoteLink);
+		/*
+		 * click(quotesAndTenders); click(requestAQuoteLink);
+		 */
+    	click(portfolioMgr);
+        click(companyProfile);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;

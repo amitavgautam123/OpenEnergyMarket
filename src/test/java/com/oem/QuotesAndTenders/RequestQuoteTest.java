@@ -904,6 +904,7 @@ public class RequestQuoteTest extends BaseTest {
 	 */
 	@Test
 	public void QT_RAQ_TC_125_verifySupplierSelectionInTenderSummaryPage() throws Throwable {
+		
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();

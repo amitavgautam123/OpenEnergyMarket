@@ -3,6 +3,8 @@ package com.oem.framework.pages;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
@@ -200,19 +202,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         isElementPresent(LOAExpiresDateDatePicker);
     	Assert.assertEquals(isElementPresent(LOAExpiresDateDatePicker), true);	
     }
-    public void validateLOAExpiresDateSelectFutureDateTest() {
-    	click(LOAExpiresDate);
-		selectFutureDateCalender(27, 10, 2021);
-		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2021");
-		Assert.assertTrue(dateSelectionStatus, "Unable to select future date.");
-    }
-    public void validateLOAPreviousDateSelectPreviousDateTest() { 	
-    	click(LOAExpiresDate);
-    	selectPrevDateCalender(12, 5, 2017);
-		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2017");
-		System.out.println("Value attr = " + getAttribute(LOAExpiresDate, "value"));
-		Assert.assertTrue(dateSelectionStatus, "Unable to select previous date.");
-    }
     public void uploadLogo()
     {   
     	setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
@@ -226,6 +215,23 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     			isElementExistInDropDown(supplierInvoicingTo, "Head Office");
     	Assert.assertTrue(status, "Dropdown options are not displaying in Supplier Invoice To");
     }
+    public void validateOptionSelectedAtSupplierInvoiceTo() throws Throwable{
+    	selectByIndex(supplierInvoicingTo,0);
+    	Reporter.log("Selected Dropdown of index 0.", true);
+    	Thread.sleep(5000);
+    	
+    	Select select = new Select(driver.findElement(supplierInvoicingTo));
+    	WebElement option = select.getFirstSelectedOption();
+    	String defaultItem = option.getText();
+    	System.out.println("Selected Option Is :  "+defaultItem );
+    	
+    	
+    	
+    	boolean isSelected=defaultItem.contains("Individual Sites");
+    	Assert.assertTrue(isSelected, "Dropdown clicked option is Not Selected in Supplier Invoice To");
+    	Reporter.log("Checked for the is cliked Option  is Selected ", true);
+    }
+    
     public void validateOptionsPrefferedSupplierPayment()
     {
     	boolean status = isElementExistInDropDown(preferredSupplierPayment, "Direct Debit") &&
@@ -242,6 +248,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Assert.assertTrue(getText(preferredSupplierPaymentError).equals("Preferred supplier payment field is required"), 
     			"Error message for Preferred Supplier Payment is not displaying");
     }
+    
     public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
     	SoftAssert softAssertion = new SoftAssert();
@@ -272,7 +279,36 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         Reporter.log("Checked if the save success popup is displaying", true);
         softAssertion.assertAll();
     }
-    
+    public void validateOptionSelectedAtPrefferdSupplierPayment() throws Throwable{
+    	selectByVisibleText(preferredSupplierPayment,"24 Day BACs");
+    	Reporter.log("Selected Dropdown of Text '24 Day BACs'.", true);
+    	Thread.sleep(5000);
+    	
+    	Select select = new Select(driver.findElement(preferredSupplierPayment));
+    	WebElement option = select.getFirstSelectedOption();
+    	String defaultItem = option.getText();
+    	System.out.println("Selected Option Is :  "+defaultItem );
+    	
+    	
+    	
+    	boolean isSelected=defaultItem.contains("24 Day BACs");
+    	Assert.assertTrue(isSelected, "Dropdown clicked option is Not Selected in Prefferd Supplier Payment");
+    	Reporter.log("Checked  is cliked Option  is Selected At Prefferd Supplier Payment", true);
+    }
+    public void validateLOAExpiresDateSelectFutureDateTest() {
+    	click(LOAExpiresDate);
+    	selectFutureDateCalender(27, 10, 2021);
+    	boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2021");
+    	Assert.assertTrue(dateSelectionStatus, "Unable to select future date.");
+    }
+    public void validateLOAPreviousDateSelectPreviousDateTest() { 	
+    	click(LOAExpiresDate);
+    	selectPrevDateCalender(12, 5, 2017);
+    	boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2017");
+    	System.out.println("Value attr = " + getAttribute(LOAExpiresDate, "value"));
+    	Assert.assertTrue(dateSelectionStatus, "Unable to select previous date.");
+    }
+
     
     
     public enum CompanyProfileFields

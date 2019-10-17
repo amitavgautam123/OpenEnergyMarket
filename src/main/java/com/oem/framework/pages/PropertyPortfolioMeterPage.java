@@ -1029,7 +1029,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	}
 	public void validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
-		
+	
 		displayAddContractHistoryHHutilityPopup();
 		
 		Thread.sleep(2000);

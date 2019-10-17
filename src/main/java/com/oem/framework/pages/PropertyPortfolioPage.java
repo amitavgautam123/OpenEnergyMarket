@@ -1,5 +1,6 @@
 package com.oem.framework.pages;
 
+import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -65,108 +66,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
 	By okBtn = By.xpath("//button[text() = 'OK']");
-	
-	public void addHHMeterUsingDifferentTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
-			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
-			String expectedConsumption, String currentSupplier, String capacity, String currentAnnualSpend, 
-			String currentMeterOperator, String currentDataCollector) throws Throwable
-	{
-		SoftAssert softAssertion = new SoftAssert();
-		click(siteFirstRecord);
-		Thread.sleep(2000);
-		click(addMeter);
-		click(addHHMeter);
-		selectByVisibleText(meterNumDropdownField, meterNoDropdownFieldValue);		
-		setValue(meterNumSecondField, meterNoSecondField);
-		setValue(meterNumThirdField, meterNoThirdField);
-		setValue(meterNumFourthField, meterNoFourthField);
-		setValue(meterNumFifthField, meterNoFifthField);
-		setValue(meterNumSixthField, meterNoSixthField);
-		setValue(meterNumSeventhField, meterNoSeventhField);
-		selectByVisibleText(this.procurementType, procurementType);
-		
-		boolean verifiedMPANNumberIconDisplayStatus = isElementPresent(verifiedMPANNumberIcon);
-		if(verifiedMPANNumberIconDisplayStatus) {
-			softAssertion.assertTrue(verifiedMPANNumberIconDisplayStatus, "Incorrect MPAN number entered");
-			Reporter.log("Checked if symbol for valid MPAN number is displaying", true);
-		}
-		else {
-			boolean invalidMPANNumberIconDisplayStatus = isElementPresent(invalidMPANNumberIcon);
-			softAssertion.assertTrue(invalidMPANNumberIconDisplayStatus, "Icon for invalid MPAN number is not displaying");
-			Reporter.log("Checked if symbol for invalid MPAN number is displaying", true);
-		}
-		
-		setValue(this.expectedConsumption, expectedConsumption);
-		selectByVisibleText(this.currentSupplier, currentSupplier);
-		setValue(this.capacity, capacity);
-		setValue(this.currentAnnualSpend, currentAnnualSpend);
-		selectByVisibleText(this.currentMeterOperator, currentMeterOperator);
-		selectByVisibleText(this.currentDataCollector, currentDataCollector);
-		Reporter.log("Entered data in various fields in Add HH Meter popup", true);
-		
-		click(saveMeter);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		if(getAttribute(meterNumSecondField, "value").equals("")) {
-			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSecondFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSecondField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSecondField", true);
-		}
-		if(getAttribute(meterNumThirdField, "value").equals("")) {
-			String meterNumThirdFieldErrorStatus = getAttribute(meterNumThirdField, "aria-invalid");
-			softAssertion.assertTrue(meterNumThirdFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumThirdField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumThirdField", true);
-		}
-		if(getAttribute(meterNumFourthField, "value").equals("")) {
-			String meterNumFourthFieldErrorStatus = getAttribute(meterNumFourthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumFourthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFourthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumFourthField", true);
-		}
-		if(getAttribute(meterNumFifthField, "value").equals("")) {
-			String meterNumFifthFieldErrorStatus = getAttribute(meterNumFifthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumFifthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFifthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumFifthField", true);
-		}
-		if(getAttribute(meterNumSixthField, "value").equals("")) {
-			String meterNumSixthFieldErrorStatus = getAttribute(meterNumSixthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSixthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSixthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSixthField", true);
-		}
-		if(getAttribute(meterNumSeventhField, "value").equals("")) {
-			String meterNumSeventhFieldErrorStatus = getAttribute(meterNumSeventhField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSeventhFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSeventhField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSeventhField", true);
-		}
-		if(getAttribute(this.expectedConsumption, "value").equals("")) {
-			String expectedConsumptionFieldErrorStatus = getAttribute(this.expectedConsumption, "aria-invalid");
-			softAssertion.assertTrue(expectedConsumptionFieldErrorStatus.equals("true"), "Mandatory expression while validating Expected Consumption is not displaying");
-			Reporter.log("Checked if error expression is displaying for Expected Consumption", true);
-		}
-		if(getAttribute(this.contractEndDate, "value").equals("")) {
-			String contractEndDateFieldErrorStatus = getAttribute(this.contractEndDate, "aria-invalid");
-			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date is not displaying");
-			Reporter.log("Checked if error expression is displaying for Contract End Date", true);
-		}
-		if(getAttribute(this.capacity, "value").equals("")) {
-			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
-			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");
-			Reporter.log("Checked if error expression is displaying for Capacity", true);
-		}
-		
-		/*if(getAttribute(meterNumSecondField, "aria-invalid").equals("false") && 
-				getAttribute(meterNumThirdField, "aria-invalid").equals("false") && 
-				getAttribute(meterNumFourthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumFifthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumSixthField, "aria-invalid").equals("false") &&
-				getAttribute(meterNumSeventhField, "aria-invalid").equals("false")) {
-			boolean validMPANStatus = isElementPresent();
-		}*/
-		
-		boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
-		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
-		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);
-		
-		softAssertion.assertAll();
-	}
+
 	By currentMeterOperator_HH = By.id("meterOperator");
 	By meterSavedPopup = By.xpath("//div[text() = 'The meter data was saved successfully.']");
 	By invalidMPANPopup = By.xpath("//div[text() = 'MPAN failed check digit validation, please review the number and try again']");
@@ -181,92 +81,6 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	By filterBy_gas_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[4]");
 	By filterBy_water_Utility = By.xpath("//td[contains(text(), 'Filter by Utility')]/../td[2]/div[5]");
 	
-	public void addNHHMeterUsingDifferntTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
-			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType,	
-			String expectedConsumption, String currentSupplier, String currentAnnualSpend) throws Throwable	{
-		SoftAssert softAssertion = new SoftAssert();
-		click(siteFirstRecord);
-		Thread.sleep(2000);
-		click(addMeter);
-		click(addnHHMeter);
-		selectByVisibleText(meterNumDropdownField, meterNoDropdownFieldValue);		
-		setValue(meterNumSecondField, meterNoSecondField);
-		setValue(meterNumThirdField, meterNoThirdField);
-		setValue(meterNumFourthField, meterNoFourthField);
-		setValue(meterNumFifthField, meterNoFifthField);
-		setValue(meterNumSixthField, meterNoSixthField);
-		setValue(meterNumSeventhField, meterNoSeventhField);
-		selectByVisibleText(this.procurementType, procurementType);
-		
-		boolean verifiedMPANNumberIconDisplayStatus = isElementPresent(verifiedMPANNumberIcon);
-		if(verifiedMPANNumberIconDisplayStatus) {
-			softAssertion.assertTrue(verifiedMPANNumberIconDisplayStatus, "Invalid MPAN number entered");
-			Reporter.log("Checked if symbol for valid MPAN number is displaying", true);
-		}
-		else {
-			boolean invalidMPANNumberIconDisplayStatus = isElementPresent(invalidMPANNumberIcon);
-			softAssertion.assertTrue(invalidMPANNumberIconDisplayStatus, "Icon for invalid MPAN number is not displaying");
-			Reporter.log("Checked if symbol for invalid MPAN number is displaying", true);
-		}
-		
-		setValue(this.expectedConsumption, expectedConsumption);
-		selectByVisibleText(this.currentSupplier, currentSupplier);
-		setValue(this.currentAnnualSpend, currentAnnualSpend);
-		Reporter.log("Entered data in various fields in Add nHH Meter popup", true);
-		
-		click(saveMeter);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
-		if(getAttribute(meterNumSecondField, "value").equals("")) {
-			String meterNumSecondFieldErrorStatus = getAttribute(meterNumSecondField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSecondFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSecondField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSecondField", true);
-		}
-		if(getAttribute(meterNumThirdField, "value").equals("")) {
-			String meterNumThirdFieldErrorStatus = getAttribute(meterNumThirdField, "aria-invalid");
-			softAssertion.assertTrue(meterNumThirdFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumThirdField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumThirdField", true);
-		}
-		if(getAttribute(meterNumFourthField, "value").equals("")) {
-			String meterNumFourthFieldErrorStatus = getAttribute(meterNumFourthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumFourthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFourthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumFourthField", true);
-		}
-		if(getAttribute(meterNumFifthField, "value").equals("")) {
-			String meterNumFifthFieldErrorStatus = getAttribute(meterNumFifthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumFifthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumFifthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumFifthField", true);
-		}
-		if(getAttribute(meterNumSixthField, "value").equals("")) {
-			String meterNumSixthFieldErrorStatus = getAttribute(meterNumSixthField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSixthFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSixthField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSixthField", true);
-		}
-		if(getAttribute(meterNumSeventhField, "value").equals("")) {
-			String meterNumSeventhFieldErrorStatus = getAttribute(meterNumSeventhField, "aria-invalid");
-			softAssertion.assertTrue(meterNumSeventhFieldErrorStatus.equals("true"), "Mandatory expression while validating meterNumSeventhField is not displaying");
-			Reporter.log("Checked if error expression is displaying for meterNumSeventhField", true);
-		}
-		if(getAttribute(this.expectedConsumption, "value").equals("")) {
-			String expectedConsumptionFieldErrorStatus = getAttribute(this.expectedConsumption, "aria-invalid");
-			softAssertion.assertTrue(expectedConsumptionFieldErrorStatus.equals("true"), "Mandatory expression while validating Expected Consumption is not displaying");
-			Reporter.log("Checked if error expression is displaying for Expected Consumption", true);
-		}
-		if(getAttribute(this.contractEndDate, "value").equals("")) {
-			String contractEndDateFieldErrorStatus = getAttribute(this.contractEndDate, "aria-invalid");
-			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date is not displaying");
-			Reporter.log("Checked if error expression is displaying for Contract End Date", true);
-		}
-		boolean invalidMPANPopupDisplayStatus = isElementPresent(invalidMPANPopup);
-		softAssertion.assertTrue(invalidMPANPopupDisplayStatus, "Invalid MPAN popup is not displaying");
-		Reporter.log("Checked if pop for invalid popup is displayed", true);
-		
-		boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
-		softAssertion.assertTrue(meterDataSaveStatus, "Meter data was not saved");
-		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);
-		
-		softAssertion.assertAll();
-		
-	}
 	
 	
 	@Override
@@ -277,7 +91,15 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
     }
 	public void validatePresenceAddSitePopup() throws Throwable
 	{
+		
 		click(addSite);
+		Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
 		Thread.sleep(1000);
 		Assert.assertTrue(isElementPresent(addNewSitePopup), "Add site popup is not displaying");
 	}
@@ -308,6 +130,13 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	}
 	public void validateMandatorySiteNamePostcodeFieldsInAddSitePopup() throws Throwable {
 		click(addSite);
+		Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
 		Thread.sleep(2000);
 		setValue(address1, "Patia");
 		click(saveSiteDataBtn);
@@ -316,12 +145,18 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Assert.assertTrue(siteNameErrorStatus && postcodeErrorStatus, 
 				"Validation messages for mandatory fields are not displaying");
 	}
-	public void validateMandatorySiteNameAddressFieldsInAddSitePopup() throws InterruptedException {
+	public void validateMandatorySiteNameAddressFieldsInAddSitePopup() throws InterruptedException, Throwable {
 		click(addSite);
+		Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
 		Thread.sleep(2000);
 		setValue(postcode, "8723423");
 		Thread.sleep(1000);
-		System.out.println("Value in the textbox is " + driver.findElement(By.id("NewSite_Postcode")).getAttribute("value"));
 		click(saveSiteDataBtn);
 		boolean siteNameErrorStatus = isElementPresent(siteName_Error);
 		boolean address1ErrorStatus = isElementPresent(address1Error);
@@ -334,6 +169,13 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		SoftAssert s = new SoftAssert();
 		click(addSite);
 		Reporter.log("Clicked Add Site button", true);
+		Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
 		Thread.sleep(2000);
 		setValue(siteName, name);
 		setValue(address1, addr1);
@@ -417,15 +259,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 				"Popup for adding new nHH Electric meter didn't appear");
 		Reporter.log("Checked if popup is displaying");
 	}
-	public void validateAddGasMeter()
-	{
-		click(siteFirstRecord);
-		Reporter.log("Clicked on the first site present in the Property Portfolio page");
-		click(addMeter);
-		Reporter.log("Clicked on Add Meter dropdown");
-		click(addGasMeter);
-		Reporter.log("Clicked on Gas meter");
-	}
+	
 	public void deleteAllSites() throws Throwable {
 		List<WebElement> allElements = driver.findElements(deleteSites);
 		for (WebElement element: allElements) {

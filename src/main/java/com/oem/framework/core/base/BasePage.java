@@ -99,7 +99,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
                 break;
             else if (i < 5) {
                 logger.info("searching element by scroll up");
-                ((JavascriptExecutor) driver).executeScript("scroll(0,100)");
+                ((JavascriptExecutor) driver).executeScript("scroll(0,-100)");
                 i++;
             } else if (i < 10) {
                 logger.info("searching element by scroll down");
