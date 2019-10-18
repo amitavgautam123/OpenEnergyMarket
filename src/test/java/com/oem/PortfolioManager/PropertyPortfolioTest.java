@@ -19,42 +19,9 @@ public class PropertyPortfolioTest extends BaseTest {
 				.login();
 		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
 		propertyPortfolioTest.validatePresenceAddSitePopup();
-	}
-	@Test
-	public void PM_PP_TC_005_validateMandatoryFieldsAddSitePopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateMandatoryFieldsAddSitePopup();
-	}
-	@Test
-	public void PM_PP_TC_006_validateAddressPostcodeMandatoryFieldsAddSitePopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateAddressPostcodeMandatoryFieldsAddSitePopup();
-	}
-	@Test
-	public void PM_PP_TC_007_validateMandatorySiteNamePostcodeFieldsInAddSitePopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateMandatorySiteNamePostcodeFieldsInAddSitePopup();
-	}
-	@Test
-	public void PM_PP_TC_008_validateMandatorySiteNameAddressFieldsInAddSitePopupTest() throws Throwable  {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
-		propertyPortfolioTest.validateMandatorySiteNameAddressFieldsInAddSitePopup();
-	}
-	
+	}	
 	/**
-	 * Executes 'Add site' popup test cases from PM_PP_TC_005 to PM_PP_TC_013 
+	 * Executes 'Add site' popup test cases from PM_PP_TC_005 to PM_PP_TC_011 
 	 * @param name
 	 * @param addr1
 	 * @param postCode
@@ -68,8 +35,8 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @param siteArea
 	 * @throws Throwable
 	 */
-	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_013
-	public void addSiteUsingDataProvider(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
+	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_011
+	public void addSiteUsingDataProviderTest(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -81,9 +48,22 @@ public class PropertyPortfolioTest extends BaseTest {
 	public Object[][] getDataForAddSite()
 	{
 		Object[][] data = 
-			{{"", "", "", "Henricks", "9823948232", "andola.amitav@gmail.com", "8125", "GR Complex", "Domlur", "Karnataka", "2000"}};
-				
+			{{"", "", "", "", "", "", "", "", "", "", ""}, 							//PM_PP_TC_005
+			{"Domlur", "", "", "", "", "", "", "", "", "", ""},						//PM_PP_TC_006
+			{"", "Bangalore", "", "", "", "", "", "", "", "", ""},					//PM_PP_TC_007
+			{"", "", "9834245", "", "", "", "", "", "", "", ""},					//PM_PP_TC_008
+			{"Domlur", "Bangalore", "", "", "", "", "", "", "", "", ""},			//PM_PP_TC_009
+			{"Domlur", "", "7831241", "", "", "", "", "", "", "", ""},				//PM_PP_TC_010
+			{"", "Bangalore", "7823427", "", "", "", "", "", "", "", ""}};			//PM_PP_TC_011	
 		return data;
+	}
+	@Test
+	public void PM_PP_TC_013_addValidSiteTest() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		PropertyPortfolioPage propertyPortfolioTest = (PropertyPortfolioPage) customerDashboardPage.goToPropertyPortfolio();
+		propertyPortfolioTest.addValidSiteGeneric(); 
 	}
 	@Test
 	public void PM_PP_TC_014_validateAddMeterDropdownTest() throws Throwable {

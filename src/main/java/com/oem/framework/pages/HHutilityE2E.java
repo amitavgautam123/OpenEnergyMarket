@@ -19,7 +19,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.oem.framework.core.base.BasePage;
 
-public class RequestQuotePage extends CustomerDashboardPage {
+public class HHutilityE2E extends CustomerDashboardPage {
 	
 	//login
 	By username=By.id("Email");
@@ -30,7 +30,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By logoutLink = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]//ul/li/a[text() = 'Log out']");
 	
 	//Company Profile
-	By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
+	By portfolioMgr= By.xpath("//*[@id='accordian-menu']//li[3]/h3");
     By companyProfile=By.linkText("Company Profile");
 	
 	By saveBtn = By.id("submit");

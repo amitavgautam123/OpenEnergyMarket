@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class CompanyProfileTest extends BaseTest { 
 
 	@Test
-	public void PM_CP_TC_003() throws Throwable {
+	public void PM_CP_TC_003_verifyPortfolioManagerElementExists() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
@@ -21,7 +21,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_004() throws Throwable {
+	public void PM_CP_TC_004_verifyRegisteredAddressInputs() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 
