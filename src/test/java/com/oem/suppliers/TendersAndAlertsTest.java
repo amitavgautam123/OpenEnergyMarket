@@ -18,19 +18,19 @@ public class TendersAndAlertsTest extends BaseTest {
 		return tendersAndAlertsPage;
 	}
 	@Test
-	public void QT_RAQ_TC_003() throws Throwable
+	public void QT_RAQ_TC_003_validateQuoteRequestStatusDropdownPresenceTest() throws Throwable
 	{
 		TendersAndAlertsPage t = generic();
 		t.validateQuoteRequestStatusDropdownPresence();
 	}
 	@Test
-	public void QT_RAQ_TC_004() throws Throwable
+	public void QT_RAQ_TC_004_validatingPresenceOfUtilitiesTest() throws Throwable
 	{
 		TendersAndAlertsPage t = generic();
 		t.validatingPresenceOfUtilities();
 	}
 	@Test
-	public void QT_RAQ_TC_005() throws Throwable
+	public void QT_RAQ_TC_005_validateQuoteRequestStatusDropdownTest() throws Throwable
 	{
 		TendersAndAlertsPage t = generic();
 		t.validateQuoteRequestStatusDropdown();	

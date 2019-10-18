@@ -90,11 +90,9 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		setValue(address3, "Auto_Bengaluru");
 		setValue(address4, "Auto_Karnataka");
 		setValue(siteArea, "200");
-		Reporter.log("Entered data in various fields in 'Add Site' popup", true);
 			WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", saveSiteBtn);
-		Reporter.log("Clicked save site data button.", true);
 		Thread.sleep(2000);
 		try {
 			click(tipCloseBtn);
@@ -103,7 +101,6 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 			System.out.println("Couldn't close 'Tip' message");
 		}
 		boolean meterPageURLstatus = driver.getCurrentUrl().contains("CompanyProfile/SiteMeters");
-		Reporter.log("Verified URL in meter page.", true);
 		Assert.assertTrue(meterPageURLstatus, "Site hasn't got saved.");
 	}
 	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
@@ -159,22 +156,16 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	{
 		SoftAssert softAssertion = new SoftAssert();
 		click(siteFirstRecord);
-		Reporter.log("Clicked on the first site present in the Property Portfolio page");
 		Thread.sleep(2000);
 		click(addMeter);
-		Reporter.log("Clicked on Add Meter dropdown");
 		boolean hhElectricPresenceStatus = isElementExistInDropDown(addMeterUtilities, "HH Electric");
 		softAssertion.assertTrue(hhElectricPresenceStatus, "HH Electric is not displaying in 'Add Meter' dropdown");
-		Reporter.log("Checked if HH Electric is displaying in 'Add Meter' dropdown", true);
 		boolean nHHElectricPresenceStatus = isElementExistInDropDown(addMeterUtilities, "nHH Electric");
 		softAssertion.assertTrue(nHHElectricPresenceStatus, "nHH Electric is not displaying in 'Add Meter' dropdown");
-		Reporter.log("Checked if nHH Electric is displaying in 'Add Meter' dropdown", true);
 		boolean gasPresenceStatus = isElementExistInDropDown(addMeterUtilities, "Gas");
 		softAssertion.assertTrue(gasPresenceStatus, "Gas utility is not displaying in 'Add Meter' dropdown");
-		Reporter.log("Checked if 'Gas' utility is displaying in 'Add Meter' dropdown", true);
 		boolean waterPresenceStatus = isElementExistInDropDown(addMeterUtilities, "Water");
 		softAssertion.assertTrue(waterPresenceStatus, "Water utility is not displaying in 'Add Meter' dropdown");
-		Reporter.log("Checked if 'Water' utility is displaying in 'Add Meter' dropdown", true);
 		softAssertion.assertAll();
 	}
 	

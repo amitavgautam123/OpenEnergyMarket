@@ -150,175 +150,175 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.validatingErrorMessageAfterSelectingsinglecontractDurationAndmultipleSupplier();
 	}
 	@Test
-	public void QT_RAQ_TC_024_validatingAvailablityToVerfyAfterSelecting1Meter1Contract1SupplierTest() throws Throwable {
+	public void QT_RAQ_TC_024_validateQuoteReqSelecting1Meter1Contract1SupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelecting1Meter1Contract1Supplier();
 	}
 	@Test
-	public void QT_RAQ_TC_025_validatingAvailablityToVerfyAfterSelectingMultipleMeter1Contract1SupplierTest() throws Throwable {
+	public void QT_RAQ_TC_025_validateQuoteReqSelectingMultiMeter1Contract1SupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingMultipleMeter1Contract1Supplier();
 	}
 	@Test
-	public void QT_RAQ_TC_026_validatingAvailablityToVerfyAfterSelecting1MeterMultipleContract1SupplierTest() throws Throwable {
+	public void QT_RAQ_TC_026_validateQuoteReqSelecting1MeterMultiContract1SupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelecting1MeterMultipleContract1Supplier();
 	}
 	@Test
-	public void QT_RAQ_TC_027_validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplierTest() throws Throwable {
+	public void QT_RAQ_TC_027_validateQuoteReqSelecting1Meter1ContractMultiSupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplier();
 	}
 	@Test
-	public void QT_RAQ_TC_028_validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContract1SupplierTest() throws Throwable {
+	public void QT_RAQ_TC_028_validateQuoteReqSelectingMultiMeterMultiContract1SupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContract1Supplier();
 	}
 	@Test
-	public void QT_RAQ_TC_029_validatingAvailablityToVerfyAfterSelectingMultipleMeter1ContractMultipleSupplier() throws Throwable {
+	public void QT_RAQ_TC_029_validateQuoteReqSelectingMultiMeter1ContractMultiSupplier() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingMultipleMeter1ContractMultipleSupplier();
 	}
 	@Test
-	public void QT_RAQ_TC_030_validatingAvailablityToVerfyAfterSelectingSingleMeterMultipleContractMultipleSupplierTest() throws Throwable {
+	public void QT_RAQ_TC_030_validateQuoteReqSelecting1MeterMultiContractMultiSupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingSingleMeterMultipleContractMultipleSupplier();
 	}
 	@Test
-	public void QT_RAQ_TC_032_validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContractMultipleSupplierTest() throws Throwable {
+	public void QT_RAQ_TC_032_validateQuoteReqSelectingMultiMeterMultiContractMultiSupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingMultipleMeterMultipleContractMultipleSupplier();
 	}
 	@Test
-	public void QT_RAQ_TC_033_validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndRenewableEnergyTest() throws Throwable {
+	public void QT_RAQ_TC_033_validateQuoteReqSelectingAllMeterAllContractAllSupplierTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndRenewableEnergy();
 	}
 	@Test
-	public void QT_RAQ_TC_034_validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBeforeTest() throws Throwable {
+	public void QT_RAQ_TC_034_settingTenderDate5daysBeforeValidateErrMsgTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBefore();
 	}
 	@Test
-	public void QT_RAQ_TC_035_validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndSettingDatetoFutureTest() throws Throwable {
+	public void QT_RAQ_TC_035_validateReqQuoteSettingTenderDatetoFutureTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndSettingDatetoFuture();
 	}
 	@Test
-	public void QT_RAQ_TC_037_verifyAlertMessageWhenNometerNocontractnosupplierSelectedIn_nHHUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_037_verifyErrMsgSelectingNoMeterNoContractNoSupplierNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhenNometerNocontractnosupplierSelectedIn_nHHUtility();
 	}
 	@Test
-	public void QT_RAQ_TC_038_verifyAlertMessageWhen1meterNocontractnosupplierSelectedIn_nHHUtility() throws Throwable {
+	public void QT_RAQ_TC_038_verifyErrMsgSelecting1meterNocontractNoSupplierNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen1meterNocontractnosupplierSelectedIn_nHHUtility();
 	}
 	@Test
-	public void QT_RAQ_TC_039_verifyAlertMessageWhenMultiplemeterNocontractnosupplierSelectedIn_nHHUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_039_verifyErrMsgSelectingMultiMeterNoContractNoSupplierNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhenMultiplemeterNocontractnosupplierSelectedIn_nHHUtility();
 	}
 	@Test
-	public void QT_RAQ_TC_040_verifyAlertMessageWhenNometer1contractnosupplierSelectedIn_nHHUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_040_verifyErrMsgSelectingNoMeter1contractNoSupplierSelectedNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhenNometer1contractnosupplierSelectedIn_nHHUtility();
 	}
 	@Test
-	public void QT_RAQ_TC_041_verifyAlertMessageWhen_Nometer_Multiplecontract_nosupplier_SelectedIn_nHHUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_041_verifyErrMsgSelectingNometerMultiContractNoSupplierNHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Nometer_Multiplecontract_nosupplier_SelectedIn_nHHUtility();
 	}
 	@Test
-	public void QT_RAQ_TC_042_verifyAlertmessageWhen2ContractDurations_selectsSameMonth_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_042_verifyErrMsgSelecting2ContDurationSameMonthNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertmessageWhen2ContractDurations_selectsSameMonth_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_043_VerifyErrorMessageWhenSelecting_zeroMeters_zeroContractDurations_OneSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_043_VerifyErrMsgSelectingNoMetersNoContDur1SupplierNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_zeroMeters_zeroContractDurations_OneSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_044_VerifyErrorMessageWhenSelecting_zeroMeters_zeroContractDurations_MultipleSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_044_VerifyErrMsgSelectingNoMetersNoContDurMultiSupplierNhhTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_zeroMeters_zeroContractDurations_MultipleSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_045_VerifyErrorMessageWhenSelecting_SingleMeters_SingleContractDurations_ZeroSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_045_VerifyErrMsgSelecting1Meters1ContDurNoSupplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_SingleMeters_SingleContractDurations_ZeroSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_046_VerifyErrorMessageWhenSelecting_SingleMeters_MultipleContractDurations_ZeroSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_046_VerifyErrMsgSelecting1MetersMultiContDurNoSupplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_SingleMeters_MultipleContractDurations_ZeroSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_047_VerifyErrorMessageWhenSelecting_MultipleMeters_SingleContractDurations_ZeroSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_047_VerifyErrMsgSelectingMultiMeters1ContDurNoSupplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_MultipleMeters_SingleContractDurations_ZeroSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_048_VerifyErrorMessageWhenSelecting_ZeroMeters_SingleContractDurations_SingleSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_048_VerifyErrMsgSelectingNoMeters1ContDur1Supplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_ZeroMeters_SingleContractDurations_SingleSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_049_VerifyErrorMessageWhenSelecting_ZeroMeters_MultipleContractDurations_SingleSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_049_VerifyErrMsgSelectingNoMetersMultiContDur1Supplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.VerifyErrorMessageWhenSelecting_ZeroMeters_MultipleContractDurations_SingleSupplier_nHH();
 	}
 	@Test
-	public void QT_RAQ_TC_050_VerifyErrorMessageWhenSelecting_ZeroMeters_SingleContractDurations_MultipleSupplier_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_050_VerifyErrMsgSelectingNoMeters1ContDurMultiSupplier_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -388,7 +388,7 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_MultipleContractDurations_MultipleSupplier_ClcikRenewableEnergy_nHH();
 	}*/
 	@Test
-	public void QT_RAQ_TC_060_validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBefore_nHHTest() throws Throwable {
+	public void QT_RAQ_TC_060_validateErrMsgSettingTenderDate5daysBefore_nHHTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -402,98 +402,98 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingfutureDate_nHH();
 	}*/
 	@Test
-	public void QT_RAQ_TC_063_verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_ZeroSupplier_Gas() throws Throwable {
+	public void QT_RAQ_TC_063_verifyErrMsgSelectingNoMeterNoContractDurNoSupplier_Gas() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_064_verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_064_verifyErrMsgSelecting1MeterNoContractDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_065_verifyErrorMessaegeWhenSelecting_MultipleMeter_ZeroContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_065_verifyErrMsgSelectingMultiMeterNoContractDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_MultipleMeter_ZeroContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_066_verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_066_verifyErrMsgSelectingNoMeter1ContractDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_067_verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_067_verifyErrMsgSelectingNoMeter_MultiContDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_068_verifyAlertmessageWhen2ContractDurations_selectsSameMonth_GasTest() throws Throwable {
+	public void QT_RAQ_TC_068_verifyAlertMsgWhen2ContractDurations_selectsSameMonth_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_069_verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_069_verifyErrMsgSelectingNoMeterNoContDur1Supplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_070_verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_070_verifyErrMsgSelectingNoMeterNoContractDur_MultiSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_071_verifyErrorMessaegeWhenSelecting_SingleMeter_SingleContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_071_verifyErrMsgSelecting1Meter1ContractDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_SingleMeter_SingleContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_072_verifyErrorMessaegeWhenSelecting_SingleMeter_MultipleContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_072_verifyErrMsgSelecting1MeterMultiContDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_SingleMeter_MultipleContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_073_verifyErrorMessaegeWhenSelecting_MultipleMeter_SingleContractDur_ZeroSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_073_verifyErrMsgSelecting_MultiMeter1ContractDurNoSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_MultipleMeter_SingleContractDur_ZeroSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_074_verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_SingleSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_074_verifyErrMsgSelecting_NoMeter1ContDur1Supplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_SingleSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_075_verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_SingleSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_075_verifyErrMsgSelectingNoMeterMultiContDur1Supplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_SingleSupplier_Gas();
 	}
 	@Test
-	public void QT_RAQ_TC_076_verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_MultipleSupplier_GasTest() throws Throwable {
+	public void QT_RAQ_TC_076_verifyErrMsgSelectingNoMeter1ContDur_MultiSupplier_GasTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -563,7 +563,7 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_MultipleContractDur_MultipleSupplier_RenewableEnergy_Gas();
 	}*/
 	@Test
-	public void QT_RAQ_TC_086_verifyAlertMessageWhenSelecting_5previousDateToCurrentDate_Gas() throws Throwable {
+	public void QT_RAQ_TC_086_verifyAlertMsgSelecting_5previousDateToCurrentDate_Gas() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -577,14 +577,14 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.verifyAlertMessageWhenSelecting_FutureDateToCurrentDate_Gas();
 	}*/
 	@Test
-	public void QT_RAQ_TC_089_verifyAlertMessageOnSelecting_NoMeter_NoContractDuration_NoSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_089_verifyAlertMessageSelecting_NoMeter_ContractDuration_Supplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "zero", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_090_verifyAlertMessageOnSelecting_OneMeter_NoContractDuration_NoSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_090_verifyAlertMsgSelecting1MeterNoContDurNoSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -598,77 +598,77 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("multiple", "zero", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_092_verifyAlertMessageOnSelecting_NoMeter_OneContractDuration_NoSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_092_verifyAlertMsgSelecting_NoMeter_1ContDur_NoSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "single", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_093_verifyAlertMessageOnSelecting_DifferentCombinations_NoMeter_MultipleContractDuration_NoSupplier_WaterTest() throws Throwable {
+	public void QT_RAQ_TC_093_verifyAlertMsgSelectingNoMeter_MultiContDurNoSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "multiple", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_094_verifyAlertMessageWhenSelected_SameContractDuration_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_094_verifyAlertMsgSelecting_SameContractDuration_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhenSelected_SameContractDuration_Water();
 	}
 	@Test
-	public void QT_RAQ_TC_095_verifyAlertMessageOnSelecting_NoMeter_NoContractDuration_OneSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_095_verifyAlertMsgSelecting_NoMeter_NoContDur1Supplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "zero", "single");
 	}
 	@Test
-	public void QT_RAQ_TC_096_verifyAlertMessageOnSelecting_NoMeter_NoContractDuration_MultipleSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_096_verifyAlertMsgSelecting_NoMeter_NoContDurMultiSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "zero", "multiple");
 	}
 	@Test
-	public void QT_RAQ_TC_097_verifyAlertMessageOnSelecting_SingleMeter_NoContractDuration_SingleSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_097_verifyAlertMsgOnSelecting_1Meter_NoContDur_1Supplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("single", "zero", "single");
 	}
 	@Test
-	public void QT_RAQ_TC_098_verifyAlertMessageOnSelecting_SingleMeter_MultipleContractDuration_NoSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_098_verifyAlertMsgSelecting_1Meter_MultiContDur_NoSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("single", "multiple", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_099_verifyAlertMessageOnSelecting_MultipleMeters_SingleContractDuration_NoSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_099_verifyAlertMsgSelecting_MultiMeters_1ContDur_NoSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("multiple", "single", "zero");
 	}
 	@Test
-	public void QT_RAQ_TC_100_verifyAlertMessageOnSelecting_NoMeter_SingleContractDuration_SingleSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_100_verifyAlertMsgSelecting_NoMeter_1ContDur_1Supplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "single", "single");
 	}
 	@Test
-	public void QT_RAQ_TC_101_verifyAlertMessageOnSelectingNoMeter_MultipleContractDuration_SingleSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_101_verifyAlertMsgSelectingNoMeter_MultiContDur_1Supplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
 		requestQuotePage.verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("zero", "multiple", "single");
 	}
 	@Test
-	public void QT_RAQ_TC_102_verifyAlertMessageOnSelecting_NoMeter_OneContractDuration_MultipleSupplier_WaterUtilityTest() throws Throwable {
+	public void QT_RAQ_TC_102_verifyAlertMsgSelecting_NoMeter_1ContDur_MultiSupplier_WaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();
@@ -731,7 +731,7 @@ public class RequestQuoteTest extends BaseTest {
 		requestQuotePage.verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water("multiple", "multiple", "multiple");
 	}*/
 	@Test
-	public void QT_RAQ_TC_112_verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndpreviousDate_Supplier_WaterTest() throws Throwable {
+	public void QT_RAQ_TC_112_verifyAlertMsgSelectingPreviousTenderDateWaterUtTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		RequestQuotePage requestQuotePage = (RequestQuotePage) customerDashboardPage.goToRequestQuote();

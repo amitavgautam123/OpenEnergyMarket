@@ -66,11 +66,8 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     
     public void verifyRegisteredAddressInputs()	{
     	setValue(companyRegisteredAddress, "Domlur");
-    	Reporter.log("Entered value in registered address field", true);
     	String valueAttributevalue = getAttribute(companyRegisteredAddress, "value");
-    	Reporter.log("Stored the value of value attribute in a string variable", true);
-        boolean inputDisplayStatus = valueAttributevalue.contains("Domlur");
-        Reporter.log("Compared if the entered data is equal to the value of value attribute", true);
+    	boolean inputDisplayStatus = valueAttributevalue.contains("Domlur");
         Assert.assertTrue(inputDisplayStatus, "Registered address is not displaying the value we entered in the field");
     }
     
@@ -105,7 +102,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	setValue(companyName, "Apple");
     	String attrValue = getAttribute(companyName, "value");
     	boolean displayStatus = attrValue.equals("Apple");
-    	Reporter.log("Checked if the value attribute is displaying the same as entered in the 'Company Name' textbox", true);
     	Assert.assertTrue(displayStatus, "Company Name field is not accepting alphabetic characters");
     }
     
@@ -129,7 +125,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
         String ariaInvalidAttributeStatus = getAttribute(compPostCode, "aria-invalid");
         System.out.println("Aria-invalid status: " + ariaInvalidAttributeStatus);
-        Reporter.log("Checked if error message for invalid postcode is displaying", true);
         boolean errorMsgDisplayStatus = ariaInvalidAttributeStatus.equals("true");
         Assert.assertTrue(errorMsgDisplayStatus, "Invalid postcode error is not displaying.");
     }
@@ -138,44 +133,35 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	setValue(compPostCode, "8923443");
     	String postcodeValueAtrributeValue = getAttribute(compPostCode, "value");
     	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
-    	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
     	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
     }
     
     public void validateIfPhoneFieldMandatory() {
     	setValue(phone, "");
-    	Reporter.log("Entered blank data in phone field", true);
     	click(saveBtn);
-    	Reporter.log("Clicked save button", true);
     	String errorStatus = getAttribute(phone, "aria-invalid");
     	if(errorStatus == null) {
     		errorStatus = "false";
     	}
-    	Reporter.log("Strored the value of the aria-invalid attribute in a string variable", true);
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
-    	Reporter.log("Checked if error message for phone field is displaying", true);
     	Assert.assertFalse(phoneErrorMsgDisplayStatus, "Error message for phone field is displaying even if it is not mandatory");
     }
     
     public void validatePhoneFieldAlphabeticTestData() {
     	setValue(phone, "Lorem Ipsum");
-    	Reporter.log("Entered alphabetic data in phone field", true);
     	click(saveBtn);
     	String errorStatus = getAttribute(phone, "aria-invalid");
     	if(errorStatus == null) {
     		errorStatus = "false";
     	}
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
-    	Reporter.log("Checked if error message for phone field is displaying", true);
     	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after alphabetic data in it");
     }
     
     public void validatePhoneFieldNumericTestData() {
     	setValue(phone, "9872391239");
-    	Reporter.log("Entered alphabetic data in phone field", true);
     	String enteredValue = getAttribute(phone, "value");
     	boolean enteredValueDisplaystatus = enteredValue.equals("9872391239");
-    	Reporter.log("Checked if the value entered is displaying in 'phone' field", true);
     	Assert.assertTrue(enteredValueDisplaystatus, "The entered value is not displaying in phone field");
     }
     
@@ -217,7 +203,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     public void validateOptionSelectedAtSupplierInvoiceTo() throws Throwable{
     	selectByIndex(supplierInvoicingTo,0);
-    	Reporter.log("Selected Dropdown of index 0.", true);
     	Thread.sleep(5000);
     	
     	Select select = new Select(driver.findElement(supplierInvoicingTo));
@@ -229,7 +214,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	
     	boolean isSelected=defaultItem.contains("Individual Sites");
     	Assert.assertTrue(isSelected, "Dropdown clicked option is Not Selected in Supplier Invoice To");
-    	Reporter.log("Checked for the is cliked Option  is Selected ", true);
     }
     
     public void validateOptionsPrefferedSupplierPayment()
@@ -255,33 +239,25 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	setValue(companyName, compName);
     	softAssertion.assertTrue(getAttribute(companyName, "value").equals(compName), 
         		"The entered data is not displaying correctly in 'Company Name' field");
-        Reporter.log("Checked if the entered is displaying correctly in 'Company Name' field", true);
         setValue(companyRegisteredAddress, addr);
         softAssertion.assertTrue(getAttribute(companyRegisteredAddress, "value").equals(addr), 
         		"The entered data is not displaying correctly in 'Company Registered Address' field");
-        Reporter.log("Checked if the entered is displaying correctly in 'Company Registered Address' field", true);
         setValue(compPostCode, postCode);
         softAssertion.assertTrue(getAttribute(compPostCode, "value").equals(postCode), 
         		"The entered data is not displaying correctly in 'Postcode' field");
-        Reporter.log("Checked if the entered is displaying correctly in 'Postcode' field", true);
         setValue(phone, ph);
         softAssertion.assertTrue(getAttribute(phone, "value").equals(ph), 
         		"The entered data is not displaying correctly in 'Phone' field");
-        Reporter.log("Checked if the entered is displaying correctly in 'Phone' field", true);
         setValue(companyRegNum, regdNo);
         softAssertion.assertTrue(getAttribute(companyRegNum, "value").equals(regdNo), 
         		"The entered data is not displaying correctly in 'Company Registration Number' field");
-        Reporter.log("Checked if the entered is displaying correctly in 'Company Registration Number' field", true);
         click(saveBtn);
-        Reporter.log("Clicked on save button", true);
         Thread.sleep(2000);
         softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn’t appear after saving profile data.");
-        Reporter.log("Checked if the save success popup is displaying", true);
         softAssertion.assertAll();
     }
     public void validateOptionSelectedAtPrefferdSupplierPayment() throws Throwable{
     	selectByVisibleText(preferredSupplierPayment,"24 Day BACs");
-    	Reporter.log("Selected Dropdown of Text '24 Day BACs'.", true);
     	Thread.sleep(5000);
     	
     	Select select = new Select(driver.findElement(preferredSupplierPayment));
@@ -293,7 +269,6 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	
     	boolean isSelected=defaultItem.contains("24 Day BACs");
     	Assert.assertTrue(isSelected, "Dropdown clicked option is Not Selected in Prefferd Supplier Payment");
-    	Reporter.log("Checked  is cliked Option  is Selected At Prefferd Supplier Payment", true);
     }
     public void validateLOAExpiresDateSelectFutureDateTest() {
     	click(LOAExpiresDate);

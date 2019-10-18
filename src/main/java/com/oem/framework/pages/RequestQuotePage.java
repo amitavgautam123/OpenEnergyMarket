@@ -707,7 +707,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Request a Quote Page");
-		Assert.assertTrue(isElementPresent(companyProfile), "Request a Quote Page didnt appear.");
+		Assert.assertTrue(isElementPresent(filterByHHutility), "Request a Quote Page didnt appear.");
 	}
 
 	public void validatePresenceOfRequestQuoteAndReviewQuotes() {

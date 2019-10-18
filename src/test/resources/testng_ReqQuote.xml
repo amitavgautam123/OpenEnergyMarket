@@ -5,7 +5,7 @@
         <listener class-name="org.uncommons.reportng.HTMLReporter" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
     </listeners>
-    <test name="Regression tests" thread-count="2" parallel="methods">
+    <test name="Regression tests" thread-count="4" parallel="methods">
 
         <packages>
             <package name="com.oem.QuotesAndTenders"/>	

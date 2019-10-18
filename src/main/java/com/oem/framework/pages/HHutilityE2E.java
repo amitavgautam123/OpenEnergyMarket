@@ -2308,35 +2308,27 @@ public class HHutilityE2E extends CustomerDashboardPage {
 		softAssertion.assertTrue(fourthSupplierPresenceStatus, "Selected supplier is not displaying.");
 		scrollToElement(confirmAndSubmit);
 		click(confirmAndSubmit);
-		Reporter.log("Clicked on confirm and submit button.", true);
 		Thread.sleep(2000);
 		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
 		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus, "Tender Submit Success Popup is not displaying.");
 		click(okBtn_TenderSummaryPage);
-		Reporter.log("Clicked on Ok button.", true);
 		logout();
 		driver.get(getPropertyFileData("url"));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		loginAsAdmin();
 		click(verifyTenders);
 		boolean verifyTendersDisplayStatus = driver.getCurrentUrl().contains("/VerifyTenders");
-		Reporter.log("Checked if verify tenders page is displaying.", true);
 		softAssertion.assertTrue(verifyTendersDisplayStatus, "Verify Tenders page is not displaying.");//VT_TC_003
 		verifyUtilityFilterPresenceVerifyTenders();//VT_TC_004
-		Reporter.log("Checked presence of filters.", true);
 		click(allowSelectedBtn);
 		boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
 		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007
 		click(okBtn);
-		Reporter.log("Clicked on Ok button", true);
 		Thread.sleep(1000);
 		click(blockSelectedBtn);
-		Reporter.log("Clicked on Block selected button", true);
 		alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
-		Reporter.log("Checked if the alert message is displaying.", true);
 		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008
 		click(okBtn);
-		Reporter.log("Clicked on Ok button", true);
 		Thread.sleep(1000);
     	scrollToElement(findQuote(companyName));
     	boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
@@ -2348,34 +2340,26 @@ public class HHutilityE2E extends CustomerDashboardPage {
 		boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus && supplier3PresenceStatus && supplier4PresenceStatus;
 		softAssertion.assertTrue(allSuppliersDisplayStatus, "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006
 		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxAllSupplierList(companyName));
-		Reporter.log("Checked if all the checkbox for the suppliers are enabled in suppliers list.", true);
 		softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, "All checkbox for the suppliers are not enabled in suppliers list for the quote.");//VT_TC_009
 		boolean allCheckBoxMatrixPriceListEnabledStatus = checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
-		Reporter.log("Checked if all the checkbox for the suppliers are enabled in matrix price list.", true);
 		softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
 		//block supplier
 		click(checkboxSupplier(companyName, secondSelectedSupplierName));
-		Reporter.log("Clicked on the checkbox for the supplier.", true);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-2000)");
 		//scrollToElement(blockSelectedBtn);
 		click(blockSelectedBtn);
-		Reporter.log("Clicked on block selected button.", true);
 		Thread.sleep(2000);
 		scrollToElement(findQuote(companyName));
 		boolean supplierPresenceInListStatusAfterBlock = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
 		softAssertion.assertFalse(supplierPresenceInListStatusAfterBlock, "Supplier name is still displaying after blocking it.");
 		//allow supplier
 		click(checkboxSupplier(companyName, thirdSelectedSupplierName));
-		Reporter.log("Clicked on the checkbox for the supplier.", true);
 		jse.executeScript("window.scrollBy(0,-2000)");
 		click(allowSelectedBtn);
-		Reporter.log("Clicked on allow selected button.", true);
 		Thread.sleep(2000);
 		scrollToElement(findQuote(companyName));
 		boolean supplierPresenceInListStatusAfterAllow = isElementExistInList(suppliersListForQuote(companyName), thirdSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
 		softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");
 		softAssertion.assertAll();
 	}
@@ -2484,7 +2468,6 @@ public class HHutilityE2E extends CustomerDashboardPage {
 	}
 	public void addSite() throws Throwable {
 			click(addSite);
-			Reporter.log("Clicked Add Site button", true);
 			Thread.sleep(2000);
 			setValue(siteName, "Domlur");
 			setValue(address1, "G R Complex, No. 31, Ground & 1st Floor");
@@ -2497,7 +2480,6 @@ public class HHutilityE2E extends CustomerDashboardPage {
 			setValue(address3, "Bengaluru");
 			setValue(address4, "Karnataka");
 			setValue(siteArea, "100");
-			Reporter.log("Entered data in various fields in 'Add Site' popup", true);
 			click(saveSiteDataBtn);
 			Thread.sleep(2000);
 			try {
@@ -2514,49 +2496,32 @@ public class HHutilityE2E extends CustomerDashboardPage {
 		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
 		Thread.sleep(2000);
 		click(addMeter);
-		Reporter.log("Clicked on add meter dropdown.", true);
 		click(addHHMeter);
-		Reporter.log("Clicked on HH Meter in add meter dropdown", true);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
 		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
 		setValue(meterNumFifthField, mpanNumber.substring(2, 6));
 		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
-		Reporter.log("Entered data in 6 fields for meter number", true);
 		setValue(expectedConsumption, readExcelData("Sheet3", 8, 2));
-		Reporter.log("Entered value in expected consumption", true);
 		click(contractEndDate);
-		Reporter.log("Clicked on contract end date field", true);
 		Thread.sleep(1000);
 		selectFutureDateCalender(14, random.nextInt(12), 2020);
-		Reporter.log("Entered date in the date picker", true);
 		setValue(capacity, readExcelData("Sheet3", 8, 3));
-		Reporter.log("Entered data in capacity field.", true);
 		selectByVisibleText(currentSupplier, "Gazprom");
-		Reporter.log("Selected current supplier from supplier dropdown", true);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
-		Reporter.log("Entered data in 'Current Annual Spent'", true);
 		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
-		Reporter.log("Selected value from 'Current Meter Operator' dropdown", true);
 		selectByVisibleText(currentDataCollector, "Morrison Data Services");
-		Reporter.log("Selected value from 'Current Data Collector' dropdown", true);
 		click(meterOperatorEndDate);
-		Reporter.log("Clicked on Meter Operator End date", true);
 		Thread.sleep(1000);
 		selectFutureDateCalender(26, 2, 2020);
-		Reporter.log("Selected date from date picker", true);
 		click(dataCollectorEndDate);
-		Reporter.log("Clicked on Data Collector End date", true);
 		Thread.sleep(1000);
 		selectFutureDateCalender(21, 7, 2020);
-		Reporter.log("Selected date from date picker", true);
 		
 		click(saveMeterBtn);
-		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		Thread.sleep(4000);
 		click(okBtn);
-		Reporter.log("Clicked on Ok button in meter saved successfully popup.", true);
 		Thread.sleep(2000);
 		try {
 			click(tipCloseBtn);
@@ -2571,22 +2536,18 @@ public class HHutilityE2E extends CustomerDashboardPage {
 		viewMeterDetails(mpanNumber);
 		Thread.sleep(1000);
 		click(addHHcontractHistoryBtn(mpanNumber));
-		Reporter.log("Clicked on the 'Add Contract History' button.", true);
 		Thread.sleep(1000);
 		setValue(dayRate, "320");
 		setValue(nightRate, "300");
 		setValue(standingCharge, "1200");
 		setValue(capacityCharge, "1400");
-		Reporter.log("Entered data in capacity charge.", true);
 		click(dateTraded);
 		Thread.sleep(1000);
 		selectPrevDateCalender(16, 2, 2018);
-		Reporter.log("Entered data in contract date traded", true);
 		Thread.sleep(1000);
 		click(contractStartDate);
 		Thread.sleep(1000);
 		selectPrevDateCalender(22, 9, 2018);
-		Reporter.log("Entered data in contract start date", true);
 		click(saveContractHistoryBtn);
 		Thread.sleep(2000);
 		
@@ -2594,7 +2555,6 @@ public class HHutilityE2E extends CustomerDashboardPage {
 	public void viewMeterDetails(String meterNumber) {
 		By meterNumb = By.xpath("//div[contains(text(), '" + meterNumber + "')]");
 		click(meterNumb);
-		Reporter.log("Clicked on the meter number to view the detail section.", true);
 	}
 	public By addHHcontractHistoryBtn(String mpanNumber) {
 		By addContractHistBtn = By.xpath("//div[contains(text(), '"+ mpanNumber +"')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[6]/button");

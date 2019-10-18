@@ -70,7 +70,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.addHHMeterUsingValidTestData();
 	}
 	@Test
-	public void PM_PP_TC_027_addValidHHmeterGenericTest() throws Throwable {
+	public void PM_PP_TC_027_addValidHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -78,7 +78,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.addValidHHmeterGeneric();
 	}
 	@Test
-	public void PM_PP_TC_028_checkSavedDetailsAfterAddingHHMeterTest() throws Throwable {
+	public void PM_PP_TC_028_checkSavedDetailsAfterAddingHHmeterTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -128,7 +128,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	}
 	
 	@Test(dataProvider = "getHHcontractHistoryData")
-	public void addHHcontractHistoryUsingDataProviderTest(String dayRate, String nightRate, String standingCharge, 
+	public void validateHHcontractHistoryMandatoryFieldUsingDataProviderTest(String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
@@ -147,7 +147,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_035_validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedTest() throws Throwable {
+	public void PM_PP_TC_035_validateMandatoryFieldsContHistPopupEnteringDateTradedTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -155,7 +155,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded();
 	}
 	@Test
-	public void PM_PP_TC_036_validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDateTest() throws Throwable {
+	public void PM_PP_TC_036_validateMandatoryFieldsContHistPopupEnteringContStartDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -163,7 +163,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDate();
 	}
 	@Test
-	public void PM_PP_TC_041_validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDateTest() throws Throwable {
+	public void PM_PP_TC_041_validateMandatoryFieldsContHistPopupEnteringDateTradedContractStartDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -171,7 +171,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDate();
 	}
 	@Test(dataProvider = "getHHcontractHistoryData2")
-	public void addHHcontractHistoryUsingDataProviderTest2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+	public void validateMandatoryFieldHHcontHistUsingDataProviderTest2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
@@ -188,7 +188,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test(dataProvider = "getHHcontractHistoryData3")
-	public void addHHcontractHistoryUsingDataProviderTest3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+	public void validateMandatoryFieldHHcontHistUsingDataProviderTest3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
@@ -213,7 +213,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
 	@Test
-	public void PM_PP_TC_065_validateAddnHHMeterPopupTest() throws Throwable {
+	public void PM_PP_TC_065_validateAddnHHmeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -221,7 +221,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		propertyPortfolioMeterTest.validateAddnHHMeterPopup();
 	}
 	@Test(dataProvider = "getNHHdata")
-	public void addnHHMeterUsingDataProviderTest(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+	public void validateMandatoryFieldsNHHmeterUsingDataProviderTest(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String procurementType, String expectedConsumption, 
 			String currentSupplier, String currentAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -241,7 +241,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_071_validateExpectedConsumptionMandatoryFieldAddNHHPopupTest() throws Throwable {
+	public void PM_PP_TC_071_validateExpConsumpMandatoryFieldAddNHHPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -301,7 +301,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
 	@Test(dataProvider = "getGasMeterData")
-	public void addGasMeterUsingDataProviderTest(String gasMeterNumber, String procurementType, String expectedConsumption, 
+	public void validateMandatoryFieldAddGasMeterUsingDataProviderTest(String gasMeterNumber, String procurementType, String expectedConsumption, 
 			String currentSupplier, int dayOfMonthOfContractEndDate, int monthNumberOfContractEndDate, int yearOfContractEndDate, 
 			String currentAnnualSpend) throws Throwable {
 		LoginPage loginPage = new LoginPage();

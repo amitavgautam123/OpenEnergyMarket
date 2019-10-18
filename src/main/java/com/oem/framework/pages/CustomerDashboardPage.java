@@ -69,11 +69,12 @@ public class CustomerDashboardPage extends BasePage {
     }
     
     public CustomerDashboardPage goToRequestQuote(){
-		/*
-		 * click(quotesAndTenders); click(requestAQuoteLink);
-		 */
-    	click(portfolioMgr);
-        click(companyProfile);
+		
+		  click(quotesAndTenders); 
+		  click(requestAQuoteLink);
+		 
+    	//click(portfolioMgr);
+        //click(companyProfile);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;

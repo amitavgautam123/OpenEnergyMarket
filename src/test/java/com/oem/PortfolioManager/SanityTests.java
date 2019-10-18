@@ -33,13 +33,5 @@ public class SanityTests extends BaseTest {
 		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
 		companyProfilePage.fillCompanyProfile();
 	}*/
-
-	@Test
-	public void PM_PP_TC_028_checkSavedDetailsAfterAddingHHMeterTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.checkSavedDetailsAfterAddingHHMeter();
-	}
+	
 }
