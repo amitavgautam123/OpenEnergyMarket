@@ -13,7 +13,7 @@ import com.oem.framework.pages.PropertyPortfolioPage;
 public class PropertyPortfolioMeterTest extends BaseTest {
 	
 	
-	@Test
+	//@Test
 	public void PM_PP_TC_015_validateAddHHMeterPopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage

@@ -36,7 +36,7 @@ public class PropertyPortfolioTest extends BaseTest {
 	 * @throws Throwable
 	 */
 	@Test(dataProvider = "getDataForAddSite") //PM_PP_TC_005 - PM_PP_TC_011
-	public void addSiteUsingDataProviderTest(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
+	public void validateMandatoryFieldsInAddSiteUsingDataProviderTest(String name, String addr1, String postCode, String siteContactNAME, String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteArea) throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();

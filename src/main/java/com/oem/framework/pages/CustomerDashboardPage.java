@@ -7,6 +7,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 public class CustomerDashboardPage extends BasePage {
@@ -64,13 +65,6 @@ public class CustomerDashboardPage extends BasePage {
 		}
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
-        Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
         return propertyPortfolioMeterPage; 
     }
     

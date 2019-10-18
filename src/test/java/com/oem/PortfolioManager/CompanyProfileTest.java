@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class CompanyProfileTest extends BaseTest { 
 
 	@Test
-	public void PM_CP_TC_003_verifyPortfolioManagerElementExists() throws Throwable {
+	public void PM_CP_TC_003_verifyPortfolioManagerElementExistsTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
@@ -21,7 +21,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_004_verifyRegisteredAddressInputs() throws Throwable {
+	public void PM_CP_TC_004_verifyRegisteredAddressInputsTest() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 
@@ -31,7 +31,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_005() throws Throwable {
+	public void PM_CP_TC_005_verifyRegAddressMaxLengthErrorTest() throws Throwable {
 
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
@@ -42,7 +42,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 
 	@Test
-	public void PM_CP_TC_006() throws Throwable {
+	public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -52,7 +52,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_007() throws Throwable {
+	public void PM_CP_TC_007_verifyCompanyNameErrorTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -61,7 +61,7 @@ public class CompanyProfileTest extends BaseTest {
 	}
 	
 	@Test
-	public void PM_CP_TC_008() throws Throwable {
+	public void PM_CP_TC_008_validateCompanyNameAlphabeticAcceptanceTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();

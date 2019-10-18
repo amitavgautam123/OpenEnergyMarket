@@ -6,7 +6,11 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
@@ -15,7 +19,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
 	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
-	By saveSiteDataBtn = By.id("save-btn"); 
+	By saveSiteDataBtn = By.id("save-btn");
 	By siteName = By.id("NewSite_Name");
 	By siteName_Error = By.id("NewSite_Name-error");
 	By address1 = By.id("NewSite_Address1");
@@ -45,11 +49,6 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	
 	By deleteSites = By.xpath("//hgroup[@class = 'site-overview-item']/table/tbody/tr/td[5]/a[2]");
 	By okBtn = By.xpath("//button[text() = 'OK']");
-
-	By currentMeterOperator_HH = By.id("meterOperator");
-	By meterSavedPopup = By.xpath("//div[text() = 'The meter data was saved successfully.']");
-	By invalidMPANPopup = By.xpath("//div[text() = 'MPAN failed check digit validation, please review the number and try again']");
-	By okButtonInPopUp = By.xpath("//button[text() = 'OK']");
 	
 	By portfolioMeterDataUpload = By.xpath("//button[@id = 'add-site-btn'][2]");
 	By forecastingBtn = By.xpath("//div[@class = 'text-right']/a[1]");
@@ -72,39 +71,30 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	{
 		
 		click(addSite);
-		Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
 		Thread.sleep(1000);
 		Assert.assertTrue(isElementPresent(addNewSitePopup), "Add site popup is not displaying");
 	}
 	public void addValidSiteGeneric() throws Throwable {
-		click(addSite);
-		Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
-		Thread.sleep(2000);
+		click(addSite);		
+			//JavascriptExecutor executor = (JavascriptExecutor)driver;
+		    //executor.executeScript("document.body.style.zoom = '0.8'");
+		Thread.sleep(1000);
 		setValue(siteName, "Auto_Domlur");
 		setValue(address1, "Auto_G R Complex, No. 31, Ground & 1st Floor");
-		setValue(postcode, "Auto_560071");
+		setValue(postcode, "560071");
 		setValue(siteContactName, "Auto_Amitav");
-		setValue(contactPhoneNo, "Auto_9823423412");
+		setValue(contactPhoneNo, "9823423412");
 		setValue(contactEmail, "andola.amitav@gmail.com");
 		setValue(siteID, "Auto_555");
 		setValue(address2, "Auto_Kempegowda Service Rd");
 		setValue(address3, "Auto_Bengaluru");
 		setValue(address4, "Auto_Karnataka");
-		setValue(siteArea, "100");
+		setValue(siteArea, "200");
 		Reporter.log("Entered data in various fields in 'Add Site' popup", true);
-		click(saveSiteDataBtn);
+			WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", saveSiteBtn);
+		Reporter.log("Clicked save site data button.", true);
 		Thread.sleep(2000);
 		try {
 			click(tipCloseBtn);
@@ -113,6 +103,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 			System.out.println("Couldn't close 'Tip' message");
 		}
 		boolean meterPageURLstatus = driver.getCurrentUrl().contains("CompanyProfile/SiteMeters");
+		Reporter.log("Verified URL in meter page.", true);
 		Assert.assertTrue(meterPageURLstatus, "Site hasn't got saved.");
 	}
 	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
@@ -136,14 +127,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 			String contactPHONENo, String contactEMAIL, String site_ID, String addr2, String addr3, String addr4, String siteAREA) throws Throwable
 	{
 		click(addSite);
-		Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		setValue(siteName, name);
 		setValue(address1, addr1);
 		setValue(postcode, postCode);
@@ -155,7 +139,9 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		setValue(address3, addr3);
 		setValue(address4, addr4);
 		setValue(siteArea, siteAREA);
-		click(saveSiteDataBtn);
+	WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", saveSiteBtn);
 
 		validateMandatoryFieldsAddSitePopup();
 		

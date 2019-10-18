@@ -27,38 +27,29 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
     }
 	public void validateQuoteRequestStatusDropdownPresence() {
 		boolean quoteRequestStatusDropdownPresenceStatus = isElementPresent(quoteRequestStatusDropdown);
-		Reporter.log("Checked if Quote Request status dropdown is displaying.", 3, true);
 		Assert.assertTrue(quoteRequestStatusDropdownPresenceStatus, "Quote Request status dropdown is not displaying.");
 	}
 	public void validateQuoteRequestStatusDropdown()	{
 		SoftAssert softAssertion = new SoftAssert();
 		boolean inProgressOptionPresenceStatus = isElementExistInDropDown(quoteRequestStatusDropdown, "In Progress");
-		Reporter.log("Checked if 'In Progress' option is present in the dropdown", 3, true);
 		softAssertion.assertTrue(inProgressOptionPresenceStatus, "In Progress option is not present in the dropdown");
 		boolean acceptedOptionPresenceStatus = isElementExistInDropDown(quoteRequestStatusDropdown, "Accepted");
-		Reporter.log("Checked if 'Accepted' option is present in the dropdown", 3, true);
 		softAssertion.assertTrue(acceptedOptionPresenceStatus, "Accepted option is not present in the dropdown");
 		boolean expiredOptionPresenceStatus = isElementExistInDropDown(quoteRequestStatusDropdown, "Expired");
-		Reporter.log("Checked if 'Expired' option is present in the dropdown", 3, true);
 		softAssertion.assertTrue(expiredOptionPresenceStatus, "Expired option is not present in the dropdown");
 		softAssertion.assertAll();
 	}
 	public void validatingPresenceOfUtilities(){
 		SoftAssert softAssertion = new SoftAssert();
 		boolean hhFilterPresenceStatus = isElementPresent(hhUtilityFilter);
-		Reporter.log("Checked if HH utility filter is displaying", 3, true);
 		softAssertion.assertTrue(hhFilterPresenceStatus, "HH Utility filter is not displaying");
 		boolean nhhFilterPresenceStatus = isElementPresent(nhhUtilityFilter);
-		Reporter.log("Checked if NHH utility filter is displaying", 3, true);
 		softAssertion.assertTrue(nhhFilterPresenceStatus, "NHH Utility filter is not displaying");
 		boolean gasFilterPresenceStatus = isElementPresent(gasUtilityFilter);
-		Reporter.log("Checked if Gas utility filter is displaying", 3, true);
 		softAssertion.assertTrue(gasFilterPresenceStatus, "Gas Utility filter is not displaying");
 		boolean waterUtilityFilterPresenceStatus = isElementPresent(waterUtilityFilter);
-		Reporter.log("Checked if Water utility filter is displaying", 3, true);
 		softAssertion.assertTrue(waterUtilityFilterPresenceStatus, "Water Utility filter is not displaying");
 		boolean allUtilitiesFilterPresenceStatus = isElementPresent(allUtilitiesFilter);
-		Reporter.log("Checked if All utilities filter is displaying", 3, true);
 		softAssertion.assertTrue(allUtilitiesFilterPresenceStatus, "All Utility filter is not displaying");		
 		softAssertion.assertAll();
 	}

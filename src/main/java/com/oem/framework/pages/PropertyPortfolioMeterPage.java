@@ -3,6 +3,8 @@ package com.oem.framework.pages;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -686,7 +688,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		
 		Random random = new Random();
 		//int cellNum = random.nextInt(1568);
-		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(70), 0);
 		Thread.sleep(2000);
 		click(addMeter);
 		Reporter.log("Clicked on add meter dropdown.", true);
@@ -726,8 +728,10 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		selectFutureDateCalender(21, 7, 2020);
 		Reporter.log("Selected date from date picker", true);
-		
-		click(saveMeterBtn);
+		WebElement saveMetBtn = driver.findElement(By.id("save-meter-button"));
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", saveMetBtn);
+		//click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		Thread.sleep(2000);
 		click(okBtn);
@@ -1613,10 +1617,8 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	public void validateAddHHMeterPopup() throws Throwable
 	{
 		click(addMeter);
-		Reporter.log("Clicked on Add Meter dropdown", true);
 		Thread.sleep(1000);
 		click(addHHMeter);
-		Reporter.log("Clicked on HH Electric", true);
 		Assert.assertTrue(isElementPresent(currentMeterOperator), "Popup for adding new HH Electric meter didn't appear");
 	}
 	public void validateAddnHHMeterPopup() throws Throwable

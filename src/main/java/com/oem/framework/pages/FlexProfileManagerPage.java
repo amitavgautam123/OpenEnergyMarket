@@ -28,19 +28,14 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean flexProfileMgrPresenceStatus = isElementPresent(flexProfileMgr);
 		softAssertion.assertTrue(flexProfileMgrPresenceStatus, "Flexible Profile Manager is not displaying.");
-		Reporter.log("Checked if flexible profile manager is displaying.", true);
 		boolean strategyProfilePresenceStatus = isElementPresent(strategyProfile);
 		softAssertion.assertTrue(strategyProfilePresenceStatus, "Strategy Profile is not displaying.");
-		Reporter.log("Checked if strategy Profile is displaying.", true);
 		boolean riskProfilePresenceStatus = isElementPresent(riskProfile);
 		softAssertion.assertTrue(riskProfilePresenceStatus, "Risk Profile is not displaying.");
-		Reporter.log("Checked if Risk Profile is displaying.", true);
 		boolean flexReportingPresenceStatus = isElementPresent(flexReporting);
 		softAssertion.assertTrue(flexReportingPresenceStatus, "Flex Reporting is not displaying.");
-		Reporter.log("Checked if Flex Reporting is displaying.", true);
 		boolean tradeReportingPresenceStatus = isElementPresent(tradeReporting);
 		softAssertion.assertTrue(tradeReportingPresenceStatus, "Trade Reporting is not displaying.");
-		Reporter.log("Checked if Trade Reporting is displaying.", true);
 	}
 	
 }
