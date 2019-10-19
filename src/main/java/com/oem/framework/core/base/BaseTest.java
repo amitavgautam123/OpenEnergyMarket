@@ -12,14 +12,18 @@ import com.oem.framework.core.TestExecutionContext;
 import com.oem.framework.core.utils.TestUtil;
 
 import com.oem.framework.reports.ExtentManager;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 
@@ -108,7 +112,7 @@ public abstract class BaseTest implements Base {
         if(result.getStatus() == ITestResult.FAILURE) {
             getReportUtil().log(Status.FAIL, MarkupHelper.createLabel(result.getName()+" FAILED ", ExtentColor.RED));
             getReportUtil().fail(result.getThrowable());
-            addScreenshotToReport(screenshot);
+            addScreenshotToReport(result, screenshot);
         }
         else if(result.getStatus() == ITestResult.SUCCESS) {
             getReportUtil().log(Status.PASS, MarkupHelper.createLabel(result.getName()+" PASSED ", ExtentColor.GREEN));
@@ -128,18 +132,34 @@ public abstract class BaseTest implements Base {
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").format(new Date());
         return timeStamp;
     }
-    private void addScreenshotToReport(String screenshot){
+    private void addScreenshotToReport(ITestResult result,String screenshot){
 
-        MediaEntityModelProvider mediaModel =
-                null;
+
+//        MediaEntityModelProvider mediaModel = null;
         try {
-            getReportUtil().fail("Test Level screenshot").addScreenCaptureFromPath(screenshot);
-            mediaModel = MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build();
-            getReportUtil().fail("Log Level screenshot", mediaModel);
-        } catch (IOException e) {
+            String base64Data=getBase64String(screenshot);
+
+           // getReportUtil().fail("Test Level screenshot").addScreenCaptureFromPath(screenshot,"lets see this");
+           // mediaModel = MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build();
+           // getReportUtil().fail("Log Level screenshot", mediaModel);
+          //  getReportUtil().addScreenCaptureFromBase64String(base64Data,"Failure details in screenshot");
+
+            getReportUtil().fail("Failed screenshot",
+                    MediaEntityBuilder.createScreenCaptureFromBase64String(base64Data).build());
+
+        } catch (Exception e) {
             e.printStackTrace();
+            getReportUtil().error("Failed to attach screenshot. There was an error. "+e.getStackTrace());
         }
 
         ExtentManager.getInstance().flush();
+    }
+
+    private String getBase64String(String screenshotLocation) throws Exception {
+        InputStream is = new FileInputStream(screenshotLocation);
+        byte[] imageBytes = IOUtils.toByteArray(is);
+        Thread.sleep(1000);
+        String base64 = Base64.getEncoder().encodeToString(imageBytes);
+        return base64;
     }
 }

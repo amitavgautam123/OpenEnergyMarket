@@ -4,7 +4,6 @@ import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.AdminDashboardPage;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
-import io.qameta.allure.Description;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -16,7 +15,7 @@ public class TenderOpenQuotesTests extends BaseTest {
         adminDashboardPage=new LoginPage().loginAsAdmin();
     }
     @Test(description = "Verify quote Request Dropdown Exists")
-    @Description("Verify whether quote request dropdown is shown after navigating to Tender Quotes page")
+//    @Description("Verify whether quote request dropdown is shown after navigating to Tender Quotes page")
     public void verifyQuoteDropDown() throws Throwable {
         adminDashboardPage
                 .navigateToTenderQuotes()

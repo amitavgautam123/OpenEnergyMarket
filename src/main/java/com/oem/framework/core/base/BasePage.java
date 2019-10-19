@@ -26,6 +26,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
    // protected static ThreadLocal threadLocalPage=new ThreadLocal<>();
     protected final WebDriver driver;
+    private int DEFAULT_EXPLICIT_WAIT=3;
     protected final String testName;
     protected TestExecutionContext testExecutionContext;
     protected Logger logger=getLogger();
@@ -68,7 +69,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
     public void waitForElementPresent(By locatn) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
             wait.until(ExpectedConditions.presenceOfElementLocated(locatn));
 
         } catch (Exception e) {
@@ -81,7 +82,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
      */
     public void waitForElementInvisible(By locator) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
         } catch (Exception e) {
