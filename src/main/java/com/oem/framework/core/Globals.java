@@ -1,7 +1,9 @@
 package com.oem.framework.core;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.oem.framework.core.base.Base;
 import com.oem.framework.core.utils.ConfigUtils;
+import com.oem.framework.reports.ExtentManager;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,10 +11,12 @@ import java.util.HashMap;
 public class Globals implements Base {
     private static HashMap<String, TestExecutionContext> allTestsExecutionContext;
     static HashMap<String, String> configForExecutionEnvironment;
+    static ExtentReports extent;
 
     static  {
         System.out.println("Globals static block");
         allTestsExecutionContext = new HashMap<>();
+        extent= ExtentManager.getInstance();
         try {
             configForExecutionEnvironment = loadConfiguration();
         } catch (IOException e) {
@@ -47,6 +51,11 @@ public class Globals implements Base {
 
     public static String getConfig(String key){
         return configForExecutionEnvironment.get(key);
+    }
+
+    public static TestExecutionContext getCurrentThreadContext(){
+        long threadId=Thread.currentThread().getId();
+        return getTestExecutionContext(threadId);
     }
 
 }

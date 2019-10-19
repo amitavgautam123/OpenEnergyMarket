@@ -1,15 +1,13 @@
 package com.oem.framework.core.base;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.collections4.bag.SynchronizedSortedBag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -309,6 +307,11 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     public void actionsClick(By locator) {
     	Actions actions = new Actions(driver);
     	actions.moveToElement((WebElement) locator).click().build().perform();
+    }
+
+    public ExtentTest getReportUtil(){
+        long threadId=Thread.currentThread().getId();
+        return Globals.getTestExecutionContext(threadId).getExtentTest();
     }
 }
 

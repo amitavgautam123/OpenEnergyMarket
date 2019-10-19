@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -23,7 +24,11 @@ public class DriverManager implements Base {
 
     public static WebDriver getDriver() throws IOException {
 
-        return getChromeDriver();
+        if(Globals.getConfig("browser").equalsIgnoreCase("chrome"))
+            return getChromeDriver();
+
+
+            return getFirefoxDriver();
 
     }
 
@@ -81,6 +86,20 @@ public class DriverManager implements Base {
 
 
     public static void shutDownService(){
-        service.stop();
+        if(service!=null)
+            service.stop();
+    }
+
+    public static FirefoxDriver getFirefoxDriver() throws IOException {
+        System.setProperty("webdriver.gecko.driver", Globals.getConfig("firefox.driver.path"));
+        DesiredCapabilities capabilities=DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette", true);
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+        FirefoxDriver driver = new FirefoxDriver(capabilities);
+
+
+
+        return driver;
     }
 }
