@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -23,7 +25,16 @@ public class DriverManager implements Base {
 
     public static WebDriver getDriver() throws IOException {
 
-        return getChromeDriver();
+        switch (Globals.getConfig("browser")){
+            case "firefox":
+                return getFirefoxDriver();
+            case "ie":
+                return getIEDriver();
+            default:
+                return getChromeDriver();
+
+        }
+
 
     }
 
@@ -80,6 +91,35 @@ public class DriverManager implements Base {
 
 
     public static void shutDownService(){
-        service.stop();
+        if(service!=null)
+            service.stop();
+    }
+
+    public static FirefoxDriver getFirefoxDriver() throws IOException {
+        if(StringUtils.isEmpty(Globals.getConfig("firefox.driver.path")))
+            throw new IOException("firefox.driver.path is not set");
+
+        System.setProperty("webdriver.gecko.driver", Globals.getConfig("firefox.driver.path"));
+        DesiredCapabilities capabilities=DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette", true);
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+        FirefoxDriver driver = new FirefoxDriver(capabilities);
+
+
+
+        return driver;
+    }
+
+
+    public static InternetExplorerDriver getIEDriver() throws IOException {
+        if(StringUtils.isEmpty(Globals.getConfig("ie.driver.path")))
+            throw new IOException("ie.driver.path is not set");
+
+        System.setProperty("webdriver.ie.driver", Globals.getConfig("ie.driver.path"));
+//        DesiredCapabilities capabilities=DesiredCapabilities.firefox();
+//        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        InternetExplorerDriver driver = new InternetExplorerDriver();
+        return driver;
     }
 }

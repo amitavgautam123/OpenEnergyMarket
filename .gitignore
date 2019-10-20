@@ -10,3 +10,5 @@ out/
 temp/
 test-output/
 target/
+screenshots/
+ExtentReport/

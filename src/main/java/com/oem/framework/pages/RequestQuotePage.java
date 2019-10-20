@@ -2225,10 +2225,11 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		
 		softAssertion.assertAll();
 	}
-	public void logout() throws Throwable {
-		click(logoutDropdown);
+	public void logout()  {
+		/*click(logoutDropdown);
 		Thread.sleep(1000);
-		click(logoutLink);
+		click(logoutLink);*/
+		super.logout();
 	}
 	public void loginAsAdmin() throws Throwable  {
     	String URL = getPropertyFileData("url");

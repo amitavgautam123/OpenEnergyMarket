@@ -3,9 +3,8 @@ package com.oem.framework.pages;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
-import com.oem.framework.core.base.BasePage;
 
-public class SupplierDashboardPage extends BasePage {
+public class SupplierDashboardPage extends HeaderPage {
 
 	By tendersAndAlertsLink = By.xpath("//li[@data-action = 'Requests']/a/h3");
 	

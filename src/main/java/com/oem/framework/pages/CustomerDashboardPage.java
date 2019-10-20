@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
-public class CustomerDashboardPage extends BasePage {
+public class CustomerDashboardPage extends HeaderPage {
 
     By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
     By companyProfile=By.linkText("Company Profile");

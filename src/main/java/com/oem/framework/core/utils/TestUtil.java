@@ -54,7 +54,7 @@ public class TestUtil implements Base {
 
         }
     }
-    public static void takeScreenshot(String fileName,WebDriver driver) {
+    public static String takeScreenshot(String fileName, WebDriver driver) {
         String filepath = System.getProperty("user.dir") + File.separator + "screenshots"+ File.separator;
         createDirectoryIfNotExists(filepath);
         File destination = new File(filepath + fileName + ".png");
@@ -71,11 +71,13 @@ public class TestUtil implements Base {
             }
 
             FileUtils.copyFile(source, destination);
+            return  destination.getAbsolutePath();
         } catch (Exception e) {
             // Ignore errors while taking the screenshot
             e.printStackTrace();
             logger.info("Failed to capture screenshot! " + e.getMessage());
         }
+        return destination.getAbsolutePath();
     }
 
 

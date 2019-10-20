@@ -1,15 +1,13 @@
 package com.oem.framework.core.base;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.commons.collections4.bag.SynchronizedSortedBag;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -28,6 +26,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
    // protected static ThreadLocal threadLocalPage=new ThreadLocal<>();
     protected final WebDriver driver;
+    private int DEFAULT_EXPLICIT_WAIT=3;
     protected final String testName;
     protected TestExecutionContext testExecutionContext;
     protected Logger logger=getLogger();
@@ -69,8 +68,11 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
 
     public void waitForElementPresent(By locatn) {
+       waitForElementPresent(locatn,DEFAULT_EXPLICIT_WAIT);
+    }
+    public void waitForElementPresent(By locatn,int waitTime) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.presenceOfElementLocated(locatn));
 
         } catch (Exception e) {
@@ -83,7 +85,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
      */
     public void waitForElementInvisible(By locator) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 
         } catch (Exception e) {
@@ -145,8 +147,12 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     }
 
     public boolean isElementPresent(By locator) {
-    	waitForElementPresent(locator);
-    	try {
+    	return isElementPresent(locator,DEFAULT_EXPLICIT_WAIT);
+    }
+
+    public boolean isElementPresent(By locator,int waitTime) {
+        waitForElementPresent(locator,waitTime);
+        try {
             WebElement element = driver.findElement(locator);
             if (element == null)
                 return false;
@@ -310,6 +316,8 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	Actions actions = new Actions(driver);
     	actions.moveToElement((WebElement) locator).click().build().perform();
     }
+
+
     /**
      * Returns true if all the check box in the list is enabled.
      * @param locator
@@ -349,8 +357,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	else
     		System.out.println("All the items are Not selected"+notSelected);
 		
-    	
-    	
+
     }
 }
 
