@@ -68,8 +68,11 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 
 
     public void waitForElementPresent(By locatn) {
+       waitForElementPresent(locatn,DEFAULT_EXPLICIT_WAIT);
+    }
+    public void waitForElementPresent(By locatn,int waitTime) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.presenceOfElementLocated(locatn));
 
         } catch (Exception e) {
@@ -144,8 +147,12 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     }
 
     public boolean isElementPresent(By locator) {
-    	waitForElementPresent(locator);
-    	try {
+    	return isElementPresent(locator,DEFAULT_EXPLICIT_WAIT);
+    }
+
+    public boolean isElementPresent(By locator,int waitTime) {
+        waitForElementPresent(locator,waitTime);
+        try {
             WebElement element = driver.findElement(locator);
             if (element == null)
                 return false;

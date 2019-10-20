@@ -1,10 +1,10 @@
 package com.oem.framework.pages;
 
-import com.oem.framework.core.base.BasePage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import sun.jvm.hotspot.memory.HeapBlock;
 
-public class AdminDashboardPage extends BasePage {
+public class AdminDashboardPage extends HeaderPage {
 
     By impersonateUsername=By.id("ImpersonateUserName");
     By impersonateBtn=By.id("impersonateBtn");

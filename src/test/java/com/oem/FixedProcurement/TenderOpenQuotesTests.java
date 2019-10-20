@@ -62,4 +62,5 @@ public class TenderOpenQuotesTests extends BaseTest {
                 .clickOpenQuotesBtn();
 
     }
+
 }

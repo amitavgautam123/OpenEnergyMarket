@@ -11,6 +11,7 @@ import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 import com.oem.framework.core.utils.TestUtil;
 
+import com.oem.framework.pages.HeaderPage;
 import com.oem.framework.reports.ExtentManager;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -35,6 +36,14 @@ public abstract class BaseTest implements Base {
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() throws IOException {
         new TestExecutionContext("");
+
+    }
+
+    @BeforeClass(alwaysRun = true)
+    public void baseClass() throws IOException {
+        HeaderPage headerPage=new HeaderPage();
+        if(headerPage.isLoggedIn())
+            headerPage.logout();
 
     }
 
