@@ -1,6 +1,11 @@
 package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
@@ -15,9 +20,14 @@ public class CustomerDashboardPage extends HeaderPage {
     
     By quotesAndTenders = By.xpath("//div[@id = 'accordian-menu']//li[4]/h3");
     By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");
+    By flexManagement = By.xpath("//h3[contains(text(),'Flex Management')]");
+    By flexProfileMgr = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[1]/a");
+    By strategyProfile = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[2]/a");
+    By riskProfile = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[3]/a");
+    By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
+    By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
-    
-    public CustomerDashboardPage goToCompanyProfile(){
+    public CustomerDashboardPage goToCompanyProfile()	{
         click(portfolioMgr);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
@@ -33,11 +43,18 @@ public class CustomerDashboardPage extends HeaderPage {
         return portfolioCalendarPage;
     }
     
-    public CustomerDashboardPage goToPropertyPortfolio(){
+    public CustomerDashboardPage goToPropertyPortfolio() throws AWTException{
         click(portfolioMgr);
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
+        Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
         return propertyPortfolioPage;
     }
 
@@ -54,6 +71,13 @@ public class CustomerDashboardPage extends HeaderPage {
 		}
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
+        Robot robot = new Robot();
+        for(int i = 1; i<=2; i++) {
+        	robot.keyPress(KeyEvent.VK_CONTROL);
+        	robot.keyPress(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        	robot.keyRelease(KeyEvent.VK_CONTROL);
+        }
         return propertyPortfolioMeterPage; 
     }
     
@@ -63,6 +87,13 @@ public class CustomerDashboardPage extends HeaderPage {
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;
+    }
+    public CustomerDashboardPage goToFlexibleProfileManager(){
+        click(flexManagement);
+        click(flexProfileMgr);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
     }
 
 

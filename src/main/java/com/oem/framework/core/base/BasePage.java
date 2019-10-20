@@ -317,9 +317,47 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	actions.moveToElement((WebElement) locator).click().build().perform();
     }
 
-    public ExtentTest getReportUtil(){
-        long threadId=Thread.currentThread().getId();
-        return Globals.getTestExecutionContext(threadId).getExtentTest();
+
+    /**
+     * Returns true if all the check box in the list is enabled.
+     * @param locator
+     */
+    public boolean checkboxListEnabledStatus(By locator) {
+	   	List<WebElement> allElements = driver.findElements(locator);
+	    boolean status = true;
+	   	for (WebElement element: allElements) {
+	        if(element.isEnabled()==false) 
+	            {
+	            	status = false;
+	            	break;
+	            }
+	        }
+	return status;
+	}
+    public void numberOfCheckListPresent(By locator){
+    	List<WebElement> els = driver.findElements(locator);
+    	int i=1;
+    	int selected=0;
+    	int notSelected=0;
+    	System.out.println("Number Of Elemnts present in List is  "+els.size());
+    	for ( WebElement el : els ) {
+    		System.out.println("Elemnt "+i+" is : "+el.getText());
+    	    if ( el.isSelected() ) {
+    	    	selected++;
+    	    
+    	    }
+    	    else{
+    	    	notSelected++;
+    	    }
+    	    i++;
+    	    }
+    	if(selected>notSelected){
+    		System.out.println("All the items are selected"+selected);
+    	}
+    	else
+    		System.out.println("All the items are Not selected"+notSelected);
+		
+
     }
 }
 

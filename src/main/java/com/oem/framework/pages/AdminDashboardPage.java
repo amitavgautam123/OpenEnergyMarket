@@ -11,6 +11,9 @@ public class AdminDashboardPage extends HeaderPage {
     By fixedProcurementAdmin=By.xpath("//*[@id=\"accordian-menu\"]//h3[text()='Fixed Procurement Admin']");
     By tenderOpenQuotes=By.linkText("Tender Open Quotes");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
+    By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
+    
+
 
 
     public CustomerDashboardPage impersonate(String email){
@@ -33,6 +36,12 @@ public class AdminDashboardPage extends HeaderPage {
     }
 
 
+    public AdminDashboardPage goToVerifyTenders(){
+        click(verifyTenders);
+        VerifyTendersPage verifyTendersPage=new VerifyTendersPage();
+        verifyTendersPage.isLoaded();
+        return new VerifyTendersPage();
+    }
 
 
     @Override

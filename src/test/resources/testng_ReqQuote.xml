@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="RequestQuotesTest" verbose="5" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
+    <test name="Regression tests" thread-count="2" parallel="methods">
+
+        <packages>
+            <package name="com.oem.QuotesAndTenders"/>	
+            
+        </packages>
+    </test>
+</suite>

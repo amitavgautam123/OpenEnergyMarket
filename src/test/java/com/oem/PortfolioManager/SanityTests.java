@@ -35,10 +35,11 @@ public class SanityTests extends BaseTest {
 	}*/
 
 	@Test
-	public void PM_PP_TC_033() throws Throwable {
+	public void PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
-		PropertyPortfolioMeterPage propertyPortfolioMeterTest = (PropertyPortfolioMeterPage) customerDashboardPage.goToPropertyPortfolioMeterPage();
-		propertyPortfolioMeterTest.validateAddContractHistoryPopup();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
+				.login();
+		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
+		companyProfilePage.validateLOAPreviousDateSelectPreviousDateTest();
 	}
 }

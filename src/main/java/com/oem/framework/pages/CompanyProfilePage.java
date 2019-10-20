@@ -200,6 +200,19 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         isElementPresent(LOAExpiresDateDatePicker);
     	Assert.assertEquals(isElementPresent(LOAExpiresDateDatePicker), true);	
     }
+    public void validateLOAExpiresDateSelectFutureDateTest() {
+    	click(LOAExpiresDate);
+		selectFutureDateCalender(27, 10, 2021);
+		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2021");
+		Assert.assertTrue(dateSelectionStatus, "Unable to select future date.");
+    }
+    public void validateLOAPreviousDateSelectPreviousDateTest() { 	
+    	click(LOAExpiresDate);
+    	selectPrevDateCalender(12, 5, 2017);
+		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2017");
+		System.out.println("Value attr = " + getAttribute(LOAExpiresDate, "value"));
+		Assert.assertTrue(dateSelectionStatus, "Unable to select previous date.");
+    }
     public void uploadLogo()
     {   
     	setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");

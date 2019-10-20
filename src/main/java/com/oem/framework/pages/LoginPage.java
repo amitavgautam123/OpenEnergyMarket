@@ -2,6 +2,8 @@ package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +48,6 @@ public class LoginPage extends BasePage {
     	String EMAIL = getPropertyFileData("email");
     	String PASSWORD = getPropertyFileData("password");
         loginUsing(URL,EMAIL,PASSWORD);
-
 
         if(isAdminDashboardPage())
             return new AdminDashboardPage();

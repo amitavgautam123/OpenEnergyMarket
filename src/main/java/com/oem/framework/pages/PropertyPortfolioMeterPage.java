@@ -1019,19 +1019,182 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Reporter.log("Checked if add contract history popup is displaying.", true);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
-	public void validateMandatoryFieldsContractHistoryPopup() {
-		SoftAssert softAssertion = new SoftAssert();
+	
+	public void displayAddContractHistoryHHutilityPopup() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
+		Thread.sleep(1000);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		Reporter.log("Clicked on the 'Add Contract History' button.", true);
+	}
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		
+		displayAddContractHistoryHHutilityPopup();
+		
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		
+		setValue(this.dayRate, dayRate);
+		setValue(this.nightRate, nightRate);
+		setValue(this.standingCharge, standingCharge);
+		setValue(this.capacityCharge, capacityCharge);
+		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
+		
 		click(saveContractHistoryBtn);
 		Reporter.log("Clicked on save contract history button.", true);
-		boolean ariaInvalidStatus = getAttribute(dateTraded, "aria-invalid").equals("true");
-		softAssertion.assertTrue(ariaInvalidStatus, "");
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded() throws Throwable {
+		displayAddContractHistoryHHutilityPopup();
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(12, 7, 2018);
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInContractStartDate() throws Throwable {
+		displayAddContractHistoryHHutilityPopup();
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(22, 9, 2018);
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTradedAndContractStartDate() throws Throwable {
+		displayAddContractHistoryHHutilityPopup();
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(16, 2, 2018);		
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(22, 9, 2018);
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		
+		displayAddContractHistoryHHutilityPopup();
+		
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		
+		setValue(this.dayRate, dayRate);
+		setValue(this.nightRate, nightRate);
+		setValue(this.standingCharge, standingCharge);
+		setValue(this.capacityCharge, capacityCharge);
+		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
+		
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+	}
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+		
+		displayAddContractHistoryHHutilityPopup();
+		
+		Thread.sleep(2000);
+		clearValue(contractEndDate_ContractHist);
+		clearValue(this.contractedAnnualSpend);
+		
+		click(dateTraded);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		Thread.sleep(1000);
+		click(contractStartDate);
+		Thread.sleep(1000);
+		selectPrevDateCalender(day, month, year);
+		
+		setValue(this.dayRate, dayRate);
+		setValue(this.nightRate, nightRate);
+		setValue(this.standingCharge, standingCharge);
+		setValue(this.capacityCharge, capacityCharge);
+		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
+		
+		click(saveContractHistoryBtn);
+		Reporter.log("Clicked on save contract history button.", true);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 	}
 	
-	
+	public void validateMandatoryFieldsErrorMessagesContractHistoryPopup() {
+		SoftAssert softAssertion = new SoftAssert();
+		if(getAttribute(dateTraded, "value").equals("")) {
+			String dateTradedStatus = getAttribute(dateTraded, "aria-invalid");
+			if(dateTradedStatus == null)
+				dateTradedStatus = "true";
+			softAssertion.assertTrue(dateTradedStatus.equals("true"), "Mandatory expression while validating Date Traded field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Date Traded field.", true);
+		}
+		if(getAttribute(contractStartDate, "value").equals("")) {
+			String contractStartDateFieldErrorStatus = getAttribute(contractStartDate, "aria-invalid");
+			if(contractStartDateFieldErrorStatus == null)
+				contractStartDateFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractStartDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract Start Date field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contract Start Date field.", true);
+		}
+		if(getAttribute(contractEndDate_ContractHist, "value").equals("")) {
+			String contractEndDateFieldErrorStatus = getAttribute(contractEndDate_ContractHist, "aria-invalid");
+			if(contractEndDateFieldErrorStatus == null)
+				contractEndDateFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractEndDateFieldErrorStatus.equals("true"), "Mandatory expression while validating Contract End Date field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contract End Date field.", true);
+		}
+		if(getAttribute(this.dayRate, "value").equals("")) {
+			String dayRateFieldErrorStatus = getAttribute(this.dayRate, "aria-invalid");
+			if(dayRateFieldErrorStatus == null)
+				dayRateFieldErrorStatus = "true";
+			softAssertion.assertTrue(dayRateFieldErrorStatus.equals("true"), "Mandatory expression while validating Day Rate field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Day Rate field.", true);
+		}
+		if(getAttribute(this.nightRate, "value").equals("")) {
+			String nightRateFieldErrorStatus = getAttribute(this.nightRate, "aria-invalid");
+			if(nightRateFieldErrorStatus == null)
+				nightRateFieldErrorStatus = "true";
+			softAssertion.assertTrue(nightRateFieldErrorStatus.equals("true"), "Mandatory expression while validating Night Rate field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Night Rate field.", true);
+		}
+		if(getAttribute(this.standingCharge, "value").equals("")) {
+			String standingChargeFieldErrorStatus = getAttribute(this.standingCharge, "aria-invalid");
+			if(standingChargeFieldErrorStatus == null)
+				standingChargeFieldErrorStatus = "true";
+			softAssertion.assertTrue(standingChargeFieldErrorStatus.equals("true"), "Mandatory expression while validating Standing Charge field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Standing Charge field.", true);
+		}
+		if(getAttribute(this.capacityCharge, "value").equals("")) {
+			String capacityChargeFieldErrorStatus = getAttribute(this.capacityCharge, "aria-invalid");
+			if(capacityChargeFieldErrorStatus == null)
+				capacityChargeFieldErrorStatus = "true";
+			softAssertion.assertTrue(capacityChargeFieldErrorStatus.equals("true"), "Mandatory expression while validating Capacity Charge field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Capacity Charge field.", true);
+		}
+		if(getAttribute(this.contractedAnnualSpend, "value").equals("")) {
+			String contractedAnnualSpendFieldErrorStatus = getAttribute(this.contractedAnnualSpend, "aria-invalid");
+			if(contractedAnnualSpendFieldErrorStatus == null)
+				contractedAnnualSpendFieldErrorStatus = "true";
+			softAssertion.assertTrue(contractedAnnualSpendFieldErrorStatus.equals("true"), "Mandatory expression while validating Contracted Annual Spend field is not displaying");
+			Reporter.log("Checked if error expression is displaying for Contracted Annual Spend field.", true);
+		}
+	}
 	
 	
 	public void validateAddnHHMeterPopupUsingDifferentTestData(String meterNoDropdownFieldValue, String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 

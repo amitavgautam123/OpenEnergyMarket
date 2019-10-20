@@ -13,7 +13,7 @@ import com.oem.framework.pages.PropertyPortfolioPage;
 public class PropertyPortfolioTest extends BaseTest {
 	
 	@Test
-	public void PM_PP_TC_004() throws Throwable { 
+	public void PM_PP_TC_004_validatePresenceAddSitePopupTest() throws Throwable { 
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -21,7 +21,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		propertyPortfolioTest.validatePresenceAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_005() throws Throwable {
+	public void PM_PP_TC_005_validateMandatoryFieldsAddSitePopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -29,7 +29,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		propertyPortfolioTest.validateMandatoryFieldsAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_006() throws Throwable {
+	public void PM_PP_TC_006_validateAddressPostcodeMandatoryFieldsAddSitePopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -37,7 +37,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		propertyPortfolioTest.validateAddressPostcodeMandatoryFieldsAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_007() throws Throwable {
+	public void PM_PP_TC_007_validateMandatorySiteNamePostcodeFieldsInAddSitePopupTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -45,7 +45,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		propertyPortfolioTest.validateMandatorySiteNamePostcodeFieldsInAddSitePopup();
 	}
 	@Test
-	public void PM_PP_TC_008() throws Throwable  {
+	public void PM_PP_TC_008_validateMandatorySiteNameAddressFieldsInAddSitePopupTest() throws Throwable  {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
@@ -86,7 +86,7 @@ public class PropertyPortfolioTest extends BaseTest {
 		return data;
 	}
 	@Test
-	public void PM_PP_TC_014() throws Throwable {
+	public void PM_PP_TC_014_validateAddMeterDropdownTest() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
 				.login();
