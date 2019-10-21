@@ -9,11 +9,210 @@ import com.oem.framework.pages.LoginPage;
 
 public class FlexProfileManagerTest extends BaseTest {
 	
-	@Test
-	public void FM_FPM_TC_003() throws Throwable {
+	
+	
+
+	@Test()
+	public void FlexProcurementFlexibleProfileManager_verifySubModulesPresenceInFlexmanagement() throws Throwable {
 		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage)loginPage.login();
-		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage)customerDashboardPage.goToFlexibleProfileManager();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
 		flexProfileManagerPage.verifySubModulesPresenceInFlexmanagement();
+		
+		
 	}
+
+	@Test()
+	public void FlexProcurementFlexibleProfileManager_verifyFlexibleProfileManager_HomePage() throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyFlexibleProfileManager_HomePage();
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyPresenceOf3Utilitys_in_flexProfileMgrHomePage()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyPresenceOf3Utilitys_in_flexProfileMgrHomePage();
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreation_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingProfileCreation_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test//this is not working
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage("HH");
+	}
+
+	@Test
+	public void FlexProcurementFlexibleProfileManager_verifyCustomerDashBoardHomePageAfterClickingCancelFlexibleProfileSetUp_In_FlexibleProfileMgrHomePage_HH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyCustomerDashBoardHomePageAfterClickingCancelFlexibleProfileSetUp_In_FlexibleProfileMgrHomePage(
+						"HH");
+	}
+
+	// =====================================================This is Related To
+	// NHH Utility ======================================================
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage("NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage("NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage("NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreation_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage.verifyingProfileCreation_In_FlexibleProfileMgrHomePage("NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage("NHH");
+	}
+
+	//@Test // this is not working
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage(
+						"NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage_NHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage("NHH");
+	}
+
+	//@Test
+	public void FlexProcurementFlexibleProfileManager_verifyCustomerDashBoardHomePageAfterClickingCancelFlexibleProfileSetUp_In_FlexibleProfileMgrHomePageNHH()
+			throws Throwable {
+		LoginPage loginPage = new LoginPage();
+		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
+		FlexProfileManagerPage flexProfileManagerPage = (FlexProfileManagerPage) customerDashboardPage
+				.goToFlexibleProfileManager();
+		flexProfileManagerPage
+				.verifyCustomerDashBoardHomePageAfterClickingCancelFlexibleProfileSetUp_In_FlexibleProfileMgrHomePage(
+						"NHH");
+	}
+
 }

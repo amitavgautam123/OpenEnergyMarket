@@ -1,13 +1,7 @@
 package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
-
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 
 public class CustomerDashboardPage extends BasePage {
@@ -28,7 +22,7 @@ public class CustomerDashboardPage extends BasePage {
     By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
     By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
-    public CustomerDashboardPage goToCompanyProfile()	{
+    public CustomerDashboardPage goToCompanyProfile(){
         click(portfolioMgr);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
@@ -44,7 +38,7 @@ public class CustomerDashboardPage extends BasePage {
         return portfolioCalendarPage;
     }
     
-    public CustomerDashboardPage goToPropertyPortfolio() throws AWTException{
+    public CustomerDashboardPage goToPropertyPortfolio(){
         click(portfolioMgr);
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
@@ -69,12 +63,8 @@ public class CustomerDashboardPage extends BasePage {
     }
     
     public CustomerDashboardPage goToRequestQuote(){
-		
-		  click(quotesAndTenders); 
-		  click(requestAQuoteLink);
-		 
-    	//click(portfolioMgr);
-        //click(companyProfile);
+        click(quotesAndTenders);
+        click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;
@@ -86,6 +76,35 @@ public class CustomerDashboardPage extends BasePage {
         flexProfileManagerPage.isLoaded();
         return flexProfileManagerPage;
     }
+    public CustomerDashboardPage goToStrategyProfile(){
+        click(flexManagement);
+        click(strategyProfile);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
+    }
+    public CustomerDashboardPage goToRiskProfile(){
+        click(flexManagement);
+        click(riskProfile);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
+    }
+    public CustomerDashboardPage goToFlexReporting(){
+        click(flexManagement);
+        click(flexReporting);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
+    }
+    public CustomerDashboardPage goToTradeReporting(){
+        click(flexManagement);
+        click(tradeReporting);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
+    }
+    
 
 
 
@@ -100,4 +119,5 @@ public class CustomerDashboardPage extends BasePage {
     }
 
 
+    
 }
