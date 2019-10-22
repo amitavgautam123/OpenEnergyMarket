@@ -48,13 +48,14 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
         Assert.assertTrue(StringUtils.isNoneBlank(getText(portfolioCalendarEntryPopUp)) &&
                 getText(portfolioCalendarEntryPopUp).trim().contains(value),"Portfolio Calendar Entry Popup heading actual value: "+getText(portfolioCalendarEntryPopUp) +" but expected:"+value);
     }
-	public void verifyCloseBtnPortfolioCalendarEntrypopup() throws InterruptedException{
+	public PortfolioCalendarPage verifyCloseBtnPortfolioCalendarEntrypopup() throws InterruptedException{
 		click(addCalendarEntry);
 		Thread.sleep(1000);
 		click(close_PortfolioCalendarEntryPopup);
 		Thread.sleep(1000);
 		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
 		Assert.assertEquals(status, false);
+		return this;
     }
 	public void verifyDateInEventDate() throws Throwable {
 		click(addCalendarEntry);
@@ -62,9 +63,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(eventDate);
 		selectFutureDateCalender(18, 6, 2020);
 		String dateData = getAttribute(eventDate, "value");
-		Reporter.log("Stored the data present in value attribut of event date field", true);
 		boolean dateDisplayStatus = dateData.contains("18/07/2020");
-		Reporter.log("Checked if the value attribute contains the same date we entered in the date picker", true);
 		Assert.assertTrue(dateDisplayStatus, "Incorrect date is displaying after choosing date in date picker");
 	}
 	public void validateDescriptionWithDifferentTestDataPortfolioCaledarEntryPopup(String data) throws InterruptedException
@@ -109,63 +108,81 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		String date = getText(eventDate_firstRecord);
 		String desc = getText(eventDes_firstRecord);
 		click(deleteEntry);
-		Reporter.log("clicked 'Delete Entry' button for first row");
 		click(delete_OkBtn);
-		Reporter.log("clicked Ok button in delete popup");
 		Thread.sleep(2000);
 		boolean status = desc.equals(getText(eventDes_firstRecord)) && date.equals(getText(eventDate_firstRecord));
-		Reporter.log("compared description and date in the first row before delete and after deleting an event");		
 		Assert.assertEquals(false, status);
 	}
 	public void validateEditEventPopup(String value) throws Throwable
 	{
 		click(editEntry);
 		Thread.sleep(2000);
-		Reporter.log("clicked 'Edit Entry' button for first row");
 		Assert.assertTrue(StringUtils.isNoneBlank(getText(edit_popup)) &&
                 getText(edit_popup).trim().contains(value),"Edit event popup heading: "+getText(edit_popup) +" but expected:"+value);
 	}
 	public void validateCloseIconEditEventPopup() throws InterruptedException
 	{
 		click(editEntry);
-		Reporter.log("clicked 'Edit Entry' button for first row");
 		Thread.sleep(1000);
+		//boolean editPopUpDisplayStatus1=driver.findElement(saveBtn).isDisplayed();
+		//System.out.println(editPopUpDisplayStatus1);
 		click(close_PortfolioCalendarEntryPopup);
-		Reporter.log("Clicked close icon in edit entry popup");
 		Thread.sleep(2000);
-		boolean editPopUpDisplayStatus = isElementPresent(edit_popup);
-		Reporter.log("Checked if edit popup is still displaying");
-		Assert.assertFalse(editPopUpDisplayStatus, "Edit popup is still displaying after closing it.");		
+		boolean editPopUpDisplayStatus=driver.findElement(saveBtn).isDisplayed();//Checking for the Save Button which is inside PopUp Is Displayed Or Not
+		//System.out.println(editPopUpDisplayStatus);
+		Assert.assertFalse(editPopUpDisplayStatus, "Edit popup is still displaying after closing it.");	
+		
 	}
 	public void validateEditEventChangingDate() throws InterruptedException
 	{
 		String desc = getText(eventDes_firstRecord);
-		Reporter.log("captured description in first record");
 		click(editEntry);
-		Reporter.log("clicked 'Edit Entry' button for first row");
 		Thread.sleep(1000);
 		click(eventDate);
 		selectPrevDateCalender(20, 2, 2017);
-		Reporter.log("Entered date in date picker");
 		click(saveBtn);
-		Reporter.log("Clicked save entry button");
 		boolean status = getText(eventDate_firstRecord).equals("20/03/2017") && getText(eventDes_firstRecord).equals(desc);
-		Reporter.log("compared date and description editing");
 		Assert.assertEquals(true, status);
 	}
 	public void validateEditEventChangingDescription() throws InterruptedException
 	{
 		String date = getText(eventDate_firstRecord);
 		click(editEntry);
-		Reporter.log("Clicked on edit entry");
 		Thread.sleep(1000);
 		setValue(eventDescription, "Bank holiday");
-		Reporter.log("Entered data in event description");
 		click(saveBtn);
-		Reporter.log("clicked save button");
 		Thread.sleep(1000);
 		boolean status = getText(eventDes_firstRecord).equals("Bank holiday") && getText(eventDate).equals(date);
-		Reporter.log("Compared data in event date and description after editing");
+		
+	}
+	public void validateErrorMessageAfterEnteringDuplicateCalenderEvents() throws Throwable{
+		click(addCalendarEntry);
+		Thread.sleep(1000);
+		click(eventDate);
+		
+		Thread.sleep(1000);
+		selectFutureDateCalender(20,11,2020);
+		Thread.sleep(1000);
+		driver.findElement(eventDescription).sendKeys("2025 year Event");
+		Thread.sleep(1000);
+		click(saveBtn);
+		//Entering date and Description For the second time with same Data 
+		click(addCalendarEntry);
+		Thread.sleep(1000);
+		click(eventDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(20,11,2020);
+		Thread.sleep(1000);
+		driver.findElement(eventDescription).sendKeys("2025 year Event");
+		Thread.sleep(1000);
+		click(saveBtn);
+		
+		boolean text=driver.findElement(addCalendarEntry).isDisplayed();
+		
+		Assert.assertFalse(text, "No Alert Message Is Shown, Even After Entering Duplicate Event Dates ");	
+
+		
+		
 	}
 	
 }

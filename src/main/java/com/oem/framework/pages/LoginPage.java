@@ -43,21 +43,19 @@ public class LoginPage extends BasePage {
         return this;
     }
     
-    public BasePage login() throws Throwable  {
+    public CustomerDashboardPage login() throws Throwable  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("email");
     	String PASSWORD = getPropertyFileData("password");
         loginUsing(URL,EMAIL,PASSWORD);
 
-        if(isAdminDashboardPage())
-            return new AdminDashboardPage();
-
+      
         if(isCustomerDashboardPage())
             return new CustomerDashboardPage();
-
-        //Failed login
-        return this;
+        else
+        	throw new IOException("After login didn't show Customer Dashboard page");
     }
+    
     public AdminDashboardPage loginAsAdmin() throws Throwable  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("adminEmail");
