@@ -274,12 +274,12 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
         Assert.assertTrue(isElementPresent(addMeter),"Site Meters page didnt appear");
     }
 	
-	public void validateEditGasMeter() throws Throwable {
+	public PropertyPortfolioMeterPage validateEditGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
 		click(editMeterBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		Random random = new Random();
 		String gasMeterNum = String.valueOf(random.nextInt(1000000000));
 		setValue(gasMeterNumber, gasMeterNum);
@@ -291,6 +291,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		selectFutureDateCalender(24, random.nextInt(12), 2020);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
+		Thread.sleep(2000);
 		click(okBtn);
 		Thread.sleep(2000);
 		boolean expectedConsumptionDisplayStatus = expectedConsumptionData(gasMeterNum).contains(expectedConsumptionValue) && expectedConsumptionData(gasMeterNum).contains("kWh");
@@ -303,18 +304,20 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
+		return this;
 	}
 	
-	public void validateEditGasMeterPopup() throws Throwable {
+	public PropertyPortfolioMeterPage validateEditGasMeterPopup() throws Throwable {
 		String meterNum = addValidGasMeterGeneric();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(editMeterBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean editGasMeterPopupDisplayStatus = isElementPresent(editMeterPopup);
 		Assert.assertTrue(editGasMeterPopupDisplayStatus, "Edit popup is not displaying");
+		return this;
 	}
 	
-	public void validateGasDeleteMeterPopup() throws Throwable {
+	public PropertyPortfolioMeterPage validateGasDeleteMeterPopup() throws Throwable {
 
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
@@ -322,15 +325,16 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		boolean deletePopupDisplayStatus = isElementPresent(deleteMeterPopup);
 		Assert.assertTrue(deletePopupDisplayStatus, "Delete meter popup is not displaying");
+		return this;
 	}
 	/*PM_PP_TC_092*/
-	public void validateDeleteGasMeter() throws Throwable {
+	public PropertyPortfolioMeterPage validateDeleteGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
 		int totalGasMeters = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		click(deleteMeterBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		selectByVisibleText(meterDeleteReasonDropdown, "Closing down site");
 		setValue(meterDeleteNotes, "Shutting down site");
 		click(deleteMeterBtnInDeletePopup);
@@ -345,8 +349,9 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		int totalGasMetersNew = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		softAssertion.assertEquals(totalGasMetersNew, totalGasMeters - 1, "Total gas meters is not getting decremented.");
 		softAssertion.assertAll();
+		return this;
 	}
-	public void validateMeterRevertDeletion() throws Throwable {
+	public PropertyPortfolioMeterPage validateMeterRevertDeletion() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(2000);
@@ -381,6 +386,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		int totalGasMetersNew = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		softAssertion.assertEquals(totalGasMetersNew, totalGasMeters, "Total gas meters is not displaying correct data after deleting meter and revert deletion of meter.");
 		softAssertion.assertAll();
+		return this;
 	}
 	
 	/**
@@ -473,23 +479,39 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		selectFutureDateCalender(dayOfMonthOfContractEndDate, monthNumberOfContractEndDate, yearOfContractEndDate);
 		setValue(this.currentAnnualSpend, currentAnnualSpend);
 		
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", saveMetBtn);
+		
+		if(getAttribute(this.capacity, "value").equals("")) {
+			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
+			if(capacityErrorStatus == null)
+				capacityErrorStatus = "true";
+			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");			
+		}
+		
 		Actions actions = new Actions(driver);
 		actions.moveToElement(driver.findElement(By.id("save-meter-button"))).click().build().perform();
 		
 		//actionsClick(saveMeterBtn);
 		if(getAttribute(this.gasMeterNumber, "value").isEmpty()) {
 			String gasMeterNumberErrorStatus = getAttribute(this.gasMeterNumber, "aria-invalid");
-			System.out.println("value of aria invalid: " + gasMeterNumberErrorStatus);
-			softAssertion.assertTrue(gasMeterNumberErrorStatus.isEmpty(), "Mandatory expression while validating 'Gas Meter Number' is not displaying");
+			if(gasMeterNumberErrorStatus == null)
+				gasMeterNumberErrorStatus = "true";
+			softAssertion.assertTrue(gasMeterNumberErrorStatus.equals("true"), "Mandatory expression while validating 'Gas Meter Number' is not displaying");			
 		}
-		if(getAttribute(this.expectedConsumption, "value").isEmpty()) {
+		if(getAttribute(this.expectedConsumption, "value").equals("")) {
 			String expectedConsumptionErrorStatus = getAttribute(this.expectedConsumption, "aria-invalid");
-			softAssertion.assertTrue(expectedConsumptionErrorStatus.equals("true"), "Mandatory expression while validating 'Expected Consumption' field is not displaying");
+			if(expectedConsumptionErrorStatus == null)
+				expectedConsumptionErrorStatus = "true";
+			softAssertion.assertTrue(expectedConsumptionErrorStatus.equals("true"), "Mandatory expression while validating 'Expected Consumption' field is not displaying");			
 		}
-		if(getAttribute(this.contractEndDate, "value").isEmpty()) {
+		if(getAttribute(this.contractEndDate, "value").equals("")) {
 			String contractEndDateErrorStatus = getAttribute(this.contractEndDate, "aria-invalid");
-			softAssertion.assertTrue(contractEndDateErrorStatus.equals("true"), "Mandatory expression while validating 'Contract End Date' field is not displaying");
+			if(contractEndDateErrorStatus == null)
+				contractEndDateErrorStatus = "true";
+			softAssertion.assertTrue(contractEndDateErrorStatus.equals("true"), "Mandatory expression while validating 'Contract End Date' field is not displaying");			
 		}
+		
 		boolean meterSuccessfullyAddedMsgStatus = isElementPresent(meterSavedPopup);
 		if(meterSuccessfullyAddedMsgStatus) {
 			click(okBtn);
@@ -501,7 +523,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 
 	
 	
-	public void addHHMeterUsingDifferentTestData(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+	public PropertyPortfolioMeterPage addHHMeterUsingDifferentTestData(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String expectedConsumption, 
 			String capacity) throws Throwable
 	{
@@ -518,7 +540,6 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		setValue(this.expectedConsumption, expectedConsumption);
 		setValue(this.capacity, capacity);
-		Reporter.log("Added test data in variius fields.", true);
 		/*boolean verifiedMPANNumberIconDisplayStatus = isElementPresent(verifiedMPANNumberIcon);
 		if(verifiedMPANNumberIconDisplayStatus) {
 			softAssertion.assertTrue(verifiedMPANNumberIconDisplayStatus, "Incorrect MPAN number entered");
@@ -530,16 +551,13 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		WebElement saveMeterBtn = driver.findElement(By.id("save-meter-button"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", saveMetBtn);
-		Reporter.log("Clicked Save button.", true);
 		validateMandatoryFieldAddHHandNHHMeterGeneric();
-		Reporter.log("Checked if error message is displaying in the mandatory fields.", true);
 		if(getAttribute(this.capacity, "value").equals("")) {
 			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
 			if(capacityErrorStatus == null)
 				capacityErrorStatus = "true";
-			Reporter.log("Checked if error message is displaying in the capacity field.", true);
 			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");		
-			softAssertion.assertAll();
+			
 		}
 				
 		/*boolean meterDataSaveStatus = isElementPresent(meterSavedPopup);
@@ -547,9 +565,10 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Reporter.log("Checked if pop for saving meter data successfully is displayed", true);*/
 		
 		softAssertion.assertAll();
+		return this;
 	}
 	
-	public void addHHMeterUsingDifferentTestData2(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
+	public PropertyPortfolioMeterPage addHHMeterUsingDifferentTestData2(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
 			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, int date, int month, int year,
 			String expectedConsumption, String capacity) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -595,6 +614,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");			
 		}
 		softAssertion.assertAll();
+		return this;
 	}
 
 	public String addValidHHmeterGeneric() throws Throwable {
@@ -604,7 +624,9 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		String mpanNumber = readExcelData("Sheet2", random.nextInt(70), 0);
 		Thread.sleep(2000);
 		click(addMeter);
+		Thread.sleep(1000);
 		click(addHHMeter);
+		Thread.sleep(2000);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
 		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
@@ -642,7 +664,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		return mpanNumber;
 	}
 	
-	public void addingHHMeterCheckMeterCountEditDeleteReviewOptionTest() throws Throwable {
+	public PropertyPortfolioMeterPage addingHHMeterCheckMeterCountEditDeleteReviewOptionTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		int hhMetersCount = Integer.parseInt(getText(totalHHMetersCountInFilter));
 		String mpanNum = addValidHHmeterGeneric();
@@ -656,6 +678,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean deleteMeterBtnDisplayStatus = isElementPresent(deleteHHmeterBtn(mpanNum));
 		softAssertion.assertTrue(deleteMeterBtnDisplayStatus, "Delete button is not displaying for the meter");
 		softAssertion.assertAll();
+		return this;
 	}
 	
 	public void addExpiredHHmeter() throws Throwable {
@@ -700,11 +723,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 			click(tipCloseBtn);
 		}
 		catch(Exception e) {
-			System.out.println("Couldn't close 'Tip' message");
+			System.out.println("'Tip' message didn't appear.");
 		}
-		boolean expectedConsumptionDataStatus = expectedConsumptionData(mpanNumber).equals(readExcelData("Sheet3", 8, 3));
+		boolean expectedConsumptionDataStatus = expectedConsumptionData(mpanNumber).contains(readExcelData("Sheet3", 8, 2));
 		softAssertion.assertTrue(expectedConsumptionDataStatus, "Expected consumption data is not displaying correctly");
-		boolean meterStatusData = meterStatus(mpanNumber).equals("Active");
+		boolean meterStatusData = meterStatus(mpanNumber).contains("ACTIVE");
 		softAssertion.assertTrue(meterStatusData, "Meter status is not displaying as Active");
 		
 		viewMeterDetails(mpanNumber);
@@ -725,7 +748,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(meterNumberSixthFieldDisplayStatus, "Meter number sixth field is displaying incorrect data in meter details section.");
 		boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(10, 13));
 		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
-		boolean capacityDataDisplayStatus = capacityData(mpanNumber).equals(readExcelData("Sheet3", 8, 4));
+		boolean capacityDataDisplayStatus = capacityData(mpanNumber).equals(readExcelData("Sheet3", 8, 3));
 		softAssertion.assertTrue(capacityDataDisplayStatus, "Data present for capacity in meter details section is not displaying correctly.");
 		
 		softAssertion.assertAll();
@@ -748,7 +771,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(1000);
 		Random random = new Random();
 		
-		String newMpanNum = readExcelData("Sheet2", random.nextInt(50), 0);
+		String newMpanNum = readExcelData("Sheet2", random.nextInt(70), 0);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
 		setValue(meterNumFourthField, newMpanNum.substring(0, 2));
@@ -771,7 +794,10 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(dataCollectorEndDate);
 		Thread.sleep(1000);
 		selectFutureDateCalender(20, 7, 2020);
-		click(saveMeterBtn);
+	WebElement saveMetBtn = driver.findElement(By.id("save-meter-button"));	
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", saveMetBtn);
+		
 		Thread.sleep(2000);
 		click(okBtn);
 		Thread.sleep(2000);
@@ -779,7 +805,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 			click(tipCloseBtn);
 		}
 		catch(Exception e) {
-			System.out.println("Couldn't close 'Tip' message");
+			System.out.println("'Tip' message didn't appear.");
 		}
 		
 		boolean expectedConsumptionDisplayStatus = expectedConsumptionData(newMpanNum).contains(expectedConsumptionValue) && expectedConsumptionData(newMpanNum).contains("kWh");
@@ -793,7 +819,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(meterNumberSixthFieldDisplayStatus, "Meter number sixth field is displaying incorrect data in meter details section.");
 		boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(newMpanNum).contains(newMpanNum.substring(10, 13));
 		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
-		boolean capacityDataDisplayStatus = capacityData(newMpanNum).equals(readExcelData("Sheet3", 12, 3));
+		boolean capacityDataDisplayStatus = capacityData(newMpanNum).contains(readExcelData("Sheet3", 12, 3));
 		softAssertion.assertTrue(capacityDataDisplayStatus, "Data present for capacity in meter details section is not displaying correctly.");
 		softAssertion.assertAll();
 	}
@@ -802,7 +828,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 
 		String mpanNumber = addValidHHmeterGeneric();
 		Thread.sleep(2000);
-		scrollToElement(deleteMeterBtn(mpanNumber));
+		scrollToElement(deleteHHmeterBtn(mpanNumber));
 		click(deleteHHmeterBtn(mpanNumber));
 		Thread.sleep(1000);
 		boolean deletePopupDisplayStatus = isElementPresent(deleteMeterPopup);
@@ -1122,15 +1148,17 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	}
 	/*PM_PP_TC_071*/
 	public void validateExpectedConsumptionMandatoryFieldAddNHHPopup() throws Throwable {
+		Random random = new Random();
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(70), 0);
 		click(addMeter);
 		click(addnHHMeter);
-		Thread.sleep(1000);
-		setValue(meterNumSecondField, "234");
-		setValue(meterNumThirdField, "978");
-		setValue(meterNumFourthField, "10");
-		setValue(meterNumFifthField, "1293");
-		setValue(meterNumSixthField, "5556");
-		setValue(meterNumSeventhField, "271");
+		Thread.sleep(2000);
+		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
+		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
+		setValue(meterNumFifthField, mpanNumber.substring(2, 6));
+		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
+		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		click(contractEndDate);
 		Thread.sleep(1000);
 		selectFutureDateCalender(16, 5, 2020);
@@ -1238,7 +1266,9 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
 		Thread.sleep(2000);
 		click(addMeter);
+		Thread.sleep(1000);
 		click(addnHHMeter);
+		Thread.sleep(2000);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
 		setValue(meterNumFourthField, mpanNumber.substring(0, 2));
@@ -1316,7 +1346,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		Random random = new Random();
 		//int cellNum = random.nextInt(1568);
-		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
 		Thread.sleep(2000);
 		click(addMeter);
 		click(addnHHMeter);
@@ -1345,6 +1375,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		catch(Exception e) {
 			System.out.println("Couldn't close 'Tip' message");
 		}
+		click(totalnHHMetersCountInFilter);
 		return mpanNumber;
 	}
 	

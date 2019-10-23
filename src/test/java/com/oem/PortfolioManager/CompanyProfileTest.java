@@ -7,15 +7,20 @@ import com.oem.framework.pages.LoginPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CompanyProfileTest extends BaseTest { 
-
+	
+	CustomerDashboardPage customerDashboardPage;
+	
+	@BeforeClass(alwaysRun = true)
+    public void beforeCompanyProfile() throws Throwable {
+        customerDashboardPage=new LoginPage().login();
+    }
 	@Test
 	public void PM_CP_TC_003_verifyPortfolioManagerElementExistsTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
 		customerDashboardPage.verifyPortfolioManagerElementExists();
 
 	}
@@ -23,41 +28,31 @@ public class CompanyProfileTest extends BaseTest {
 	@Test
 	public void PM_CP_TC_004_verifyRegisteredAddressInputsTest() throws Throwable {
 
-		LoginPage loginPage = new LoginPage();
-
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyRegisteredAddressInputs();
+		customerDashboardPage.
+			goToCompanyProfile().
+				verifyRegisteredAddressInputs();
 	}
 
 	@Test
 	public void PM_CP_TC_005_verifyRegisteredAddressErrorTest() throws Throwable {
 
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyRegisteredAddressError(
-				"The field Registered address must be a string with a maximum length of 200");
+		customerDashboardPage.
+			goToCompanyProfile().
+				verifyRegisteredAddressError("The field Registered address must be a string with a maximum length of 200");
 	}
 
 	@Test
 	public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyBlankRegisteredAddressError("Registered address field is required");
-
+		customerDashboardPage.
+			goToCompanyProfile().
+				verifyBlankRegisteredAddressError("Registered address field is required");
 	}
 	
 	@Test
 	public void PM_CP_TC_007_verifyCompanyNameErrorTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyCompanyNameError("The Company name field is required.");
+		customerDashboardPage.
+			goToCompanyProfile().
+				verifyCompanyNameError("The Company name field is required.");
 	}
 	
 	@Test

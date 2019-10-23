@@ -27,7 +27,7 @@ public class CustomerDashboardPage extends HeaderPage {
     By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
     By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
-    public CustomerDashboardPage goToCompanyProfile()	{
+    public CompanyProfilePage goToCompanyProfile()	{
         click(portfolioMgr);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
@@ -35,7 +35,7 @@ public class CustomerDashboardPage extends HeaderPage {
         return companyProfilePage;
     }
     
-    public CustomerDashboardPage goToPortfolioCalendar(){
+    public PortfolioCalendarPage goToPortfolioCalendar(){
         click(portfolioMgr);
         click(portfolioCalendar);
         PortfolioCalendarPage portfolioCalendarPage=new PortfolioCalendarPage();
@@ -43,22 +43,15 @@ public class CustomerDashboardPage extends HeaderPage {
         return portfolioCalendarPage;
     }
     
-    public CustomerDashboardPage goToPropertyPortfolio() throws AWTException{
+    public PropertyPortfolioPage goToPropertyPortfolio() throws AWTException{
         click(portfolioMgr);
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
-        Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
         return propertyPortfolioPage;
     }
 
-    public CustomerDashboardPage goToPropertyPortfolioMeterPage() throws Throwable{
+    public PropertyPortfolioMeterPage goToPropertyPortfolioMeterPage() throws Throwable{
         click(portfolioMgr);
         click(propertyPortfolio);
         click(siteFirstRecord);
@@ -67,17 +60,10 @@ public class CustomerDashboardPage extends HeaderPage {
 			click(tipCloseBtn);
 		}
 		catch(Exception e) {
-			System.out.println("Couldn't close 'Tip' message");
+			System.out.println("Tip message didn't appear");
 		}
         PropertyPortfolioMeterPage propertyPortfolioMeterPage=new PropertyPortfolioMeterPage();
         propertyPortfolioMeterPage.isLoaded();
-        Robot robot = new Robot();
-        for(int i = 1; i<=2; i++) {
-        	robot.keyPress(KeyEvent.VK_CONTROL);
-        	robot.keyPress(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_SUBTRACT);
-        	robot.keyRelease(KeyEvent.VK_CONTROL);
-        }
         return propertyPortfolioMeterPage; 
     }
     

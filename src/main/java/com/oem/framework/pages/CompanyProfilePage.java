@@ -30,9 +30,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
     
-    public void fillCompanyProfile(){
+    public CompanyProfilePage fillCompanyProfile(){
         setValue(companyName,"abc");
-        setValue(companyRegisteredAddress,"Bangalore");      
+        setValue(companyRegisteredAddress,"Bangalore"); 
+        return this;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
 
     }
     
-    public void verifyRegisteredAddressInputs()	{
+    public CompanyProfilePage verifyRegisteredAddressInputs()	{
     	setValue(companyRegisteredAddress, "Domlur");
     	Reporter.log("Entered value in registered address field", true);
     	String valueAttributevalue = getAttribute(companyRegisteredAddress, "value");
@@ -70,59 +71,67 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         boolean inputDisplayStatus = valueAttributevalue.contains("Domlur");
         Reporter.log("Compared if the entered data is equal to the value of value attribute", true);
         Assert.assertTrue(inputDisplayStatus, "Registered address is not displaying the value we entered in the field");
+        return this;
     }
     
-    public void verifyRegisteredAddressError(String value){
+    public CompanyProfilePage verifyRegisteredAddressError(String value){
     	setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
                 getText(registeredAddressError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressError) +" but expected:"+value);
+    	return this;
     }
     
-    public void verifyBlankRegisteredAddressError(String value) {
+    public CompanyProfilePage verifyBlankRegisteredAddressError(String value) {
     	setValue(companyRegisteredAddress, "");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
+    	return this;
     }
-    public void verifyRegisteredAddressErrorSpaceTestData() {
+    public CompanyProfilePage verifyRegisteredAddressErrorSpaceTestData() {
     	setValue(companyRegisteredAddress, "       ");
         click(saveBtn);
         boolean regdAddrErrorDisplayStatus = isElementPresent(registeredAddressBlankError);
         Assert.assertTrue(regdAddrErrorDisplayStatus, "Registered address is not displaying any error after entering 'space' as test data.");
+        return this;
     }
 
-    public void verifyCompanyNameError(String value) {
+    public CompanyProfilePage verifyCompanyNameError(String value) {
     	setValue(companyName, "");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
+    	return this;
     }
     
-    public void validateCompanyNameAlphabeticAcceptance() {
+    public CompanyProfilePage validateCompanyNameAlphabeticAcceptance() {
     	setValue(companyName, "Apple");
     	String attrValue = getAttribute(companyName, "value");
     	boolean displayStatus = attrValue.equals("Apple");
     	Reporter.log("Checked if the value attribute is displaying the same as entered in the 'Company Name' textbox", true);
     	Assert.assertTrue(displayStatus, "Company Name field is not accepting alphabetic characters");
+    	return this;
     }
     
-    public void verifyBlankPostcodeError(String value) { 
+    public CompanyProfilePage verifyBlankPostcodeError(String value) { 
     	
     	setValue(compPostCode, "");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
+    	return this;
     }
-    public void verifyPostcodeWithSpaceTestData() {
+    public CompanyProfilePage verifyPostcodeWithSpaceTestData() {
     	
     	setValue(compPostCode, "    ");
         click(saveBtn);
         boolean postCodeErrorDisplayStatus = isElementPresent(postCodeError);
     	Assert.assertTrue(postCodeErrorDisplayStatus, "Error message for postcode field is not displaying on entering space test data");
+    	return this;
     }
     
-    public void validatePostcodeSpecialSymbolTest() {
+    public CompanyProfilePage validatePostcodeSpecialSymbolTest() {
     	setValue(compPostCode, "%<>#");
         click(saveBtn);
         String ariaInvalidAttributeStatus = getAttribute(compPostCode, "aria-invalid");
@@ -130,17 +139,19 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         Reporter.log("Checked if error message for invalid postcode is displaying", true);
         boolean errorMsgDisplayStatus = ariaInvalidAttributeStatus.equals("true");
         Assert.assertTrue(errorMsgDisplayStatus, "Invalid postcode error is not displaying.");
+        return this;
     }
     
-    public void validatePostcodeNumericDataTest() {
+    public CompanyProfilePage validatePostcodeNumericDataTest() {
     	setValue(compPostCode, "8923443");
     	String postcodeValueAtrributeValue = getAttribute(compPostCode, "value");
     	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
     	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
     	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
+    	return this;
     }
     
-    public void validateIfPhoneFieldMandatory() {
+    public CompanyProfilePage validateIfPhoneFieldMandatory() {
     	setValue(phone, "");
     	Reporter.log("Entered blank data in phone field", true);
     	click(saveBtn);
@@ -153,9 +164,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
     	Assert.assertFalse(phoneErrorMsgDisplayStatus, "Error message for phone field is displaying even if it is not mandatory");
+    	return this;
     }
     
-    public void validatePhoneFieldAlphabeticTestData() {
+    public CompanyProfilePage validatePhoneFieldAlphabeticTestData() {
     	setValue(phone, "Lorem Ipsum");
     	Reporter.log("Entered alphabetic data in phone field", true);
     	click(saveBtn);
@@ -166,6 +178,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
     	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after alphabetic data in it");
+    	return this;
     }
     
     public void validatePhoneFieldNumericTestData() {
@@ -268,7 +281,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
         Reporter.log("Clicked on save button", true);
         Thread.sleep(2000);
-        softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn’t appear after saving profile data.");
+        softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didnï¿½t appear after saving profile data.");
         Reporter.log("Checked if the save success popup is displaying", true);
         softAssertion.assertAll();
     }
