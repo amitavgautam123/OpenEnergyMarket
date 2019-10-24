@@ -39,7 +39,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(expiredOptionPresenceStatus, "Expired option is not present in the dropdown");
 		softAssertion.assertAll();
 	}
-	public void validatingPresenceOfUtilities(){
+	public void validatingPresenceOfUtilities()		{
 		SoftAssert softAssertion = new SoftAssert();
 		boolean hhFilterPresenceStatus = isElementPresent(hhUtilityFilter);
 		softAssertion.assertTrue(hhFilterPresenceStatus, "HH Utility filter is not displaying");

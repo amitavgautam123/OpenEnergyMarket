@@ -63,7 +63,7 @@ public class CustomerDashboardPage extends BasePage {
     }
     
     public CustomerDashboardPage goToRequestQuote(){
-        click(quotesAndTenders);
+    	click(quotesAndTenders);
         click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();

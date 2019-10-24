@@ -80,31 +80,26 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 
 		}
 		softAssertion.assertTrue(NoOfCustomers > 1, "No Elements are Present.");
-		Reporter.log("Checked for the Number Of Customers Present", true);
-
+		
 	}
 
 	public void verifyPresenceOf3Modules() {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean presenceOfFlexTenderResponse = isElementPresent(flexTenderResponse);
 		softAssertion.assertTrue(presenceOfFlexTenderResponse, "flex Tender Response is Not Present.");
-		Reporter.log("Cheked For the Presence Of flex Tender Response", true);
-
+		
 		boolean presenceOfflexReQuoteTender = isElementPresent(flexReQuoteTender);
 		softAssertion.assertTrue(presenceOfflexReQuoteTender, "flex Re-Quote Tender is Not Present.");
-		Reporter.log("Cheked For the Presence Of flex Re-Quote Tender", true);
-
+		
 		boolean presenceOfflexProfileAdmin = isElementPresent(flexProfileAdmin);
 		softAssertion.assertTrue(presenceOfflexProfileAdmin, "flex Profile Admin is Not Present.");
-		Reporter.log("Cheked For the Presence Of flex Profile Admin", true);
-
+		
 		softAssertion.assertAll();
 	}
 
 	public void VerifypresenceOfDuration_Manage_DeleteOptions_AfterSelectingCustomer() {
 
 		click(firstcustomerProfile);
-		Reporter.log("Clicked On First Customer", true);
 		SoftAssert softAssertion = new SoftAssert();
 		for (int i = 0; i < 9; i++) {
 			if (i == 3) {
@@ -112,7 +107,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 						.getText();
 				boolean DuratText = DurationText.contains("Years");
 				softAssertion.assertTrue(DuratText, "Duration is Not Present");
-				Reporter.log("Checked for the Duration ", true);
+				
 			}
 			if (i == 7) {
 
@@ -120,14 +115,14 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 						.findElement(By.xpath("//table[@id='profile-table']//tr//td[" + i + "]")).getText();
 				boolean ManagPrText = ManageProfileText.contentEquals("Manage Profile");
 				softAssertion.assertTrue(ManagPrText, "Manage Profile Text is Not Present");
-				Reporter.log("Checked for the Manag Profile Text ", true);
+				
 			}
 			if (i == 8) {
 				String DeleteProfileText = driver
 						.findElement(By.xpath("//table[@id='profile-table']//tr//td[" + i + "]")).getText();
 				boolean DeletePrText = DeleteProfileText.contains("Delete");
 				softAssertion.assertTrue(DeletePrText, "Delete Profile Text is Not Present");
-				Reporter.log("Checked for the Delete Profile Text  ", true);
+				
 			}
 		}
 		softAssertion.assertAll();
@@ -137,9 +132,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 	public void verifyProfileDetails_ProfileActions_PresenceOf_Impersonate_Users() {
 		SoftAssert softAssertion = new SoftAssert();
 		click(firstcustomerProfile);
-		Reporter.log("Clicked On First Customer", true);
 		click(manageProfiles);
-		Reporter.log("Clicked On Manage Profiles", true);
 		boolean Profile_Details = getText(profileDetailsText).contains("Profile Details");
 		boolean Profile_Actions = getText(profileActionsText).contains("Profile Actions");
 		boolean Customer_Defined_Risk = getText(customerDefinedRiskesText).contains("Customer Defined Risk / Strategy");
@@ -149,9 +142,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		softAssertion.assertTrue(Customer_Defined_Risk, "Customer Defined Risks Are Not Present.");
 		softAssertion.assertTrue(Impersonate_Users, "Impersonate Users Are Not Present.");
 
-		Reporter.log(
-				"Checked for PresenceOf ProfileDetails_ProfileActions__Impersonate_Users after Clicking Manage Profiles",
-				true);
 		softAssertion.assertAll();
 	}
 
@@ -159,13 +149,11 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		selectingCustomerAndManageProfile();
 		click(governanceManage);
-		Reporter.log("Clicked On Governance Manage Link", true);
 		String GovernanceExpectedText = "Governance";
 		String GovernanceActualText = driver.findElement(By.xpath("//h3[@id='governance_WidgetTitle']")).getText();
 		boolean abc = GovernanceActualText.contentEquals(GovernanceExpectedText);
 		softAssertion.assertTrue(abc, "Not directed Expected Page");
-		Reporter.log("Checked for Governance Page After Clicking Governance Manage Link", true);
-
+		
 	}
 
 	public void selectingCustomerAndManageProfile() throws Throwable {
@@ -176,7 +164,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		OuterLoop: for (int i = 1; i <= NoOfCustomers; i++) {
 
 			driver.findElement(By.xpath("//a[" + i + "]//section[1]")).click();
-			Reporter.log("Clicked On " + i + ". Customer", true);
 			int NoOfRows = driver.findElements(NoOfRows_01).size();
 
 			System.out.println("No Of Rows(Profile Utilitys) Of " + i + ". Customer Are:" + NoOfRows);
@@ -197,7 +184,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 				if (TextDelete.contains("Delete Profile") & tickPresent) {
 					Thread.sleep(3000);
 					driver.findElement(By.xpath("//tr[" + j + "]//td[7]")).click();
-					Reporter.log("Clicked On " + j + ". Manage Profile Link", true);
 					break OuterLoop;
 
 				}
@@ -214,7 +200,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		System.out.println("No Of Customers are:" + NoOfCustomersRed);
 	firstLoop:	for(int i=1;i<=NoOfCustomersRed;i++){
 		driver.findElement(By.xpath("//span[@class='ChangeRequest']["+i+"]")).click();
-		Reporter.log("Clicked On  Customer having Governance", true);
 		
 		/*List<WebElement> UtilityRed = driver.findElements(By.xpath("//span[@class='CustomerProfileOverview ChangeRequest']/parent::*"));
 		int NoOfUtilityRed = UtilityRed.size();
@@ -225,7 +210,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		if (TextPresent) {
 			Thread.sleep(3000);
 			driver.findElement(By.xpath("//span[@class='CustomerProfileOverview ChangeRequest']/parent::*")).click();
-			Reporter.log("Clicked On  Manage Profile Link having Governance", true);
 			break firstLoop;
 		}
 		}
@@ -237,7 +221,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		softAssertion.assertTrue(presenceoftickmark, "Right Tick Mark Is Not Present");
 		boolean presenceofupdateButton = driver.findElement(UpdateButtonOFPurchas).isDisplayed();
 		softAssertion.assertTrue(presenceofupdateButton, "Update Button  Is Not Present");
-		Reporter.log("Checked for the presence of tick mark and Update Button After Clicking Accept Button", true);
 		softAssertion.assertAll();
 	}
 
@@ -247,14 +230,12 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		Thread.sleep(3000);
 		click(purchaseRequirementManage);
 		Thread.sleep(6000);
-		Reporter.log("Clicked On Governance Manage Link", true);
 		boolean rejButtonPresent = driver.findElement(rejectButton).isDisplayed();
 		softAssertion.assertTrue(rejButtonPresent, "Reject Button is Not Present");
 		boolean accepButtonPresent = driver.findElement(acceptButton).isDisplayed();
 		softAssertion.assertTrue(accepButtonPresent, "Accept Button is Not Present");
 		softAssertion.assertAll();
-		Reporter.log("Checked for the presence of Accept and Reject Buttons", true);
-
+		
 	}
 
 	public void verifying_presenceOfUpdateButton_AfetrClikingAcceptButton() throws Throwable {
@@ -262,7 +243,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		Thread.sleep(3000);
 		click(governanceManage);
 		Thread.sleep(6000);
-		Reporter.log("Clicked On Governance Manage Link", true);
 		click(acceptButton);
 		String AcceptText = driver.switchTo().alert().getText();
 		System.out.println(AcceptText);
@@ -276,7 +256,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		Thread.sleep(3000);
 		click(governanceManage);
 		Thread.sleep(6000);
-		Reporter.log("Clicked On Governance Manage Link", true);
 		click(rejectButton);
 		Thread.sleep(3000);
 		/*
@@ -301,19 +280,15 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		switch (selectButton) {
 		case "accept":
 			click(acceptButton);
-			Reporter.log("Clicked on Accept Button", true);
 			break;
 		case "reject":
 			click(rejectButton);
-			Reporter.log("Clicked on Reject Button", true);
 			break;
 		case "update":
 			click(UpdateButtonOfGovenance);
-			Reporter.log("Clicked on Update Button", true);
 			break;
 		case "cancel":
 			click(cancelButtoun);
-			Reporter.log("Clicked on Cancel Button", true);
 			break;
 		default:
 			System.out.println("Enter/Select  Correct manage accept OR reject OR update OR cancel ");
@@ -324,18 +299,16 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		boolean supplierClipVolumesPresence = driver
 				.findElement(By.xpath("//h3[contains(text(),'Supplier Clip Volumes')]")).isDisplayed();
 		Assert.assertTrue(supplierClipVolumesPresence, "Not Redirected to Supplier Clip Volumes page");
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
+		
 	}
 
 	public void verifyingEditButton_CancelButton_VoluemIsEnabledOfSupplierclipVolumes() throws Throwable {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -360,7 +333,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertTrue(volumeEnabled, "Volume is not Enabled");
 			Assert.assertTrue(cancelButtonDisplyed, "Cancel Button is not Displyed");
 			Assert.assertTrue(saveButtonDisplyed, "Save Button is not Displyed");
-			Reporter.log("Checked for the presence of Edit,cancel,save Buttons At Row " + i + ".", true);
+			
 		}
 
 	}
@@ -369,7 +342,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -397,14 +369,13 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertFalse(volumeEnabled, "Volume is Enabled after Clicking cancel Button");
 
 		}
-		Reporter.log("Checked the Disablity Of Volume Text Box ", true);
+		
 	}
 
 	public void verifyDisablityOfVolumeAfterChangingVolumeandClickingCancelButton() throws Throwable {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -428,15 +399,13 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertFalse(volumeEnabled, "Volume is Enabled after Clicking cancel Button");
 
 		}
-		Reporter.log("Checked the Disablity Of Volume Text Box After Changing Volume and clicking cancel Button ",
-				true);
+		
 	}
 
 	public void verifyValueOfVolumeAfterEnteringValidVolumeDataandClickingSaveButton() throws Throwable {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -466,15 +435,13 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 					"Volume Data is Not Changed after Entering Valid Data and clicking Save button.");
 
 		}
-		Reporter.log("Checked the Disablity Of Volume Text Box After Changing Volume and clicking cancel Button ",
-				true);
+	
 	}
 
 	public void verify_Recient_Clicked_EditButton_Willbe_ShownItsActions() throws Throwable {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -500,27 +467,23 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertTrue(volumeEnabled, "Volume is not Enabled");
 			Assert.assertTrue(cancelButtonDisplyed, "Cancel Button is not Displyed");
 			Assert.assertTrue(saveButtonDisplyed, "Save Button is not Displyed");
-			Reporter.log("Checked for the presence of Edit,cancel,save Buttons At Row " + i + ".", true);
+			
 			i = i + 3;
 		}
-		Reporter.log("Chcked for Recient Clicked EditButton Will be Shown ItsActions like saveButtob,cancelButton",
-				true);
+		
 	}
 
 	public void verify_HomePageIfTrading_AfetrClicking_TradingLink() throws Throwable {
 		selectingCustomerAndManageProfile();
 
 		click(trading);
-		Reporter.log("Clicked on Trading Link", true);
 		Thread.sleep(6000);
 
 		Assert.assertTrue(isElementPresent(positionWithTrades), "Position With Trades Element Is Not Present");
 		Assert.assertTrue(isElementPresent(positionWithoutTrades), "Position Without Trades Element Is Not Present");
 		Assert.assertTrue(isElementPresent(positionExpired), "Position Expired Element Is Not Present");
 		Assert.assertTrue(isElementPresent(tradingHistory), "Trading History Element Is Not Present");
-		Reporter.log(
-				"Checked for the presence of Elements 'Position With Trades','Position Without Trades','Position Expired','Trading History' ",
-				true);
+		
 
 	}
 
@@ -528,7 +491,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		selectingCustomerAndManageProfile();
 
 		click(trading);
-		Reporter.log("Clicked on Trading Link", true);
 		Thread.sleep(3000);
 		verify_Record_a_TradPage();
 	}
@@ -537,7 +499,6 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		selectingCustomerAndManageProfile();
 		Thread.sleep(3000);
 		click(editTradeVolumes);
-		Reporter.log("Clicked on Edit Trade Volumes Link", true);
 		Thread.sleep(5000);
 		int NoOfRows = driver.findElements(By.xpath("//table[@class='table']//tbody//tr")).size();
 
@@ -568,7 +529,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 					"Volume Data is changed  after Entering inValid Data (String ABCD) and clicking Save button.");
 
 		}
-		Reporter.log("Checked the  Volume Text Box After Entering Invalid Volume Data and clicking Save Button ", true);
+		
 	}
 
 	public void verify_Record_a_TradPage() throws Throwable {
@@ -584,11 +545,9 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertTrue(selButton, "Sell Button Is Not Present");
 			Assert.assertTrue(UnitPrice, "UnitPrice Button Is Not Present");
 			Assert.assertTrue(tdpPresence, "TDP Button Is Not Present");
-			Reporter.log("Checked for the presence Of BuyButton, SellButton, UnitPriceButton,Tdp ", true);
-
+			
 			driver.navigate().back();
 			click(trading);
-			Reporter.log("Clicked on Trading Link", true);
 			Thread.sleep(2000);
 
 		}

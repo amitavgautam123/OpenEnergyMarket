@@ -46,7 +46,7 @@ public class LoginPage extends BasePage {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("email");
     	String PASSWORD = getPropertyFileData("password");
-    	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    	//driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     	driver.get(URL);
         setValue(username, EMAIL);
         setValue(pwd, PASSWORD);

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,46 +21,46 @@ import org.testng.asserts.SoftAssert;
 import com.oem.framework.core.base.BasePage;
 
 public class RequestQuotePage extends CustomerDashboardPage {
-	
-	//login
-	By username=By.id("Email");
-    By pwd=By.id("Password");
-    By signInBtn=By.xpath("//input[@value='Sign in']");
-	//Logout
+
+	// login
+	By username = By.id("Email");
+	By pwd = By.id("Password");
+	By signInBtn = By.xpath("//input[@value='Sign in']");
+	// Logout
 	By logoutDropdown = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a");
 	By logoutLink = By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]//ul/li/a[text() = 'Log out']");
-	
-	//Company Profile
-	By portfolioMgr= By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
-    By companyProfile=By.linkText("Company Profile");
-	
+
+	// Company Profile
+	By portfolioMgr = By.xpath("//*[@id=\"accordian-menu\"]//li[3]/h3");
+	By companyProfile = By.linkText("Company Profile");
+
 	By saveBtn = By.id("submit");
 	By saveSuccessMsg = By.id("global-message-text");
-    By companyName=By.id("Name");
-    By companyRegisteredAddress=By.id("RegisteredAddress");
-    By compPostCode=By.id("Postcode");
-    By companyNameError = By.id("Name-error");
-    By registeredAddressError=By.id("RegisteredAddress-error");
-    By registeredAddressBlankError = By.id("RegisteredAddress-error");
-    By postCodeError = By.id("Postcode-error");
-    By phone = By.id("ContactPhone");
-    By companyRegNum = By.id("CompanyRegistrationNumber");
-    By companyRegNumError = By.id("CompanyRegistrationNumber-error");
-    By CompanyLogo = By.id("CompanyLogo");
-    By supplierInvoicingTo = By.id("InvoiceHeadOffice");
-    By preferredSupplierPayment = By.id("PreferredSupplierPayment");
-    By preferredSupplierPaymentError = By.id("PreferredSupplierPayment-error");
-    By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
-    By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
-    By LOAExpiresDate = By.id("LOAExpiresDate");
-    By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
-	
-    //Property Portfolio
-    By propertyPortfolio = By.linkText("Property Portfolio");
-    
-    By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
+	By companyName = By.id("Name");
+	By companyRegisteredAddress = By.id("RegisteredAddress");
+	By compPostCode = By.id("Postcode");
+	By companyNameError = By.id("Name-error");
+	By registeredAddressError = By.id("RegisteredAddress-error");
+	By registeredAddressBlankError = By.id("RegisteredAddress-error");
+	By postCodeError = By.id("Postcode-error");
+	By phone = By.id("ContactPhone");
+	By companyRegNum = By.id("CompanyRegistrationNumber");
+	By companyRegNumError = By.id("CompanyRegistrationNumber-error");
+	By CompanyLogo = By.id("CompanyLogo");
+	By supplierInvoicingTo = By.id("InvoiceHeadOffice");
+	By preferredSupplierPayment = By.id("PreferredSupplierPayment");
+	By preferredSupplierPaymentError = By.id("PreferredSupplierPayment-error");
+	By loaTemplate = By.xpath("//strong[text() = 'Letter of Authority Template']");
+	By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
+	By LOAExpiresDate = By.id("LOAExpiresDate");
+	By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
+
+	// Property Portfolio
+	By propertyPortfolio = By.linkText("Property Portfolio");
+
+	By addSite = By.xpath("//button[@id = 'add-site-btn'][1]");
 	By addNewSitePopup = By.xpath("//h3[text() = 'Add New Site']");
-	By saveSiteDataBtn = By.id("save-btn"); 
+	By saveSiteDataBtn = By.id("save-btn");
 	By siteName = By.id("NewSite_Name");
 	By siteName_Error = By.id("NewSite_Name-error");
 	By address1 = By.id("NewSite_Address1");
@@ -74,22 +75,22 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By address3 = By.id("NewSite_Address3");
 	By address4 = By.id("NewSite_Address4");
 	By siteArea = By.id("NewSite_SiteArea");
-	
+
 	By siteNameList = By.xpath("//div[@id = 'divSitesOverview']/hgroup[*]/table/tbody/tr/td[2]/div[1]");
-    
-	//Meter Page
+
+	// Meter Page
 	By siteFirstRecord = By.xpath("//div[@id = 'divSitesOverview']/hgroup[1]/table/tbody/tr/td[1]");
 	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
 	By tipCloseBtn = By.xpath("//p[contains(text(), 'Tip')]/following-sibling::a");
-	
+
 	By addMeter = By.id("add-meter-button");
 	By meterUtilitiesInAddMeterDropdown = By.xpath("//div[@id = 'add-meter-button']/ul/li[*]");
 	By addHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[1]");
 	By addnHHMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[2]");
 	By addGasMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[3]");
-	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]"); 
+	By addWaterMeter = By.xpath("//div[@id = 'add-meter-button']/ul/li[4]");
 	By saveMeterBtn = By.id("save-meter-button");
-	/*Add HH & nHH Meter popup*/
+	/* Add HH & nHH Meter popup */
 	By meterNumDropdownField = By.id("profileClass");
 	By meterNumSecondField = By.id("meterTimeSwitchCode");
 	By meterNumThirdField = By.id("lineLossFactor");
@@ -99,7 +100,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By meterNumSeventhField = By.id("checkDigit");
 	By invalidMPANNumberIcon = By.id("checksum-fail");
 	By verifiedMPANNumberIcon = By.xpath("//div[@id = 'checksum-pass']/i");
-	
+
 	By procurementType = By.id("procurementType");
 	By expectedConsumption = By.id("expectedConsumption");
 	By currentSupplier = By.id("electricitySuppliers");
@@ -111,7 +112,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By meterOperatorEndDate = By.id("meterOperatorEndDateForMeterModel");
 	By currentDataCollector = By.id("dataCollector");
 	By dataCollectorEndDate = By.id("dataCollectorEndDateForMeterModel");
-	//Contract History
+	// Contract History
 	By addContractHistoryPopup = By.xpath("//h3[text() = 'Add new Contract History details']");
 	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
 	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
@@ -127,9 +128,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
 	By supplierProductDDwn = By.id("supplierProductForContractHistory");
 	By uploadContractBtn = By.id("btnShowContractUploadModal");
-	
+
 	By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
-	
+
 	By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");
 	By reviewQuotesLink = By.xpath("//li[@data-action = 'QuoteOverview']/a");
 
@@ -182,8 +183,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	By message = By.xpath("//div[@class='alert alert-error']");
 	By tenderRequestSummary = By.xpath("//h1[contains(text(),'Tender Request Summary')]");
-	
-	
+
 	/*
 	 * By AlertMessageText =By.xpath(
 	 * "//li[contains(text(),'Please select at least one meter for a quote reque')]"
@@ -269,8 +269,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By secondContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration2']");
 	By thirdContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration3']");
 	By fourthContractDuration_Water = By.xpath("//select[@id='WaterQuote_Duration4']");
-	
-	By numberOfSuppliers=By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li");
+
+	By numberOfSuppliers = By
+			.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li");
 
 	By choosSuppliers_Water = By.xpath("//div[@id='request-water-quote']//div[@id='selectall']");
 	By firstSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[1]//label[1]");
@@ -279,33 +280,37 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By fourthSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[4]//label[1]");
 	By fifthSupplier_Water = By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//li[5]//label[1]");
 
-	//Tender Summary Page
+	// Tender Summary Page
 	By editCompanyDetailsTenderSummaryPage = By.xpath("//a[@title = 'Edit Company Details']");
 	By editAdditionalReqTenderSummaryPage = By.xpath("//a[@title = 'Edit Additional Requirements']");
 	By editMeterDetailsTenderSummaryPage = By.id("edit-quote-request");
 	By invitedSuppliersHeading_TenderSummaryPage = By.xpath("//h4[text() = 'Invited Suppliers']");
-	By invitedSuppliers_TenderSummaryPage = By.xpath("//h4[text() = 'Invited Suppliers']/following-sibling::div/table/tbody/tr/td");
-	
+	By invitedSuppliers_TenderSummaryPage = By
+			.xpath("//h4[text() = 'Invited Suppliers']/following-sibling::div/table/tbody/tr/td");
+
 	By confirmAndSubmit = By.xpath("//button[text() = 'Confirm and Submit']");
-	By quoteSubmitSuccessPopup = By.xpath("//p[text() = 'Your request for a quote has been submitted. You will receive feedback from the Supplier shortly.']");
+	By quoteSubmitSuccessPopup = By.xpath(
+			"//p[text() = 'Your request for a quote has been submitted. You will receive feedback from the Supplier shortly.']");
 	By okBtn_TenderSummaryPage = By.xpath("//a[text() = 'Ok']");
-	
-	//Verify Tenders
-	By filterAllUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[1]");
-	By filterHHutility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[2]");
-	By filterNHHutility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[3]");
-	By filterGasUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[4]");
-	By filterWaterUtility_VerifyTender = By.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");
+
+	// Verify Tenders
+	By filterAllUtility_VerifyTender = By
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[1]");
+	By filterHHutility_VerifyTender = By
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[2]");
+	By filterNHHutility_VerifyTender = By
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[3]");
+	By filterGasUtility_VerifyTender = By
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[4]");
+	By filterWaterUtility_VerifyTender = By
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");
 	By allowSelectedBtn = By.xpath("//input[@value = 'Allow Selected']");
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
 	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
-	
-	
-	
-	
+
 	public void clickWaterUtility() {
 		click(filterByWaterUtility);
-		
+
 	}
 
 	public void Options_Water(String WaterMeter, String WaterContractD, String WaterSupplier) {
@@ -359,7 +364,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void ClickDate_Water() {
 		click(date_Water);
-		
+
 	}
 
 	public void selectingzerometers_Water() {
@@ -368,42 +373,40 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void selectingSinglemeters_Water() {
 		click(allmeter_Water);
-		
+
 		click(firstMeter_Water);
-		
+
 	}
 
 	public void selectingMultiplemeters_Water() {
 		click(allmeter_Water);
-		
+
 		click(firstMeter_Water);
 		/*
-		 * click(secondMeter_Water); Reporter.log("Clicked on second Meter.",
-		 * true); click(thirdMeter_Water); Reporter.log(
-		 * "Clicked on third Meter.", true); click(fourthMeter_Water);
-		 * Reporter.log("Clicked on fourth Meter.", true);
+		 * click(secondMeter_Water); Reporter.log("Clicked on second Meter.", true);
+		 * click(thirdMeter_Water); Reporter.log( "Clicked on third Meter.", true);
+		 * click(fourthMeter_Water); Reporter.log("Clicked on fourth Meter.", true);
 		 */
 
 	}
 
 	public void selectingsingleContractDur_Water() {
 		selectByIndex(firstContractDuration_Water, 02);
-		
+
 	}
 
 	public void selectingMultipleContractDur_Water() {
 		selectByIndex(firstContractDuration_Water, 02);
 
-		
 		click(addNewContractDuration_Water);
 		selectByIndex(secondContractDuration_Water, 03);
-		
+
 		click(addNewContractDuration_Water);
 		selectByIndex(thirdContractDuration_Water, 04);
-		
+
 		click(addNewContractDuration_Water);
 		selectByIndex(fourthContractDuration_Water, 05);
-		
+
 	}
 
 	public void selectingzerosupplier_Water() {
@@ -412,7 +415,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void selectingSinglesupplier_Water() {
 		click(choosSuppliers_Water);
-	try {
+		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -420,18 +423,18 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		}
 
 		click(firstSupplier_Water);
-		
+
 	}
 
 	public void selectingMultiplesupplier_Water() {
 		click(choosSuppliers_Water);
-		
+
 		click(firstSupplier_Water);
 		click(secondSupplier_Water);
 		click(thirdSupplier_Water);
 		click(fourthSupplier_Water);
 		click(fifthSupplier_Water);
-		
+
 	}
 
 	// ===========================================Water===========================================================================
@@ -490,17 +493,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void ClickrenewableEnergy_Gas() {
 		click(renewableEnergy_Gas);
-		
+
 	}
 
 	public void ClickDate_Gas() {
 		click(date_Gas);
-		
+
 	}
 
 	public void selectingzerometers_Gas() {
 		click(allmeter_Gas);
-		
+
 	}
 
 	public void selectingSinglemeters_Gas() {
@@ -510,22 +513,20 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void selectingMultiplemeters_Gas() {
 		click(allmeter_Gas);
-		
 
 		click(firstMeter_Gas);
-		
+
 		click(secondMeter_Gas);
-		
+
 		click(thirdMeter_Gas);
-		
+
 		click(fourthMeter_Gas);
-		
 
 	}
 
 	public void selectingsingleContractDur_Gas() {
 		selectByIndex(firstContractDuration_Gas, 02);
-		
+
 	}
 
 	public void selectingMultipleContractDur_Gas() {
@@ -593,7 +594,6 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	public void selectingMultipleContractDur_nHH() {
 		selectByIndex(contractDuration_nHH, 02);
-
 
 		click(AddContractDuration_nHH);
 		selectByIndex(contractDuration2_nHH, 03);
@@ -838,10 +838,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		/*
 		 * boolean contractEndDate6monthsPresenceStatusWaterUtility =
 		 * isElementExistInDropDown(contractDurationWaterUtility, "6 months");
-		 * softAssertion.assertFalse(
-		 * contractEndDate6monthsPresenceStatusWaterUtility,
-		 * "6 months is displaying in contract end date dropdown for Water Utility"
-		 * ); Reporter.log(
+		 * softAssertion.assertFalse( contractEndDate6monthsPresenceStatusWaterUtility,
+		 * "6 months is displaying in contract end date dropdown for Water Utility" );
+		 * Reporter.log(
 		 * "Checked if 6 months is displaying in contract end date dropdown for Water Utility"
 		 * , true);
 		 */
@@ -906,9 +905,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(TopSubmit);
 		try {
 			click(OkAlert);
+		} catch (Exception e) {
 		}
-		catch(Exception e)
-		{}
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message)
 				.contains("Please select contract duration");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
@@ -932,7 +930,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		try {
 			click(OkAlert);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -1091,7 +1089,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void validatealertErrormessageAfterSelectingMultiplemeterMultiplecontractDuration() {
+	public void validatealertErrormessageAfterSelectingMultiplemeterMultiplecontractDuration() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		click(HHElectricity);
 		click(SelectAllChoosemeter);
@@ -1108,26 +1106,11 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectByIndex(ContractDuration3, 04);
 		click(AddNewContractDuration);
 		selectByIndex(ContractDuration4, 05);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(2000);
 		click(SelectAllChooseSupplier);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(2000);
 		click(TopSubmit);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Thread.sleep(2000);
 
 		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 				.contains("Please select at least one supplier for a quote request.");
@@ -1136,22 +1119,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void validatingErrorMessageAfterSelecting1contractDurationAndMultipleSuppliers() {
+	public void validatingErrorMessageAfterSelecting1contractDurationAndMultipleSuppliers() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-
 		click(HHElectricity);
-
 		click(SelectAllChoosemeter);
-
 		selectByIndex(ContractDuration, 02);
-
 		click(SelectAllChooseSupplier);
 		click(ThirdSupplier);
 		click(FourthSupplier);
 		click(FifthSupplier);
-
 		click(TopSubmit);
-
+		Thread.sleep(1000);
 		boolean errorMessageDisplyStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
 		softAssertion.assertTrue(errorMessageDisplyStatusForNotSelectingMeter,
@@ -1446,7 +1424,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectByIndex(contractDuration_nHH, 02);
 		click(AddContractDuration_nHH);
 		selectByIndex(contractDuration2_nHH, 02);
-	
+
 		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
 				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
@@ -1524,12 +1502,13 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void VerifyErrorMessageWhenSelecting_MultipleMeters_SingleContractDurations_ZeroSupplier_nHH() {
+	public void VerifyErrorMessageWhenSelecting_MultipleMeters_SingleContractDurations_ZeroSupplier_nHH() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		SelectElectricity_nHHUtility();
 		Options("multiple", "single", "zero");
+		Thread.sleep(1000);
 		ClickTopSubmitButton();
-
+		Thread.sleep(2000);
 		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 				.contains("Please select at least one supplier for a quote request.");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
@@ -1762,7 +1741,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			SoftAssert softAssertion = new SoftAssert();
 			boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 					.contains("Please select at least one supplier for a quote request.");
-			//Reporter.log("Checked if error message for not selecting any supplier is displaying.", true);
+			// Reporter.log("Checked if error message for not selecting any supplier is
+			// displaying.", true);
 			softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 					"Error message is not displaying for not selecting any supplier.");
 			softAssertion.assertAll();
@@ -1785,13 +1765,15 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 		boolean errorMessageDisplayStatusForNotSelectingContractDuration = getText(message)
 				.contains("Please select contract duration");
-		//Reporter.log("Checked if error message for not selecting contract duration is displaying.", true);
+		// Reporter.log("Checked if error message for not selecting contract duration is
+		// displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
 				"Error message is not displaying for not entering contract duration.");
 
 		boolean errorMessageDisplayStatusForNotSelectingSuplier = getText(message)
 				.contains("Please select at least one supplier for a quote request.");
-		//Reporter.log("Checked if error message for not selecting any supplier is displaying.", true);
+		// Reporter.log("Checked if error message for not selecting any supplier is
+		// displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
@@ -1833,15 +1815,16 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		clickGasUtility();
 		selectByIndex(firstContractDuration_Gas, 02);
-		//Reporter.log("Selected First Contract Duration.", true);
+		// Reporter.log("Selected First Contract Duration.", true);
 		click(addNewContractDuration_Gas);
-		//Reporter.log("Clicked on add contract Duration", true);
+		// Reporter.log("Clicked on add contract Duration", true);
 		selectByIndex(secondContractDuration_Gas, 02);
-		//Reporter.log("Selected second Contract Duration.", true);
+		// Reporter.log("Selected second Contract Duration.", true);
 
 		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
 				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
-		//Reporter.log("Checked if error message for Selecting 2 same Contract Durations is displaying.", true);
+		// Reporter.log("Checked if error message for Selecting 2 same Contract
+		// Durations is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
 				"Error message is not displaying for selecting 2 same contract durations.");
 
@@ -2009,7 +1992,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 		boolean errorMessageDisplyStatusForEnteringwrongDate = getText(message)
 				.contains("Tender date must be at least five days in the future");
-		//Reporter.log("Checked if error message for Entering wrong Date is displaying.", true);
+		// Reporter.log("Checked if error message for Entering wrong Date is
+		// displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
@@ -2058,15 +2042,16 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		clickWaterUtility();
 		selectByIndex(firstContractDuration_Water, 02);
-		//Reporter.log("Selected First Contract Duration.", true);
+		// Reporter.log("Selected First Contract Duration.", true);
 		click(addNewContractDuration_Water);
-		//Reporter.log("Clicked on add contract Duration", true);
+		// Reporter.log("Clicked on add contract Duration", true);
 		selectByIndex(secondContractDuration_Water, 02);
-		//Reporter.log("Selected second Contract Duration.", true);
+		// Reporter.log("Selected second Contract Duration.", true);
 
 		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
 				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
-		//Reporter.log("Checked if error message for Selecting 2 same Contract Durations is displaying.", true);
+		// Reporter.log("Checked if error message for Selecting 2 same Contract
+		// Durations is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
 				"Error message is not displaying for selecting 2 same contract durations.");
 		softAssertion.assertAll();
@@ -2080,28 +2065,31 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 	}
+
 	public void verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndpreviousDate_Supplier_Water(
 			String NoOfMeter, String NoOfContractDur, String NoOfSupplier) {
 		SoftAssert softAssertion = new SoftAssert();
 		clickWaterUtility();
 		ClickDate_Water();
-		selectPrevDateCalender(05,9,2019);
+		selectPrevDateCalender(05, 9, 2019);
 		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
 		ClickTopSubmitButton();
-		
+
 		boolean errorMessageDisplyStatusForEnteringwrongDate = getText(message)
 				.contains("Tender date must be at least five days in the future");
-		//Reporter.log("Checked if error message for Entering wrong Date is displaying.", true);
+		// Reporter.log("Checked if error message for Entering wrong Date is
+		// displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
 	}
+
 	public void verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndFutureDate_Supplier_Water(
 			String NoOfMeter, String NoOfContractDur, String NoOfSupplier) {
 		clickWaterUtility();
 		ClickDate_Water();
-		selectPrevDateCalender(15,9,2019);
+		selectPrevDateCalender(15, 9, 2019);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -2123,28 +2111,29 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Water() {
 		SoftAssert softAssertion = new SoftAssert();
 		clickWaterUtility();
 		selectByIndex(firstContractDuration_Water, 02);
-		//Reporter.log("Selected First Contract Duration.", true);
+		// Reporter.log("Selected First Contract Duration.", true);
 		click(addNewContractDuration_Water);
-		//Reporter.log("Clicked on add contract Duration", true);
+		// Reporter.log("Clicked on add contract Duration", true);
 		selectByIndex(secondContractDuration_Water, 02);
-		//Reporter.log("Selected second Contract Duration.", true);
+		// Reporter.log("Selected second Contract Duration.", true);
 
 		boolean errorMessageDisplayStatusForSelecting2SameContractDurations = getText(
 				OkAlertTextwhen2sameContractDurationSected).contains("You have already selected that duration");
-		//Reporter.log("Checked if error message for Selecting 2 same Contract Durations is displaying.", true);
+		// Reporter.log("Checked if error message for Selecting 2 same Contract
+		// Durations is displaying.", true);
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
 				"Error message is not displaying for selecting 2 same contract durations.");
 
 		softAssertion.assertAll();
 	}
-	
-	public void verifyTheElemtsareCheckedOrNot(){
-		//driver.findElements(By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li"))
+
+	public void verifyTheElemtsareCheckedOrNot() {
+		// driver.findElements(By.xpath("//div[@id='request-water-quote']//section[@id='suppliers']//ul[@class='check-list']//li"))
 		clickWaterUtility();
 		try {
 			Thread.sleep(5000);
@@ -2152,7 +2141,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//selectingzerosupplier_Water();
+		// selectingzerosupplier_Water();
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -2160,65 +2149,66 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			e.printStackTrace();
 		}
 		numberOfCheckListPresent(numberOfSuppliers);
-		
+
 	}
+
 	public void validateSelectAllSupplierCheckboxWhenUnChecked() {
 		click(filterByHHutility);
-		//Reporter.log("Clicked on filter for HH Utility", true);
+		// Reporter.log("Clicked on filter for HH Utility", true);
 		click(SelectAllChooseSupplier);
-		//Reporter.log("Clicked on select all option for HH utility.", true);
+		// Reporter.log("Clicked on select all option for HH utility.", true);
 		List<WebElement> allElements = driver.findElements(listOfHHsupplierCheckbox);
-    	boolean status = false;
-    	for (WebElement element: allElements) {
-	       if(element.isSelected()==false) 
-	       {
-	    	   	System.out.println(element);
-	        	status = true;
-	       }
-	       else {
-	           	status = false;
-	           	Assert.assertTrue(status, "All checkbox are not unchecked.");
-	       }
-	   }
-    	Assert.assertTrue(status, "All checkbox are unchecked");
+		boolean status = false;
+		for (WebElement element : allElements) {
+			if (element.isSelected() == false) {
+				System.out.println(element);
+				status = true;
+			} else {
+				status = false;
+				Assert.assertTrue(status, "All checkbox are not unchecked.");
+			}
+		}
+		Assert.assertTrue(status, "All checkbox are unchecked");
 	}
+
 	public void validateSelectAllSupplierCheckboxWhenChecked() {
 		click(filterByHHutility);
-		//Reporter.log("Clicked on filter for HH Utility", true);
+		// Reporter.log("Clicked on filter for HH Utility", true);
 		click(SelectAllChooseSupplier);
-		//Reporter.log("Clicked on select all option for HH utility.", true);
+		// Reporter.log("Clicked on select all option for HH utility.", true);
 		List<WebElement> allElements = driver.findElements(listOfHHsupplierCheckbox);
-    	boolean status = false;
-    	for (WebElement element: allElements) {
-	       if(element.isSelected()==false) 
-	       {
-	    	   	System.out.println(element);
-	        	status = true;
-	       }
-	       else {
-	           	status = false;
-	           	Assert.assertTrue(status, "All checkbox are not unchecked.");
-	       }
-	   }
-    	Assert.assertTrue(status, "All checkbox are unchecked");
+		boolean status = false;
+		for (WebElement element : allElements) {
+			if (element.isSelected() == false) {
+				System.out.println(element);
+				status = true;
+			} else {
+				status = false;
+				Assert.assertTrue(status, "All checkbox are not unchecked.");
+			}
+		}
+		Assert.assertTrue(status, "All checkbox are unchecked");
 	}
+
 	public void validateCheckboxClickableTest() throws Throwable {
-		SoftAssert softAssertion = new SoftAssert(); 
+		SoftAssert softAssertion = new SoftAssert();
 		click(filterByHHutility);
-		//Reporter.log("Clicked on filter for HH Utility", true);
+		// Reporter.log("Clicked on filter for HH Utility", true);
 		click(SelectAllChooseSupplier);
-		//Reporter.log("Clicked on select all option for HH utility.", true);
+		// Reporter.log("Clicked on select all option for HH utility.", true);
 		click(FirstSupplier);
-		//Reporter.log("Clicked the checkbox for British gas business.", true);
+		// Reporter.log("Clicked the checkbox for British gas business.", true);
 		Thread.sleep(1000);
 		boolean checkboxCheckedstatusforBritishGasBusiness = driver.findElement(FirstSupplier).isSelected();
-		softAssertion.assertFalse(checkboxCheckedstatusforBritishGasBusiness, "Checkbox is unchecked for British Gas Business.");
+		softAssertion.assertFalse(checkboxCheckedstatusforBritishGasBusiness,
+				"Checkbox is unchecked for British Gas Business.");
 		click(ThirdSupplier);
 		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(ThirdSupplier).isSelected();
 		softAssertion.assertFalse(checkboxCheckedstatusForCoronaEnergy, "Checkbox is unchecked for Corona Energy.");
-		//FourthSupplier
+		// FourthSupplier
 		softAssertion.assertAll();
 	}
+
 	public void validateTenderSummaryPageDisplay() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -2228,6 +2218,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean verifyTenderRequestSummaryURL = driver.getCurrentUrl().contains("RequestQuoteSubmit");
 		Assert.assertTrue(verifyTenderRequestSummaryURL, "Incorrect URL is displaying.");
 	}
+
 	public void validateEditCompanyProfileOption() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -2239,6 +2230,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean verifyCompanyProfileURL = driver.getCurrentUrl().contains("CompanyProfile");
 		Assert.assertTrue(verifyCompanyProfileURL, "Incorrect URL is displaying.");
 	}
+
 	public void validateEditAdditionalReqOptionTenderSummaryPage() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -2250,6 +2242,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean verifyCompanyProfileURL = driver.getCurrentUrl().contains("CompanyProfile");
 		Assert.assertTrue(verifyCompanyProfileURL, "Incorrect URL is displaying.");
 	}
+
 	public void validateEditQuoteOptionTenderSummaryPage() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -2261,151 +2254,195 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		boolean verifyEditRequestQuoteURL = driver.getCurrentUrl().contains("Quote/EditRequestQuote");
 		Assert.assertTrue(verifyEditRequestQuoteURL, "Incorrect URL is displaying.");
 	}
+
 	public void verifySupplierSelectionInTenderSummaryPage() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-		//navigateToCompanyProfile();
-		fillCompanyProfile();
-		Thread.sleep(1000);
-		click(propertyPortfolio);
-		Thread.sleep(2000);
-		addSite();
-		Thread.sleep(2000);
-		addValidHHmeterGeneric();
-		addContractHistory();
-		try {
-			click(okBtn);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Thread.sleep(2000);
-		click(quotesAndTenders);
-		Thread.sleep(1000);
-        click(requestAQuoteLink);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		// navigateToCompanyProfile();
+		/*
+		 * fillCompanyProfile(); Thread.sleep(1000); click(propertyPortfolio);
+		 * Thread.sleep(2000); addSite(); Thread.sleep(2000); String mpanNum =
+		 * addValidHHmeterGeneric(); addContractHistory(); try { click(okBtn); } catch
+		 * (Exception e) { e.printStackTrace(); } Reporter.log("Closed tip message",
+		 * true); Thread.sleep(2000); click(quotesAndTenders); Thread.sleep(1000);
+		 * click(requestAQuoteLink); Reporter.log("Clicked on request a quote link",
+		 * true);
+		 */
 		String companyName = "AGB3";
-		SelectingSingleMeter();
+		scrollToElement(checkboxForMeter("1012703797008"));// need to be replaced by mpanNum
+		selectingSingleMeterModified("1012703797008");// need to be replaced by mpanNum
+		jse.executeScript("window.scrollBy(0,-500)");
 		SelectingSingleContractDuration();
 		click(tenderDateHH);
 		Thread.sleep(1000);
 		String tenderDate = "12/11/2019";
 		selectFutureDateCalender(12, 10, 2019);
 		SelectingMultipleSupplier();
-		
+		Reporter.log("Selected suppliers.", true);
 		String firstSelectedSupplierName = getText(FirstSupplier);
 		String secondSelectedSupplierName = getText(ThirdSupplier);
-		String thirdSelectedSupplierName = getText(FourthSupplier);
 		String fourthSelectedSupplierName = getText(FifthSupplier);
+
 		ClickTopSubmitButton();
+		Reporter.log("Clicked on submit button", true);
 		Thread.sleep(3000);
 		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
-		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage, firstSelectedSupplierName);
+		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				firstSelectedSupplierName);
 		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
-		
-		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage, secondSelectedSupplierName);
+
+		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				secondSelectedSupplierName);
 		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
-		boolean thirdSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage, thirdSelectedSupplierName);
-		softAssertion.assertTrue(thirdSupplierPresenceStatus, "Selected supplier is not displaying.");
-		boolean fourthSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage, fourthSelectedSupplierName);
+
+		boolean fourthSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				fourthSelectedSupplierName);
 		softAssertion.assertTrue(fourthSupplierPresenceStatus, "Selected supplier is not displaying.");
 		scrollToElement(confirmAndSubmit);
 		click(confirmAndSubmit);
 		Reporter.log("Clicked on confirm and submit button.", true);
 		Thread.sleep(2000);
 		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
-		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus, "Tender Submit Success Popup is not displaying.");
+		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus,
+				"Tender Submit Success Popup is not displaying.");
 		click(okBtn_TenderSummaryPage);
 		Reporter.log("Clicked on Ok button.", true);
 		logout();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(getPropertyFileData("url"));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		loginAsAdmin();
-		click(verifyTenders);
-		boolean verifyTendersDisplayStatus = driver.getCurrentUrl().contains("/VerifyTenders");
-		Reporter.log("Checked if verify tenders page is displaying.", true);
-		softAssertion.assertTrue(verifyTendersDisplayStatus, "Verify Tenders page is not displaying.");//VT_TC_003
-		verifyUtilityFilterPresenceVerifyTenders();//VT_TC_004
-		Reporter.log("Checked presence of filters.", true);
-		click(allowSelectedBtn);
-		boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
-		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007
-		click(okBtn);
-		Reporter.log("Clicked on Ok button", true);
-		Thread.sleep(1000);
-		click(blockSelectedBtn);
-		Reporter.log("Clicked on Block selected button", true);
-		alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
-		Reporter.log("Checked if the alert message is displaying.", true);
-		softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008
-		click(okBtn);
-		Reporter.log("Clicked on Ok button", true);
-		Thread.sleep(1000);
-    	scrollToElement(findQuote(companyName));
-    	boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
-    	softAssertion.assertTrue(downloadTenderPresenceStatus, "Download tender button is not displaying.");//VT_TC_005 
-		boolean supplier1PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
-		boolean supplier2PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), secondSelectedSupplierName);
-		boolean supplier3PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), thirdSelectedSupplierName);
-		boolean supplier4PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), fourthSelectedSupplierName);
-		boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus && supplier3PresenceStatus && supplier4PresenceStatus;
-		softAssertion.assertTrue(allSuppliersDisplayStatus, "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006
-		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxAllSupplierList(companyName));
-		Reporter.log("Checked if all the checkbox for the suppliers are enabled in suppliers list.", true);
-		softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, "All checkbox for the suppliers are not enabled in suppliers list for the quote.");//VT_TC_009
-		boolean allCheckBoxMatrixPriceListEnabledStatus = checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
-		Reporter.log("Checked if all the checkbox for the suppliers are enabled in matrix price list.", true);
-		softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
-		//block supplier
-		click(checkboxSupplier(companyName, secondSelectedSupplierName));
-		Reporter.log("Clicked on the checkbox for the supplier.", true);
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,-2000)");
-		//scrollToElement(blockSelectedBtn);
-		click(blockSelectedBtn);
-		Reporter.log("Clicked on block selected button.", true);
+		/*
+		 * click(verifyTenders); boolean verifyTendersDisplayStatus =
+		 * driver.getCurrentUrl().contains("/VerifyTenders");
+		 * Reporter.log("Checked if verify tenders page is displaying.", true);
+		 * softAssertion.assertTrue(verifyTendersDisplayStatus,
+		 * "Verify Tenders page is not displaying.");//VT_TC_003
+		 * verifyUtilityFilterPresenceVerifyTenders();//VT_TC_004
+		 * Reporter.log("Checked presence of filters.", true); click(allowSelectedBtn);
+		 * boolean alertPopupDisplayStatus =
+		 * isElementPresent(alertPopUpForNoSupplierSelection);
+		 * softAssertion.assertTrue(alertPopupDisplayStatus,
+		 * "Alert popup is not displaying");//VT_TC_007 click(okBtn);
+		 * Reporter.log("Clicked on Ok button", true); Thread.sleep(1000);
+		 * click(blockSelectedBtn); Reporter.log("Clicked on Block selected button",
+		 * true); alertPopupDisplayStatus =
+		 * isElementPresent(alertPopUpForNoSupplierSelection);
+		 * Reporter.log("Checked if the alert message is displaying.", true);
+		 * softAssertion.assertTrue(alertPopupDisplayStatus,
+		 * "Alert popup is not displaying");//VT_TC_008 click(okBtn);
+		 * Reporter.log("Clicked on Ok button", true); Thread.sleep(1000);
+		 * scrollToElement(findQuote(companyName)); boolean downloadTenderPresenceStatus
+		 * = isElementPresent(downloadTenderDetailsButton(companyName));
+		 * softAssertion.assertTrue(downloadTenderPresenceStatus,
+		 * "Download tender button is not displaying.");//VT_TC_005 boolean
+		 * supplier1PresenceStatus =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * firstSelectedSupplierName); boolean supplier2PresenceStatus =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * secondSelectedSupplierName); boolean supplier4PresenceStatus =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * fourthSelectedSupplierName); boolean allSuppliersDisplayStatus =
+		 * supplier1PresenceStatus && supplier2PresenceStatus &&
+		 * supplier4PresenceStatus; softAssertion.assertTrue(allSuppliersDisplayStatus,
+		 * "All suppliers are not dispaying for the quote in verify tenders.");//
+		 * VT_TC_006 boolean allCheckBoxSuppliersListEnabledStatus =
+		 * checkboxListEnabledStatus(checkboxAllSupplierList(companyName)); Reporter.
+		 * log("Checked if all the checkbox for the suppliers are enabled in suppliers list."
+		 * , true); softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus,
+		 * "All checkbox for the suppliers are not enabled in suppliers list for the quote."
+		 * );//VT_TC_009 boolean allCheckBoxMatrixPriceListEnabledStatus =
+		 * checkboxListEnabledStatus(checkboxMatrixPriceList(companyName)); Reporter.
+		 * log("Checked if all the checkbox for the suppliers are enabled in matrix price list."
+		 * , true); softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus,
+		 * "All checkbox for the suppliers are not enabled in matrix price list for the quote."
+		 * );//VT_TC_012 //block supplier
+		 * 
+		 * click(checkboxSupplier(companyName, secondSelectedSupplierName));
+		 * Reporter.log("Clicked on the checkbox for the supplier.", true);
+		 * //JavascriptExecutor jse = (JavascriptExecutor)driver;
+		 * jse.executeScript("window.scrollBy(0,-2000)");
+		 * //scrollToElement(blockSelectedBtn); click(blockSelectedBtn);
+		 * Reporter.log("Clicked on block selected button.", true); Thread.sleep(2000);
+		 * scrollToElement(findQuote(companyName)); boolean
+		 * supplierPresenceInListStatusAfterBlock =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * firstSelectedSupplierName);
+		 * Reporter.log("Checked if supplier name is displaying after blocking it.",
+		 * true); softAssertion.assertFalse(supplierPresenceInListStatusAfterBlock,
+		 * "Supplier name is still displaying after blocking it.");
+		 * 
+		 * //allow supplier click(checkboxSupplier(companyName,
+		 * firstSelectedSupplierName));
+		 * Reporter.log("Clicked on the checkbox for the supplier.", true);
+		 * jse.executeScript("window.scrollBy(0,-2000)"); Thread.sleep(1000);
+		 * click(allowSelectedBtn); Reporter.log("Clicked on allow selected button.",
+		 * true); Thread.sleep(2000); scrollToElement(findQuote(companyName)); boolean
+		 * supplierPresenceInListStatusAfterAllow =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * secondSelectedSupplierName);
+		 * Reporter.log("Checked if supplier name is displaying after allowing it.",
+		 * true); softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow,
+		 * "Supplier name is still displaying after allowing it.");
+		 */
+		driver.findElement(By.id("ImpersonateUserName")).sendKeys("BGB@openenergymarket.com", Keys.ENTER);
 		Thread.sleep(2000);
-		scrollToElement(findQuote(companyName));
-		boolean supplierPresenceInListStatusAfterBlock = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
-		softAssertion.assertFalse(supplierPresenceInListStatusAfterBlock, "Supplier name is still displaying after blocking it.");
-		//allow supplier
-		click(checkboxSupplier(companyName, thirdSelectedSupplierName));
-		Reporter.log("Clicked on the checkbox for the supplier.", true);
-		jse.executeScript("window.scrollBy(0,-2000)");
-		click(allowSelectedBtn);
-		Reporter.log("Clicked on allow selected button.", true);
+		softAssertion.assertTrue(driver.getCurrentUrl().contains("SupplierHome"), "Supplier Dashboard page is not displaying.");
+		click(tendersAndAlertsLink);
 		Thread.sleep(2000);
-		scrollToElement(findQuote(companyName));
-		boolean supplierPresenceInListStatusAfterAllow = isElementExistInList(suppliersListForQuote(companyName), thirdSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after blocking it.", true);
-		softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");
-		softAssertion.assertAll();
+		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate));
+		softAssertion.assertTrue(tenderDisplayStatus, "Tender is not displaying in Supplier account after verifying in admin panel");
+		click(submitPricesBtn(companyName, tenderDate));
+		Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(2000);
+		boolean clientNameDisplayStatus = driver.findElement(By.xpath("//h1[text() = 'Submit Prices']/../following-sibling::div[1]/div[1]")).getText().contains("Client: "+companyName);
+		softAssertion.assertTrue(clientNameDisplayStatus, "Client name is not displaying in 'Submit Prices' page.");
+		boolean commodityDisplayStatus = driver.findElement(By.xpath("//h1[text() = 'Submit Prices']/../following-sibling::div[1]/div[2]")).getText().contains("Commodity: ElectricityHh");
+		softAssertion.assertTrue(commodityDisplayStatus, "Commodity is not displaying.");
+		boolean tenderDateDisplayStatus = driver.findElement(By.xpath(""));
+				softAssertion.assertAll();
 	}
+	//Suppliers
+	By tendersAndAlertsLink = By.xpath("//li[@data-action = 'Requests']/a/h3");
+
+	By quoteRequestStatusDropdown = By.id("SelectedStatus");
+	
+	public By submitPricesBtn(String companyName, String tenderDate) {
+		By submitPricesBtn = By.xpath("//tr[@class = 'tender-row']/td[text() = '" + currentDate() + "']/following-sibling::td[text() = '" + companyName + "']/following-sibling::td[@class = 'utility' and text() = 'HH']/following-sibling::td[@class = 'tender-date' and text() = '" + tenderDate + "']/following-sibling::td/a[@id = 'submit-prices-link']");
+		return submitPricesBtn;
+	}
+	
 	public void logout() throws Throwable {
-		Actions action  = new Actions(driver);
-		WebElement accountSettingsBtn = driver.findElement(By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a"));
+		Actions action = new Actions(driver);
+		WebElement accountSettingsBtn = driver
+				.findElement(By.xpath("//figure[@id = 'logo']/following-sibling::ul/li[2]/a"));
 		WebElement logoutBtn = driver.findElement(By.xpath("//a[text() = 'Log out']"));
 		action.moveToElement(accountSettingsBtn).moveToElement(logoutBtn).click().build().perform();
 	}
-	public void loginAsAdmin() throws Throwable  {
-    	String URL = getPropertyFileData("url");
-    	String EMAIL = getPropertyFileData("adminEmail");
-    	String PASSWORD = getPropertyFileData("adminPassword");
-    	driver.get(URL);
-        setValue(username, EMAIL);
-        setValue(pwd, PASSWORD);
-        click(signInBtn);
+
+	public void loginAsAdmin() throws Throwable {
+		String URL = getPropertyFileData("url");
+		String EMAIL = getPropertyFileData("adminEmail");
+		String PASSWORD = getPropertyFileData("adminPassword");
+		driver.get(URL);
+		setValue(username, EMAIL);
+		setValue(pwd, PASSWORD);
+		click(signInBtn);
 	}
+
 	public String currentDate() {
 		LocalDate myObj1 = LocalDate.now(); // Create a date object
-		
+
 		Object d1 = myObj1;
 		String date = d1.toString();
-		
+
 		int day = Integer.parseInt(date.substring(8, 10));
 		int month = Integer.parseInt(date.substring(5, 7));
 		int year = Integer.parseInt(date.substring(0, 4));
-		String currentDate = day +"/"+month+"/"+ year;
+		String currentDate = day + "/" + month + "/" + year;
 		return currentDate;
 	}
+
 	public void verifyUtilityFilterPresenceVerifyTenders() {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean allFilterPresenceStatus = isElementPresent(filterAllUtility_VerifyTender);
@@ -2420,98 +2457,129 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(waterFilterPresenceStatus, "Water utility filter is not displaying.");
 		softAssertion.assertAll();
 	}
+
 	/**
 	 * Looks for the HH quote in verify tenders by using current date, company name
+	 * 
 	 * @param companyName
 	 * @return
 	 */
 	public By findQuote(String companyName) {
-		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']");
+		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
+				+ "']/preceding-sibling::td[text() = '" + companyName + "']");
 		return quote;
 	}
+
 	public By downloadTenderDetailsButton(String companyName) {
-		By downloadBtn = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[3]/a");
+		By downloadBtn = By
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
+						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[3]/a");
 		return downloadBtn;
 	}
+
 	/**
-	 * Consists of list of suppliers which were selected while requesting a quote for the quote in verify tenders. 
+	 * Consists of list of suppliers which were selected while requesting a quote
+	 * for the quote in verify tenders.
+	 * 
 	 * @param companyName
 	 * @return
 	 */
 	public By suppliersListForQuote(String companyName) {
-		By suppliers = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[5]/label");
+		By suppliers = By
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
+						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/label");
 		return suppliers;
 	}
+
 	/**
-	 * Returns the list of locators of check box for the all the suppliers in Supplier column. 
+	 * Returns the list of locators of check box for the all the suppliers in
+	 * Supplier column.
+	 * 
 	 * @return
 	 */
 	public By checkboxAllSupplierList(String companyName) {
-		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[5]/input");
+		By checkboxLst = By
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
+						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/input");
 		return checkboxLst;
 	}
+
 	/**
-	 * Returns the list of locators of check box for the all the suppliers in Matrix Price column. 
+	 * Returns the list of locators of check box for the all the suppliers in Matrix
+	 * Price column.
+	 * 
 	 * @return
 	 */
 	public By checkboxMatrixPriceList(String companyName) {
-		By checkboxLst = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+ currentDate() +"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[4]/input");
+		By checkboxLst = By
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
+						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[4]/input");
 		return checkboxLst;
 	}
+
 	/**
-	 * Returns the locator of the checkbox for the supplier in supplier list in verify tenders.
+	 * Returns the locator of the checkbox for the supplier in supplier list in
+	 * verify tenders.
+	 * 
 	 * @param companyName
 	 * @param supplierName
 	 */
 	public By checkboxSupplier(String companyName, String supplierName) {
-		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"+currentDate()+"']/preceding-sibling::td[text() = '"+companyName+"']/following-sibling::td[4]/label[text() = '"+supplierName+"']/preceding-sibling::input[1]");
+		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"
+				+ currentDate() + "']/preceding-sibling::td[text() = '" + companyName
+				+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
+
 	public void navigateToCompanyProfile() {
 		click(portfolioMgr);
 		click(companyProfile);
 	}
+
 	public void fillCompanyProfile() throws Throwable {
 		setValue(companyName, "AGB3");
-    	setValue(companyRegisteredAddress, "Bangalore");
-        
-        setValue(compPostCode, "2983472");
-        setValue(phone, "8923472834");
-        setValue(companyRegNum, "8173812323");
-        click(saveBtn);
-        Thread.sleep(2000);
-        click(okBtn_TenderSummaryPage);
+		setValue(companyRegisteredAddress, "Bangalore");
+
+		setValue(compPostCode, "2983472");
+		setValue(phone, "8923472834");
+		setValue(companyRegNum, "8173812323");
+		click(saveBtn);
+		Thread.sleep(2000);
+		click(okBtn_TenderSummaryPage);
 	}
+
 	public void addSite() throws Throwable {
-			click(addSite);
-			Reporter.log("Clicked Add Site button", true);
-			Thread.sleep(2000);
-			setValue(siteName, "Domlur");
-			setValue(address1, "G R Complex, No. 31, Ground & 1st Floor");
-			setValue(postcode, "560071");
-			setValue(siteContactName, "Amitav");
-			setValue(contactPhoneNo, "9823423412");
-			setValue(contactEmail, "andola.amitav@gmail.com");
-			setValue(siteID, "555");
-			setValue(address2, "Kempegowda Service Rd");
-			setValue(address3, "Bengaluru");
-			setValue(address4, "Karnataka");
-			setValue(siteArea, "100");
-			Reporter.log("Entered data in various fields in 'Add Site' popup", true);
-			click(saveSiteDataBtn);
-			Thread.sleep(2000);
-			try {
-				click(tipCloseBtn);
-			}
-			catch(Exception e) {
-				System.out.println("Couldn't close 'Tip' message");
-			}
+		click(addSite);
+		Reporter.log("Clicked Add Site button", true);
+		Thread.sleep(2000);
+		setValue(siteName, "Domlur");
+		setValue(address1, "G R Complex, No. 31, Ground & 1st Floor");
+		setValue(postcode, "560071");
+		setValue(siteContactName, "Amitav");
+		setValue(contactPhoneNo, "9823423412");
+		setValue(contactEmail, "andola.amitav@gmail.com");
+		setValue(siteID, "555");
+		setValue(address2, "Kempegowda Service Rd");
+		setValue(address3, "Bengaluru");
+		setValue(address4, "Karnataka");
+		setValue(siteArea, "100");
+		Reporter.log("Entered data in various fields in 'Add Site' popup", true);
+		WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", saveSiteBtn);
+		Thread.sleep(2000);
+		try {
+			click(tipCloseBtn);
+		} catch (Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
 	}
+
 	public String addValidHHmeterGeneric() throws Throwable {
-		
+
 		Random random = new Random();
-		//int cellNum = random.nextInt(1568);
-		String mpanNumber = readExcelData("Sheet2", random.nextInt(50), 0);
+		// int cellNum = random.nextInt(1568);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
 		Thread.sleep(2000);
 		click(addMeter);
 		Reporter.log("Clicked on add meter dropdown.", true);
@@ -2533,7 +2601,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Entered date in the date picker", true);
 		setValue(capacity, readExcelData("Sheet3", 8, 3));
 		Reporter.log("Entered data in capacity field.", true);
-		selectByVisibleText(currentSupplier, "Gazprom");
+		selectByVisibleText(currentSupplier, "British Gas Business");
 		Reporter.log("Selected current supplier from supplier dropdown", true);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		Reporter.log("Entered data in 'Current Annual Spent'", true);
@@ -2551,8 +2619,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(1000);
 		selectFutureDateCalender(21, 7, 2020);
 		Reporter.log("Selected date from date picker", true);
-		
-		click(saveMeterBtn);
+		WebElement saveMetBtn = driver.findElement(By.id("save-meter-button"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", saveMetBtn);
+		// click(saveMeterBtn);
 		Reporter.log("Clicked on 'Save Meter Data' button", true);
 		Thread.sleep(4000);
 		click(okBtn);
@@ -2560,13 +2630,14 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(2000);
 		try {
 			click(tipCloseBtn);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Couldn't close 'Tip' message");
 		}
 		return mpanNumber;
 	}
+
 	public void addContractHistory() throws Throwable {
+		// Need to enter supplier product
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
 		Thread.sleep(1000);
@@ -2589,15 +2660,34 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Reporter.log("Entered data in contract start date", true);
 		click(saveContractHistoryBtn);
 		Thread.sleep(2000);
-		
+
 	}
+
 	public void viewMeterDetails(String meterNumber) {
 		By meterNumb = By.xpath("//div[contains(text(), '" + meterNumber + "')]");
 		click(meterNumb);
 		Reporter.log("Clicked on the meter number to view the detail section.", true);
 	}
+
 	public By addHHcontractHistoryBtn(String mpanNumber) {
-		By addContractHistBtn = By.xpath("//div[contains(text(), '"+ mpanNumber +"')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[6]/button");
+		By addContractHistBtn = By.xpath("//div[contains(text(), '" + mpanNumber
+				+ "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[6]/button");
 		return addContractHistBtn;
 	}
+
+	/**
+	 * Provides the locator of checkbox for the meter in tender request page.
+	 * 
+	 * @return
+	 */
+	public By checkboxForMeter(String mpan) {
+		By checkboxMeter = By.xpath("//label[contains(text(),'" + mpan + "')]/../../../..");
+		return checkboxMeter;
+	}
+
+	public void selectingSingleMeterModified(String mpan) {
+		click(SelectAllChoosemeter);
+		click(checkboxForMeter(mpan));
+	}
+
 }

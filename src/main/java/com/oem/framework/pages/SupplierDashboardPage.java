@@ -8,12 +8,19 @@ import com.oem.framework.core.base.BasePage;
 public class SupplierDashboardPage extends BasePage {
 
 	By tendersAndAlertsLink = By.xpath("//li[@data-action = 'Requests']/a/h3");
+	By reviewQuotes = By.linkText("Review Quotes");
 	
 	public SupplierDashboardPage goToTendersAndAlerts(){
         click(tendersAndAlertsLink);
         TendersAndAlertsPage tendersAndAlertsPage=new TendersAndAlertsPage();
         tendersAndAlertsPage.isLoaded();
         return tendersAndAlertsPage;
+    }
+	public SupplierDashboardPage goToReviewQuotes(){
+        click(reviewQuotes);
+        ReviewQuotesPage reviewQuotesPage=new ReviewQuotesPage();
+        reviewQuotesPage.isLoaded();
+        return reviewQuotesPage;
     }
 	
 	

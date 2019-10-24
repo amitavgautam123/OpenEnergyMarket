@@ -8,8 +8,8 @@
     <test name="Regression tests" thread-count="3" parallel="methods">
 
         <packages>
-            <package name="com.oem.PortfolioManager"/>	
-            <package name="com.oem.QuotesAndTenders"/>	
+  			<package name="com.oem.QuotesAndTenders"/>
+            <package name="com.oem.PortfolioManager"/>
             <package name="com.oem.suppliers"/>	
         </packages>
     </test>
