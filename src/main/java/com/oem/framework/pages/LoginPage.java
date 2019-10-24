@@ -49,13 +49,13 @@ public class LoginPage extends BasePage {
     	String PASSWORD = getPropertyFileData("password");
         loginUsing(URL,EMAIL,PASSWORD);
 
-      
         if(isCustomerDashboardPage())
             return new CustomerDashboardPage();
         else
         	throw new IOException("After login didn't show Customer Dashboard page");
     }
-    
+
+
     public AdminDashboardPage loginAsAdmin() throws Throwable  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("adminEmail");

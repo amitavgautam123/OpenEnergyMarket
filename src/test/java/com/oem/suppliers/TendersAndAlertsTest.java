@@ -1,5 +1,6 @@
 package com.oem.suppliers;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.oem.framework.core.base.BaseTest;
@@ -9,32 +10,42 @@ import com.oem.framework.pages.SupplierDashboardPage;
 import com.oem.framework.pages.TendersAndAlertsPage;
 
 public class TendersAndAlertsTest extends BaseTest {
-	
-	public TendersAndAlertsPage generic() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		AdminDashboardPage adminDashboardPage = (AdminDashboardPage)loginPage.loginAsAdmin();
-		SupplierDashboardPage supplierDashboardPage = (SupplierDashboardPage)adminDashboardPage.impersonateSupplier();
-		TendersAndAlertsPage tendersAndAlertsPage = (TendersAndAlertsPage)supplierDashboardPage.goToTendersAndAlerts();
-		return tendersAndAlertsPage;
+
+	AdminDashboardPage adminDashboardPage;
+	TendersAndAlertsPage tendersAndAlertsPage;
+	@BeforeClass(alwaysRun = true)
+	public void beforeTenderQuote() throws Throwable {
+		adminDashboardPage=new LoginPage().loginAsAdmin();
 	}
-	@Test
-	public void QT_RAQ_TC_003() throws Throwable
+
+	@Test(description = "Impersonate as supplier by entering username in username field and click on Impersonate")
+	public void verifyImpersonateToSupplier() throws Throwable
 	{
-		TendersAndAlertsPage t = generic();
-		t.validateQuoteRequestStatusDropdownPresence();
+		tendersAndAlertsPage=adminDashboardPage.impersonateSupplier()
+				.goToTendersAndAlerts();
+		tendersAndAlertsPage.verifySupplierSummaryTableExists();
 	}
-	@Test
-	public void QT_RAQ_TC_004() throws Throwable
+	@Test(description = "Click on Tenders and Alerts and verify presence of Filters",dependsOnMethods ="verifyImpersonateToSupplier")
+	public void verifyPresenceOfFilters() throws Throwable
 	{
-		TendersAndAlertsPage t = generic();
-		t.validatingPresenceOfUtilities();
+		tendersAndAlertsPage
+				.verifyPresenceOfFilters()
+				.verifyQuoteStatusDropdownExist();
 	}
-	@Test
-	public void QT_RAQ_TC_005() throws Throwable
+	@Test(description = "Click on Tenders and Alerts and verify presence of Utilities")
+	public void verifyPresenceOfUtils() throws Throwable
 	{
-		TendersAndAlertsPage t = generic();
-		t.validateQuoteRequestStatusDropdown();	
+		tendersAndAlertsPage
+				.verifyPresenceOfFilters();
 	}
+
+	@Test(description = "Verify Quote status dropdown has In Progress, Accepted and Expired as predefined inputs")
+	public void verifyQuoteRequestStatusDropDown() throws Throwable
+	{
+		tendersAndAlertsPage
+				.validateQuoteRequestStatusDropdown();
+	}
+
 	
 	/*public void QT_RAQ_TC_019() throws Throwable
 	{

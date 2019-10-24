@@ -356,6 +356,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	}
     	else
     		System.out.println("All the items are Not selected"+notSelected);
+
     }
 }
 
