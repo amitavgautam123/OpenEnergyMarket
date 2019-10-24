@@ -11,6 +11,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
 
 	By saveBtn = By.id("submit");
 	By saveSuccessMsg = By.id("global-message-text");
+	By okBtn = By.xpath("//a[text() = 'Ok']");
     By companyName=By.id("Name");
     By companyRegisteredAddress=By.id("RegisteredAddress");
     By compPostCode=By.id("Postcode");
@@ -89,11 +90,16 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     	return this;
     }
-    public CompanyProfilePage verifyRegisteredAddressErrorSpaceTestData() {
+    public CompanyProfilePage verifyRegisteredAddressErrorSpaceTestData() throws Throwable {
     	setValue(companyRegisteredAddress, "       ");
         click(saveBtn);
         boolean regdAddrErrorDisplayStatus = isElementPresent(registeredAddressBlankError);
+        Thread.sleep(2000);
+        if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
         Assert.assertTrue(regdAddrErrorDisplayStatus, "Registered address is not displaying any error after entering 'space' as test data.");
+        
         return this;
     }
 
@@ -122,36 +128,48 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
     	return this;
     }
-    public CompanyProfilePage verifyPostcodeWithSpaceTestData() {
+    public CompanyProfilePage verifyPostcodeWithSpaceTestData() throws Throwable {
     	
     	setValue(compPostCode, "    ");
         click(saveBtn);
         boolean postCodeErrorDisplayStatus = isElementPresent(postCodeError);
-    	Assert.assertTrue(postCodeErrorDisplayStatus, "Error message for postcode field is not displaying on entering space test data");
+        Thread.sleep(2000);
+        if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
+        Assert.assertTrue(postCodeErrorDisplayStatus, "Error message for postcode field is not displaying on entering space test data");
     	return this;
     }
     
-    public CompanyProfilePage validatePostcodeSpecialSymbolTest() {
+    public CompanyProfilePage validatePostcodeSpecialSymbolTest() throws Throwable {
     	setValue(compPostCode, "%<>#");
         click(saveBtn);
         String ariaInvalidAttributeStatus = getAttribute(compPostCode, "aria-invalid");
         System.out.println("Aria-invalid status: " + ariaInvalidAttributeStatus);
         Reporter.log("Checked if error message for invalid postcode is displaying", true);
         boolean errorMsgDisplayStatus = ariaInvalidAttributeStatus.equals("true");
+        Thread.sleep(2000);
+        if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
         Assert.assertTrue(errorMsgDisplayStatus, "Invalid postcode error is not displaying.");
         return this;
     }
     
-    public CompanyProfilePage validatePostcodeNumericDataTest() {
+    public CompanyProfilePage validatePostcodeNumericDataTest() throws Throwable {
     	setValue(compPostCode, "8923443");
     	String postcodeValueAtrributeValue = getAttribute(compPostCode, "value");
     	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
     	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
+    	Thread.sleep(2000);
+    	if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
     	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
     	return this;
     }
     
-    public CompanyProfilePage validateIfPhoneFieldMandatory() {
+    public CompanyProfilePage validateIfPhoneFieldMandatory() throws Throwable {
     	setValue(phone, "");
     	Reporter.log("Entered blank data in phone field", true);
     	click(saveBtn);
@@ -163,11 +181,15 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Reporter.log("Strored the value of the aria-invalid attribute in a string variable", true);
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
+    	Thread.sleep(2000);
+    	if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
     	Assert.assertFalse(phoneErrorMsgDisplayStatus, "Error message for phone field is displaying even if it is not mandatory");
     	return this;
     }
     
-    public CompanyProfilePage validatePhoneFieldAlphabeticTestData() {
+    public CompanyProfilePage validatePhoneFieldAlphabeticTestData() throws Throwable {
     	setValue(phone, "Lorem Ipsum");
     	Reporter.log("Entered alphabetic data in phone field", true);
     	click(saveBtn);
@@ -177,69 +199,82 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	}
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
+    	Thread.sleep(2000);
+    	if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
     	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after alphabetic data in it");
     	return this;
     }
     
-    public void validatePhoneFieldNumericTestData() {
+    public CompanyProfilePage validatePhoneFieldNumericTestData() {
     	setValue(phone, "9872391239");
     	Reporter.log("Entered alphabetic data in phone field", true);
     	String enteredValue = getAttribute(phone, "value");
     	boolean enteredValueDisplaystatus = enteredValue.equals("9872391239");
     	Reporter.log("Checked if the value entered is displaying in 'phone' field", true);
     	Assert.assertTrue(enteredValueDisplaystatus, "The entered value is not displaying in phone field");
+    	return this;
     }
     
-    public void verifyCompRegistrationNumberError(String value) {
+    public CompanyProfilePage verifyCompRegistrationNumberError(String value) {
     	setValue(companyRegNum, "");
         click(saveBtn);
-    	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
+        Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
+    	return this;
     }
     
-    public void verifyLOATemplateDisplay(String value)
+    public CompanyProfilePage verifyLOATemplateDisplay(String value)
     {
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(loaTemplate)) &&
                 getText(loaTemplate).trim().contains(value),"Letter of Authority Template"+getText(loaTemplate) +" but expected:"+value);
+    	return this;
     }
-    public void verifyExistingLOADisplay(String value)
+    public CompanyProfilePage verifyExistingLOADisplay(String value)
     {
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(existingLOA)) &&
                 getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);
+    	return this;
     }
-    public void verifyDatePickerDisplayLOAExpiresDate()
+    public CompanyProfilePage verifyDatePickerDisplayLOAExpiresDate()
     {   
     	click(LOAExpiresDate);
         isElementPresent(LOAExpiresDateDatePicker);
     	Assert.assertEquals(isElementPresent(LOAExpiresDateDatePicker), true);	
+    	return this;
     }
-    public void validateLOAExpiresDateSelectFutureDateTest() {
+    public CompanyProfilePage validateLOAExpiresDateSelectFutureDateTest() {
     	click(LOAExpiresDate);
 		selectFutureDateCalender(27, 10, 2021);
 		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2021");
 		Assert.assertTrue(dateSelectionStatus, "Unable to select future date.");
+		return this;
     }
-    public void validateLOAPreviousDateSelectPreviousDateTest() { 	
+    public CompanyProfilePage validateLOAPreviousDateSelectPreviousDateTest() { 	
     	click(LOAExpiresDate);
     	selectPrevDateCalender(12, 5, 2017);
 		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2017");
 		System.out.println("Value attr = " + getAttribute(LOAExpiresDate, "value"));
 		Assert.assertTrue(dateSelectionStatus, "Unable to select previous date.");
+		return this;
     }
-    public void uploadLogo()
+    public CompanyProfilePage uploadLogo()
     {   
     	setValue(CompanyLogo, "C:\\Users\\sowjanya\\Desktop\\Bank.jpg");
     	click(saveBtn);
     	boolean status = isElementPresent(saveSuccessMsg);
         Assert.assertEquals(true, status);
+        return this;
     }
-    public void validateOptionsSupplierInvoiceTo()
+    public CompanyProfilePage validateOptionsSupplierInvoiceTo()
     {
     	boolean status = isElementExistInDropDown(supplierInvoicingTo, "Individual Sites") &&
     			isElementExistInDropDown(supplierInvoicingTo, "Head Office");
     	Assert.assertTrue(status, "Dropdown options are not displaying in Supplier Invoice To");
+    	return this;
     }
-    public void validateOptionsPrefferedSupplierPayment()
+    public CompanyProfilePage validateOptionsPrefferedSupplierPayment()
     {
     	boolean status = isElementExistInDropDown(preferredSupplierPayment, "Direct Debit") &&
     			isElementExistInDropDown(preferredSupplierPayment, "Chaps") &&
@@ -247,15 +282,17 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     			isElementExistInDropDown(preferredSupplierPayment, "24 Day BACs") &&
     			isElementExistInDropDown(preferredSupplierPayment, "30 Day BACs");
     	Assert.assertTrue(status, "Dropdown options are not displaying in Preferred Supplier Payment");
+    	return this;
     }
-    public void validateMandatoryPrefferedSupplierPayment()
+    public CompanyProfilePage validateMandatoryPrefferedSupplierPayment()
     {	
     	selectByVisibleText(preferredSupplierPayment,"Please select");
     	click(saveBtn);
     	Assert.assertTrue(getText(preferredSupplierPaymentError).equals("Preferred supplier payment field is required"), 
     			"Error message for Preferred Supplier Payment is not displaying");
+    	return this;
     }
-    public void validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
+    public CompanyProfilePage validateProfileDiffDataSets(String compName, String addr, String postCode, String ph, String regdNo) throws InterruptedException
     {
     	SoftAssert softAssertion = new SoftAssert();
     	setValue(companyName, compName);
@@ -283,7 +320,12 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         Thread.sleep(2000);
         softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn�t appear after saving profile data.");
         Reporter.log("Checked if the save success popup is displaying", true);
+        Thread.sleep(2000);
+        if(isElementPresent(okBtn)) {
+        	click(okBtn);
+        }
         softAssertion.assertAll();
+        return this;
     }
     
     
