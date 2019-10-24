@@ -12,7 +12,6 @@ public class AdminDashboardPage extends HeaderPage {
     By tenderOpenQuotes=By.linkText("Tender Open Quotes");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
     By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
-    
 
 
 
@@ -42,6 +41,7 @@ public class AdminDashboardPage extends HeaderPage {
         verifyTendersPage.isLoaded();
         return new VerifyTendersPage();
     }
+
 
 
     @Override

@@ -14,7 +14,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	By nhhUtilityFilter = By.xpath("//div[@data-original-title = '<strong>Non Half Hourly Electricity</strong>']");
 	By gasUtilityFilter = By.xpath("//div[@data-original-title = '<strong>Gas</strong>']");
 	By waterUtilityFilter = By.xpath("//div[@data-original-title = '<strong>Water</strong>']");
-	
+	By supplierSummaryTable=By.id("tender-summary-div");
 	
 	By submitPricesBtnFirstRecord = By.xpath("//table[@id='accept-decline-table']/tbody/tr[1]/td[9]/a");
 	
@@ -25,12 +25,13 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
         Assert.assertTrue(isElementPresent(tendersAndAlertsLink),"Supplier Dashboard Page didnt appear");
         
     }
-	public void validateQuoteRequestStatusDropdownPresence() {
+	public TendersAndAlertsPage verifyQuoteStatusDropdownExist() {
 		boolean quoteRequestStatusDropdownPresenceStatus = isElementPresent(quoteRequestStatusDropdown);
 		Reporter.log("Checked if Quote Request status dropdown is displaying.", 3, true);
 		Assert.assertTrue(quoteRequestStatusDropdownPresenceStatus, "Quote Request status dropdown is not displaying.");
+		return this;
 	}
-	public void validateQuoteRequestStatusDropdown()	{
+	public TendersAndAlertsPage validateQuoteRequestStatusDropdown()	{
 		SoftAssert softAssertion = new SoftAssert();
 		boolean inProgressOptionPresenceStatus = isElementExistInDropDown(quoteRequestStatusDropdown, "In Progress");
 		Reporter.log("Checked if 'In Progress' option is present in the dropdown", 3, true);
@@ -42,8 +43,9 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Reporter.log("Checked if 'Expired' option is present in the dropdown", 3, true);
 		softAssertion.assertTrue(expiredOptionPresenceStatus, "Expired option is not present in the dropdown");
 		softAssertion.assertAll();
+		return this;
 	}
-	public void validatingPresenceOfUtilities(){
+	public TendersAndAlertsPage verifyPresenceOfFilters(){
 		SoftAssert softAssertion = new SoftAssert();
 		boolean hhFilterPresenceStatus = isElementPresent(hhUtilityFilter);
 		Reporter.log("Checked if HH utility filter is displaying", 3, true);
@@ -61,6 +63,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Reporter.log("Checked if All utilities filter is displaying", 3, true);
 		softAssertion.assertTrue(allUtilitiesFilterPresenceStatus, "All Utility filter is not displaying");		
 		softAssertion.assertAll();
+		return this;
 	}
 	/*public void validateSubmitPricePage() {
 		selectByVisibleText(quoteRequestStatusDropdown, "In Progress");
@@ -69,4 +72,10 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Reporter.log("Clicked on In Progress button", true);
 		
 	}*/
+
+	public SupplierDashboardPage verifySupplierSummaryTableExists(){
+		Assert.assertTrue(isElementPresent(supplierSummaryTable),"Supplier Summary table is not shown after impersonating");
+		return this;
+	}
+
 }
