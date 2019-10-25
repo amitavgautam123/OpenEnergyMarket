@@ -16,12 +16,11 @@ public class SupplierDashboardPage extends BasePage {
         tendersAndAlertsPage.isLoaded();
         return tendersAndAlertsPage;
     }
-	public SupplierDashboardPage goToReviewQuotes(){
-        click(reviewQuotes);
-        ReviewQuotesPage reviewQuotesPage=new ReviewQuotesPage();
-        reviewQuotesPage.isLoaded();
-        return reviewQuotesPage;
-    }
+	/*
+	 * public SupplierDashboardPage goToReviewQuotes(){ click(reviewQuotes);
+	 * ReviewQuotesPage reviewQuotesPage=new ReviewQuotesPage();
+	 * reviewQuotesPage.isLoaded(); return reviewQuotesPage; }
+	 */
 	
 	
 	@Override

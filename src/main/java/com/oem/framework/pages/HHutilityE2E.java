@@ -2339,10 +2339,15 @@ public class HHutilityE2E extends CustomerDashboardPage {
 		boolean supplier4PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), fourthSelectedSupplierName);
 		boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus && supplier3PresenceStatus && supplier4PresenceStatus;
 		softAssertion.assertTrue(allSuppliersDisplayStatus, "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006
-		boolean allCheckBoxSuppliersListEnabledStatus = checkboxListEnabledStatus(checkboxAllSupplierList(companyName));
-		softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, "All checkbox for the suppliers are not enabled in suppliers list for the quote.");//VT_TC_009
-		boolean allCheckBoxMatrixPriceListEnabledStatus = checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
-		softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
+		/*
+		 * boolean allCheckBoxSuppliersListEnabledStatus =
+		 * checkboxListEnabledStatus(checkboxAllSupplierList(companyName));
+		 * softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus,
+		 * "All checkbox for the suppliers are not enabled in suppliers list for the quote."
+		 * );//VT_TC_009 boolean allCheckBoxMatrixPriceListEnabledStatus =
+		 * checkboxListEnabledStatus(checkboxMatrixPriceList(companyName));
+		 */
+		//softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote.");//VT_TC_012
 		//block supplier
 		click(checkboxSupplier(companyName, secondSelectedSupplierName));
 		JavascriptExecutor jse = (JavascriptExecutor)driver;

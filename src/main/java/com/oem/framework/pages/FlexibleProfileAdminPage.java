@@ -53,7 +53,10 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 	By tpd = By.id("volumeInputUnit");
 	By percent = By.id("volumeInputPercent");
 	By volumetext = By.className("tradeVolumeUnit");
+	By totalValue=By.id("totalValue");
 	By save = By.xpath("//button[contains(text(),'Save')]");
+	By successAlertMessage=By.xpath("//div[@class='vex-dialog-message']");
+	By okButtonOfAlertMessage=By.xpath("//button[text()='OK']");
 
 	public void verifyThePresenceOfAllCustomers(/* String CustomerName */) {
 		/*
@@ -350,7 +353,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 		for (int i = 1; i <= NoOfRows; i++) {
 			Thread.sleep(2000);
 			boolean volumeEnabled1 = driver
-					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]//span")).isEnabled();
+					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]//input")).isEnabled();
 			System.out.println("Enability" + volumeEnabled1);
 			driver.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td//button[text()='Edit']"))
 					.click();
@@ -364,7 +367,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 					.click();
 			Thread.sleep(3000);
 			boolean volumeEnabled = driver
-					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]/span")).isEnabled();
+					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]/input")).isEnabled();
 			System.out.println("Enability" + volumeEnabled);
 			Assert.assertFalse(volumeEnabled, "Volume is Enabled after Clicking cancel Button");
 
@@ -394,7 +397,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 					.click();
 			Thread.sleep(3000);
 			boolean volumeEnabled = driver
-					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]/span")).isEnabled();
+					.findElement(By.xpath("//table[@class='table']//tbody//tr[" + i + "]//td[3]/input")).isEnabled();
 			System.out.println("Enability" + volumeEnabled);
 			Assert.assertFalse(volumeEnabled, "Volume is Enabled after Clicking cancel Button");
 
@@ -435,7 +438,7 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 					"Volume Data is Not Changed after Entering Valid Data and clicking Save button.");
 
 		}
-	
+		
 	}
 
 	public void verify_Recient_Clicked_EditButton_Willbe_ShownItsActions() throws Throwable {
@@ -547,9 +550,96 @@ public class FlexibleProfileAdminPage extends AdminDashboardPage {
 			Assert.assertTrue(tdpPresence, "TDP Button Is Not Present");
 			
 			driver.navigate().back();
+			Thread.sleep(3000);
 			click(trading);
+			Thread.sleep(2000);
 			Thread.sleep(2000);
 
 		}
+	}
+	public void verify_TotalValue_AfterEnteringUnitPrice_RequiredVolume() throws Throwable {
+		selectingCustomerAndManageProfile();
+
+		click(trading);
+		Thread.sleep(3000);
+		By firsttrade=By.xpath("//table[@id='trading-table']//tbody//tr[1]//td[8]");
+		click(firsttrade);
+		String UnitPrice=readExcelData("Sheet4",1,1);
+		String ReqVolume=readExcelData("Sheet4",1,2);
+		setValue(unitPrice,UnitPrice);
+		setValue(volumetext,ReqVolume);
+		click(totalValue);
+		Thread.sleep(3000);
+		click(okButtonOfAlertMessage);
+		Thread.sleep(3000);
+		String TotalValue=getText(totalValue);
+		String ExpectedTotalValue=readExcelData("Sheet4",1,3);
+		System.out.println(TotalValue+" "+ExpectedTotalValue);
+		boolean result=ExpectedTotalValue.contentEquals(TotalValue);
+		Assert.assertTrue(result, "ExpectedTotal And Actual Total are Different");
+			
+		
+		
+	}
+	public void verify_AlertMessage_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton() throws Throwable {
+		selectingCustomerAndManageProfile();
+
+		click(trading);
+		Thread.sleep(3000);
+		By firsttrade=By.xpath("//table[@id='trading-table']//tbody//tr[1]//td[8]");
+		click(firsttrade);
+		String UnitPrice=readExcelData("Sheet4",1,1);
+		String ReqVolume=readExcelData("Sheet4",1,2);
+		setValue(unitPrice,UnitPrice);
+		setValue(volumetext,ReqVolume);
+		click(save);
+		Thread.sleep(3000);
+		click(okButtonOfAlertMessage);
+		Thread.sleep(3000);
+		Thread.sleep(3000);
+		click(save);
+		Thread.sleep(3000);
+		
+		String successAlertMessageActual=getText(successAlertMessage);
+		String AlertMewssageExpected="success";
+		Assert.assertTrue(successAlertMessageActual.contains(AlertMewssageExpected), "Not Saved Successfully Afetr Entering ");
+		
+	}
+	public void verify_DeleteButton_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton() throws Throwable {
+		selectingCustomerAndManageProfile();
+
+		click(trading);
+		Thread.sleep(3000);
+		By firsttrade=By.xpath("//table[@id='trading-table']//tbody//tr[1]//td[8]");
+		click(firsttrade);
+		String UnitPrice=readExcelData("Sheet4",1,1);
+		String ReqVolume=readExcelData("Sheet4",1,2);
+		setValue(unitPrice,UnitPrice);
+		setValue(volumetext,ReqVolume);
+		click(save);
+		Thread.sleep(3000);
+		click(okButtonOfAlertMessage);
+		Thread.sleep(3000);
+		Thread.sleep(3000);
+		click(save);
+		click(okButtonOfAlertMessage);
+		Thread.sleep(6000);
+		
+		int NoOfRows=driver.findElements(By.xpath("//tbody//tr")).size();
+		
+		System.out.println("No Of Rows Are :"+NoOfRows);
+	FirstLoop:	for(int i=1;i<=NoOfRows;i++){
+			String UnitCostText=driver.findElement(By.xpath("//tbody//tr["+i+"]//td[3]")).getText();
+			System.out.println("Unit Price At "+i+".Row Is"+UnitCostText);
+			
+			String TradeVolumeText=driver.findElement(By.xpath("//tbody//tr[1]//td[5]")).getText();
+			System.out.println("Trade Volume At "+i+".Row Is"+TradeVolumeText);
+			if((UnitCostText.contains(UnitPrice))&(TradeVolumeText.contains(ReqVolume))){
+				String DeleteTextActual=driver.findElement(By.xpath("//tbody//tr["+i+"]//td[7]//button[1]")).getText();
+				Assert.assertTrue(DeleteTextActual.contains("Delete"), "Delete Button Is Not Present ");
+				break FirstLoop;
+			}
+		}
+		
 	}
 }

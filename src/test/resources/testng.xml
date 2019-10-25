@@ -11,6 +11,7 @@
   			<package name="com.oem.QuotesAndTenders"/>
             <package name="com.oem.PortfolioManager"/>
             <package name="com.oem.suppliers"/>	
+            <package name="com.oem.flexManagement"/>	
         </packages>
     </test>
 </suite>

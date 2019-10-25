@@ -12,7 +12,7 @@ public class FlexProfileManagerTest extends BaseTest {
 	
 	
 
-	@Test()
+	@Test(priority=0)
 	public void FlexProcurementFlexibleProfileManager_verifySubModulesPresenceInFlexmanagement() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
@@ -23,7 +23,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		
 	}
 
-	@Test()
+	@Test(priority=1)
 	public void FlexProcurementFlexibleProfileManager_verifyFlexibleProfileManager_HomePage() throws Throwable {
 		LoginPage loginPage = new LoginPage();
 		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage.login();
@@ -32,7 +32,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyFlexibleProfileManager_HomePage();
 	}
 
-	@Test
+	@Test(priority=2)
 	public void FlexProcurementFlexibleProfileManager_verifyPresenceOf3Utilitys_in_flexProfileMgrHomePage()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -42,7 +42,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyPresenceOf3Utilitys_in_flexProfileMgrHomePage();
 	}
 
-	@Test
+	@Test(priority=3)
 	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -52,7 +52,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage("HH");
 	}
 
-	@Test
+	@Test(priority=6)
 	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -62,7 +62,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test
+ @Test(priority=7)
 	public void FlexProcurementFlexibleProfileManager_verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -72,7 +72,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyingPresenceOfListQuestions_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test
+	@Test(priority=9)
 	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreation_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -82,7 +82,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		flexProfileManagerPage.verifyingProfileCreation_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test
+	@Test(priority=7)
 	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -93,7 +93,7 @@ public class FlexProfileManagerTest extends BaseTest {
 				.verifyingProfileCreationAndSelectingEditFlexibleProfile_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test//this is not working
+	@Test(priority=8)
 	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -104,7 +104,7 @@ public class FlexProfileManagerTest extends BaseTest {
 				.verifyingProfileCreationAndSelectingReturnToFlexibleProfileManager_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test
+	@Test(priority=4)
 	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();
@@ -115,7 +115,7 @@ public class FlexProfileManagerTest extends BaseTest {
 				.verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage("HH");
 	}
 
-	@Test
+	@Test(priority=5)
 	public void FlexProcurementFlexibleProfileManager_verifyCustomerDashBoardHomePageAfterClickingCancelFlexibleProfileSetUp_In_FlexibleProfileMgrHomePage_HH()
 			throws Throwable {
 		LoginPage loginPage = new LoginPage();

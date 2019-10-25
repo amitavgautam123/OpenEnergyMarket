@@ -67,7 +67,7 @@ public class FlexibleProfileAdminTest extends BaseTest{
 		Thread.sleep(5000);
 		flexibleprofileAdmin.verify_Upadate_Accept_RejectOptions_ArePresent();
 	}
-	//@Test//need to work on this
+	@Test//need to work on this
 	public void TC_FMP_09() throws Throwable{
 		LoginPage loginPage = new LoginPage();
 		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
@@ -76,7 +76,7 @@ public class FlexibleProfileAdminTest extends BaseTest{
 		Thread.sleep(5000);
 		flexibleprofileAdmin.verifying_presenceOfUpdateButton_AfetrClikingAcceptButton();
 	}
-	//@Test//need to work on this
+	@Test//need to work on this
 	public void TC_FMP_08() throws Throwable{
 		LoginPage loginPage = new LoginPage();
 		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
@@ -160,5 +160,26 @@ public class FlexibleProfileAdminTest extends BaseTest{
 		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
 		FlexibleProfileAdminPage flexibleprofileAdmin= (FlexibleProfileAdminPage)admindashborad.goToflexProfileAdmin();
 		flexibleprofileAdmin.verify_HomePageIfTrad_AfetrClicking_TradLinkInTradingHomePage();
+	}
+	@Test
+	public void TC_FMP_61_verify_TotalValue_AfterEnteringUnitPrice_RequiredVolume() throws Throwable{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
+		FlexibleProfileAdminPage flexibleprofileAdmin= (FlexibleProfileAdminPage)admindashborad.goToflexProfileAdmin();
+		flexibleprofileAdmin.verify_TotalValue_AfterEnteringUnitPrice_RequiredVolume();
+	}
+	@Test
+	public void TC_FMP_62_verify_AlertMessage_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton() throws Throwable{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
+		FlexibleProfileAdminPage flexibleprofileAdmin= (FlexibleProfileAdminPage)admindashborad.goToflexProfileAdmin();
+		flexibleprofileAdmin.verify_AlertMessage_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton();
+	}
+	@Test
+	public void TC_FMP_63_verify_DeleteButton_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton() throws Throwable{
+		LoginPage loginPage = new LoginPage();
+		AdminDashboardPage admindashborad=(AdminDashboardPage) loginPage.loginAsAdmin();
+		FlexibleProfileAdminPage flexibleprofileAdmin= (FlexibleProfileAdminPage)admindashborad.goToflexProfileAdmin();
+		flexibleprofileAdmin.verify_DeleteButton_AfterEnteringUnitPrice_RequiredVolume_andClickingSaveButton();
 	}
 }

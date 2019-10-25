@@ -5,6 +5,7 @@ import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -99,7 +100,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
                 break;
             else if (i < 5) {
                 logger.info("searching element by scroll up");
-                ((JavascriptExecutor) driver).executeScript("scroll(0,-100)");
+                ((JavascriptExecutor) driver).executeScript("scroll(0,100)");
                 i++;
             } else if (i < 10) {
                 logger.info("searching element by scroll down");
@@ -270,6 +271,46 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	String data = cel.getStringCellValue();
     	return data;
     }
+    
+    public int readExcelIntData(String sheetNum, int rowNum, int cellNum) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/testscriptdata.xlsx");
+    	Workbook wb = WorkbookFactory.create(fObj);
+    	Sheet sh = wb.getSheet(sheetNum);
+    	Row row = sh.getRow(rowNum);
+    	Cell cel = row.getCell(cellNum);
+    	int data = (int) cel.getNumericCellValue();
+    	return data;
+    }
+    
+    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable
+	{
+		FileInputStream fis = new FileInputStream("./data/testScriptData.xlsx");
+		Workbook wb = WorkbookFactory.create(fis);
+		Sheet sh = wb.getSheet(sheetName);
+		Row row = sh.getRow(rowNum);
+		Cell cel = row.getCell(celNum);
+		cel.setCellValue(data);
+		FileOutputStream fos = new FileOutputStream("./data/testScriptData.xlsx");		
+		wb.write(fos);
+		wb.close();
+	}
+    public void setExcelIntData(String sheetName, int rowNum, int celNum, int data) throws Throwable
+   	{
+   		FileInputStream fis = new FileInputStream("./data/testScriptData.xlsx");
+   		Workbook wb = WorkbookFactory.create(fis);
+   		Sheet sh = wb.getSheet(sheetName);
+   		Row row = sh.getRow(rowNum);
+   		Cell cel = row.getCell(celNum);
+   		cel.setCellValue(data);
+   		FileOutputStream fos = new FileOutputStream("./data/testScriptData.xlsx");		
+   		wb.write(fos);
+   		wb.close();
+   	}
+    
+    
+    
+    
     /**
      * Used to check if the dropdown contains the value
      * @param locator of dropdown
@@ -310,22 +351,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	Actions actions = new Actions(driver);
     	actions.moveToElement((WebElement) locator).click().build().perform();
     }
-    /**
-     * Returns true if all the check box in the list is enabled.
-     * @param locator
-     */
-    public boolean checkboxListEnabledStatus(By locator) {
-	   	List<WebElement> allElements = driver.findElements(locator);
-	    boolean status = true;
-	   	for (WebElement element: allElements) {
-	        if(element.isEnabled()==false) 
-	            {
-	            	status = false;
-	            	break;
-	            }
-	        }
-	return status;
-	}
+    
     public void numberOfCheckListPresent(By locator){
     	List<WebElement> els = driver.findElements(locator);
     	int i=1;
