@@ -2,7 +2,6 @@ package com.oem.framework.pages;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import sun.jvm.hotspot.memory.HeapBlock;
 
 public class AdminDashboardPage extends HeaderPage {
 
@@ -10,6 +9,7 @@ public class AdminDashboardPage extends HeaderPage {
     By impersonateBtn=By.id("impersonateBtn");
     By fixedProcurementAdmin=By.xpath("//*[@id=\"accordian-menu\"]//h3[text()='Fixed Procurement Admin']");
     By tenderOpenQuotes=By.linkText("Tender Open Quotes");
+    By tenderResponseLnk=By.linkText("Tender Response");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
     By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
 
@@ -36,6 +36,11 @@ public class AdminDashboardPage extends HeaderPage {
     }
 
 
+    public TenderResponsePage navigateToTenderResponse() throws Throwable{
+        click(fixedProcurementAdmin);
+        click(tenderResponseLnk);
+        return new TenderResponsePage();
+    }
     public AdminDashboardPage goToVerifyTenders(){
         click(verifyTenders);
         VerifyTendersPage verifyTendersPage=new VerifyTendersPage();

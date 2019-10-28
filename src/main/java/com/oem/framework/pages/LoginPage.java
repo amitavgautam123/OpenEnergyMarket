@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
         return this;
     }
     
-    public CustomerDashboardPage login() throws Throwable  {
+    public CustomerDashboardPage login() throws Exception  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("email");
     	String PASSWORD = getPropertyFileData("password");
@@ -56,7 +56,7 @@ public class LoginPage extends BasePage {
     }
 
 
-    public AdminDashboardPage loginAsAdmin() throws Throwable  {
+    public AdminDashboardPage loginAsAdmin() throws Exception  {
     	String URL = getPropertyFileData("url");
     	String EMAIL = getPropertyFileData("adminEmail");
     	String PASSWORD = getPropertyFileData("adminPassword");

@@ -22,12 +22,10 @@ public class ExcelUtils {
     private Sheet dataSheet = null;
 
     public ExcelUtils(String xlsfile) throws Exception {
-        // TODO Auto-generated constructor stub
         this(xlsfile, 1);
     }
 
     public ExcelUtils(String xlsfile, String sheetName) throws Exception {
-        // TODO Auto-generated constructor stub
         InputStream inp = new FileInputStream(xlsfile);
         dataSheet = WorkbookFactory.create(inp).getSheet(sheetName);
 
@@ -42,7 +40,6 @@ public class ExcelUtils {
      * @throws IOException
      */
     public ExcelUtils(String xlsfile, int sheetNumber) throws Exception {
-        // TODO Auto-generated constructor stub
         InputStream inp = new FileInputStream(xlsfile);
         dataSheet = WorkbookFactory.create(inp).getSheetAt(sheetNumber - 1);
 

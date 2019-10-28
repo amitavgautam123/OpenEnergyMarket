@@ -7,7 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -100,13 +102,18 @@ public class DriverManager implements Base {
             throw new IOException("firefox.driver.path is not set");
 
         System.setProperty("webdriver.gecko.driver", Globals.getConfig("firefox.driver.path"));
+
+        FirefoxOptions options=new FirefoxOptions();
+        options.addArguments("--start-maximized");
+
         DesiredCapabilities capabilities=DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 
-        FirefoxDriver driver = new FirefoxDriver(capabilities);
+        options.merge(capabilities);
+        FirefoxDriver driver = new FirefoxDriver(options);
 
-
+        driver.manage().window().maximize();
 
         return driver;
     }
@@ -115,11 +122,13 @@ public class DriverManager implements Base {
     public static InternetExplorerDriver getIEDriver() throws IOException {
         if(StringUtils.isEmpty(Globals.getConfig("ie.driver.path")))
             throw new IOException("ie.driver.path is not set");
+        InternetExplorerOptions options=new InternetExplorerOptions();
 
         System.setProperty("webdriver.ie.driver", Globals.getConfig("ie.driver.path"));
 //        DesiredCapabilities capabilities=DesiredCapabilities.firefox();
 //        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         InternetExplorerDriver driver = new InternetExplorerDriver();
+        driver.manage().window().maximize();
         return driver;
     }
 }

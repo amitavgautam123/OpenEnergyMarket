@@ -250,7 +250,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
      * @return String
      * @throws Throwable
      */
-    public String getPropertyFileData(String key) throws Throwable
+    public String getPropertyFileData(String key) throws Exception
     {
     	FileInputStream fObj = new FileInputStream("./data/commonData.properties");
     	Properties pObj = new Properties();
@@ -266,7 +266,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
      * @return String
      * @throws Throwable
      */
-    public String readExcelData(String sheetNum, int rowNum, int cellNum) throws Throwable
+    public String readExcelData(String sheetNum, int rowNum, int cellNum) throws Exception
     {
     	FileInputStream fObj = new FileInputStream("./data/testscriptdata.xlsx");
     	Workbook wb = WorkbookFactory.create(fObj);
@@ -357,6 +357,15 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	else
     		System.out.println("All the items are Not selected"+notSelected);
 
+    }
+
+    public void scrollUp() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1000)");
+    }
+    public void scrollDown() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
     }
 }
 
