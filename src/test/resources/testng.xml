@@ -1,16 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="e2e Test Suite" verbose="5" configfailurepolicy="continue">
+    <parameter name="pdfngreport-properties" value="./pdfngreport.properties" />
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+        <listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
     </listeners>
 
     <test name="Automation tests">
         <packages>
-            <package name="com.oem.PortfolioManager"/>	
-            <package name="com.oem.QuotesAndTenders"/>	
-            <package name="com.oem.suppliers"/>	
+            <package name="com.oem.PortfolioManager"/>
+            <package name="com.oem.QuotesAndTenders"/>
+            <package name="com.oem.suppliers"/>
+
         </packages>
     </test>
 </suite>

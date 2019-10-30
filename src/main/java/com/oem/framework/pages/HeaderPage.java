@@ -7,7 +7,7 @@ import org.testng.Assert;
 public class HeaderPage extends BasePage {
 
     By logouLink=By.linkText("Log out");
-
+    By avatar=By.id("avatar");
 
 
 
@@ -17,9 +17,12 @@ public class HeaderPage extends BasePage {
     }
 
     public boolean isLoggedIn(){
-        return isElementPresent(logouLink,2);
+        if(isElementPresent(avatar,5))
+            mouseOver(avatar);
+        return isElementPresent(logouLink,1);
     }
     public void logout(){
+        mouseOver(avatar);
         click(logouLink);
     }
 }

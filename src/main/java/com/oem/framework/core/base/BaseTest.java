@@ -115,24 +115,27 @@ public abstract class BaseTest implements Base {
     }
 
     private void updateTestStatusInReport(ITestResult result) {
-        TestExecutionContext context=Globals.getCurrentThreadContext();
-        String screenshot=TestUtil.takeScreenshot(result.getName()+"-"+getCurrentTime(), context.getDriver());
+        try {
+            TestExecutionContext context = Globals.getCurrentThreadContext();
+            String screenshot = TestUtil.takeScreenshot(result.getName() + "-" + getCurrentTime(), context.getDriver());
 
-        if(result.getStatus() == ITestResult.FAILURE) {
-            getReportUtil().log(Status.FAIL, MarkupHelper.createLabel(result.getName()+" FAILED ", ExtentColor.RED));
-            getReportUtil().fail(result.getThrowable());
-            addScreenshotToReport(result, screenshot);
-        }
-        else if(result.getStatus() == ITestResult.SUCCESS) {
-            getReportUtil().log(Status.PASS, MarkupHelper.createLabel(result.getName()+" PASSED ", ExtentColor.GREEN));
-        }
-        else {
-            getReportUtil().log(Status.SKIP, MarkupHelper.createLabel(result.getName()+" SKIPPED ", ExtentColor.ORANGE));
-            getReportUtil().skip(result.getThrowable());
-        }
+            if (result.getStatus() == ITestResult.FAILURE) {
+                getReportUtil().log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED ", ExtentColor.RED));
+                getReportUtil().fail(result.getThrowable());
+                addScreenshotToReport(result, screenshot);
+            } else if (result.getStatus() == ITestResult.SUCCESS) {
+                getReportUtil().log(Status.PASS, MarkupHelper.createLabel(result.getName() + " PASSED ", ExtentColor.GREEN));
+            } else {
+                getReportUtil().log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " SKIPPED ", ExtentColor.ORANGE));
+                if(result.getThrowable()!=null)
+                    getReportUtil().skip(result.getThrowable());
+            }
 
-        ExtentManager.getInstance().flush();
-
+            ExtentManager.getInstance().flush();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

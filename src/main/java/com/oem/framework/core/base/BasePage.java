@@ -367,5 +367,18 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
     }
+
+    public void mouseOver(By locator){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(locator)).perform();
+
+    }
+    public void staticWait(int secs){
+        try {
+            Thread.sleep(secs*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

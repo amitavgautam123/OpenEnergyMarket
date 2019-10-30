@@ -60,6 +60,7 @@ public class TenderResponsePage extends BasePage {
     }
 
     public TenderResponsePage verifyPopUpDialogue(){
+        staticWait(1);
         Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
         return this;
     }
