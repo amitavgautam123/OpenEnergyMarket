@@ -77,4 +77,77 @@ public class TenderResponseTests extends BaseTest {
 
     }
 
+    @Test(description = "FPA_TOP_TC_011 - verify Alert appears when lowest duration is provided  ")
+    public void verifyAlertLowestDuration() throws Throwable {
+        adminDashboardPage
+                .navigateToTenderResponse()
+                .selectFirstValueInQuoteByDate()
+                .selectFirstValueQuoteRequest()
+                .verifyMeterForecastLinkExists()
+                .clickMeterForecastLink()
+                .setFirstDayConsumption("0")
+                .clickCalculateConsumptions()
+                .verifyPopUpDialogue();
+
+    }
+
+
+    @Test(description = "FPA_TOP_TC_012 - verify Alert appears when lowest duration is provided for Night Consumption ")
+    public void verifyAlertLowestDurationForNightConsumption() throws Throwable {
+        adminDashboardPage
+                .navigateToTenderResponse()
+                .selectFirstValueInQuoteByDate()
+                .selectFirstValueQuoteRequest()
+                .verifyMeterForecastLinkExists()
+                .clickMeterForecastLink()
+                .setFirstNightConsumption("0")
+                .clickCalculateConsumptions()
+                .verifyPopUpDialogue();
+
+    }
+
+    @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
+    public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
+        adminDashboardPage
+                .navigateToTenderResponse()
+                .selectFirstValueInQuoteByDate()
+                .selectFirstValueQuoteRequest()
+                .verifyMeterForecastLinkExists()
+                .clickMeterForecastLink()
+                .setFirstDayConsumption("abc")
+                .setFirstNightConsumption("def")
+                .clickCalculateConsumptions()
+                .verifyPopUpDialogue();
+
+    }
+
+    @Test(description = "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption ")
+    public void verifyAlertFoSplCharValuesForConsumption() throws Throwable {
+        adminDashboardPage
+                .navigateToTenderResponse()
+                .selectFirstValueInQuoteByDate()
+                .selectFirstValueQuoteRequest()
+                .verifyMeterForecastLinkExists()
+                .clickMeterForecastLink()
+                .setFirstDayConsumption("abc@#$%")
+                .setFirstNightConsumption("def")
+                .clickCalculateConsumptions()
+                .verifyPopUpDialogue();
+
+    }
+
+    @Test(description = "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption ")
+    public void verifyAlertFoSplCharValuesForNightConsumption() throws Throwable {
+        adminDashboardPage
+                .navigateToTenderResponse()
+                .selectFirstValueInQuoteByDate()
+                .selectFirstValueQuoteRequest()
+                .verifyMeterForecastLinkExists()
+                .clickMeterForecastLink()
+                .setFirstDayConsumption("def")
+                .setFirstNightConsumption("abc@#$%")
+                .clickCalculateConsumptions()
+                .verifyPopUpDialogue();
+
+    }
 }

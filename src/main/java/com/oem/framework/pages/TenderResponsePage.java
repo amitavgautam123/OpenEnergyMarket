@@ -13,6 +13,8 @@ public class TenderResponsePage extends BasePage {
     By downloadExcel=By.linkText("Download Excel");
     By calConsumptionsBtn=By.id("calculate-consumptions-button");
     By popUpDialogue=By.xpath("//form[@class='vex-dialog-form']");
+    By dayConsumption1=By.id("MeterForecasts_0__DayConsumption");
+    By nightConsumption1=By.id("MeterForecasts_0__NightConsumption");
 
     By quoteIdDropDown=By.id("QuoteId");
 
@@ -61,7 +63,19 @@ public class TenderResponsePage extends BasePage {
 
     public TenderResponsePage verifyPopUpDialogue(){
         staticWait(1);
+        driver.switchTo().alert();
         Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
+        driver.switchTo().alert().dismiss();
+        return this;
+    }
+
+    public TenderResponsePage setFirstDayConsumption(String value){
+        setValue(dayConsumption1,value);
+        return this;
+    }
+
+    public TenderResponsePage setFirstNightConsumption(String value){
+        setValue(nightConsumption1,value);
         return this;
     }
 }
