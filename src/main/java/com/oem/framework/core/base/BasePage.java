@@ -7,6 +7,7 @@ import com.oem.framework.core.TestExecutionContext;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -414,6 +415,17 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	JavascriptExecutor js = (JavascriptExecutor) driver;
     	js.executeScript("window.scrollBy(0,1000)");
     }
+    public String currentDate() {
+		LocalDate myObj1 = LocalDate.now(); 
+		Object d1 = myObj1;
+		String date = d1.toString();
+
+		int day = Integer.parseInt(date.substring(8, 10));
+		int month = Integer.parseInt(date.substring(5, 7));
+		int year = Integer.parseInt(date.substring(0, 4));
+		String currentDate = day + "/" + month + "/" + year;
+		return currentDate;
+	}
 
 }
 

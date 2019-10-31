@@ -2,6 +2,8 @@ package com.oem.framework.pages;
 
 import com.oem.framework.core.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 public class HeaderPage extends BasePage {
@@ -20,6 +22,10 @@ public class HeaderPage extends BasePage {
         return isElementPresent(logouLink,2);
     }
     public void logout(){
-        click(logouLink);
+    	Actions action = new Actions(driver);
+		WebElement accountSettingsBtn = driver
+				.findElement(By.xpath("//li[@id = 'help-icon']/preceding-sibling::li[1]"));
+		WebElement logoutBtn = driver.findElement(By.xpath("//a[text() = 'Log out']"));
+		action.moveToElement(accountSettingsBtn).moveToElement(logoutBtn).click().build().perform();
     }
 }

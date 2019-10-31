@@ -9,7 +9,7 @@
     <test name="Automation tests">
         <packages>
             <package name="com.oem.PortfolioManager"/>	
-            <package name="com.oem.Suits"/>	
+         
         </packages>
     </test>
 </suite>

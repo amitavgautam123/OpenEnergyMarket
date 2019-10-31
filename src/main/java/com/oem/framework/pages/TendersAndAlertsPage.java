@@ -19,6 +19,11 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	By submitPricesBtnFirstRecord = By.xpath("//table[@id='accept-decline-table']/tbody/tr[1]/td[9]/a");
 	
 	
+	public By submitPricesBtn(String companyName, String tenderDate) {
+		By submitPricesBtn = By.xpath("//tr[@class = 'tender-row']/td[text() = '" + currentDate() + "']/following-sibling::td[text() = '" + companyName + "']/following-sibling::td[@class = 'utility' and text() = 'HH']/following-sibling::td[@class = 'tender-date' and text() = '" + tenderDate + "']/following-sibling::td/a[@id = 'submit-prices-link']");
+		return submitPricesBtn;
+	}
+	
 	@Override
     protected void isLoaded() throws Error {
         System.out.println("Executing isLoaded in Supplier Dashboard Page");
@@ -77,5 +82,21 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Assert.assertTrue(isElementPresent(supplierSummaryTable),"Supplier Summary table is not shown after impersonating");
 		return this;
 	}
-
+	public SupplierDashboardPage verifyTenderPresenceAndSubmitPrice() throws Throwable {
+		String companyName = "Auto_Company_555";
+		String tenderDate = "12/11/2019";
+		
+		SoftAssert softAssertion = new SoftAssert();
+		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate));
+		softAssertion.assertTrue(tenderDisplayStatus, "Tender is not displaying in Supplier account after verifying in admin panel");
+		click(submitPricesBtn(companyName, tenderDate));
+		Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(2000);
+		boolean clientNameDisplayStatus = driver.findElement(By.xpath("//h1[text() = 'Submit Prices']/../following-sibling::div[1]/div[1]")).getText().contains("Client: "+companyName);
+		softAssertion.assertTrue(clientNameDisplayStatus, "Client name is not displaying in 'Submit Prices' page.");
+		boolean commodityDisplayStatus = driver.findElement(By.xpath("//h1[text() = 'Submit Prices']/../following-sibling::div[1]/div[2]")).getText().contains("Commodity: ElectricityHh");
+		softAssertion.assertTrue(commodityDisplayStatus, "Commodity is not displaying.");
+		return this;
+		
+	}
 }

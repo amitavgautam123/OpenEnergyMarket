@@ -881,7 +881,28 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean popupDisplayStatus = isElementPresent(addContractHistoryPopup);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
-	
+	public void addValidContractHistory() throws Throwable {
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Thread.sleep(2000);
+		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 20, 5));
+		selectByVisibleText(supplierProductDDwn, readExcelData("Sheet3", 20, 6));
+		setValue(dateTraded, readExcelData("Sheet3", 20, 2));
+		setValue(contractStartDate, readExcelData("Sheet3", 20, 3));
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 20, 4));
+		setValue(this.dayRate, readExcelData("Sheet3", 20, 7));
+		setValue(this.nightRate, readExcelData("Sheet3", 20, 8));
+		setValue(this.standingCharge, readExcelData("Sheet3", 20, 9));
+		setValue(this.capacityCharge, readExcelData("Sheet3", 20, 10));
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 20, 11));
+		
+		click(saveContractHistoryBtn);
+		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+		Thread.sleep(3000);
+		boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
+		click(okBtn);
+		Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
+	}
 	public void displayAddContractHistoryHHutilityPopup() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
@@ -889,6 +910,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(addHHcontractHistoryBtn(mpanNumber));
 		
 	}
+	
 	public void validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 	
