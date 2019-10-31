@@ -1,10 +1,12 @@
 package com.oem.PortfolioManager;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.oem.framework.core.base.BasePage;
 import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.AdminDashboardPage;
 import com.oem.framework.pages.CustomerDashboardPage;
@@ -17,9 +19,10 @@ public class PortfolioCalendarTest extends BaseTest{
 
     @BeforeClass(alwaysRun = true)
     public void beforePortfolioCalendar() throws Throwable {
-    	customerDashboardPage=new LoginPage().login();
+    	customerDashboardPage=new LoginPage().
+    				login().
+    					goToPortfolioCalendar();
     }
-	
 	@Test
 	public void PM_PC_TC_003_verifyPortfolioManagerElementExistsTest() throws Throwable {
 		customerDashboardPage.verifyPortfolioManagerElementExists();
@@ -27,62 +30,50 @@ public class PortfolioCalendarTest extends BaseTest{
 	@Test
 	public void PM_PC_TC_004_verifyPortfolioCalendarEntrypopupTest() throws Throwable {
 		customerDashboardPage.
-				goToPortfolioCalendar().
-						verifyPortfolioCalendarEntrypopup("Add new portfolio calendar entry");
+				clickPortfolioCalendar().
+						verifyPortfolioCalendarEntrypopup();
 	}
 	@Test 
 	public void PM_PC_TC_005_verifyCloseBtnPortfolioCalendarEntrypopupTest() throws Throwable {
-		customerDashboardPage
-			.goToPortfolioCalendar().
-				verifyCloseBtnPortfolioCalendarEntrypopup();
+		customerDashboardPage.
+			    clickPortfolioCalendar().
+					   verifyCloseBtnPortfolioCalendarEntrypopup();
 	}
 	@Test
 	public void PM_PC_TC_007_verifyDateInEventDateTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.verifyDateInEventDate();
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    verifyDateInEventDate();
 	}
 	@Test
 	public void PM_PC_TC_008_validateEventDescriptionPortfolioCaledarEntryPopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateEventDescriptionPortfolioCaledarEntryPopup("The Event Description * field is required.");
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateEventDescriptionPortfolioCaledarEntryPopup();
 	}
 	@Test
 	public void PM_PC_TC_009_validateDeleteEventPopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateDeleteEventPopup("Are you sure you want to delete this event?");
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateDeleteEventPopup();
 	}
 	@Test
 	public void PM_PC_TC_010_validateCancelBtnDeleteEventPopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateCancelBtnDeleteEventPopup();
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    	validateCancelBtnDeleteEventPopup();
 	}
 	@Test
 	public void PM_PC_TC_011_validateDeleteEventTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateDeleteEvent();
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateDeleteEvent();
 	}
 	@Test
 	public void PM_PC_TC_012_validateEditEventPopupTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateEditEventPopup("Edit portfolio calendar entry");
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateEditEventPopup("Edit portfolio calendar entry");
 	}
 	/*@Test
 	public void PM_PC_TC_013() throws Throwable {
@@ -94,35 +85,27 @@ public class PortfolioCalendarTest extends BaseTest{
 	}*/
 	@Test
 	public void PM_PC_TC_014_validateEditEventChangingDateTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateEditEventChangingDate();
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateEditEventChangingDate();
 	}
 	@Test
 	public void PM_PC_TC_015_validateEditEventChangingDescriptionTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateEditEventChangingDescription();
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateEditEventChangingDescription();
 	}
 	@Test
-	public void PM_PC_TC_016_validateErrMsgAfterEnteringDuplicateCalenderEventsTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateErrorMessageAfterEnteringDuplicateCalenderEvents();
+	public void PM_PC_TC_016_validateErrMsgEnteringDuplicateCalenderEventsTest() throws Throwable {
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateErrorMessageAfterEnteringDuplicateCalenderEvents();
 	}
 	@Test(dataProvider = "getData")
 	public void addCalendarEventUsingDataProviderTest(String description) throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		PortfolioCalendarPage portfolioCalendarPage = (PortfolioCalendarPage) customerDashboardPage.goToPortfolioCalendar();
-		portfolioCalendarPage.validateDescriptionWithDifferentTestDataPortfolioCaledarEntryPopup(description);
+		customerDashboardPage.
+	    clickPortfolioCalendar().
+	    validateDescriptionWithDifferentTestDataPortfolioCaledarEntryPopup(description);
 	}
 	@DataProvider
 	public Object[][] getData() {
@@ -131,9 +114,9 @@ public class PortfolioCalendarTest extends BaseTest{
 		data[1][0] = "";
 		data[2][0] = "123456";
 		data[3][0] = "!@#$%";
-		data[4][0] = "Lorem Ipsum123456";
+		data[4][0] = "       ";
 		data[5][0] = "</html>";
-		data[6][0] = "      ";
+		data[6][0] = "Lorem Ipsum123456";
 		return data;
 	}
 

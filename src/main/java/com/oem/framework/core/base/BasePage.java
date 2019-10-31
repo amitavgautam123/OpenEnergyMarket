@@ -5,6 +5,10 @@ import com.oem.framework.core.Globals;
 import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -65,7 +69,9 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(by);
         driver.findElement(by).click();
     }
-
+    public void refreshPage() {
+    	driver.navigate().refresh();
+    }
 
     public void waitForElementPresent(By locatn) {
        waitForElementPresent(locatn,DEFAULT_EXPLICIT_WAIT);
@@ -244,6 +250,14 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 			}
 		}
 	}
+    public String addDaysToCurrentDate(int addDSays){
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(new Date()); // Now use today date.
+    	c.add(Calendar.DATE, addDSays); // Adding  days
+    	String output = sdf.format(c.getTime());
+    	return output;
+    }
     /**
      * Get properties file key value based on your arguments
      * @param key
@@ -276,6 +290,40 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	String data = cel.getStringCellValue();
     	return data;
     }
+    public int readExcelIntData(String sheetNum, int rowNum, int cellNum) throws Throwable
+    {
+    	FileInputStream fObj = new FileInputStream("./data/testscriptdata.xlsx");
+    	Workbook wb = WorkbookFactory.create(fObj);
+    	Sheet sh = wb.getSheet(sheetNum);
+    	Row row = sh.getRow(rowNum);
+    	Cell cel = row.getCell(cellNum);
+    	int data = (int) cel.getNumericCellValue();
+    	return data;
+    }
+    public void setExcelIntData(String sheetName, int rowNum, int celNum, int data) throws Throwable
+   	{
+   		FileInputStream fis = new FileInputStream("./data/testscriptData.xlsx");
+   		Workbook wb = WorkbookFactory.create(fis);
+   		Sheet sh = wb.getSheet(sheetName);
+   		Row row = sh.getRow(rowNum);
+   		Cell cel = row.getCell(celNum);
+   		cel.setCellValue(data);
+   		FileOutputStream fos = new FileOutputStream("./data/testscriptData.xlsx");		
+   		wb.write(fos);
+   		wb.close();
+   	}
+    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable
+	{
+		FileInputStream fis = new FileInputStream("./data/testscriptData.xlsx");
+		Workbook wb = WorkbookFactory.create(fis);
+		Sheet sh = wb.getSheet(sheetName);
+		Row row = sh.getRow(rowNum);
+		Cell cel = row.getCell(celNum);
+		cel.setCellValue(data);
+		FileOutputStream fos = new FileOutputStream("./data/testscriptData.xlsx");		
+		wb.write(fos);
+		wb.close();
+	}
     /**
      * Used to check if the dropdown contains the value
      * @param locator of dropdown
@@ -358,5 +406,14 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     		System.out.println("All the items are Not selected"+notSelected);
 
     }
+    public void scrollUp() {
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("window.scrollBy(0,-1000)");
+    }
+    public void scrollDown() {
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("window.scrollBy(0,1000)");
+    }
+
 }
 

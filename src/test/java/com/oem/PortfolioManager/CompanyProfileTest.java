@@ -18,6 +18,7 @@ public class CompanyProfileTest extends BaseTest {
 	@BeforeClass(alwaysRun = true)
     public void beforeCompanyProfile() throws Throwable {
         customerDashboardPage=new LoginPage().login();
+        customerDashboardPage.goToCompanyProfile();
     }
 	
 	@Test
@@ -30,170 +31,166 @@ public class CompanyProfileTest extends BaseTest {
 	public void PM_CP_TC_004_verifyRegisteredAddressInputsTest() throws Throwable {
 
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyRegisteredAddressInputs();
 	}
 
 	@Test
-	public void PM_CP_TC_005_verifyRegisteredAddressErrorTest() throws Throwable {
+	public void PM_CP_TC_005_verifyRegisteredAddressExceedingMaxLengthErrorTest() throws Throwable {
 
 		customerDashboardPage.
-			goToCompanyProfile().
-				verifyRegisteredAddressError("The field Registered address must be a string with a maximum length of 200");
+			clickCompanyProfile().
+			verifyRegisteredAddressExceedingMaxLengthError("The field Registered address must be a string with a maximum length of 200");
 	}
 
 	@Test
 	public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyBlankRegisteredAddressError("Registered address field is required");
 	}
 	
 	@Test
-	public void PM_CP_TC_007_verifyCompanyNameErrorTest() throws Throwable {
+	public void PM_CP_TC_007_verifyCompanyNameBlankErrorTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyCompanyNameError("The Company name field is required.");
 	}
 	
 	@Test
 	public void PM_CP_TC_008_validateCompanyNameAlphabeticAcceptanceTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateCompanyNameAlphabeticAcceptance();
 	}
 
 	@Test
 	public void PM_CP_TC_009_verifyBlankPostcodeErrorTest() throws Throwable {
 		customerDashboardPage.
-				goToCompanyProfile().
+				clickCompanyProfile().
 					verifyBlankPostcodeError("Postcode field is required");
 	}
 	
 	@Test
 	public void PM_CP_TC_010_validatePostcodeSpecialSymbolTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validatePostcodeSpecialSymbolTest();
 	}
 	
 	@Test
 	public void PM_CP_TC_011_validatePostcodeNumericDataTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validatePostcodeNumericDataTest();
 	}
 	@Test
 	public void PM_CP_TC_012_validateIfPhoneFieldMandatoryTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateIfPhoneFieldMandatory();
 	}
 	@Test
 	public void PM_CP_TC_013_validatePhoneFieldAlphabeticTestData() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validatePhoneFieldAlphabeticTestData();
 	}
 	@Test
 	public void PM_CP_TC_014_validatePhoneFieldNumericTestData() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validatePhoneFieldNumericTestData();
 	}
 
 	@Test
 	public void PM_CP_TC_015_verifyCompRegistrationNumberErrorTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyCompRegistrationNumberError("Company registration number field is required");
 	}
 
-	//@Test
-	public void PM_CP_TC_018_uploadLogoTest() throws Throwable {
-		customerDashboardPage.
-			goToCompanyProfile().
-						uploadLogo();
-	}
+	/*
+	 * @Test public void PM_CP_TC_018_uploadLogoTest() throws Throwable {
+	 * customerDashboardPage. goToCompanyProfile(). uploadLogo(); }
+	 */
 
 	@Test
 	public void PM_CP_TC_019_validateOptionsSupplierInvoiceToTest() throws Throwable
 	{
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateOptionsSupplierInvoiceTo();
 	}
 	@Test
 	public void PM_CP_TC_021_validateOptionsPrefferedSupplierPaymentTest() throws Throwable
 	{
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateOptionsPrefferedSupplierPayment();
 	}
 	@Test
 	public void PM_CP_TC_022_validateMandatoryPrefferedSupplierPaymentTest() throws Throwable
 	{
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateMandatoryPrefferedSupplierPayment();
 	}
 
 	@Test
 	public void PM_CP_TC_026_verifyLOATemplateDisplayTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyLOATemplateDisplay("Letter of Authority Template");
 	}
 
 	@Test
-	public void PM_CP_TC_027_verifyExistingLOADisplayTest() throws Throwable {
+	public void PM_CP_TC_027_verifyExistingLOAdisplayTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyExistingLOADisplay("Download Existing Letter Of Authority");
 	}
 
 	@Test
 	public void PM_CP_TC_028_verifyDatePickerDisplayLOAExpiresDateTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyDatePickerDisplayLOAExpiresDate();
 	}
 
 	@Test
 	public void PM_CP_TC_029_LOAExpiresDateSelectFutureDateTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateLOAExpiresDateSelectFutureDateTest();
 	}
 
 	@Test
 	public void PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateLOAPreviousDateSelectPreviousDateTest();
 	}
 
 	@Test
 	public void PM_CP_TC_031_verifyRegisteredAddressErrorSpaceTestDataTest() throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				verifyRegisteredAddressErrorSpaceTestData();
 	}
 
 	@Test
 	public void PM_CP_TC_032_verifyPostcodeWithSpaceTestDataTest() throws Throwable {
-		LoginPage loginPage = new LoginPage();
-		CustomerDashboardPage customerDashboardPage = (CustomerDashboardPage) loginPage
-				.login();
-		CompanyProfilePage companyProfilePage = (CompanyProfilePage) customerDashboardPage.goToCompanyProfile();
-		companyProfilePage.verifyPostcodeWithSpaceTestData();
+		customerDashboardPage.
+			clickCompanyProfile().
+				verifyPostcodeWithSpaceTestData();
 	} 
 
 	@Test(dataProvider = "getData")
 	public void fillCompanyProfileWithDifferentDataTest(String compName, String addr, String postCode, String ph, String regdNo)
 			throws Throwable {
 		customerDashboardPage.
-			goToCompanyProfile().
+			clickCompanyProfile().
 				validateProfileDiffDataSets(compName, addr, postCode, ph, regdNo);
 	}
 

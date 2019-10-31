@@ -1,5 +1,7 @@
 package com.oem.framework.pages;
 
+import java.util.Random;
+
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -30,6 +32,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     By existingLOA = By.xpath("//strong[text() = 'Download Existing Letter Of Authority']");
     By LOAExpiresDate = By.id("LOAExpiresDate");
     By LOAExpiresDateDatePicker = By.id("ui-datepicker-div");
+    By serverError = By.xpath("//*[contains(text(), 'Server Error')]");
     
     public CompanyProfilePage fillCompanyProfile(){
         setValue(companyName,"abc");
@@ -64,18 +67,18 @@ public class CompanyProfilePage extends CustomerDashboardPage {
 
     }
     
-    public CompanyProfilePage verifyRegisteredAddressInputs()	{
-    	setValue(companyRegisteredAddress, "Domlur");
+    public CompanyProfilePage verifyRegisteredAddressInputs() throws Throwable	{
+    	setValue(companyRegisteredAddress, readExcelData("Sheet3", 2, 3));
     	Reporter.log("Entered value in registered address field", true);
     	String valueAttributevalue = getAttribute(companyRegisteredAddress, "value");
     	Reporter.log("Stored the value of value attribute in a string variable", true);
-        boolean inputDisplayStatus = valueAttributevalue.contains("Domlur");
+        boolean inputDisplayStatus = valueAttributevalue.contains(readExcelData("Sheet3", 2, 3));
         Reporter.log("Compared if the entered data is equal to the value of value attribute", true);
         Assert.assertTrue(inputDisplayStatus, "Registered address is not displaying the value we entered in the field");
         return this;
     }
     
-    public CompanyProfilePage verifyRegisteredAddressError(String value){
+    public CompanyProfilePage verifyRegisteredAddressExceedingMaxLengthError(String value){
     	setValue(companyRegisteredAddress, "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressError)) &&
@@ -104,7 +107,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
 
     public CompanyProfilePage verifyCompanyNameError(String value) {
-    	setValue(companyName, "");
+    	clearValue(companyName);
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
@@ -121,8 +124,8 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     }
     
     public CompanyProfilePage verifyBlankPostcodeError(String value) { 
-    	
-    	setValue(compPostCode, "");
+    	clearValue(compPostCode);
+    	//setValue(compPostCode, "");
         click(saveBtn);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(postCodeError)) &&
                 getText(postCodeError).trim().contains(value),"Postcode error actual value: "+getText(postCodeError) +" but expected:"+value);
@@ -144,33 +147,34 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     public CompanyProfilePage validatePostcodeSpecialSymbolTest() throws Throwable {
     	setValue(compPostCode, "%<>#");
         click(saveBtn);
-        String ariaInvalidAttributeStatus = getAttribute(compPostCode, "aria-invalid");
-        System.out.println("Aria-invalid status: " + ariaInvalidAttributeStatus);
-        Reporter.log("Checked if error message for invalid postcode is displaying", true);
-        boolean errorMsgDisplayStatus = ariaInvalidAttributeStatus.equals("true");
-        Thread.sleep(2000);
+        
+        String errorStatus = getAttribute(compPostCode, "aria-invalid");
+    	if(errorStatus == null) {
+    		errorStatus = "false";
+    	}
+    	Reporter.log("Strored the value of the aria-invalid attribute in a string variable", true);
+    	boolean postCodeErrorMsgDisplayStatus = errorStatus.equals("true");
+    	Reporter.log("Checked if error message for postcode field is displaying", true);
+        
+        Thread.sleep(1000);
         if(isElementPresent(okBtn)) {
         	click(okBtn);
         }
-        Assert.assertTrue(errorMsgDisplayStatus, "Invalid postcode error is not displaying.");
+        Assert.assertTrue(postCodeErrorMsgDisplayStatus, "Invalid postcode error is not displaying.");
         return this;
     }
     
     public CompanyProfilePage validatePostcodeNumericDataTest() throws Throwable {
-    	setValue(compPostCode, "8923443");
+    	setValue(compPostCode, readExcelData("Sheet3", 2, 4));
     	String postcodeValueAtrributeValue = getAttribute(compPostCode, "value");
-    	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals("8923443");
+    	boolean numericValueAcceptanceStatus = postcodeValueAtrributeValue.equals(readExcelData("Sheet3", 2, 4));
     	Reporter.log("Checked if the numeric data entered in postcode field is displaying", true);
-    	Thread.sleep(2000);
-    	if(isElementPresent(okBtn)) {
-        	click(okBtn);
-        }
     	Assert.assertTrue(numericValueAcceptanceStatus, "Numeric value is not geting accepted in postcodefield.");
     	return this;
     }
     
     public CompanyProfilePage validateIfPhoneFieldMandatory() throws Throwable {
-    	setValue(phone, "");
+    	clearValue(phone);
     	Reporter.log("Entered blank data in phone field", true);
     	click(saveBtn);
     	Reporter.log("Clicked save button", true);
@@ -203,23 +207,24 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	if(isElementPresent(okBtn)) {
         	click(okBtn);
         }
-    	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after alphabetic data in it");
+    	Assert.assertTrue(phoneErrorMsgDisplayStatus, "Error message for phone field is not displaying after entering alphabetic data.");
     	return this;
     }
     
-    public CompanyProfilePage validatePhoneFieldNumericTestData() {
-    	setValue(phone, "9872391239");
+    public CompanyProfilePage validatePhoneFieldNumericTestData() throws Throwable {
+    	setValue(phone, readExcelData("Sheet3", 2, 5));
     	Reporter.log("Entered alphabetic data in phone field", true);
     	String enteredValue = getAttribute(phone, "value");
-    	boolean enteredValueDisplaystatus = enteredValue.equals("9872391239");
+    	boolean enteredValueDisplaystatus = enteredValue.equals(readExcelData("Sheet3", 2, 5));
     	Reporter.log("Checked if the value entered is displaying in 'phone' field", true);
     	Assert.assertTrue(enteredValueDisplaystatus, "The entered value is not displaying in phone field");
     	return this;
     }
     
-    public CompanyProfilePage verifyCompRegistrationNumberError(String value) {
-    	setValue(companyRegNum, "");
+    public CompanyProfilePage verifyCompRegistrationNumberError(String value) throws Throwable {
+    	clearValue(companyRegNum);
         click(saveBtn);
+        Thread.sleep(1000);
         Assert.assertTrue(StringUtils.isNoneBlank(getText(companyRegNumError)) &&
                 getText(companyRegNumError).trim().contains(value),"Company Registration Number error actual value: "+getText(companyRegNumError) +" but expected:"+value);
     	return this;
@@ -237,24 +242,27 @@ public class CompanyProfilePage extends CustomerDashboardPage {
                 getText(existingLOA).trim().contains(value),"Download Existing Letter Of Authority"+getText(existingLOA) +" but expected:"+value);
     	return this;
     }
-    public CompanyProfilePage verifyDatePickerDisplayLOAExpiresDate()
+    public CompanyProfilePage verifyDatePickerDisplayLOAExpiresDate() throws Throwable
     {   
     	click(LOAExpiresDate);
+    	Thread.sleep(1000);
         isElementPresent(LOAExpiresDateDatePicker);
     	Assert.assertEquals(isElementPresent(LOAExpiresDateDatePicker), true);	
     	return this;
     }
-    public CompanyProfilePage validateLOAExpiresDateSelectFutureDateTest() {
+    public CompanyProfilePage validateLOAExpiresDateSelectFutureDateTest() throws Throwable {
     	click(LOAExpiresDate);
-		selectFutureDateCalender(27, 10, 2021);
-		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2021");
+    	Thread.sleep(1000);
+		selectFutureDateCalender(27, 10, 2020);
+		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("27/11/2020");
 		Assert.assertTrue(dateSelectionStatus, "Unable to select future date.");
 		return this;
     }
-    public CompanyProfilePage validateLOAPreviousDateSelectPreviousDateTest() { 	
+    public CompanyProfilePage validateLOAPreviousDateSelectPreviousDateTest() throws Throwable { 	
     	click(LOAExpiresDate);
-    	selectPrevDateCalender(12, 5, 2017);
-		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2017");
+    	Thread.sleep(1000);
+    	selectPrevDateCalender(12, 5, 2018);
+		boolean dateSelectionStatus = getAttribute(LOAExpiresDate, "value").contains("12/6/2018");
 		System.out.println("Value attr = " + getAttribute(LOAExpiresDate, "value"));
 		Assert.assertTrue(dateSelectionStatus, "Unable to select previous date.");
 		return this;
@@ -284,10 +292,11 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Assert.assertTrue(status, "Dropdown options are not displaying in Preferred Supplier Payment");
     	return this;
     }
-    public CompanyProfilePage validateMandatoryPrefferedSupplierPayment()
+    public CompanyProfilePage validateMandatoryPrefferedSupplierPayment() throws Throwable
     {	
     	selectByVisibleText(preferredSupplierPayment,"Please select");
     	click(saveBtn);
+    	Thread.sleep(1000);
     	Assert.assertTrue(getText(preferredSupplierPaymentError).equals("Preferred supplier payment field is required"), 
     			"Error message for Preferred Supplier Payment is not displaying");
     	return this;
@@ -318,6 +327,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
         Reporter.log("Clicked on save button", true);
         Thread.sleep(2000);
+        if(isElementPresent(serverError, 6)) {
+        	driver.navigate().back();
+        	softAssertion.assertTrue(false, "Server Error is displaying.");
+        }
         softAssertion.assertTrue(isElementPresent(saveSuccessMsg), "Save success message didn�t appear after saving profile data.");
         Reporter.log("Checked if the save success popup is displaying", true);
         Thread.sleep(2000);
@@ -327,7 +340,18 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         softAssertion.assertAll();
         return this;
     }
-    
+    public void fillCompanyProfileGeneric() throws Throwable {
+		String compName = "Auto_Company_555";
+		setValue(companyName, compName);
+    	setValue(companyRegisteredAddress, "Bangalore");
+        
+        setValue(compPostCode, "2983472");
+        setValue(phone, "8923472834");
+        setValue(companyRegNum, "8173812323");
+        click(saveBtn);
+        Thread.sleep(2000);
+        click(okBtn);
+	}
     
     
     public enum CompanyProfileFields

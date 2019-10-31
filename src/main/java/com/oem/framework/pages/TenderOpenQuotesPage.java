@@ -14,6 +14,11 @@ public class TenderOpenQuotesPage extends BasePage {
     By errText=By.xpath("//*[@id=\"supplier-quotes\"]/div/div/ul/li");
 
     By durationInMonths=By.id("QuoteDurationsToOpen_0__DurationInMonths");
+    By duration2ndField=By.id("QuoteDurationsToOpen_1__DurationInMonths");
+    By closeQuotesLink=By.linkText("Close");
+    By popUpDialogue=By.xpath("//form[@class='vex-dialog-form']");
+    By cancelBtn=By.xpath("//button[text()='Cancel']");
+    By okBtn=By.xpath("//button[text()='OK']");
 
     public TenderOpenQuotesPage verifyQuoteRequestDropDownExist(){
         Assert.assertTrue(isElementPresent(tenderQuoteDropDown),"verifyQuoteRequestDropDownExist didnt appear");
@@ -58,4 +63,29 @@ public class TenderOpenQuotesPage extends BasePage {
         setValue(durationInMonths,text);
         return this;
     }
+    public TenderOpenQuotesPage set2ndTenderDuration(String text){
+        setValue(duration2ndField,text);
+        return this;
+    }
+
+    public TenderOpenQuotesPage verifyPopUpDialogue(){
+        Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
+        return this;
+    }
+    public TenderOpenQuotesPage clickCancelInPopUp(){
+        click(cancelBtn);
+        return this;
+    }
+
+    public TenderOpenQuotesPage clickOkInPopUp(){
+        click(okBtn);
+        return this;
+    }
+
+    public TenderOpenQuotesPage clickCloseQuotesLink(){
+        scrollUp();
+        driver.findElements(closeQuotesLink).get(0).click();
+        return this;
+    }
+
 }
