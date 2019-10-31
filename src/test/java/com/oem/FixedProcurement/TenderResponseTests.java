@@ -6,6 +6,7 @@ import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.TenderOpenQuotesPage;
 import com.oem.framework.pages.TenderResponsePage;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
@@ -106,7 +107,9 @@ public class TenderResponseTests extends BaseTest {
 
     }
 
-    @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
+
+
+   /* @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
     public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
@@ -134,18 +137,32 @@ public class TenderResponseTests extends BaseTest {
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
-    }
+    }*/
 
-    @Test(description = "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption ")
-    public void verifyAlertFoSplCharValuesForNightConsumption() throws Throwable {
+    @DataProvider(name = "consumptionInput")
+    public static Object[][] credentials() {
+
+        return new Object[][] { { "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption", "abc","def" },
+                { "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
+                { "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption", "def","abc#$%!" },
+                { "FPA_TOP_TC_016 - verify Alert appears when SplCharts is provided for both", "@#$%","@#$%" },
+                { "FPA_TOP_TC_017 - verify Alert appears when SplCharts is provided for both", " ","@#$%" },
+                { "FPA_TOP_TC_018 - verify Alert appears when space is provided for both", " "," " },
+                { "FPA_TOP_TC_019 - verify Alert appears when SplCharts is provided for both", "@#$%"," " },
+                { "FPA_TOP_TC_020 - verify Alert appears when SplCharts is provided for both", "12345"," " }
+        };
+
+    }
+    @Test(dataProvider = "consumptionInput")
+    public void verifyAlertFoSplCharValuesForNightConsumption(String desc,String dayConsumption, String nightConsumption) throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstDayConsumption("def")
-                .setFirstNightConsumption("abc@#$%")
+                .setFirstDayConsumption(dayConsumption)
+                .setFirstNightConsumption(nightConsumption)
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
