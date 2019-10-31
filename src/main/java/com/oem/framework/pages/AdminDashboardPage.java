@@ -12,7 +12,8 @@ public class AdminDashboardPage extends HeaderPage {
     By tenderResponseLnk=By.linkText("Tender Response");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
     By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
-
+    By flexprocAdmin=By.xpath("//h3[contains(text(),'Flex Procurement Admin')]");
+    By flexTenderResponse=By.xpath("//li[5]//ul[1]//li[1]//a[1]");
 
 
 
@@ -28,24 +29,40 @@ public class AdminDashboardPage extends HeaderPage {
         click(impersonateBtn);
         return new SupplierDashboardPage();
     }
+    public CustomerDashboardPage impersonateCustomer() throws Throwable{
+    	String EMAIL = getPropertyFileData("email");
+        setValue(impersonateUsername, EMAIL);
+        click(impersonateBtn);
+        return new CustomerDashboardPage();
+    }
 
     public TenderOpenQuotesPage navigateToTenderQuotes() throws Throwable{
         click(fixedProcurementAdmin);
         click(tenderOpenQuotes);
         return new TenderOpenQuotesPage();
     }
-
-
     public TenderResponsePage navigateToTenderResponse() throws Throwable{
-        click(fixedProcurementAdmin);
-        click(tenderResponseLnk);
-        return new TenderResponsePage();
+    	 click(fixedProcurementAdmin);
+    	 click(tenderResponseLnk);
+         return new TenderResponsePage();
     }
-    public AdminDashboardPage goToVerifyTenders(){
+
+
+
+    public VerifyTendersPage goToVerifyTenders(){
         click(verifyTenders);
         VerifyTendersPage verifyTendersPage=new VerifyTendersPage();
         verifyTendersPage.isLoaded();
         return new VerifyTendersPage();
+    }
+    public AdminDashboardPage goFlexTenderResponse() throws Throwable{
+        click(flexprocAdmin);
+        Thread.sleep(2000);
+        
+        click(flexTenderResponse);
+        FlexTenderResponsePage flexTenderResponsePage=new FlexTenderResponsePage();
+        flexTenderResponsePage.isLoaded();
+        return new FlexTenderResponsePage();
     }
 
 

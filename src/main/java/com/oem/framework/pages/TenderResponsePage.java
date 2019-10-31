@@ -15,6 +15,7 @@ public class TenderResponsePage extends BasePage {
     By popUpDialogue=By.xpath("//form[@class='vex-dialog-form']");
     By dayConsumption1=By.id("MeterForecasts_0__DayConsumption");
     By nightConsumption1=By.id("MeterForecasts_0__NightConsumption");
+    By okButton=By.xpath("//button[text()='OK'");
 
     By quoteIdDropDown=By.id("QuoteId");
 
@@ -62,10 +63,11 @@ public class TenderResponsePage extends BasePage {
     }
 
     public TenderResponsePage verifyPopUpDialogue(){
-        staticWait(1);
-        driver.switchTo().alert();
+        staticWait(2);
+      //  driver.switchTo().alert();
         Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
-        driver.switchTo().alert().dismiss();
+        //driver.switchTo().
+        click(By.xpath("//button[text()='OK']"));
         return this;
     }
 
@@ -79,3 +81,4 @@ public class TenderResponsePage extends BasePage {
         return this;
     }
 }
+
