@@ -149,7 +149,15 @@ public class TenderResponseTests extends BaseTest {
                 { "FPA_TOP_TC_017 - verify Alert appears when SplCharts is provided for both", " ","@#$%" },
                 { "FPA_TOP_TC_018 - verify Alert appears when space is provided for both", " "," " },
                 { "FPA_TOP_TC_019 - verify Alert appears when SplCharts is provided for both", "@#$%"," " },
-                { "FPA_TOP_TC_020 - verify Alert appears when SplCharts is provided for both", "12345"," " }
+                { "FPA_TOP_TC_020 - verify Alert appears space is provided for night", "12345"," " },
+                { "FPA_TOP_TC_021 - verify Alert appears space is provided for night", "afds"," " },
+                { "FPA_TOP_TC_022 - verify Alert appears space is provided for day", " ","fdasfa" },
+                { "FPA_TOP_TC_023 - verify Alert Day:Space, night: Numbers", " ","234" },
+                { "FPA_TOP_TC_024 - verify Alert Day:Space, night: Special chars", " ","@#!$%" },
+                { "FPA_TOP_TC_025 - verify Alert Day:Nos, night: chars", "1234","abc" },
+                { "FPA_TOP_TC_026 - verify Alert Day:chars, night: Nos", "abcd","1234" },
+                { "FPA_TOP_TC_027 - verify Alert Day:Nos, night: Special chars", "1234","!@#$%" },
+                { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" },
         };
 
     }
