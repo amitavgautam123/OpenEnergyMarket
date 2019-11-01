@@ -154,7 +154,7 @@ public class TenderResponseTests extends BaseTest {
 
     }
     @Test(dataProvider = "consumptionInput")
-    public void verifyAlertFoSplCharValuesForNightConsumption(String desc,String dayConsumption, String nightConsumption) throws Throwable {
+    public void verifyAlertFoSplCharValues(String desc,String dayConsumption, String nightConsumption) throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
                 .selectFirstValueInQuoteByDate()

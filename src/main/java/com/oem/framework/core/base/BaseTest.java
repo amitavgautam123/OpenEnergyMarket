@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
@@ -41,6 +42,7 @@ public abstract class BaseTest implements Base {
 
     @BeforeClass(alwaysRun = true)
     public void baseClass() throws IOException {
+        new TestExecutionContext("");
         HeaderPage headerPage=new HeaderPage();
         if(headerPage.isLoggedIn())
             headerPage.logout();
@@ -49,18 +51,21 @@ public abstract class BaseTest implements Base {
 
 
     @BeforeMethod(alwaysRun = true)
-    public void baseInit(Method method, ITestContext ctx) throws IOException {
+    public void baseInit(Method method, ITestContext ctx,Object[] params) throws IOException {
         System.out.println("Executing BaseTest before method");
         System.out.println("**************** Starting test : " + getClass().getSimpleName() +" - "+method.getName()
                 + " ****************");
 
+        String dataproviderDesc = "";
+        if(method.getParameters()[0].getName().contains("desc"))
+            dataproviderDesc= (String) params[0];
 
         if(Globals.getCurrentThreadContext()==null)
-            new TestExecutionContext(method.getName());
+            new TestExecutionContext(method.getName()+dataproviderDesc);
         else
             Globals.getCurrentThreadContext().setTestName(method.getName());
 
-        getReportUtil().info("**************** Starting test : " + getClass().getSimpleName() +" - "+method.getName()
+        getReportUtil().info("**************** Starting test : " + getClass().getSimpleName() +" - "+method.getName() + dataproviderDesc
                 + " ****************");
         getReportUtil().info("***** Description "+method.getAnnotation(Test.class).description() +" ***********");
 
@@ -117,11 +122,12 @@ public abstract class BaseTest implements Base {
     private void updateTestStatusInReport(ITestResult result) {
         try {
             TestExecutionContext context = Globals.getCurrentThreadContext();
-            String screenshot = TestUtil.takeScreenshot(result.getName() + "-" + getCurrentTime(), context.getDriver());
+
 
             if (result.getStatus() == ITestResult.FAILURE) {
                 getReportUtil().log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED ", ExtentColor.RED));
                 getReportUtil().fail(result.getThrowable());
+                String screenshot = TestUtil.takeScreenshot(result.getName() + "-" + getCurrentTime(), context.getDriver());
                 addScreenshotToReport(result, screenshot);
             } else if (result.getStatus() == ITestResult.SUCCESS) {
                 getReportUtil().log(Status.PASS, MarkupHelper.createLabel(result.getName() + " PASSED ", ExtentColor.GREEN));
