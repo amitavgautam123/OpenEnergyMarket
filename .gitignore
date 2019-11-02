@@ -12,3 +12,4 @@ test-output/
 target/
 screenshots/
 ExtentReport/
+pdfngreport/
