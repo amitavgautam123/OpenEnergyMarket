@@ -142,7 +142,9 @@ public class TenderResponseTests extends BaseTest {
     @DataProvider(name = "consumptionInput")
     public static Object[][] credentials() {
 
-        return new Object[][] { { "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption", "abc","def" },
+        return new Object[][] {
+                { "FPA_TOP_TC_012 - verify Alert Night consumption:0", "10","0" },
+                { "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption", "abc","def" },
                 { "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
                 { "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption", "def","abc#$%!" },
                 { "FPA_TOP_TC_016 - verify Alert appears when SplCharts is provided for both", "@#$%","@#$%" },

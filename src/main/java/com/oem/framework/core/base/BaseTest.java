@@ -57,7 +57,7 @@ public abstract class BaseTest implements Base {
                 + " ****************");
 
         String dataproviderDesc = "";
-        if(method.getParameters()[0].getName().contains("desc"))
+        if(method.getParameters().length>0/* && method.getParameters()[0].getName().contains("desc")*/)
             dataproviderDesc= (String) params[0];
 
         if(Globals.getCurrentThreadContext()==null)
