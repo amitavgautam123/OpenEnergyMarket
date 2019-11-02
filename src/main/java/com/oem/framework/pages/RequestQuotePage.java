@@ -646,8 +646,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(MeterThridElement);
 	}
 
-	public void SelectingSingleContractDuration() {
-		selectByIndex(ContractDuration, 02);
+	public void SelectingSingleContractDuration() throws Throwable {
+		//selectByIndex(ContractDuration, 02);
+		selectByValue(ContractDuration, readExcelData("Sheet1", 1, 2));
+		
 	}
 
 	public void SelectingMultipleContractDuration() {
@@ -1159,7 +1161,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void validatingErrorMessageAfterSelectingsinglecontractDurationAndmultipleSupplier() {
+	public void validatingErrorMessageAfterSelectingsinglecontractDurationAndmultipleSupplier() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		SelectElectricity_HHUtility();
 		SelectingZeroMeters();
@@ -1176,7 +1178,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void validatingAvailablityToVerfyAfterSelecting1Meter1Contract1Supplier() {
+	public void validatingAvailablityToVerfyAfterSelecting1Meter1Contract1Supplier() throws Throwable {
 		SelectElectricity_HHUtility();
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -1185,7 +1187,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		// need to write further script to verify is it present at admin portal
 	}
 
-	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1Contract1Supplier() {
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1Contract1Supplier() throws Throwable {
 		SelectElectricity_HHUtility();
 		SelectingMultipleMeter();
 		SelectingSingleContractDuration();
@@ -1203,7 +1205,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		// need to write further script to verify is it present at admin portal
 	}
 
-	public void validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplier() {
+	public void validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplier() throws Throwable {
 		SelectElectricity_HHUtility();
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
@@ -1221,7 +1223,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		// need to write further script to verify is it present at admin portal
 	}
 
-	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1ContractMultipleSupplier() {
+	public void validatingAvailablityToVerfyAfterSelectingMultipleMeter1ContractMultipleSupplier() throws Throwable {
 		SelectElectricity_HHUtility();
 		SelectingMultipleMeter();
 		SelectingSingleContractDuration();
@@ -2702,12 +2704,12 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(checkboxForMeter(mpan));
 	}
 	//Used in HH Suite
-	public void requestAquoteAndVerifyTenderSummaryPageTest() throws Throwable {
+	public void requestAquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = "Auto_Company_555";
-		scrollToElement(checkboxForMeter("1014568646666"));// need to be replaced by mpanNum
-		selectingSingleMeterModified("1014568646666");// need to be replaced by mpanNum
+		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
+		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
 		jse.executeScript("window.scrollBy(0,-500)");
 		SelectingSingleContractDuration();
 		click(tenderDateHH);

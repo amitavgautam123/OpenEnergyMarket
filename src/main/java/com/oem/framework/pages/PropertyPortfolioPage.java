@@ -101,7 +101,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 			System.out.println("Couldn't close 'Tip' message");
 		}
 		boolean meterPageURLstatus = driver.getCurrentUrl().contains("CompanyProfile/SiteMeters");
-		refreshPage();
+		//refreshPage();
 		Assert.assertTrue(meterPageURLstatus, "Site hasn't got saved.");
 	}
 	public void validateMandatoryFieldsAddSitePopup() throws Throwable 
