@@ -61,8 +61,9 @@ public class DriverManager implements Base {
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         DesiredCapabilities.chrome();
         options.merge(capabilities);
-
-        return new ChromeDriver(service,options);
+        ChromeDriver driver=new ChromeDriver(service,options);
+        driver.manage().window().maximize();
+        return driver;
     }
 
 

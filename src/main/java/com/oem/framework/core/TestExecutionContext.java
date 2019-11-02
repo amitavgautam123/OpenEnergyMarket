@@ -30,10 +30,16 @@ public class TestExecutionContext implements Base {
     }
 
     private void getDriverAndAddToContext() throws IOException {
-        if(Globals.getTestExecutionContext(Thread.currentThread().getId())==null) {
+        TestExecutionContext context=Globals.getCurrentThreadContext();
+        if(context==null) {
             this.driver = DriverManager.getDriver();
             configForExecutionEnvironment = Globals.configForExecutionEnvironment;
             Globals.addContext(Thread.currentThread().getId(), this);
+        }
+        else{
+            // This becomes null when you close driver after class
+            if(context.getDriver()==null)
+                context.driver=DriverManager.getDriver();
         }
 
     }
