@@ -100,8 +100,9 @@ public class CustomerDashboardPage extends HeaderPage {
         return propertyPortfolioMeterPage; 
     }
     
-    public RequestQuotePage goToRequestQuote(){
+    public RequestQuotePage goToRequestQuote() throws Throwable{
         click(quotesAndTenders);
+        Thread.sleep(1000);
         click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();

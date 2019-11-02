@@ -95,6 +95,10 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By uploadContractBtn = By.id("btnShowContractUploadModal");
 	
 	
+	int meterValue;
+	
+	public void setMeterValue() {}
+	public int getSavedMeterValue() {return meterValue;}
 	/**
 	 * Returns the locator of the Edit meter button by passing 'Meter Number' as argument
 	 * @param meterNumber
@@ -641,7 +645,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(1000);
 		selectFutureDateCalender(14, random.nextInt(12), 2020);
 		setValue(capacity, readExcelData("Sheet3", 8, 3));
-		selectByVisibleText(currentSupplier, "Gazprom");
+		selectByVisibleText(currentSupplier, "British Gas Business");
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
 		selectByVisibleText(currentDataCollector, "Morrison Data Services");
@@ -715,7 +719,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertAll();
 	}
 	
-	public void checkSavedDetailsAfterAddingHHMeter() throws Throwable {
+	public String checkSavedDetailsAfterAddingHHMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String mpanNumber = addValidHHmeterGeneric();
 		Thread.sleep(3000);
@@ -755,6 +759,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(capacityDataDisplayStatus, "Data present for capacity in meter details section is not displaying correctly.");
 		
 		softAssertion.assertAll();
+		return mpanNumber;
 	}
 	
 	public void validateEditHHmeterPopup() throws Throwable {
@@ -897,9 +902,8 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 20, 11));
 		
 		click(saveContractHistoryBtn);
-		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 		Thread.sleep(3000);
-	//	boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
+		//boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
 	//	Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
 	}

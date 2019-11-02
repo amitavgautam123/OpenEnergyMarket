@@ -17,42 +17,45 @@ public class HHsuiteE2Etest extends BaseTest{
 	CustomerDashboardPage customerDashboardPage;
 	AdminDashboardPage adminDashboardPage;
 	SupplierDashboardPage supplierDashboardPage;
-	
+	String meterValue;
 	@BeforeClass(alwaysRun = true)
 	public void beforeHHSuite() throws Throwable {
 		customerDashboardPage = new LoginPage().login();
 	}
 	
-	@Test(priority = 1)
+	//@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.
 			goToCompanyProfile().
 				fillCompanyProfileGeneric();
 	}
-	@Test(dependsOnMethods = { "fillCompanyProfileTest" })
+	//@Test(dependsOnMethods = { "fillCompanyProfileTest" })
 	public void addSiteTest() throws Throwable {
 		customerDashboardPage.
 			clickPropertyPortfolio().
 				addValidSiteGeneric();
 	}
-	@Test(dependsOnMethods = { "addSiteTest" })
+	//@Test(dependsOnMethods = { "addSiteTest" })
 	public void addHHmeterAndCheckSavedDetailsTest() throws Throwable {
-		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
-		propertyPortfolioMeterPage.checkSavedDetailsAfterAddingHHMeter();
+		meterValue = customerDashboardPage.
+			refreshPropertyPortfolioMeterPage().
+				checkSavedDetailsAfterAddingHHMeter();
+		//meterValue=propertyPortfolioMeterPage.getSavedMeterValue();
 	}
-	@Test(dependsOnMethods = { "addHHmeterAndCheckSavedDetailsTest" })
+	//@Test(dependsOnMethods = { "addHHmeterAndCheckSavedDetailsTest" })
 	public void addHHcontractHistoryTest() throws Throwable {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
+		//propertyPortfolioMeterPage.setMeterValue(meterValue);
 		propertyPortfolioMeterPage.addValidContractHistory();
 	}
 	
-	@Test(dependsOnMethods = { "addHHcontractHistoryTest" })
+	//@Test(dependsOnMethods = { "addHHcontractHistoryTest" })
 	public void requestQuoteAndVerifyTenderSummaryPageTest() throws Throwable {
 		customerDashboardPage.
 			goToRequestQuote().
-				requestAquoteAndVerifyTenderSummaryPageTest();
+				requestAquoteAndVerifyTenderSummaryPageTest(meterValue);
 	}
-	@Test(dependsOnMethods = { "requestQuoteAndVerifyTenderSummaryPageTest" })
+	//@Test(dependsOnMethods = { "requestQuoteAndVerifyTenderSummaryPageTest" })
 	public void verifyTenderAdminPanelTest() throws Throwable {
 		adminDashboardPage = new LoginPage().
 									loginAsAdmin();
@@ -67,7 +70,12 @@ public class HHsuiteE2Etest extends BaseTest{
 									loginAsAdmin().
 									impersonateSupplier().
 									goToTendersAndAlerts().
-									verifyTenderPresenceAndSubmitPrice();
+									verifyQuoteStatusDropdownExist().
+									validateQuoteRequestStatusDropdown().
+									verifyPresenceOfFilters().
+									verifyTenderPresenceInTendersAndAlertsTest().
+									navigateToSubmitPricePageTest().
+									verifySubmitPrice();
 	}
 	
 	
