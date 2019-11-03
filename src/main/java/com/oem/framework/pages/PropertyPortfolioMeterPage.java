@@ -49,6 +49,26 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	/*Add Gas Meter popup*/
 	By gasMeterNumber = By.id("gasMeterNumber");
 	By gasCurrentSuppliers = By.id("gasSuppliers");
+	/* Add Water Meter Popup */
+	By spidWater = By.id("spidWater");
+	By spidSWHD = By.id("spidSWHD");
+	By spidWaste = By.id("spidWaste");
+	By meterNumber_Water = By.id("waterMeterNumber");
+	By unitRate_water = By.id("waterUnitRate");
+	By annualm3 = By.id("waterExpectedConsumption");
+	By annualStandingCharge = By.id("annualStandingCharge");
+	By rtsUnitRate = By.id("rtsUnitRate");
+	By billedWasteM3 = By.id("rtsConsumption");
+	By wasteAnnualStandingCharge = By.id("rtsAnnualStandingCharge");
+	
+	By currentSuppliersIncoming = By.id("waterSuppliersIncoming");
+	By currentSuppliersSewerage = By.id("waterSuppliersSewerage");
+	By contractEndDate_Water = By.id("waterContractEndDateForMeterModel");
+	By rtsContractEndDate_Water = By.id("waterRTSContractEndDateForMeterModel");
+	By currentAnnualSpend_Water = By.id("waterCurrentAnnualSpend");
+	By swHD = By.id("swHD");
+	By swHDBasis = By.id("swHDBasis");
+	
 	/*popup after saving meter*/
 	By meterSavedPopup = By.xpath("//div[text() = 'The meter data was saved successfully.']");
 	By invalidMPANPopup = By.xpath("//div[text() = 'MPAN failed check digit validation, please review the number and try again']");
@@ -80,6 +100,8 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By addContractHistoryPopup = By.xpath("//h3[text() = 'Add new Contract History details']");
 	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
 	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	By nhhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-3']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	
 	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
 	By dateTraded = By.id("dateTraded");
 	By contractStartDate = By.id("contractStartDate");
@@ -93,7 +115,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
 	By supplierProductDDwn = By.id("supplierProductForContractHistory");
 	By uploadContractBtn = By.id("btnShowContractUploadModal");
-	
+	By contractHistSaveSuccessPopup = By.xpath("//div[text() = 'The contract history data was saved successfully.']");
 	
 	int meterValue;
 	
@@ -886,11 +908,12 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean popupDisplayStatus = isElementPresent(addContractHistoryPopup);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
-	public void addValidContractHistory() throws Throwable {
+	public void addValidHHcontractHistory() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
 		click(addHHcontractHistoryBtn(mpanNumber));
 		Thread.sleep(2000);
 		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 20, 5));
+		Thread.sleep(1000);
 		selectByVisibleText(supplierProductDDwn, readExcelData("Sheet3", 20, 6));
 		setValue(dateTraded, readExcelData("Sheet3", 20, 2));
 		setValue(contractStartDate, readExcelData("Sheet3", 20, 3));
@@ -906,6 +929,28 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		//boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
 	//	Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
+	}
+	public void addValidNHHcontractHistory() throws Throwable {
+		String mpanNumber = getText(nhhMeterNumberFirstRecord).trim();		
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Thread.sleep(2000);
+		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 22, 5));
+		Thread.sleep(1000);
+		selectByIndex(supplierProductDDwn, 2);
+		setValue(dateTraded, readExcelData("Sheet3", 22, 2));
+		setValue(contractStartDate, readExcelData("Sheet3", 22, 3));
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 22, 4));
+		setValue(this.dayRate, readExcelData("Sheet3", 22, 7));
+		setValue(this.nightRate, readExcelData("Sheet3", 22, 8));
+		setValue(this.standingCharge, readExcelData("Sheet3", 22, 9));
+		setValue(this.capacityCharge, readExcelData("Sheet3", 22, 10));
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 22, 11));
+		
+		click(saveContractHistoryBtn);
+		//Thread.sleep(3000);
+		boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup,3);
+		click(okBtn);
+		Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
 	}
 	public void displayAddContractHistoryHHutilityPopup() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
@@ -1259,7 +1304,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertAll();
 	}
 	
-	public void checkSavedDetailsAfterAddingNHHMeter() throws Throwable {
+	public String checkSavedDetailsAfterAddingNHHMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String mpanNumber = addValidNHHMeterGeneric();
 		click(totalnHHMetersCountInFilter);
@@ -1291,6 +1336,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(10, 13));
 		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
 		softAssertion.assertAll();
+		return mpanNumber;
 	}
 	public void addExpiredNHHmeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -1447,5 +1493,55 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(addMeter);
 		click(addGasMeter);
 		Assert.assertTrue(isElementPresent(gasMeterNumber), "Popup for adding new nHH Electric meter didn't appear");
+	}
+public String addValidWaterMeterGeneric() throws Throwable {
+		
+		Random random = new Random();
+		//int cellNum = random.nextInt(1568);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
+		Thread.sleep(2000);
+		click(addMeter);
+		Thread.sleep(1000);
+		click(addWaterMeter);
+		Thread.sleep(2000);
+		setValue(spidWater, String.valueOf(random.nextInt(1000000)));
+		setValue(spidSWHD, String.valueOf(random.nextInt(1000000)));
+		setValue(spidWaste, String.valueOf(random.nextInt(1000000)));
+		setValue(meterNumber_Water, String.valueOf(random.nextInt(1000000)));
+		setValue(unitRate_water, String.valueOf(random.nextInt(300)));
+		setValue(annualm3, String.valueOf(random.nextInt(1000)));
+		setValue(annualStandingCharge, String.valueOf(random.nextInt(2000)));
+		setValue(rtsUnitRate, String.valueOf(random.nextInt(200)));
+		setValue(billedWasteM3, String.valueOf(random.nextInt(1000)));
+		
+		
+		click(contractEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(14, random.nextInt(12), 2020);
+		setValue(capacity, readExcelData("Sheet3", 8, 3));
+		selectByVisibleText(currentSupplier, "British Gas Business");
+		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
+		selectByVisibleText(currentDataCollector, "Morrison Data Services");
+		click(meterOperatorEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(26, 2, 2020);
+		click(dataCollectorEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(21, 7, 2020);
+		
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", saveMetBtn);
+		//click(saveMeterBtn);
+		Thread.sleep(2000);
+		click(okBtn);
+		Thread.sleep(2000);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
+		return mpanNumber;
 	}
 }

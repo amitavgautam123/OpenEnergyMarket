@@ -15,7 +15,8 @@ public class AdminDashboardPage extends HeaderPage {
     By flexprocAdmin=By.xpath("//h3[contains(text(),'Flex Procurement Admin')]");
     By flexTenderResponse=By.xpath("//li[5]//ul[1]//li[1]//a[1]");
 
-
+    By user=By.xpath("//a[@id='user-link']");
+	By logout=By.xpath("//a[contains(text(),'Log out')]");
 
     public CustomerDashboardPage impersonate(String email){
         setValue(impersonateUsername,email);
@@ -64,7 +65,14 @@ public class AdminDashboardPage extends HeaderPage {
         flexTenderResponsePage.isLoaded();
         return new FlexTenderResponsePage();
     }
-
+    public void verifyAdminHomePage(){
+    	boolean impersonatePresence=isElementPresent(impersonateUsername);
+    	Assert.assertTrue(impersonatePresence, "Admin Home page is not displyed");
+    }
+    public void logOut(){
+		click(user);
+		click(logout);
+	}
 
     @Override
     protected void isLoaded() throws Error {

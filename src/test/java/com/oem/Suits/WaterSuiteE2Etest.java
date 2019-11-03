@@ -12,7 +12,7 @@ import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.PropertyPortfolioMeterPage;
 import com.oem.framework.pages.SupplierDashboardPage;
 
-public class HHsuiteE2Etest extends BaseTest{
+public class WaterSuiteE2Etest extends BaseTest{
 	
 	CustomerDashboardPage customerDashboardPage;
 	AdminDashboardPage adminDashboardPage;
@@ -65,7 +65,7 @@ public class HHsuiteE2Etest extends BaseTest{
 			
 	}
 	@Test
-	public void verifySuppliersTendersAndQuotesTest() throws Throwable {
+	public void verifySuppliers() throws Throwable {
 		supplierDashboardPage = new LoginPage().
 									loginAsAdmin().
 									impersonateSupplier().
@@ -75,21 +75,9 @@ public class HHsuiteE2Etest extends BaseTest{
 									verifyPresenceOfFilters().
 									verifyTenderPresenceInTendersAndAlertsTest().
 									navigateToSubmitPricePageTest().
-									verifySubmitPrice().
-									verifySubmitPricesSuccessPage();
+									verifySubmitPrice();
 	}
-	@Test
-	public void verifyCustomerReviewQuotesTest() throws Throwable {
-		/*
-		 * customerDashboardPage = new LoginPage(). login(). goToReviewQuotes().
-		 * verifyReviewQuotes();
-		 */
-		
-		/*
-		 * supplierDashboardPage = new LoginPage(). loginAsAdmin().
-		 * impersonateSupplier(). goToTendersAndAlerts(). goToReviewQuotes();
-		 */
-	}
+	
 	
 	
 }

@@ -11,8 +11,6 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
-
-
 public class VerifyTendersPage extends AdminDashboardPage	{
 
 	By filterAllUtility_VerifyTender = By
@@ -24,8 +22,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	By filterGasUtility_VerifyTender = By
 			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[4]");
 	By filterWaterUtility_VerifyTender = By
-			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");
-	
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");	
 	By allowSelectedBtn = By.xpath("//input[@value = 'Allow Selected']");
 	By allowSelectedBtnBottomPage = By.xpath(("(//input[@value = 'Allow Selected'])[2]"));
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
@@ -61,6 +58,11 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		int year = Integer.parseInt(date.substring(0, 4));
 		String currentDate = day + "/" + month + "/" + year;
 		return currentDate;
+	}
+	public VerifyTendersPage goToNHHmeterSection() throws Throwable {
+		click(filterNHHutility_VerifyTender);
+		Thread.sleep(1000);
+		return this;
 	}
 
 	public void verifyUtilityFilterPresenceVerifyTenders() {

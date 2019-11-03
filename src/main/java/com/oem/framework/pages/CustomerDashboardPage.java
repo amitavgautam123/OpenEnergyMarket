@@ -20,6 +20,7 @@ public class CustomerDashboardPage extends HeaderPage {
     
     By quotesAndTenders = By.xpath("//div[@id = 'accordian-menu']//li[4]/h3");
     By requestAQuoteLink = By.xpath("//li[@id = 'sidebar-request-quote']/a");
+    By reviewQuoteLink = By.xpath("//li[@data-controller = 'ReviewQuotes']/a");
     By flexManagement = By.xpath("//h3[contains(text(),'Flex Management')]");
     By flexProfileMgr = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[1]/a");
     By strategyProfile = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[2]/a");
@@ -114,6 +115,15 @@ public class CustomerDashboardPage extends HeaderPage {
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;
+    }
+    
+    public ReviewQuoteCustomerPage goToReviewQuotes() throws Throwable{
+        click(quotesAndTenders);
+        Thread.sleep(1000);
+        click(reviewQuoteLink);
+        ReviewQuoteCustomerPage reviewQuoteCustomerPage=new ReviewQuoteCustomerPage();
+        reviewQuoteCustomerPage.isLoaded();
+        return reviewQuoteCustomerPage;
     }
     public CustomerDashboardPage goToFlexibleProfileManager() throws Throwable{
         click(flexManagement);

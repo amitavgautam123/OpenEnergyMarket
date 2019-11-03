@@ -2703,8 +2703,13 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(SelectAllChoosemeter);
 		click(checkboxForMeter(mpan));
 	}
+	public RequestQuotePage goToNHHmetersSection() throws Throwable {
+		click(filterByNHHutility);
+		Thread.sleep(1000);
+		return this;
+	}
 	//Used in HH Suite
-	public void requestAquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
+	public void requestHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = "Auto_Company_555";
@@ -2749,5 +2754,47 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		logout();
 		softAssertion.assertAll();
 	}
+	public void requestNHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		String companyName = "Auto_Company_555";
+		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
+		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
+		jse.executeScript("window.scrollBy(0,-500)");
+		selectingsingleContractDur_nHH();
+		click(date_nHH);
+		Thread.sleep(1000);
+		String tenderDate = "12/11/2019";
+		selectFutureDateCalender(12, 10, 2019);
+		selectingMultiplesupplier_nHH();
+		Reporter.log("Selected suppliers.", true);
+		String firstSelectedSupplierName = getText(supplier01_nHH);
+		String secondSelectedSupplierName = getText(supplier03_nHH);
+		
+		ClickTopSubmitButton();
+		Reporter.log("Clicked on submit button", true);
+		Thread.sleep(3000);
+		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
+		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				firstSelectedSupplierName);
+		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
+
+		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				secondSelectedSupplierName);
+		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
+		
+		scrollToElement(confirmAndSubmit);
+		click(confirmAndSubmit);
+		Reporter.log("Clicked on confirm and submit button.", true);
+		Thread.sleep(2000);
+		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
+		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus,
+				"Tender Submit Success Popup is not displaying.");
+		click(okBtn_TenderSummaryPage);
+		Reporter.log("Clicked on Ok button.", true);
+		logout();
+		softAssertion.assertAll();
+	}
+	
 
 }

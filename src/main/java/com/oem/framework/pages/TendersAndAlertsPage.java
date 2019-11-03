@@ -8,6 +8,8 @@ import org.testng.asserts.SoftAssert;
 public class TendersAndAlertsPage extends SupplierDashboardPage{
 	
 	By tendersAndAlertsLink = By.xpath("//li[@data-action = 'Requests']/a/h3");
+	By reviewQuotesLink = By.xpath("//li[@id = 'sidebar-review-quotes']/a/h3");
+	
 	By quoteRequestStatusDropdown = By.id("SelectedStatus");
 	By allUtilitiesFilter = By.xpath("//div[@class='filter-icons']//div/p[text() = 'ALL']");
 	By hhUtilityFilter = By.xpath("//div[@data-original-title = '<strong>Half Hourly Electricity</strong>']");
@@ -28,6 +30,21 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	By productDropdown = By.id("SelectedProductId");
 	By commentsEdtBox = By.id("Comments");
 	By uploadPrice = By.id("FileUpload");
+	By submitBtn = By.xpath("//button[text() = 'Submit']");
+	By pleaseUploadAFilePopup = By.xpath("//div[text() = 'Please upload a file']");
+	By okBtn = By.xpath("//button[text() = 'OK']");
+	By invalidFileErrMsg = By.xpath("//div[contains(text(), 'An error occurred when trying to upload')]");
+	
+	//Submit price Success page
+	By confirmBtn = By.id("btn-confirm");
+
+	//Review Quotes Page
+	By currentContractTitle = By.xpath("//h3[text() = 'Current Contract ']");
+	By proposedQuotesTitle = By.xpath("//h3[text() = 'Proposed Quotes']");
+	By hhUtilityFilter_ReviewQuotes = By.xpath("//td[contains(text(), 'Please select a Utility')]/following-sibling::td/div[1]");
+	By nhhUtilityFilter_ReviewQuotes = By.xpath("//td[contains(text(), 'Please select a Utility')]/following-sibling::td/div[2]");
+	By gasUtilityFilter_ReviewQuotes = By.xpath("//td[contains(text(), 'Please select a Utility')]/following-sibling::td/div[3]");
+	By waterUtilityFilter_ReviewQuotes = By.xpath("//td[contains(text(), 'Please select a Utility')]/following-sibling::td/div[4]");		
 	
 	
 	String companyName = "Auto_Company_555";
@@ -132,12 +149,66 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(toleranceEdtBoxDisplayStatus, "Tolerance edit box is not displaying after entering contract duration.");
 		setValue(toleranceEdtBox, readExcelData("Sheet6", 1, 2));
 		selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 3));
-		selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 4));
+		selectByIndex(creditStatusDropdown, 2);
+		Thread.sleep(1000);
+		//selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 4));
 		setValue(commentsEdtBox, readExcelData("Sheet6", 1, 5));
+		boolean uploadPriceBtnDisplayStatus = isElementPresent(uploadPrice);
+		softAssertion.assertTrue(uploadPriceBtnDisplayStatus, "Upload Price button is not displaying.");
+		validateUploadPriceImproperData();
 		setValue(uploadPrice, readExcelData("Sheet6", 1, 6));
+		click(submitBtn);		
 		softAssertion.assertAll();
 		return this;
 		
 	}
+	public void validateUploadPriceImproperData() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		click(submitBtn);
+		Thread.sleep(2000);
+		boolean pleaseUploadAfileDisplayStatus = isElementPresent(pleaseUploadAFilePopup);
+		softAssertion.assertTrue(pleaseUploadAfileDisplayStatus, "Please upload a file popup is not displaying.");
+		if(pleaseUploadAfileDisplayStatus) {
+			click(okBtn);
+		}
+		setValue(uploadPrice, readExcelData("Sheet6", 2, 6));
+		click(submitBtn);
+		Thread.sleep(2000);
+		boolean errorMsgDisplayStatus = isElementPresent(invalidFileErrMsg);
+		softAssertion.assertTrue(errorMsgDisplayStatus, "Error message for invalid file is not diplaying.");
+		softAssertion.assertAll();
+	}
+	public TendersAndAlertsPage verifySubmitPricesSuccessPage() {
+		SoftAssert softAssertion = new SoftAssert();
+		boolean submitPricesSuccessPageDisplayStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPricesSuccess");
+		softAssertion.assertTrue(submitPricesSuccessPageDisplayStatus, "Submit price success page is not displaying.");
+		click(confirmBtn);
+		softAssertion.assertAll();
+		return this;
+	}
+	
+	public TendersAndAlertsPage verifyCurrentContractAndProposedQuotePresence(){
+		SoftAssert softAssertion = new SoftAssert();
+		boolean currentContractDisplayStatus = isElementPresent(currentContractTitle);
+		softAssertion.assertTrue(currentContractDisplayStatus, "Current contract is not displaying.");
+		boolean proposedQuotesDisplayStatus = isElementPresent(proposedQuotesTitle);
+		softAssertion.assertTrue(proposedQuotesDisplayStatus, "Proposed Quote is not displaying.");		
+        
+		softAssertion.assertAll();
+		return this;
+    }
+	public TendersAndAlertsPage verifyFilterUtilityPresence(){
+		SoftAssert softAssertion = new SoftAssert();
+		boolean hhUtilityDisplayStatus = isElementPresent(hhUtilityFilter_ReviewQuotes);
+		softAssertion.assertTrue(hhUtilityDisplayStatus, "HH Utility filter is not displaying.");
+		boolean nhhUtilityDisplayStatus = isElementPresent(nhhUtilityFilter_ReviewQuotes);
+		softAssertion.assertTrue(nhhUtilityDisplayStatus, "NHH Utility filter is not displaying.");
+		boolean gasUtilityDisplayStatus = isElementPresent(gasUtilityFilter_ReviewQuotes);
+		softAssertion.assertTrue(gasUtilityDisplayStatus, "Gas Utility filter is not displaying.");
+		boolean waterUtilityDisplayStatus = isElementPresent(waterUtilityFilter_ReviewQuotes);
+		softAssertion.assertTrue(waterUtilityDisplayStatus, "Water Utility filter is not displaying.");
+		softAssertion.assertAll();
+        return this;
+    }
 	
 }

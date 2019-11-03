@@ -6,6 +6,7 @@ import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -440,6 +441,14 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		int year = Integer.parseInt(date.substring(0, 4));
 		String currentDate = day + "/" + month + "/" + year;
 		return currentDate;
+	}
+    public String getCuttrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date date = new Date();
+
+		String systemdate = dateFormat.format(date);
+		return systemdate;
 	}
 
 }
