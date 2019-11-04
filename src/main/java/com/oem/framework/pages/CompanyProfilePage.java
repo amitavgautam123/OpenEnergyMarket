@@ -341,7 +341,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         return this;
     }
     public void fillCompanyProfileGeneric() throws Throwable {
-		String compName = "Auto_Company_555";
+		String compName = "Auto_Company_55";
 		setValue(companyName, compName);
     	setValue(companyRegisteredAddress, "Bangalore");
         

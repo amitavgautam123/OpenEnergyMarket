@@ -43,12 +43,12 @@ public class ReviewQuoteCustomerPage extends HeaderPage{
 		softAssertion.assertAll();
 		return this;
     }
-	public ReviewQuoteCustomerPage verifyReviewQuotes() {
+	public CustomerDashboardPage verifyReviewQuotes() {
 		SoftAssert softAssertion = new SoftAssert();
 		verifyFilterUtilityPresence();
 		verifyCurrentContractAndProposedQuotePresence();
 		boolean currentContractDisplayStatus = isElementPresent(currentContract);
 		boolean expiredQuoteDisplayStatus = isElementPresent(currentContract);
-	return this;
+	return new CustomerDashboardPage();
 	}
 }

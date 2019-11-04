@@ -88,14 +88,12 @@ public class CompanyProfileTest extends BaseTest {
 	  verifyCompRegistrationNumberError("Company registration number field is required"
 	  ); }
 	  
-	  
-	  @Test public void PM_CP_TC_018_uploadLogoTest() throws Throwable {
-	  customerDashboardPage. goToCompanyProfile(). uploadLogo(); }
-	  
-	  
-	  @Test public void PM_CP_TC_019_validateOptionsSupplierInvoiceToTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  validateOptionsSupplierInvoiceTo(); }
+	  @Test 
+	  public void PM_CP_TC_019_validateOptionsSupplierInvoiceToTest() throws Throwable { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  validateOptionsSupplierInvoiceTo(); 
+	  }
 	  
 	  @Test public void PM_CP_TC_021_validateOptionsPrefferedSupplierPaymentTest()
 	  throws Throwable { customerDashboardPage. clickCompanyProfile().
@@ -142,18 +140,14 @@ public class CompanyProfileTest extends BaseTest {
 	  clickCompanyProfile(). validateProfileDiffDataSets(compName, addr, postCode,
 	  ph, regdNo); }
 	  
-	  @DataProvider public Object[][] getData() { Object[][] data = {{"Tibco Inc",
-	  "Bangalore", "123456", "7234823423", "123456"}, {"Tibco12345",
-	  "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka"
-	  , "123456", "7234823423", "123456"}, {"!@#$%^&",
-	  "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka"
-	  , "123456", "7234823423", "123456"}, {"      ",
-	  "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka"
-	  , "123456", "7234823423", "123456"}, {"</html>",
-	  "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka"
-	  , "123456", "7234823423", "123456"}, {"AGB3", "123456789", "123456",
-	  "7234823423", "123456"}, {"AGB3", "!@#$%^&*", "123456", "7234823423",
-	  "123456"}};
+	  @DataProvider public Object[][] getData() { Object[][] data = 
+		  {{"Tibco Inc", "Bangalore", "123456", "7234823423", "123456"}, 
+				  {"Tibco12345", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
+				  {"!@#$%^&", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
+				  {"      ", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
+				  {"</html>", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
+				  {"Auto_Comp", "123456789", "123456", "7234823423", "123456"}, 
+				  {"Auto_Company_555", "!@#$%^&*", "123456", "7234823423", "123456"}};
 	  
 	  return data; }
 	 }

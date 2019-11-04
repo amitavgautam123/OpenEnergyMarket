@@ -156,7 +156,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_555";
+		String companyName = "Auto_Company_55";
 		click(filterHHutility_VerifyTender);
 		Thread.sleep(1000);
 		/*

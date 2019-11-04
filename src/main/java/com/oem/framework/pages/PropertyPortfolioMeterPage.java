@@ -109,10 +109,12 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By dayRate = By.id("dayRate");
 	By nightRate = By.id("nightRate");
 	By standingCharge = By.id("standingCharge");
+	By unitCharge = By.id("unitCharge");
 	By capacityCharge = By.id("capacityCharge");
 	By contractedAnnualSpend = By.id("contractedAnnualSpend");
 	By contractedConsumption = By.id("contractedConsumption");
 	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
+	By supplierContHistDDwn_Gas = By.id("gasSuppliersForContractHistory");
 	By supplierProductDDwn = By.id("supplierProductForContractHistory");
 	By uploadContractBtn = By.id("btnShowContractUploadModal");
 	By contractHistSaveSuccessPopup = By.xpath("//div[text() = 'The contract history data was saved successfully.']");
@@ -477,7 +479,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertAll();
 	}
 	/*PM_PP_TC_088*/
-	public void checkSavedDetailsAfterAddingGasMeter() throws Throwable {
+	public String checkSavedDetailsAfterAddingGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String gasMeterNum = addValidGasMeterGeneric();
 		Thread.sleep(3000);
@@ -490,6 +492,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
+		return gasMeterNum;
 	}
 	
 	public void addGasMeterUsingDifferentTestData(String gasMeterNumber, String procurementType, String expectedConsumption, 
@@ -907,6 +910,25 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(addHHcontractHistoryBtn(mpanNumber));
 		boolean popupDisplayStatus = isElementPresent(addContractHistoryPopup);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
+	}
+	public void addValidGascontractHistory() throws Throwable {
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Thread.sleep(2000);
+		selectByVisibleText(supplierContHistDDwn_Gas, readExcelData("Sheet3", 24, 5));
+		Thread.sleep(1000);
+		selectByIndex(supplierProductDDwn, 1);
+		setValue(dateTraded, readExcelData("Sheet3", 24, 2));
+		setValue(contractStartDate, readExcelData("Sheet3", 24, 3));
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 24, 4));
+		setValue(standingCharge, readExcelData("Sheet3", 24, 9));
+		setValue(unitCharge, readExcelData("Sheet3", 24, 13));
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 24, 11));
+		click(saveContractHistoryBtn);
+		Thread.sleep(3000);
+		if(isElementPresent(contractHistSaveSuccessPopup)) {
+			click(okBtn);
+		}
 	}
 	public void addValidHHcontractHistory() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		

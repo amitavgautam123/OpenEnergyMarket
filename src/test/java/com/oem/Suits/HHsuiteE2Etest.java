@@ -23,40 +23,40 @@ public class HHsuiteE2Etest extends BaseTest{
 		customerDashboardPage = new LoginPage().login();
 	}
 	
-	//@Test(priority = 1)
+	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.
 			goToCompanyProfile().
 				fillCompanyProfileGeneric();
 	}
-	//@Test(dependsOnMethods = { "fillCompanyProfileTest" })
+	@Test(dependsOnMethods = { "fillCompanyProfileTest" })
 	public void addSiteTest() throws Throwable {
 		customerDashboardPage.
 			clickPropertyPortfolio().
 				addValidSiteGeneric();
 	}
-	//@Test(dependsOnMethods = { "addSiteTest" })
+	@Test(dependsOnMethods = { "addSiteTest" })
 	public void addHHmeterAndCheckSavedDetailsTest() throws Throwable {
 		meterValue = customerDashboardPage.
 			refreshPropertyPortfolioMeterPage().
 				checkSavedDetailsAfterAddingHHMeter();
 		//meterValue=propertyPortfolioMeterPage.getSavedMeterValue();
 	}
-	//@Test(dependsOnMethods = { "addHHmeterAndCheckSavedDetailsTest" })
+	@Test(dependsOnMethods = { "addHHmeterAndCheckSavedDetailsTest" })
 	public void addHHcontractHistoryTest() throws Throwable {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
 		//propertyPortfolioMeterPage.setMeterValue(meterValue);
 		propertyPortfolioMeterPage.addValidHHcontractHistory();
 	}
 	
-	//@Test(dependsOnMethods = { "addHHcontractHistoryTest" })
+	@Test(dependsOnMethods = { "addHHcontractHistoryTest" })
 	public void requestQuoteAndVerifyTenderSummaryPageTest() throws Throwable {
 		customerDashboardPage.
 			goToRequestQuote().
 				requestHHquoteAndVerifyTenderSummaryPageTest(meterValue);
 	}
-	//@Test(dependsOnMethods = { "requestQuoteAndVerifyTenderSummaryPageTest" })
-	public void verifyTenderAdminPanelTest() throws Throwable {
+	@Test(dependsOnMethods = { "requestQuoteAndVerifyTenderSummaryPageTest" })
+	public void verifyTenderTest() throws Throwable {
 		adminDashboardPage = new LoginPage().
 									loginAsAdmin();
 		 adminDashboardPage.
@@ -64,7 +64,7 @@ public class HHsuiteE2Etest extends BaseTest{
 				verifyAllowSelectedFunctionalityTest();
 			
 	}
-	@Test
+	@Test(dependsOnMethods = { "verifyTenderTest" })
 	public void verifySuppliersTendersAndQuotesTest() throws Throwable {
 		supplierDashboardPage = new LoginPage().
 									loginAsAdmin().
@@ -78,12 +78,14 @@ public class HHsuiteE2Etest extends BaseTest{
 									verifySubmitPrice().
 									verifySubmitPricesSuccessPage();
 	}
-	@Test
+	@Test(dependsOnMethods = { "verifySuppliersTendersAndQuotesTest" })
 	public void verifyCustomerReviewQuotesTest() throws Throwable {
-		/*
-		 * customerDashboardPage = new LoginPage(). login(). goToReviewQuotes().
-		 * verifyReviewQuotes();
-		 */
+		
+		  customerDashboardPage = new LoginPage(). 
+				  						login(). 
+				  						goToReviewQuotes().
+				  						verifyReviewQuotes();
+		 
 		
 		/*
 		 * supplierDashboardPage = new LoginPage(). loginAsAdmin().

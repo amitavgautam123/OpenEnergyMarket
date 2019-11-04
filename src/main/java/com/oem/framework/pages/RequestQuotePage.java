@@ -308,6 +308,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
 	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
 
+	String companyName_Suite = "Auto_Company_555";
+	
 	public void clickWaterUtility() {
 		click(filterByWaterUtility);
 
@@ -2712,7 +2714,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_555";
+		String companyName = "Auto_Company_55";
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
 		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
 		jse.executeScript("window.scrollBy(0,-500)");
@@ -2783,6 +2785,51 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				secondSelectedSupplierName);
 		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
 		
+		scrollToElement(confirmAndSubmit);
+		click(confirmAndSubmit);
+		Reporter.log("Clicked on confirm and submit button.", true);
+		Thread.sleep(2000);
+		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
+		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus,
+				"Tender Submit Success Popup is not displaying.");
+		click(okBtn_TenderSummaryPage);
+		Reporter.log("Clicked on Ok button.", true);
+		logout();
+		softAssertion.assertAll();
+	}
+	public void requestGasQuoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		String companyName = "Auto_Company_555";
+		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
+		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
+		jse.executeScript("window.scrollBy(0,-500)");
+		SelectingSingleContractDuration();
+		click(tenderDateHH);
+		Thread.sleep(1000);
+		String tenderDate = "12/11/2019";
+		selectFutureDateCalender(12, 10, 2019);
+		SelectingMultipleSupplier();
+		Reporter.log("Selected suppliers.", true);
+		String firstSelectedSupplierName = getText(FirstSupplier);
+		String secondSelectedSupplierName = getText(ThirdSupplier);
+		String thirdSelectedSupplierName = getText(FifthSupplier);
+
+		ClickTopSubmitButton();
+		Reporter.log("Clicked on submit button", true);
+		Thread.sleep(3000);
+		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
+		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				firstSelectedSupplierName);
+		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
+
+		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				secondSelectedSupplierName);
+		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
+
+		boolean thirdSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
+				thirdSelectedSupplierName);
+		softAssertion.assertTrue(thirdSupplierPresenceStatus, "Selected supplier is not displaying.");
 		scrollToElement(confirmAndSubmit);
 		click(confirmAndSubmit);
 		Reporter.log("Clicked on confirm and submit button.", true);
