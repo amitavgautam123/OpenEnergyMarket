@@ -27,7 +27,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	By allowSelectedBtnBottomPage = By.xpath(("(//input[@value = 'Allow Selected'])[2]"));
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
 	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
-	
+	By requestDateHeading = By.xpath("//div[contains(text(),'Request Date')]/..");
 	
 	By hHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][1]");
 	By nHHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][2]");
@@ -38,6 +38,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	By customer = By.xpath("//div[text()='Customer']");
 	By requestDate = By.xpath("//div[text()='Request Date']");
 	
+	String selectAll = "All";
 	String firstSelectedSupplierName = "British Gas Business";
 	String secondSelectedSupplierName = "Corona Energy";
 	String fourthSelectedSupplierName = "Dong Energy";
@@ -47,6 +48,12 @@ public class VerifyTendersPage extends AdminDashboardPage	{
         System.out.println("Executing isLoaded in Verify Tenders Page");
         Assert.assertTrue(isElementPresent(allowSelectedBtn),"Verify Tenders Page didn't appear.");    
     }
+	public VerifyTendersPage setRequestDateDescending() {
+		if(getAttribute(requestDateHeading, "aria-sort").equals("ascending")) {
+			click(requestDateHeading);
+		}
+		return this;
+	}
 	public String currentDate() {
 		LocalDate myObj1 = LocalDate.now(); // Create a date object
 
@@ -87,15 +94,13 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 * @return
 	 */
 	public By findQuote(String companyName) {
-		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-				+ "']/preceding-sibling::td[text() = '" + companyName + "']");
+		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate() + "')]/"
+				+ "preceding-sibling::td[text() = '" + companyName + "']");
 		return quote;
 	}
 
 	public By downloadTenderDetailsButton(String companyName) {
-		By downloadBtn = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[3]/a");
+		By downloadBtn = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate() + "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[3]/a");
 		return downloadBtn;
 	}
 
@@ -108,8 +113,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By suppliersListForQuote(String companyName) {
 		By suppliers = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/label");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/label");
 		return suppliers;
 	}
 
@@ -121,8 +126,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By checkboxAllSupplierList(String companyName) {
 		By checkboxLst = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/input");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/input");
 		return checkboxLst;
 	}
 
@@ -134,8 +139,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By checkboxMatrixPriceList(String companyName) {
 		By checkboxLst = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[4]/input");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[4]/input");
 		return checkboxLst;
 	}
 
@@ -147,8 +152,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 * @param supplierName
 	 */
 	public By checkboxSupplier(String companyName, String supplierName) {
-		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"
-				+ currentDate() + "']/preceding-sibling::td[text() = '" + companyName
+		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '"
+				+ currentDate() + "')]/preceding-sibling::td[text() = '" + companyName
 				+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
@@ -158,20 +163,29 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = "Auto_Company_55";
 		click(filterHHutility_VerifyTender);
+		Reporter.log("Click on HH filter", true);
 		Thread.sleep(1000);
+		setRequestDateDescending();
+		Reporter.log("Request quote is set descending.", true);
+		Thread.sleep(1000);
+		
+		  click(checkboxSupplier(companyName, selectAll));
+		  Reporter.log("Clicked on the checkbox for the supplier.", true);
+		  Thread.sleep(1000);
+		  click(allowSelectedBtn);
+		  Reporter.log("Clicked on allow selected button.", true); 
+		  Thread.sleep(2000);
+		 
 		/*
-		 * click(checkboxSupplier(companyName, firstSelectedSupplierName));
-		 * Reporter.log("Clicked on the checkbox for the supplier.", true);
-		 * jse.executeScript("window.scrollBy(0,1000)"); Thread.sleep(1000);
-		 * click(allowSelectedBtnBottomPage);
-		 * Reporter.log("Clicked on allow selected button.", true); Thread.sleep(2000);
+		 * scrollToElement(findQuote(companyName)); boolean
+		 * supplierPresenceInListStatusAfterAllow =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * firstSelectedSupplierName);
+		 * Reporter.log("Checked if supplier name is displaying after allowing it.",
+		 * true); softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow,
+		 * "Supplier name is still displaying after allowing it.");
 		 */
-		scrollToElement(findQuote(companyName)); 
-		boolean supplierPresenceInListStatusAfterAllow = 
-				isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after allowing it.", true); 
-		softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");
-		softAssertion.assertAll();
+		
 		logout();
 	}
 	

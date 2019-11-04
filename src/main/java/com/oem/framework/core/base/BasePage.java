@@ -153,6 +153,16 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(locator);
         new Select(driver.findElement(locator)).selectByValue(value);
     }
+    
+    public void selectByPartOfVisibleText(By locatorsOfOptions, String value) {
+    	List<WebElement> options = driver.findElements(locatorsOfOptions);
+    	for (WebElement option : options) {
+    	    if (option.getText().contains(value)) {
+    	        option.click();
+    	        break;
+    	    }
+    	}
+    }
 
     public boolean isElementPresent(By locator) {
     	return isElementPresent(locator,DEFAULT_EXPLICIT_WAIT);

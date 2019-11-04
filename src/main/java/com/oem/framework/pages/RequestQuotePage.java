@@ -2717,12 +2717,12 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		String companyName = "Auto_Company_55";
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
 		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
-		jse.executeScript("window.scrollBy(0,-500)");
+		scrollUp();
 		SelectingSingleContractDuration();
 		click(tenderDateHH);
 		Thread.sleep(1000);
-		String tenderDate = "12/11/2019";
-		selectFutureDateCalender(12, 10, 2019);
+		String tenderDate = "24/11/2019";
+		selectFutureDateCalender(24, 10, 2019);
 		SelectingMultipleSupplier();
 		Reporter.log("Selected suppliers.", true);
 		String firstSelectedSupplierName = getText(FirstSupplier);
