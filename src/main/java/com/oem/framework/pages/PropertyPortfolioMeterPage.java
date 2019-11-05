@@ -950,6 +950,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(3000);
 		//boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
+		Thread.sleep(2000);
 	//	Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
 	}
 	public void addValidNHHcontractHistory() throws Throwable {

@@ -351,7 +351,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
         Thread.sleep(2000);
         click(okBtn);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 	}
     
     

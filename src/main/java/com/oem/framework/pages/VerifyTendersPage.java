@@ -249,5 +249,13 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		click(allowSelectedBtn);
 		Reporter.log("Clicked On Allow Selected Button", true);
 	}
+	public void verifyTendersHomePage() {
+		Assert.assertTrue(isElementPresent(allowSelectedBtn), "Allow selected Button is Not Present");
+		Assert.assertTrue(isElementPresent(blockSelectedBtn), "Block selected Button is Not Present");
+		Assert.assertTrue(isElementPresent(hHUtility), "hHHUtility is Not Present");
+		Assert.assertTrue(isElementPresent(nHHUtility), "nHHUtility is Not Present");
+		Assert.assertTrue(isElementPresent(gastility), "GasUtility is Not Present");
+		Assert.assertTrue(isElementPresent(waterUtility), "WaterUtility is Not Present");
+		}
 	
 }

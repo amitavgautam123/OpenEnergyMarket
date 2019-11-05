@@ -73,6 +73,9 @@ public class AdminDashboardPage extends HeaderPage {
 		click(user);
 		click(logout);
 	}
+    public void refreshpage(){
+		driver.navigate().refresh();
+	}
 
     @Override
     protected void isLoaded() throws Error {

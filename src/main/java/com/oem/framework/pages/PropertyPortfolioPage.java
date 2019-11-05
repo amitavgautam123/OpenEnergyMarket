@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -77,9 +78,11 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Assert.assertTrue(popupPresenceStatus, "Add site popup is not displaying");
 	}
 	public void addValidSiteGeneric() throws Throwable {
+		Random random = new Random();
+		random.nextInt(1000);
 		click(addSite);		
-		Thread.sleep(1000);
-		setValue(siteName, "Auto_Domlur");
+		Thread.sleep(2000);
+		setValue(siteName, "Auto_Domlur" + random.nextInt(1000));
 		setValue(address1, "Auto_G R Complex, No. 31, Ground & 1st Floor");
 		setValue(postcode, "560071");
 		setValue(siteContactName, "Auto_Amitav");

@@ -28,6 +28,16 @@ public class CustomerDashboardPage extends HeaderPage {
     By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
     By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
+    By rightProfile=By.id("user-link");
+    By logOut=By.xpath("//a[text()='Log out']");
+
+    By unImpersonatenButton=By.id("unImpersonateBtn");
+
+    public void clickUnImpersonateButton(){
+    click(unImpersonatenButton);
+    
+    }
+    
     public CompanyProfilePage goToCompanyProfile()	{
         click(portfolioMgr);
         click(companyProfile);
@@ -133,7 +143,10 @@ public class CustomerDashboardPage extends HeaderPage {
         flexProfileManagerPage.isLoaded();
         return flexProfileManagerPage;
     }
-
+    public void logOut(){
+    	click(rightProfile);
+    	click(logOut);
+    }
 
 
     @Override

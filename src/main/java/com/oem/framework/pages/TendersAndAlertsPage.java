@@ -48,7 +48,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	
 	
 	String companyName = "Auto_Company_55";
-	String tenderDate = "12/11/2019";
+	String tenderDate = "24/11/2019";
 	
 	public By submitPricesBtn(String companyName, String tenderDate) {
 		By submitPricesBtn = By.xpath("//tr[@class = 'tender-row']/td[contains(text(), '" + currentDate() + "')]/following-sibling::td[text() = '" + companyName + "']/following-sibling::td[@class = 'utility' and text() = 'HH']/following-sibling::td[@class = 'tender-date' and text() = '" + tenderDate + "']/following-sibling::td/a[@id = 'submit-prices-link']");

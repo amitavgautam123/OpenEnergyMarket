@@ -45,6 +45,7 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 	By No_GoBackToPropertyProfoli = By.xpath("//a[@id='portfolio-manager-btn']");
 	By cancelFlexibleProfileSetUp = By.xpath("//a[@id='cancel-btn']");
+	
 	String QuestionsTextExpected = "Questions";
 	String PropertyPortfoli = "Property Portfolio | Open Energy Market";
 
@@ -52,6 +53,11 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 	By noOfSuppliers = By.xpath("//div[@class='span3 profile-summay-supplier-container']/div");
 
+	By clickHHReview=By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Review Quotes']");
+	
+	By eonImageSource=By.xpath("//img[@src='https://oemweb.s3.amazonaws.com/files/7face949-67d1-43ed-b378-2dce75fc7691-sq.jpg']");
+	By productName=By.xpath("//table//tbody//tr//td[2]");
+	
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Flexible Profile Manager Page");
@@ -788,4 +794,56 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 			System.out.println("Please enter the Correct Spelling ie. HH or nHH or Gas");
 		}
 	}
+	public void clickHHReview(){
+		click(clickHHReview);
+		Reporter.log("Clicked On HHRewiew", true);
+	}
+	
+	public void verifyQuoteRequestelemets() throws Throwable{
+		clickHHReview();
+		SoftAssert softAssertion = new SoftAssert();
+		softAssertion.assertTrue(isElementPresent(eonImageSource), "EON image is Not Present");
+		String productNameFroexcel=readExcelData("Sheet5",23,1);
+		softAssertion.assertTrue(getText(productName).contains(productNameFroexcel), "Product Name Is Different(MisMatch) ");
+		By supplierContractCosstatust=By.xpath("//table//tbody//tr//td[4]//i");
+		By networksCostsstatu=By.xpath("//table//tbody//tr//td[5]//i");
+		By enviChargesstatus=By.xpath("//table//tbody//tr//td[6]//i");
+
+		By cclStatus = By.xpath("//table//tbody//tr//td[7]/i");
+		By paymentTermsstatus=By.xpath("//table//tbody//tr//td[8]//i");
+		By billingSetUpStatus=By.xpath("//table//tbody//tr//td[9]//i");
+		By passedCreditStatus=By.xpath("//table//tbody//tr//td[10]//i");
+		By acceptButton=By.xpath("//table//tbody//tr//td[11]//input");
+
+		boolean supplierContractCostVerifystatust = getAttribute(supplierContractCosstatust, "class").equals("icon-close");
+		softAssertion.assertTrue(supplierContractCostVerifystatust, "SupplierContractCost is displaying as selected");
+
+		boolean networksCostsverifystatu = getAttribute(networksCostsstatu, "class").equals("icon-close");
+		softAssertion.assertTrue(networksCostsverifystatu, "NetworksCosts is displaying as selected");
+
+		boolean envichargesVerifyStatus=getAttribute(enviChargesstatus, "class").equals("icon-close");
+		softAssertion.assertTrue(envichargesVerifyStatus, "Enivronmental Charges is displaying as selected");
+
+		boolean cclVerifyStatus = getAttribute(cclStatus, "class").equals("icon-checkmark");
+		softAssertion.assertTrue(cclVerifyStatus, "CCL is not displaying as selected");
+
+		boolean paymentTermserifystatus = getAttribute(paymentTermsstatus, "class").equals("icon-close");
+		softAssertion.assertTrue(paymentTermserifystatus, "Payment Terms is displaying as selected");
+		boolean billingSetUpverifyStatus = getAttribute(billingSetUpStatus, "class").equals("icon-close");
+		softAssertion.assertTrue(billingSetUpverifyStatus, "BillingSetUp is displaying as selected");
+		boolean passedCreditverifyStatus = getAttribute(passedCreditStatus, "class").equals("icon-close");
+		softAssertion.assertTrue(passedCreditverifyStatus, "Passed Credit is displaying as selected");
+		boolean verifyacceptButton=isElementPresent(acceptButton);
+		softAssertion.assertTrue(verifyacceptButton, "Accept Button is not Present");
+
+
+
+
+		click(acceptButton);
+		Reporter.log("Clicked Accept Buutton", true);
+		By okButton=By.id("global-message-button-text");
+		click(okButton);
+		Reporter.log("Quote acceptenace has been passed and Clicked on Ok ");
+		softAssertion.assertAll();
+		}
 }

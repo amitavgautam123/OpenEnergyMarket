@@ -23,13 +23,13 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	By greenClick = By.xpath("//i[@style='color: green'][@class='icon-check']");
 
 	By meterForeCast = By.xpath("//a[text()=' Meter Forecasts']");
-	By meter_ElectricityTLosses = By.id("MeterForecastLosses_ElectricityTLosses");
-	By Meter_ElectricityDLosses = By.id("MeterForecastLosses_ElectricityDLosses");
+	By meter_ElectricityTLosses = By.xpath("//*[@id='MeterForecastLosses_ElectricityTLosses']");
+	By Meter_ElectricityDLosses = By.xpath("//*[@id='MeterForecastLosses_ElectricityDLosses']");
 	By saveButton = By.xpath("//button[text()='Save']");
 	By quotes = By.id("QuoteId");
 	By quoteInformation = By.xpath("//a[text()=' Quote Information']");
 
-	By tollerance = By.xpath("Quote_Tolerance");
+	By tollerance = By.xpath("//input[@id='Quote_Tolerance']");
 	By productName = By.id("Quote_ProductName");
 	By renewable = By.xpath("//a[@id='green3state']");
 	By renewableDiscount = By.id("Quote_RenewableDiscount");
@@ -42,12 +42,18 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	By passedCredit = By.xpath("//a[@id='passedcredit3state']");
 
 	By NoOfRowsInQuoteInformationTable = By.xpath("//table[@id='meter-information-table']//tbody//tr");
-	By submitSave = By.id("submit");
+	By submitSave = By.xpath("//button[text()='Save']");// ("submit");
 	By OkButton = By.xpath("//button[text()='OK']");
-
+	
+	By cancelButton=By.xpath("//button[text()='Cancel']");
+	By secondSave=By.id("submit");
 	String After15days = addDaysToCurrentDate(14);
 	String currentDate = getCuttrentDate();
 
+	By notifyCustomer=By.id("send-email");
+	By finalSubmitButtin=By.id("submit-quote-button");
+	
+	
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Flexible Tender Response Page");
@@ -86,27 +92,27 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	public void verifyQuoteRequestAfetrSelectingDate() throws Throwable {
 		Thread.sleep(3000);
 		Reporter.log("Navigated to flex tender response", true);
-		selectByVisibleText(byDate2, "16/11/2019 (21)");
-		// selectByValue(byDate2, "16/11/2019");
+		// selectByVisibleText(byDate2, "16/11/2019 (21)");
+		selectByValue(byDate2, After15days);
 		Thread.sleep(3000);
-		Reporter.log("Selected value from dd.", true);
+		Reporter.log("Selected value from DropDrown.", true);
 		Assert.assertTrue(isElementPresent(requestQuote), "Request Quote Is Not Present");
 
 	}
 
 	public void verifyMeterForeCastAfetrSelectingRequestQuote() {
-		// selectByIndex(byDate,x);
-		selectdesiredvalueFromDropDown(byDate, After15days);
-		// selectByIndex(quotes,1);
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByValue(byDate, After15days);
+		// selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
 		Assert.assertTrue(isElementPresent(meterForeCast), "MeterForeCast Is Not Present");
 	}
 
 	public void verifyElementsAfterClickingmeterforecast() throws Throwable {
-		// selectByIndex(byDate,x);
-		selectdesiredvalueFromDropDown(byDate, After15days);
-		// selectByIndex(quotes,1);
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByValue(byDate, After15days);
+		// selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
 		click(meterForeCast);
 
 		Assert.assertTrue(isElementPresent(meter_ElectricityTLosses), "meter_ElectricityTLosses Is Not Present");
@@ -115,37 +121,95 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	}
 
 	public void verifymeterforecastafterenetringNoData() throws Throwable {
-		// selectByIndex(byDate,x);
-		selectdesiredvalueFromDropDown(byDate, After15days);
-		// selectByIndex(quotes,1);
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByValue(byDate, After15days);
+		// selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
 		click(meterForeCast);
 
 		click(submitSave);
 		Assert.assertTrue(isAlertPresent(), "Alert is Not Present,Its Accepting Even when we dont enetr any data");
-		driver.switchTo().alert().accept();
+
+	}
+
+	public void verifymeterforecastTextFields() throws Throwable {
+		// selectByIndex(byDate,x);
+		SoftAssert softAssertion = new SoftAssert();
+		selectByValue(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		click(meterForeCast);
+		String atribute=getAttribute(meter_ElectricityTLosses,"type");
+		if(atribute.equals("numbers")){
+			System.out.println("meter_ElectricityTLosses text field will accept only Valid Numbers");
+		}
+		softAssertion.assertTrue(atribute.equals("numbers"),
+				"Electricity Transmission Losses % is Accepting Other Than valid Numbers Values.");
+		String atribute1=getAttribute(Meter_ElectricityDLosses,"type");
+		if(atribute1.equals("numbers")){
+			System.out.println("meter_ElectricityDLosses text field will accept only Valid Numbers");
+		}
+		softAssertion.assertTrue(atribute1.equals("numbers"),
+				"Electricity Distribution Losses % is Accepting Other Than valid Numbers Values.");
+		for (int i = 1; i <= 5; i++) {
+			String typeOfValue = readExcelData("sheet5", 13, i);
+			String TLossesInvalidData = readExcelData("sheet5", 14, i);
+
+			String DLossesInvalidData = readExcelData("sheet5", 15, i);
+
+			setValue(meter_ElectricityTLosses, TLossesInvalidData);
+			Thread.sleep(3000);
+			setValue(Meter_ElectricityDLosses, DLossesInvalidData);
+			Thread.sleep(3000);
+			String l = getText(meter_ElectricityTLosses);
+			String d = getText(Meter_ElectricityDLosses);
+			boolean displaystatusOfTLoss = l.contains(TLossesInvalidData);
+			Thread.sleep(3000);
+			boolean displaystatusOfDLoss = d.contains(DLossesInvalidData);
+			Thread.sleep(3000);
+			
+			softAssertion.assertTrue(displaystatusOfTLoss,
+					"Electricity Transmission Losses % is Accepting " + typeOfValue + " Values.");
+			softAssertion.assertTrue(displaystatusOfDLoss,
+					"Electricity Distribution Losses % " + typeOfValue + " Values.");
+			System.out.println(getText(meter_ElectricityTLosses));
+			System.out.println(getText(Meter_ElectricityDLosses));
+			for (int j = 1; j <= 12; j++) {
+				//String Data = readExcelData("sheet5", 11, i);
+				By ele = By.xpath("//tbody//tr[" + j + "]//td[6]//input");
+				setValue(ele, TLossesInvalidData);
+				String monthsData=getText(ele);
+				boolean verifymonthsData=monthsData.contains(TLossesInvalidData);
+				softAssertion.assertTrue(verifymonthsData,
+						"month "+j+" is Accepting " + typeOfValue + " Values.");
+				// enterDateInToFlexQuoteInformation();
+			}
+			// softAssertion.assertAll();
+		}
+		
+
+		softAssertion.assertAll();
 
 	}
 
 	public void verifymeterHHforecastafterenetringInvalidData() throws Throwable {
-		// selectByIndex(byDate,x);
-		selectdesiredvalueFromDropDown(byDate, After15days);
-		// selectByIndex(quotes,1);
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByValue(byDate, After15days);
+		// selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
 		click(meterForeCast);
 
 		enterInvalidDataIntoMeterHHForeCast();
 		click(submitSave);
-		Assert.assertTrue(isAlertPresent(), "Alert is Not Present,Its Accepting Invalid Data");
-		
+		Assert.assertTrue(isAlertPresent(), "Alert is Not Present,Its Accepting Invalid Negative Data");
 
 	}
 
 	public void verifyingTextFieldNotacceptsAlphabetsIntoMeterHH() throws Throwable {
-		// selectByIndex(byDate,x);
-		selectdesiredvalueFromDropDown(byDate, After15days);
-		// selectByIndex(quotes,1);
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByValue(byDate, After15days);
+		// selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByIndex(requestQuote, 1);
+		// selectdesiredvalueFromDropDown(requestQuote, "HH");
 		click(meterForeCast);
 		enterInvalidDataAlphabetsIntoMeterHHForeCast();
 		click(submitSave);
@@ -155,9 +219,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifyingQuotesDropDwonAfterEnteringValidDataInMeterHHForeCast() throws Throwable {
 
-		selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByValue(byDate, After15days);
 
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByIndex(requestQuote, 1);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
@@ -168,15 +232,22 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifyingQuotesInformationAfterSelectingHHDropDwon() throws Throwable {
 
-		selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByValue(byDate, After15days);
 
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
-		click(meterForeCast);
-		enterValidDataIntoMeterHHForeCast();
-		click(submitSave);
-		Thread.sleep(3000);
+		selectByIndex(requestQuote, 1);
+		//selectdesiredvalueFromDropDown(requestQuote, "HH");
+		if (isElementPresent(greenClick)) {
+			selectdesiredvalueFromDropDown(quotes, "EON");
+		} else {
 
-		selectdesiredvalueFromDropDown(quotes, "EON");
+			click(meterForeCast);
+			enterValidDataIntoMeterHHForeCast();
+			click(submitSave);
+
+			Thread.sleep(3000);
+			selectdesiredvalueFromDropDown(quotes, "EON");
+		}
+		// selectByVisibleText(quotes, "EON");
 
 		Assert.assertTrue(isElementPresent(quoteInformation), "QuoteInformation Link is Not Present");
 
@@ -184,15 +255,20 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifyingQuotesInformationHomePageAfterclickingQouteInformationLink() throws Throwable {
 
-		selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByValue(byDate, After15days);
 
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
-		click(meterForeCast);
-		enterValidDataIntoMeterHHForeCast();
-		click(submitSave);
-		Thread.sleep(3000);
+		selectByIndex(requestQuote, 1);
+		
+		if (isElementPresent(greenClick)) {
+			selectdesiredvalueFromDropDown(quotes, "EON");
+		} else {
+			click(meterForeCast);
+			enterValidDataIntoMeterHHForeCast();
+			click(submitSave);
+			Thread.sleep(3000);
+			selectdesiredvalueFromDropDown(quotes, "EON");
+		}
 
-		selectdesiredvalueFromDropDown(quotes, "EON");
 		click(quoteInformation);
 
 		Assert.assertTrue(isElementPresent(tollerance), "tollerance Text is Not Present");
@@ -203,20 +279,50 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifyingFexQuoteInformationPageAfterEnteringNoData() throws Throwable {
 
-		selectdesiredvalueFromDropDown(byDate, After15days);
+		selectByValue(byDate, After15days);
 
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
+		selectByIndex(requestQuote, 1);
+		if(isElementPresent(greenClick)){
+			selectdesiredvalueFromDropDown(quotes, "EON");
+		}else{
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
 		Thread.sleep(3000);
 
 		selectdesiredvalueFromDropDown(quotes, "EON");
+		}
+		
 		click(quoteInformation);
 		Thread.sleep(2000);
 
-		click(submitSave);
+		click(secondSave);
+		Thread.sleep(2000);
 		click(OkButton);
+		
+
+		Assert.assertTrue(isElementPresent(tollerance), "tollerance Text is Not Present");
+		Assert.assertTrue(isElementPresent(productName), "productName Text is Not Present");
+		Assert.assertTrue(isElementPresent(renewable), "renewable Text is Not Present");
+		Assert.assertTrue(isElementPresent(renewableDiscount), "renewableDiscount Text is Not Present");
+	}
+
+	public void verifyingFexQuoteInformationPageAfterEnteringNegativeData() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		// click(meterForeCast);
+		// enterValidDataIntoMeterHHForeCast();
+		// click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enternegativeDataInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+		// click(OkButton);
 		Thread.sleep(2000);
 
 		Assert.assertTrue(isElementPresent(tollerance), "tollerance Text is Not Present");
@@ -224,22 +330,24 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		Assert.assertTrue(isElementPresent(renewable), "renewable Text is Not Present");
 		Assert.assertTrue(isElementPresent(renewableDiscount), "renewableDiscount Text is Not Present");
 	}
-	public void verifyingFexQuoteInformationPageAfterEnteringNegativeData() throws Throwable {
 
-		selectdesiredvalueFromDropDown(byDate, After15days);
+	public void verifyingFexQuoteInformationPageAfterEnteringSpecialData() throws Throwable {
 
-		selectdesiredvalueFromDropDown(requestQuote, "HH");
-		//click(meterForeCast);
-		//enterValidDataIntoMeterHHForeCast();
-		//click(submitSave);
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		// click(meterForeCast);
+		// enterValidDataIntoMeterHHForeCast();
+		// click(submitSave);
 		Thread.sleep(3000);
 
 		selectdesiredvalueFromDropDown(quotes, "EON");
+		
 		click(quoteInformation);
 		Thread.sleep(2000);
-		enternegativeDataInToFlexHHUtilityQuoteInformation();
-		click(submitSave);
-		//click(OkButton);
+		enterSpecialCharacterInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+		// click(OkButton);
 		Thread.sleep(2000);
 
 		Assert.assertTrue(isElementPresent(tollerance), "tollerance Text is Not Present");
@@ -289,9 +397,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		setValue(Meter_ElectricityDLosses, "-20");
 		for (int i = 1; i <= 12; i++) {
 			String Data = "-10";
-			By ele = By.xpath("//tbody//tr[" + i + "]//tr[6]//input");
+			By ele = By.xpath("//tbody//tr[" + i + "]//td[6]//input");
 			setValue(ele, Data);
-			
+
 		}
 	}
 
@@ -301,7 +409,7 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 			String Data = "ABCD";
 			By ele = By.xpath("//tbody//tr[" + i + "]//input");
 			setValue(ele, Data);
-			
+
 		}
 	}
 
@@ -320,7 +428,7 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		setValue(meter_ElectricityTLosses, "20");
 		setValue(Meter_ElectricityDLosses, "20");
 		for (int i = 1; i <= 12; i++) {
-			String Data = readExcelData("sheet5", 11, i);
+			String Data = "20";// readExcelData("sheet5", 11, i);
 			By ele = By.xpath("//tbody//tr[" + i + "]//td[6]//input");
 			setValue(ele, Data);
 			// enterDateInToFlexQuoteInformation();
@@ -338,14 +446,22 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	}
 
 	public void enterInvalidDataSpecialCharctersIntoMeterHHForeCast() throws Throwable {
+
+		selectByValue(byDate, After15days);
+		selectByIndex(requestQuote, 01);
+		click(meterForeCast);
+
 		setValue(meter_ElectricityTLosses, "!@#$%^&");
 		setValue(Meter_ElectricityDLosses, "!@#$%^&");
 		for (int i = 1; i <= 12; i++) {
 			String Data = "!@#$%^&";
 			By ele = By.xpath("//tbody//tr[" + i + "]//td[6]//input");
 			setValue(ele, Data);
-			
+
 		}
+		click(submitSave);
+		Assert.assertTrue(isAlertPresent(), "its accepting Special charecters");
+
 	}
 
 	public void enterDataIntoMeterGasForeCast() throws Throwable {
@@ -367,9 +483,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	}
 
 	public void enternegativeDataInToFlexHHUtilityQuoteInformation() throws Throwable {
-		setValue(tollerance,"-10");
-		setValue(productName,"-10");
-		setValue(renewableDiscount,"-10");
+		setValue(tollerance, "-10");
+		setValue(productName, "-10");
+		setValue(renewableDiscount, "-10");
 		click(ccl);
 		int RowNum = driver.findElements(NoOfRowsInQuoteInformationTable).size();
 		for (int i = 1; i <= RowNum; i++) {
@@ -386,6 +502,105 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 			By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + i + "]/td[4]//input");
 			setValue(ele, "-10");
 		}
+	}
+
+	public void enterSpecialCharacterInToFlexHHUtilityQuoteInformation() throws Throwable {
+		setValue(tollerance, "!@#$$%");
+		setValue(productName, "!@#$$%");
+		setValue(renewableDiscount, "!@#$$%");
+		click(ccl);
+		int RowNum = driver.findElements(NoOfRowsInQuoteInformationTable).size();
+		for (int i = 1; i <= RowNum; i++) {
+			// String Data = readExcelData("sheet4", 12, i);
+			By dropDown_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + i + "]//td[2]//select");
+			selectByIndex(dropDown_ele, 2);
+			By text_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + i + "]//td[3]//input");
+			setValue(text_ele, "!@#$$%");
+
+		}
+		for (int i = 1; i <= 12; i++) {
+
+			// String Data = readExcelData("sheet5", 9, i);
+			By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + i + "]/td[4]//input");
+			setValue(ele, "!@#$$%");
+		}
+	}
+	public void verifyFlexQuoteInformationTextFields() throws Throwable {
+		// selectByIndex(byDate,x);
+		SoftAssert softAssertion = new SoftAssert();
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		// click(meterForeCast);
+		// enterValidDataIntoMeterHHForeCast();
+		// click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		click(quoteInformation);
+		
+		for (int i = 1; i <= 5; i++) {
+			String typeOfValue = readExcelData("sheet5", 13, i);
+			String InvalidDatas = readExcelData("sheet5", 14, i);
+			
+			//String DLossesInvalidData = readExcelData("sheet5", 15, i);
+
+			setValue(tollerance, InvalidDatas);
+			Thread.sleep(3000);
+			setValue(productName, InvalidDatas);
+			Thread.sleep(3000);
+			setValue(renewableDiscount, InvalidDatas);
+			String l = getText(tollerance);
+			String d = getText(productName);
+			String k=getText(renewableDiscount);
+			boolean displaystatusTollerance = l.contains(InvalidDatas);
+			Thread.sleep(3000);
+			boolean displaystatusProductName = d.contains(InvalidDatas);
+			Thread.sleep(3000);
+			boolean displaystatusrenewableDiscount = d.contains(InvalidDatas);
+			Thread.sleep(3000);
+			softAssertion.assertTrue(displaystatusTollerance,
+					"TolleranceText Field is Accepting " + typeOfValue + " Values.");
+			softAssertion.assertFalse(displaystatusProductName,
+					"ProductName is Accepting " + typeOfValue + " Values.");
+			softAssertion.assertTrue(displaystatusrenewableDiscount,
+					"RenewableDiscount is Accepting " + typeOfValue + " Values.");
+			
+			
+			int RowNum = driver.findElements(NoOfRowsInQuoteInformationTable).size();
+			for (int j = 1; j <= RowNum; j++) {
+				// String Data = readExcelData("sheet4", 12, i);
+				By element =By.xpath("//table[@id='meter-information-table']//tbody//tr[" + j + "]//td[1]/label");
+				String ElementText=getText(element);
+				By dropDown_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + j + "]//td[2]//select");
+				selectByIndex(dropDown_ele, 2);
+				By text_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + j + "]//td[3]//input");
+				setValue(text_ele, InvalidDatas);
+				Thread.sleep(3000);
+				String firstValue=getText(text_ele);
+				boolean displayElementvalue = firstValue.contains(InvalidDatas);
+				softAssertion.assertTrue(displayElementvalue,
+						"Element "+ElementText+" Text Field is Accepting " + typeOfValue + " Values.");
+
+			}
+			for (int z = 1; z <= 12; z++) {
+
+				By month=By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + z + "]/td[1]");
+				String monthText=getText(month);
+				// String Data = readExcelData("sheet5", 9, i);
+				By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + z + "]/td[4]//input");
+				setValue(ele, InvalidDatas);
+				String monthValue=getText(ele);
+				boolean displayMonthvalue = monthValue.contains(InvalidDatas);
+				softAssertion.assertTrue(displayMonthvalue,
+						"Month "+monthText+" Text Field is Accepting " + typeOfValue + " Values.");
+
+			}
+		}
+		
+
+		softAssertion.assertAll();
+
 	}
 
 	public void enterDataInToFlexHHUtilityQuoteInformation() throws Throwable {
@@ -406,36 +621,66 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 			setValue(ele, Data);
 		}
 	}
-	public void verifymeterforecastTextFields() throws Throwable {
-		// selectByIndex(byDate,x);
-		SoftAssert softAssertion= new SoftAssert();
-		selectByValue(byDate, After15days);
-		selectByIndex(requestQuote,1);
-		//selectdesiredvalueFromDropDown(requestQuote, "HH");
-		click(meterForeCast);
-	//for(int i=1;i<=5;i++){
-		String typeOfValue=readExcelData("sheet5", 13, 1);	
-		String TLossesInvalidData=readExcelData("sheet5", 14, 1);
-		
-		String DLossesInvalidData=readExcelData("sheet5", 15, 1);
-		
-		setValue(meter_ElectricityTLosses,TLossesInvalidData);
-		Thread.sleep(3000);
-		setValue(Meter_ElectricityDLosses,DLossesInvalidData);
-		Thread.sleep(3000);
-		boolean displaystatusOfTLoss=getText(meter_ElectricityTLosses).contains(TLossesInvalidData);
-		Thread.sleep(3000);
-		boolean displaystatusOfDLoss=getText(Meter_ElectricityDLosses).contains(DLossesInvalidData);
-		Thread.sleep(3000);
-		softAssertion.assertFalse(displaystatusOfTLoss, "Electricity Transmission Losses % is Accepting "+typeOfValue+" Values.");
-		softAssertion.assertFalse(displaystatusOfDLoss, "Electricity Distribution Losses % "+typeOfValue+" Values.");
-		System.out.println(getText(meter_ElectricityTLosses));
-		System.out.println(getText(Meter_ElectricityDLosses));
-		//softAssertion.assertAll();
-		//}
-		
-		softAssertion.assertAll();
+	public void enterValidInToFlexHHUtilityQuoteInformation() throws Throwable {
+		setValue(tollerance, readExcelData("sheet5", 22, 1));
+		setValue(productName, readExcelData("sheet5", 23, 1));
+		setValue(renewableDiscount, readExcelData("sheet5", 24, 1));
+		click(ccl);
+		int RowNum = driver.findElements(NoOfRowsInQuoteInformationTable).size();
+		for (int i = 1; i <= RowNum; i++) {
+			 String Data = readExcelData("sheet5", 25, 1);
+			By dropDown_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + i + "]//td[2]//select");
+			selectByIndex(dropDown_ele, 2);
+			By text_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[" + i + "]//td[3]//input");
+			setValue(text_ele, Data);
 
+		}
+		for (int i = 1; i <= 12; i++) {
+
+			 String Data = readExcelData("sheet5", 26, 1);
+			By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + i + "]/td[4]//input");
+			setValue(ele, Data);
+		}
 	}
+	public void verifyingsubmitButtonAfterEnteringValidFexQuoteInformationAndclickingSave57() throws Throwable {
 
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		// click(meterForeCast);
+		// enterValidDataIntoMeterHHForeCast();
+		// click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+		Assert.assertTrue(isElementPresent(notifyCustomer), "Notify Customer Is Not Present");
+		Assert.assertTrue(isElementPresent(finalSubmitButtin),"Submit Button is not present");
+	}
+	public void verifyconformatonpopAfterClikingSbmitButton(){
+		click(notifyCustomer);
+		click(finalSubmitButtin);
+		Assert.assertTrue(isElementPresent(cancelButton), "Cancel Button Is Not Present");
+		Assert.assertTrue(isElementPresent(OkButton), "Ok Button Is Not Present");
+	}
+	public void verifyconformatonpopsesAftercloAfterClikingcancelButton(){
+		click(cancelButton);
+		
+		Assert.assertTrue(isElementPresent(finalSubmitButtin), "Submit Button is not present after canceling the submit popup");
+	}
+	public void verifyflexResponsePageAfterClikingOkButtonOnSubmitPopUp() throws Throwable{
+		click(finalSubmitButtin);
+		click(OkButton);
+		Thread.sleep(3000);
+		By finalOk=By.xpath("//a[text()='Ok']");
+		click(finalOk);
+		Thread.sleep(3000);
+		Assert.assertTrue(isElementPresent(byDate), " ByDate DropDown is not present after submitting request");
+	}
+	
+		
 }
