@@ -25,8 +25,7 @@ public class NHHsuiteE2Etest extends BaseTest {
 	
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
-		customerDashboardPage = new LoginPage().
-				login();
+		
 		customerDashboardPage.
 			goToCompanyProfile().
 				fillCompanyProfileGeneric();

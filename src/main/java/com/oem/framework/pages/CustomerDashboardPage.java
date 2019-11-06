@@ -164,7 +164,8 @@ public class CustomerDashboardPage extends HeaderPage {
         Assert.assertTrue(isElementPresent(portfolioMgr),"Customer Dashboard Page didnt appear");
     }
 
-    public void verifyPortfolioManagerElementExists(){
+    public void verifyPortfolioManagerElementExists() throws Throwable{
+    	Thread.sleep(2000);
            verifyElementPresent(portfolioMgr);
     }
 }

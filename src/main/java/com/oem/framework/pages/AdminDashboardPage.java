@@ -76,6 +76,11 @@ public class AdminDashboardPage extends HeaderPage {
     	boolean impersonatePresence=isElementPresent(impersonateUsername);
     	Assert.assertTrue(impersonatePresence, "Admin Home page is not displyed");
     }
+    public void clickAdminDashBoard(){
+    	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+    	click(dashBoard);
+    	
+    	}
     public void logOut() throws Throwable{
 		click(user);
 		Thread.sleep(1000);

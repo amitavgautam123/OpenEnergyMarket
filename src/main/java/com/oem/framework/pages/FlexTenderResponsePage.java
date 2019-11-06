@@ -705,4 +705,70 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		By finalOk=By.xpath("//a[text()='Ok']");
 		click(finalOk);
 		}
+	public void EnterValidDataInToTheTextFieldsGas() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		click(meterForeCast);
+		enterDataIntoMeterGasForeCast();
+		click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		Thread.sleep(5000);
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexGasUtilityQuoteInformation();
+		click(secondSave);
+		}
+	public void clicksubmitDetails() throws Throwable{
+		click(notifyCustomer);
+		click(finalSubmitButton);
+		click(OkButton);
+		Thread.sleep(3000);
+		By finalOk=By.xpath("//a[text()='Ok']");
+		click(finalOk);
+		}
+	public void EnterValidDataInToTheTextFieldsHH() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		click(meterForeCast);
+		enterValidDataIntoMeterHHForeCast();
+		click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		Thread.sleep(5000);
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+		}
+	public void clickDashBoard(){
+		By dashBoard=By.xpath("//li[2]//a[1]//h3[1]");
+		click(dashBoard);
+		}
+	public void enterValidInToFlexGasUtilityQuoteInformation() throws Throwable {
+		setValue(tollerance, readExcelData("sheet5", 22, 1));
+		setValue(productName, readExcelData("sheet5", 23, 1));
+
+		click(ccl);
+		int RowNum = driver.findElements(NoOfRowsInQuoteInformationTable).size();
+		for (int i = 1; i <= RowNum; i++) {
+		String Data = readExcelData("sheet5", 29, i);
+
+		By text_ele = By.xpath("//table[@id='meter-information-table']//tbody//tr[1]//td[2]//input");
+		setValue(text_ele, Data);
+
+		}
+		for (int i = 1; i <= 12; i++) {
+
+		String Data = readExcelData("sheet5", 30, i);
+		By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + i + "]//td[3]//input");
+		setValue(ele, Data);
+		}
+		}
 }
