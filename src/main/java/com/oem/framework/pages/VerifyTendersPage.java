@@ -31,7 +31,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	
 	By hHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][1]");
 	By nHHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][2]");
-	By gastility = By.xpath("//div[@class='meter-type-circle-tiny'][3]");
+	By gasUtility = By.xpath("//div[@class='meter-type-circle-tiny'][3]");
 	By waterUtility = By.xpath("//div[@class='meter-type-circle-tiny'][4]");
 
 	By noOfRowsInCustomer = By.xpath("//table[@id='verify-quote-requests']//tbody//tr");
@@ -161,20 +161,20 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_55";
+		String companyName = readExcelData("Sheet4", 1, 1);
 		click(filterHHutility_VerifyTender);
 		Reporter.log("Click on HH filter", true);
 		Thread.sleep(1000);
 		setRequestDateDescending();
 		Reporter.log("Request quote is set descending.", true);
 		Thread.sleep(1000);
-		
-		  click(checkboxSupplier(companyName, selectAll));
-		  Reporter.log("Clicked on the checkbox for the supplier.", true);
-		  Thread.sleep(1000);
-		  click(allowSelectedBtn);
-		  Reporter.log("Clicked on allow selected button.", true); 
-		  Thread.sleep(2000);
+		click(checkboxSupplier(companyName, selectAll));
+		Reporter.log("Clicked on the checkbox for the supplier.", true);
+		scrollUp();
+		Thread.sleep(1000);
+		click(allowSelectedBtn);
+		Reporter.log("Clicked on allow selected button.", true); 
+		Thread.sleep(2000);
 		 
 		/*
 		 * scrollToElement(findQuote(companyName)); boolean
@@ -195,67 +195,39 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	}
 
 	public void verifySuppliersPresence(String utility) throws Throwable {
-		SoftAssert softassert=new SoftAssert();
-		switch(utility){
+		switch (utility) {
 		case "HH":
-			click(hHUtility);
-			break;
+		Thread.sleep(3000);
+		click(hHUtility);
+		break;
 		case "nHH":
-			click(nHHUtility);
-			break;
+		click(nHHUtility);
+		break;
 		case "Gas":
-			click(gastility);
-			break;
+		click(gasUtility);
+		break;
 		case "Water":
-			click(waterUtility);
-			break;	
+		click(waterUtility);
+		break;
 		default:
-			System.out.println("Enter Correct Utility");
+		System.out.println("Enter Correct Utility");
 		}
-		
-		click(requestDate);//click on utility
+
+		click(requestDate);// click on utility
+		Thread.sleep(3000);
 		Reporter.log("Clicked Request Date", true);
-
-		int rows = noOfRowsOrCustomers();
-		
-
-	customerLoop:	for (int i = 1; i <= rows; i++) {
-			String customerName = driver
-					.findElement(By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[2]"))
-					.getText();
-			String expectedCustomer = readExcelData("sheet4", 1, 9);
-
-			
-			
-			if (customerName.contains(expectedCustomer)) {
-				List<WebElement> NoOfSupplier = driver.findElements(
-						By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[6]/label"));
-				int NoofsuppliersinPage = NoOfSupplier.size();
-				int suppliersNo = readExcelIntData("sheet5", 0, 1);
-				boolean equalSuppliersOrNot=(NoofsuppliersinPage-1) == suppliersNo;
-				
-					for (int j = 0; j < suppliersNo; j++) {
-						boolean trueelementpresent=NoOfSupplier.contains(readExcelData("sheet5", 1, j));
-						softassert.assertTrue(trueelementpresent,"Number Of Suppliers are Not Equal");
-					}
-					Reporter.log("All Suppliers are present", true);
-					driver.findElement(By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[6]/input[1]")).click();
-					Reporter.log("Slected  All Suppliers", true);
-					break customerLoop;
-								
-			}
-
-		}
+		Thread.sleep(3000);
+		click(checkboxSupplier(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		Thread.sleep(3000);
 		click(allowSelectedBtn);
-		Reporter.log("Clicked On Allow Selected Button", true);
 	}
 	public void verifyTendersHomePage() {
 		Assert.assertTrue(isElementPresent(allowSelectedBtn), "Allow selected Button is Not Present");
 		Assert.assertTrue(isElementPresent(blockSelectedBtn), "Block selected Button is Not Present");
 		Assert.assertTrue(isElementPresent(hHUtility), "hHHUtility is Not Present");
 		Assert.assertTrue(isElementPresent(nHHUtility), "nHHUtility is Not Present");
-		Assert.assertTrue(isElementPresent(gastility), "GasUtility is Not Present");
+		Assert.assertTrue(isElementPresent(gasUtility), "GasUtility is Not Present");
 		Assert.assertTrue(isElementPresent(waterUtility), "WaterUtility is Not Present");
-		}
+	}
 	
 }

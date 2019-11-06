@@ -38,44 +38,50 @@ public class CustomerDashboardPage extends HeaderPage {
     
     }
     
-    public CompanyProfilePage goToCompanyProfile()	{
+    public CompanyProfilePage goToCompanyProfile() throws Throwable	{
         click(portfolioMgr);
+        Thread.sleep(2000);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
         companyProfilePage.isLoaded();
         return companyProfilePage;
     }
-    public CompanyProfilePage clickCompanyProfile()	{
+    public CompanyProfilePage clickCompanyProfile() throws Throwable	{
         click(companyProfile);
+        Thread.sleep(2000);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
         companyProfilePage.isLoaded();
         return companyProfilePage;
     }
     
-    public PortfolioCalendarPage goToPortfolioCalendar(){
+    public PortfolioCalendarPage goToPortfolioCalendar() throws Throwable{
         click(portfolioMgr);
+        Thread.sleep(2000);
         click(portfolioCalendar);
         PortfolioCalendarPage portfolioCalendarPage=new PortfolioCalendarPage();
         portfolioCalendarPage.isLoaded();
         return portfolioCalendarPage;
     }
-    public PortfolioCalendarPage clickPortfolioCalendar(){
+    public PortfolioCalendarPage clickPortfolioCalendar() throws Throwable{
         click(portfolioCalendar);
+        Thread.sleep(2000);
         PortfolioCalendarPage portfolioCalendarPage=new PortfolioCalendarPage();
         portfolioCalendarPage.isLoaded();
         return portfolioCalendarPage;
     }
     
-    public PropertyPortfolioPage goToPropertyPortfolio() throws AWTException{
+    public PropertyPortfolioPage goToPropertyPortfolio() throws AWTException, Throwable{
         click(portfolioMgr);
+        Thread.sleep(2000);
         click(propertyPortfolio);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
         return propertyPortfolioPage;
     }
     
-    public PropertyPortfolioPage clickPropertyPortfolio() throws AWTException{
+    public PropertyPortfolioPage clickPropertyPortfolio() throws AWTException, Throwable{
         click(propertyPortfolio);
+        Thread.sleep(2000);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
         return propertyPortfolioPage;
@@ -83,7 +89,9 @@ public class CustomerDashboardPage extends HeaderPage {
     
     public PropertyPortfolioMeterPage goToPropertyPortfolioMeterPage() throws Throwable{
         click(portfolioMgr);
+        Thread.sleep(2000);
         click(propertyPortfolio);
+        Thread.sleep(2000);
         click(siteFirstRecord);
         Thread.sleep(2000);
         try {
@@ -113,7 +121,7 @@ public class CustomerDashboardPage extends HeaderPage {
     
     public RequestQuotePage goToRequestQuote() throws Throwable{
         click(quotesAndTenders);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
@@ -129,7 +137,7 @@ public class CustomerDashboardPage extends HeaderPage {
     
     public ReviewQuoteCustomerPage goToReviewQuotes() throws Throwable{
         click(quotesAndTenders);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         click(reviewQuoteLink);
         ReviewQuoteCustomerPage reviewQuoteCustomerPage=new ReviewQuoteCustomerPage();
         reviewQuoteCustomerPage.isLoaded();
@@ -137,14 +145,15 @@ public class CustomerDashboardPage extends HeaderPage {
     }
     public CustomerDashboardPage goToFlexibleProfileManager() throws Throwable{
         click(flexManagement);
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         click(flexProfileMgr);
         FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
         flexProfileManagerPage.isLoaded();
         return flexProfileManagerPage;
     }
-    public void logOut(){
+    public void logOut() throws Throwable{
     	click(rightProfile);
+    	Thread.sleep(2000);
     	click(logOut);
     }
 

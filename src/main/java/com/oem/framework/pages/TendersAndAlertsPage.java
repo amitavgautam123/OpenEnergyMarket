@@ -47,11 +47,8 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	By waterUtilityFilter_ReviewQuotes = By.xpath("//td[contains(text(), 'Please select a Utility')]/following-sibling::td/div[4]");		
 	
 	
-	String companyName = "Auto_Company_55";
-	String tenderDate = "24/11/2019";
-	
-	public By submitPricesBtn(String companyName, String tenderDate) {
-		By submitPricesBtn = By.xpath("//tr[@class = 'tender-row']/td[contains(text(), '" + currentDate() + "')]/following-sibling::td[text() = '" + companyName + "']/following-sibling::td[@class = 'utility' and text() = 'HH']/following-sibling::td[@class = 'tender-date' and text() = '" + tenderDate + "']/following-sibling::td/a[@id = 'submit-prices-link']");
+	public By submitPricesBtn(String companyName, String tenderDate, String utility) {
+		By submitPricesBtn = By.xpath("//tr[@class = 'tender-row']/td[contains(text(), '" + currentDate() + "')]/following-sibling::td[text() = '" + companyName + "']/following-sibling::td[@class = 'utility' and text() = '" + utility + "']/following-sibling::td[@class = 'tender-date' and text() = '" + tenderDate + "']/following-sibling::td/a[@id = 'submit-prices-link']");
 		return submitPricesBtn;
 	}
 	
@@ -113,26 +110,35 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Assert.assertTrue(isElementPresent(supplierSummaryTable),"Supplier Summary table is not shown after impersonating");
 		return this;
 	}
-	public TendersAndAlertsPage verifyTenderPresenceInTendersAndAlertsTest() throws Throwable {		
-		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate));		
-		click(submitPricesBtn(companyName, tenderDate));
-		Reporter.log("Clicked on submit prices button.", true);
+	public TendersAndAlertsPage verifyTenderPresenceInTendersAndAlertsTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 1, 3);
+		
+		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate, utility));		
+		//click(submitPricesBtn(companyName, tenderDate, utility));
+		//Reporter.log("Clicked on submit prices button.", true);
 		Thread.sleep(2000);
 		Assert.assertTrue(tenderDisplayStatus, "Tender is not displaying with InProgress status in Supplier account after verifying in admin panel");
 		return this;
 		
 	}
-	public TendersAndAlertsPage navigateToSubmitPricePageTest() throws Throwable {		
-		click(submitPricesBtn(companyName, tenderDate));
+	public TendersAndAlertsPage navigateToSubmitPricePageTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 1, 3);
+		
+		click(submitPricesBtn(companyName, tenderDate, utility));
 		Reporter.log("Clicked on submit prices button.", true);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		boolean pageLoadedStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPrices");
 		Assert.assertTrue(pageLoadedStatus, "Submit price page is not displaying");
 		return this;
 		
 	}
 	public TendersAndAlertsPage verifySubmitPrice() throws Throwable {
-		
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
 		SoftAssert softAssertion = new SoftAssert();
 		boolean clientNameDisplayStatus = getText(clientName).contains("Client: "+companyName);
 		softAssertion.assertTrue(clientNameDisplayStatus, "Client name is not displaying in 'Submit Prices' page.");
@@ -140,24 +146,32 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(commodityDisplayStatus, "Commodity is not displaying.");
 		boolean tenderDateDisplayStatus = getText(tenderDateDetails).contains(tenderDate);
 		softAssertion.assertTrue(tenderDateDisplayStatus, "Tender Date is not displaying correctly.");
-		boolean quoteDropdownDisplayStatus = isElementPresent(quoteRequestStatusDropdown);
-		softAssertion.assertTrue(quoteDropdownDisplayStatus, "Quote dropdown is not displaying correctly.");
+		//boolean quoteDropdownDisplayStatus = isElementPresent(quoteRequestStatusDropdown);
+		//softAssertion.assertTrue(quoteDropdownDisplayStatus, "Quote dropdown is not displaying.");
 		boolean durationDropdownDisplayStatus = isElementPresent(durationDropdown);
 		softAssertion.assertTrue(durationDropdownDisplayStatus, "Duration dropdown is not displaying correctly.");
-		selectByValue(durationDropdown, readExcelData("Sheet1", 1, 2));
+		selectByIndex(durationDropdown, 1);
+		Thread.sleep(2000);
+		scrollDown();
 		boolean toleranceEdtBoxDisplayStatus = isElementPresent(toleranceEdtBox,2);
 		softAssertion.assertTrue(toleranceEdtBoxDisplayStatus, "Tolerance edit box is not displaying after entering contract duration.");
 		setValue(toleranceEdtBox, readExcelData("Sheet6", 1, 2));
 		selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 3));
-		selectByIndex(creditStatusDropdown, 2);
-		Thread.sleep(1000);
-		//selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 4));
+		selectByIndex(creditStatusDropdown, 0);
 		setValue(commentsEdtBox, readExcelData("Sheet6", 1, 5));
+		Thread.sleep(1000);
+		selectByIndex(productDropdown, 2);
+		Thread.sleep(1000);
+		scrollDown();
+		//selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 4));
+		
 		boolean uploadPriceBtnDisplayStatus = isElementPresent(uploadPrice);
 		softAssertion.assertTrue(uploadPriceBtnDisplayStatus, "Upload Price button is not displaying.");
-		validateUploadPriceImproperData();
+		//validateUploadPriceImproperData();
 		setValue(uploadPrice, readExcelData("Sheet6", 1, 6));
+		Thread.sleep(2000);
 		click(submitBtn);		
+		Thread.sleep(7000);
 		softAssertion.assertAll();
 		return this;
 		
@@ -178,11 +192,13 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(errorMsgDisplayStatus, "Error message for invalid file is not diplaying.");
 		softAssertion.assertAll();
 	}
-	public TendersAndAlertsPage verifySubmitPricesSuccessPage() {
+	public TendersAndAlertsPage verifySubmitPricesSuccessPage() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean submitPricesSuccessPageDisplayStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPricesSuccess");
 		softAssertion.assertTrue(submitPricesSuccessPageDisplayStatus, "Submit price success page is not displaying.");
 		click(confirmBtn);
+		Thread.sleep(5000);
+		
 		softAssertion.assertAll();
 		return this;
 	}

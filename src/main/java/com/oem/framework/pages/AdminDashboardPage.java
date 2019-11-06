@@ -17,9 +17,11 @@ public class AdminDashboardPage extends HeaderPage {
 
     By user=By.xpath("//a[@id='user-link']");
 	By logout=By.xpath("//a[contains(text(),'Log out')]");
-
-    public CustomerDashboardPage impersonate(String email){
+	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+	
+    public CustomerDashboardPage impersonate(String email) throws Throwable{
         setValue(impersonateUsername,email);
+        Thread.sleep(1000);
         click(impersonateBtn);
         return new CustomerDashboardPage();
     }
@@ -39,11 +41,13 @@ public class AdminDashboardPage extends HeaderPage {
 
     public TenderOpenQuotesPage navigateToTenderQuotes() throws Throwable{
         click(fixedProcurementAdmin);
+        Thread.sleep(2000);
         click(tenderOpenQuotes);
         return new TenderOpenQuotesPage();
     }
     public TenderResponsePage navigateToTenderResponse() throws Throwable{
     	 click(fixedProcurementAdmin);
+    	 Thread.sleep(2000);
     	 click(tenderResponseLnk);
          return new TenderResponsePage();
     }
@@ -65,12 +69,16 @@ public class AdminDashboardPage extends HeaderPage {
         flexTenderResponsePage.isLoaded();
         return new FlexTenderResponsePage();
     }
+    public void goToAdminDashBoard(){
+    	click(dashBoard);    	
+    }
     public void verifyAdminHomePage(){
     	boolean impersonatePresence=isElementPresent(impersonateUsername);
     	Assert.assertTrue(impersonatePresence, "Admin Home page is not displyed");
     }
-    public void logOut(){
+    public void logOut() throws Throwable{
 		click(user);
+		Thread.sleep(1000);
 		click(logout);
 	}
     public void refreshpage(){

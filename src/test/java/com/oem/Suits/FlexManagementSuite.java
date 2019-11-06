@@ -335,5 +335,20 @@ public class FlexManagementSuite extends BaseTest {
 		VerifyTendersPage veri = new VerifyTendersPage();
 		veri.verifySuppliersPresence("HH");	
 	}
+	@Test(priority = 34)
+	public void verifyFlexTenderResponse_ReviewsuppliersubmittedQuoteusingImporsonate() throws Throwable{
+	adminDashboardPage.goFlexTenderResponse();
+	FlexTenderResponsePage abc = new FlexTenderResponsePage();
+	abc.EnterValidDataIntoTheTextFields();
+	abc.clickSubmitDetails();
+	adminDashboardPage.goToAdminDashBoard();
+	adminDashboardPage.impersonateCustomer();
+	CustomerDashboardPage customerDashboardPage2=new CustomerDashboardPage();
+	customerDashboardPage2.goToFlexibleProfileManager();
+	FlexProfileManagerPage flexRev = new FlexProfileManagerPage();
+	flexRev.verifyQuoteRequestelemets();
+
+
+	}
 	
 }

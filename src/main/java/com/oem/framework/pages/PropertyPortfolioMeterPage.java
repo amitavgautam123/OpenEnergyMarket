@@ -307,26 +307,35 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(2000);
 		click(editMeterBtn(meterNum));
 		Thread.sleep(2000);
 		Random random = new Random();
 		String gasMeterNum = String.valueOf(random.nextInt(1000000000));
 		setValue(gasMeterNumber, gasMeterNum);
+		Thread.sleep(2000);
 		selectByVisibleText(procurementType, "Flexible");
+		Thread.sleep(2000);
 		String expectedConsumptionValue = String.valueOf(random.nextInt(5000));
 		setValue(expectedConsumption, expectedConsumptionValue);
+		Thread.sleep(2000);
 		selectByVisibleText(gasCurrentSuppliers, "Crown Gas");
+		Thread.sleep(2000);
 		click(contractEndDate);
+		Thread.sleep(2000);
 		selectFutureDateCalender(24, random.nextInt(12), 2020);
+		Thread.sleep(2000);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(okBtn);
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(gasMeterNum));
+		Thread.sleep(2000);
 		boolean expectedConsumptionDisplayStatus = expectedConsumptionData(gasMeterNum).contains(expectedConsumptionValue) && expectedConsumptionData(gasMeterNum).contains("kWh");
 		softAssertion.assertTrue(expectedConsumptionDisplayStatus, "Expected consumption is not displaying correct value");
 		viewMeterDetails(gasMeterNum);
+		Thread.sleep(2000);
 		boolean meterNumberDisplayStatus = meterNumberInMeterDetails(gasMeterNum).equals(gasMeterNum);
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
@@ -340,9 +349,11 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(1000);
 		click(editMeterBtn(meterNum));
 		Thread.sleep(2000);
 		boolean editGasMeterPopupDisplayStatus = isElementPresent(editMeterPopup);
+		scrollUp();
 		Assert.assertTrue(editGasMeterPopupDisplayStatus, "Edit popup is not displaying");
 	}
 	
@@ -978,12 +989,12 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	public void displayAddContractHistoryHHutilityPopup() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		
 	}
 	
-	public void validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
+	public PropertyPortfolioMeterPage validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 	
 		displayAddContractHistoryHHutilityPopup();
@@ -1000,6 +1011,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+		return this;
 	}
 	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded() throws Throwable {
 		displayAddContractHistoryHHutilityPopup();
@@ -1037,7 +1049,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 	}
-	public void validateMandatoryFieldsContractHistoryPopupDataProvider2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+	public PropertyPortfolioMeterPage validateMandatoryFieldsContractHistoryPopupDataProvider2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		
 		displayAddContractHistoryHHutilityPopup();
@@ -1049,7 +1061,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(dateTraded);
 		Thread.sleep(1000);
 		selectPrevDateCalender(day, month, year);
-		
+		Thread.sleep(1000);
 		setValue(this.dayRate, dayRate);
 		setValue(this.nightRate, nightRate);
 		setValue(this.standingCharge, standingCharge);
@@ -1058,6 +1070,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+		return this;
 	}
 	public void validateMandatoryFieldsContractHistoryPopupDataProvider3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {

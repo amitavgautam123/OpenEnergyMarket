@@ -341,15 +341,19 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         return this;
     }
     public void fillCompanyProfileGeneric() throws Throwable {
-		String compName = "Auto_Company_55";
+		String compName = readExcelData("Sheet4", 1, 1);
 		setValue(companyName, compName);
+		Thread.sleep(1000);
     	setValue(companyRegisteredAddress, "Bangalore");
-        
+    	Thread.sleep(1000);
         setValue(compPostCode, "2983472");
+        Thread.sleep(1000);
         setValue(phone, "8923472834");
+        Thread.sleep(1000);
         setValue(companyRegNum, "8173812323");
+        Thread.sleep(1000);
         click(saveBtn);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         click(okBtn);
         Thread.sleep(2000);
 	}

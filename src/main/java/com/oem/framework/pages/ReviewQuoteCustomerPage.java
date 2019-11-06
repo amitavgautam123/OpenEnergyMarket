@@ -16,6 +16,10 @@ public class ReviewQuoteCustomerPage extends HeaderPage{
 	By currentContract = By.xpath("//h3[text() = 'Current Contract ']/following-sibling::div/div/div/table/tbody/tr/td[contains(text(), 'Current Contract')]");
 	By expiredBtn = By.xpath("//h3[text() = 'Proposed Quotes']/following-sibling::div/div/table/tbody/tr/td/button[text()='Expired']");
 	
+	By acceptBtn = By.xpath("//button[text() = 'Accept']");
+	By okBtn = By.xpath("//button[text() = 'OK']");
+	
+	
 	@Override
     protected void isLoaded() throws Error {
         System.out.println("Executing isLoaded in Customer Review Quote Page");
@@ -43,12 +47,23 @@ public class ReviewQuoteCustomerPage extends HeaderPage{
 		softAssertion.assertAll();
 		return this;
     }
-	public CustomerDashboardPage verifyReviewQuotes() {
+	public ReviewQuoteCustomerPage verifyReviewQuotes() {
 		SoftAssert softAssertion = new SoftAssert();
 		verifyFilterUtilityPresence();
 		verifyCurrentContractAndProposedQuotePresence();
 		boolean currentContractDisplayStatus = isElementPresent(currentContract);
+		softAssertion.assertTrue(currentContractDisplayStatus, "Current contract is not displaying.");
 		boolean expiredQuoteDisplayStatus = isElementPresent(currentContract);
-	return new CustomerDashboardPage();
+		softAssertion.assertAll();
+	return this;
 	}
+	public void acceptQuoteTest() throws Throwable{
+		SoftAssert softAssertion = new SoftAssert();
+		click(acceptBtn);
+		Thread.sleep(2000);
+		click(okBtn);
+		Thread.sleep(2000);
+		softAssertion.assertAll();
+		
+    }
 }

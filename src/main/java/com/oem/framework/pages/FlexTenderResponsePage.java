@@ -51,8 +51,7 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	String currentDate = getCuttrentDate();
 
 	By notifyCustomer=By.id("send-email");
-	By finalSubmitButtin=By.id("submit-quote-button");
-	
+	By finalSubmitButton=By.id("submit-quote-button");
 	
 	@Override
 	protected void isLoaded() throws Error {
@@ -659,21 +658,21 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		enterValidInToFlexHHUtilityQuoteInformation();
 		click(secondSave);
 		Assert.assertTrue(isElementPresent(notifyCustomer), "Notify Customer Is Not Present");
-		Assert.assertTrue(isElementPresent(finalSubmitButtin),"Submit Button is not present");
+		Assert.assertTrue(isElementPresent(finalSubmitButton),"Submit Button is not present");
 	}
 	public void verifyconformatonpopAfterClikingSbmitButton(){
 		click(notifyCustomer);
-		click(finalSubmitButtin);
+		click(finalSubmitButton);
 		Assert.assertTrue(isElementPresent(cancelButton), "Cancel Button Is Not Present");
 		Assert.assertTrue(isElementPresent(OkButton), "Ok Button Is Not Present");
 	}
 	public void verifyconformatonpopsesAftercloAfterClikingcancelButton(){
 		click(cancelButton);
 		
-		Assert.assertTrue(isElementPresent(finalSubmitButtin), "Submit Button is not present after canceling the submit popup");
+		Assert.assertTrue(isElementPresent(finalSubmitButton), "Submit Button is not present after canceling the submit popup");
 	}
 	public void verifyflexResponsePageAfterClikingOkButtonOnSubmitPopUp() throws Throwable{
-		click(finalSubmitButtin);
+		click(finalSubmitButton);
 		click(OkButton);
 		Thread.sleep(3000);
 		By finalOk=By.xpath("//a[text()='Ok']");
@@ -681,6 +680,29 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		Thread.sleep(3000);
 		Assert.assertTrue(isElementPresent(byDate), " ByDate DropDown is not present after submitting request");
 	}
-	
-		
+	public void EnterValidDataIntoTheTextFields() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		click(meterForeCast);
+		enterValidDataIntoMeterHHForeCast();
+		click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+		}
+	public void clickSubmitDetails() throws Throwable{
+		click(notifyCustomer);
+		click(finalSubmitButton);
+		click(OkButton);
+		Thread.sleep(3000);
+		By finalOk=By.xpath("//a[text()='Ok']");
+		click(finalOk);
+		}
 }

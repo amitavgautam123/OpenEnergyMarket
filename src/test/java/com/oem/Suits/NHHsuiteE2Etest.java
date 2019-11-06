@@ -3,13 +3,14 @@ package com.oem.Suits;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.AdminDashboardPage;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.PropertyPortfolioMeterPage;
 import com.oem.framework.pages.SupplierDashboardPage;
 
-public class NHHsuiteE2Etest {
+public class NHHsuiteE2Etest extends BaseTest {
 
 	CustomerDashboardPage customerDashboardPage;
 	AdminDashboardPage adminDashboardPage;
@@ -17,12 +18,15 @@ public class NHHsuiteE2Etest {
 	String meterValue;
 	
 	@BeforeClass(alwaysRun = true)
-	public void beforeHHSuite() throws Throwable {
-		customerDashboardPage = new LoginPage().login();
+	public void beforeNHHSuite() throws Throwable {
+		customerDashboardPage = new LoginPage().
+									login();
 	}
 	
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
+		customerDashboardPage = new LoginPage().
+				login();
 		customerDashboardPage.
 			goToCompanyProfile().
 				fillCompanyProfileGeneric();

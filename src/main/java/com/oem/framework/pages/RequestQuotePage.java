@@ -164,11 +164,11 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	By SelectAllChooseSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//div[@id='selectall']");
 	By listOfHHsupplierCheckbox = By.xpath("//div[@id='request-electricity-hh-quote']//li[*]//label[1]");
-	By FirstSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[1]//label[1]");
-	By ThirdSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[3]//label[1]");
-	By FourthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[4]//label[1]");
-	By FifthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[5]//label[1]");
-	By SixthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//li[6]//label[1]");
+	By FirstSupplier_BGB = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[1]//label[1]");
+	By thirdSupplier_CoronaEnergy = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[3]//label[1]");
+	By fourthSupplier_DEnergi = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[4]//label[1]");
+	By fifthSupplier_DongEnergy = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[5]//label[1]");
+	By SixthSupplier = By.xpath("//div[@id='request-electricity-hh-quote']//section[@id='suppliers']//li[6]//label[1]");
 
 	By HHElectricity = By.xpath("//a[@id='request-electricity-hh-quote-a']");
 
@@ -666,17 +666,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(SelectAllChooseSupplier);
 	}
 
-	public void SelectingSingleSupplier() {
+	public void selectingSingleHHsupplier() {
 		click(SelectAllChooseSupplier);
-		click(FirstSupplier);
+		click(FirstSupplier_BGB);
 	}
 
 	public void SelectingMultipleSupplier() {
 		click(SelectAllChooseSupplier);
-		click(FirstSupplier);
-		click(ThirdSupplier);
-		click(FourthSupplier);
-		click(FifthSupplier);
+		click(FirstSupplier_BGB);
+		click(thirdSupplier_CoronaEnergy);
+		click(fourthSupplier_DEnergi);
+		click(fifthSupplier_DongEnergy);
 	}
 
 	public void ClickTopSubmitButton() {
@@ -1133,9 +1133,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(SelectAllChoosemeter);
 		selectByIndex(ContractDuration, 02);
 		click(SelectAllChooseSupplier);
-		click(ThirdSupplier);
-		click(FourthSupplier);
-		click(FifthSupplier);
+		click(thirdSupplier_CoronaEnergy);
+		click(fourthSupplier_DEnergi);
+		click(fifthSupplier_DongEnergy);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)");
 		click(TopSubmit);
@@ -1154,7 +1154,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_HHUtility();
 		SelectingZeroMeters();
 		SelectingMultipleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		boolean errorMessageDisplyStatusForNotSelectingMeter = getText(message)
 				.contains("Please select at least one meter for a quote request.");
@@ -1184,7 +1184,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_HHUtility();
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
 	}
@@ -1193,7 +1193,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_HHUtility();
 		SelectingMultipleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
 	}
@@ -1202,7 +1202,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_HHUtility();
 		SelectingSingleMeter();
 		SelectingMultipleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
 	}
@@ -1220,7 +1220,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_HHUtility();
 		SelectingMultipleMeter();
 		SelectingMultipleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
 	}
@@ -2210,14 +2210,14 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		// Reporter.log("Clicked on filter for HH Utility", true);
 		click(SelectAllChooseSupplier);
 		// Reporter.log("Clicked on select all option for HH utility.", true);
-		click(FirstSupplier);
+		click(FirstSupplier_BGB);
 		// Reporter.log("Clicked the checkbox for British gas business.", true);
 		Thread.sleep(1000);
-		boolean checkboxCheckedstatusforBritishGasBusiness = driver.findElement(FirstSupplier).isSelected();
+		boolean checkboxCheckedstatusforBritishGasBusiness = driver.findElement(FirstSupplier_BGB).isSelected();
 		softAssertion.assertFalse(checkboxCheckedstatusforBritishGasBusiness,
 				"Checkbox is unchecked for British Gas Business.");
-		click(ThirdSupplier);
-		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(ThirdSupplier).isSelected();
+		click(thirdSupplier_CoronaEnergy);
+		boolean checkboxCheckedstatusForCoronaEnergy = driver.findElement(thirdSupplier_CoronaEnergy).isSelected();
 		softAssertion.assertFalse(checkboxCheckedstatusForCoronaEnergy, "Checkbox is unchecked for Corona Energy.");
 		// FourthSupplier
 		softAssertion.assertAll();
@@ -2226,7 +2226,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validateTenderSummaryPageDisplay() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		Thread.sleep(3000);
 		boolean verifyTenderRequestSummaryURL = driver.getCurrentUrl().contains("RequestQuoteSubmit");
@@ -2236,7 +2236,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validateEditCompanyProfileOption() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		Thread.sleep(3000);
 		click(editCompanyDetailsTenderSummaryPage);
@@ -2248,7 +2248,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validateEditAdditionalReqOptionTenderSummaryPage() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		Thread.sleep(3000);
 		click(editAdditionalReqTenderSummaryPage);
@@ -2260,7 +2260,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void validateEditQuoteOptionTenderSummaryPage() throws Throwable {
 		SelectingSingleMeter();
 		SelectingSingleContractDuration();
-		SelectingSingleSupplier();
+		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		Thread.sleep(3000);
 		click(editMeterDetailsTenderSummaryPage);
@@ -2293,9 +2293,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectFutureDateCalender(12, 10, 2019);
 		SelectingMultipleSupplier();
 		Reporter.log("Selected suppliers.", true);
-		String firstSelectedSupplierName = getText(FirstSupplier);
-		String secondSelectedSupplierName = getText(ThirdSupplier);
-		String fourthSelectedSupplierName = getText(FifthSupplier);
+		String firstSelectedSupplierName = getText(FirstSupplier_BGB);
+		String secondSelectedSupplierName = getText(thirdSupplier_CoronaEnergy);
+		String fourthSelectedSupplierName = getText(fifthSupplier_DongEnergy);
 
 		ClickTopSubmitButton();
 		Reporter.log("Clicked on submit button", true);
@@ -2697,7 +2697,8 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	 * @return
 	 */
 	public By checkboxForMeter(String mpan) {
-		By checkboxMeter = By.xpath("//label[contains(text(),'" + mpan + "')]/../../../..");
+		By checkboxMeter = By.xpath("//input[contains(@value, '" + mpan + "')]/..");
+		//By checkboxMeter = By.xpath("//label[contains(text(),'" + mpan + "')]/../../../..");
 		return checkboxMeter;
 	}
 
@@ -2714,36 +2715,26 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_55";
-		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
-		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
+		String companyName = readExcelData("Sheet4", 1, 1);
+		scrollToElement(checkboxForMeter(readExcelData("Sheet4", 1, 4)));	
+		selectingSingleMeterModified((readExcelData("Sheet4", 1, 4)));
 		scrollUp();
 		SelectingSingleContractDuration();
 		click(tenderDateHH);
 		Thread.sleep(1000);
-		String tenderDate = "24/11/2019";
-		selectFutureDateCalender(24, 10, 2019);
-		SelectingMultipleSupplier();
+		String tenderDate = "25/12/2019";
+		selectFutureDateCalender(25, 11, 2019);
+		selectingSingleHHsupplier();
 		Reporter.log("Selected suppliers.", true);
-		String firstSelectedSupplierName = getText(FirstSupplier);
-		String secondSelectedSupplierName = getText(ThirdSupplier);
-		String thirdSelectedSupplierName = getText(FifthSupplier);
-
+		String selectedSupplierName = getText(FirstSupplier_BGB);
 		ClickTopSubmitButton();
 		Reporter.log("Clicked on submit button", true);
 		Thread.sleep(3000);
 		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
 		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
-				firstSelectedSupplierName);
+				selectedSupplierName);
 		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
 
-		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
-				secondSelectedSupplierName);
-		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
-
-		boolean thirdSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
-				thirdSelectedSupplierName);
-		softAssertion.assertTrue(thirdSupplierPresenceStatus, "Selected supplier is not displaying.");
 		scrollToElement(confirmAndSubmit);
 		click(confirmAndSubmit);
 		Reporter.log("Clicked on confirm and submit button.", true);
@@ -2811,9 +2802,9 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectFutureDateCalender(12, 10, 2019);
 		SelectingMultipleSupplier();
 		Reporter.log("Selected suppliers.", true);
-		String firstSelectedSupplierName = getText(FirstSupplier);
-		String secondSelectedSupplierName = getText(ThirdSupplier);
-		String thirdSelectedSupplierName = getText(FifthSupplier);
+		String firstSelectedSupplierName = getText(FirstSupplier_BGB);
+		String secondSelectedSupplierName = getText(thirdSupplier_CoronaEnergy);
+		String thirdSelectedSupplierName = getText(fifthSupplier_DongEnergy);
 
 		ClickTopSubmitButton();
 		Reporter.log("Clicked on submit button", true);

@@ -72,7 +72,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	{
 		
 		click(addSite);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean popupPresenceStatus = isElementPresent(addNewSitePopup);
 		refreshPage();
 		Assert.assertTrue(popupPresenceStatus, "Add site popup is not displaying");
@@ -83,20 +83,30 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		click(addSite);		
 		Thread.sleep(2000);
 		setValue(siteName, "Auto_Domlur" + random.nextInt(1000));
+		Thread.sleep(2000);
 		setValue(address1, "Auto_G R Complex, No. 31, Ground & 1st Floor");
+		Thread.sleep(2000);
 		setValue(postcode, "560071");
+		Thread.sleep(2000);
 		setValue(siteContactName, "Auto_Amitav");
+		Thread.sleep(2000);
 		setValue(contactPhoneNo, "9823423412");
+		Thread.sleep(2000);
 		setValue(contactEmail, "andola.amitav@gmail.com");
+		Thread.sleep(2000);
 		setValue(siteID, "Auto_555");
+		Thread.sleep(2000);
 		setValue(address2, "Auto_Kempegowda Service Rd");
+		Thread.sleep(2000);
 		setValue(address3, "Auto_Bengaluru");
+		Thread.sleep(2000);
 		setValue(address4, "Auto_Karnataka");
+		Thread.sleep(2000);
 		setValue(siteArea, "200");
 			WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", saveSiteBtn);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		try {
 			click(tipCloseBtn);
 		}
@@ -130,20 +140,30 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		click(addSite);
 		Thread.sleep(1000);
 		setValue(siteName, name);
+		Thread.sleep(1000);
 		setValue(address1, addr1);
+		Thread.sleep(1000);
 		setValue(postcode, postCode);
+		Thread.sleep(1000);
 		setValue(siteContactName, siteContactNAME);
+		Thread.sleep(1000);
 		setValue(contactPhoneNo, contactPHONENo);
+		Thread.sleep(1000);
 		setValue(contactEmail, contactEMAIL);
+		Thread.sleep(1000);
 		setValue(siteID, site_ID);
+		Thread.sleep(1000);
 		setValue(address2, addr2);
+		Thread.sleep(1000);
 		setValue(address3, addr3);
+		Thread.sleep(1000);
 		setValue(address4, addr4);
+		Thread.sleep(1000);
 		setValue(siteArea, siteAREA);
 	WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", saveSiteBtn);
-
+		Thread.sleep(2000);
 		validateMandatoryFieldsAddSitePopup();
 		refreshPage();
 		/*
@@ -160,7 +180,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 	{
 		SoftAssert softAssertion = new SoftAssert();
 		click(siteFirstRecord);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(addMeter);
 		boolean hhElectricPresenceStatus = isElementExistInDropDown(addMeterUtilities, "HH Electric");
 		softAssertion.assertTrue(hhElectricPresenceStatus, "HH Electric is not displaying in 'Add Meter' dropdown");
