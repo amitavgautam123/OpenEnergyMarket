@@ -5,14 +5,17 @@ import com.oem.framework.pages.AdminDashboardPage;
 import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.TenderOpenQuotesPage;
 import com.oem.framework.pages.TenderResponsePage;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.ITest;
+import org.testng.annotations.*;
 
+import java.lang.reflect.Method;
 
+@Listeners(com.oem.framework.listeners.CustomReporter.class)
 public class TenderResponseTests extends BaseTest {
     AdminDashboardPage adminDashboardPage;
     TenderResponsePage tenderResponsePage;
+    // Has to be set to prevent NullPointerException from reporters
+    protected String mTestCaseName = "";
 
     @BeforeClass(alwaysRun = true)
     public void beforeTenderQuote() throws Throwable {
@@ -145,7 +148,7 @@ public class TenderResponseTests extends BaseTest {
         return new Object[][] {
                 { "FPA_TOP_TC_012 - verify Alert Night consumption:0", "10","0" },
                 { "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption", "abc","def" },
-                { "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
+                /*{ "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
                 { "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption", "def","abc#$%!" },
                 { "FPA_TOP_TC_016 - verify Alert appears when SplCharts is provided for both", "@#$%","@#$%" },
                 { "FPA_TOP_TC_017 - verify Alert appears when SplCharts is provided for both", " ","@#$%" },
@@ -159,7 +162,7 @@ public class TenderResponseTests extends BaseTest {
                 { "FPA_TOP_TC_025 - verify Alert Day:Nos, night: chars", "1234","abc" },
                 { "FPA_TOP_TC_026 - verify Alert Day:chars, night: Nos", "abcd","1234" },
                 { "FPA_TOP_TC_027 - verify Alert Day:Nos, night: Special chars", "1234","!@#$%" },
-                { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" },
+                { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" },*/
         };
 
     }
@@ -177,5 +180,12 @@ public class TenderResponseTests extends BaseTest {
                 .verifyPopUpDialogue();
 
     }
+
+
+
+
+
+
+
 }
 

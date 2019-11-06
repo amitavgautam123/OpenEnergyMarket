@@ -15,6 +15,7 @@ import com.oem.framework.pages.HeaderPage;
 import com.oem.framework.reports.ExtentManager;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
+import org.testng.ITest;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -29,9 +30,9 @@ import java.util.Base64;
 import java.util.Date;
 
 
-public abstract class BaseTest implements Base {
+public abstract class BaseTest implements Base, ITest {
 
-
+    String mTestCaseName;
 
     protected Logger logger=getLogger();
     @BeforeSuite(alwaysRun = true)
@@ -52,20 +53,22 @@ public abstract class BaseTest implements Base {
 
     @BeforeMethod(alwaysRun = true)
     public void baseInit(Method method, ITestContext ctx,Object[] params) throws IOException {
+
+        updateTestNameForDataProvider(method,params);
         System.out.println("Executing BaseTest before method");
-        System.out.println("**************** Starting test : " + getClass().getSimpleName() +" - "+method.getName()
+        System.out.println("**************** Starting test : " + getClass().getSimpleName() +" - "+mTestCaseName
                 + " ****************");
 
-        String dataproviderDesc = "";
-        if(method.getParameters().length>0/* && method.getParameters()[0].getName().contains("desc")*/)
+        //String dataproviderDesc = "";
+        /*if(method.getParameters().length>0*//* && method.getParameters()[0].getName().contains("desc")*//*)
             dataproviderDesc= (String) params[0];
-
+*/
         if(Globals.getCurrentThreadContext()==null)
-            new TestExecutionContext(method.getName()+dataproviderDesc);
+            new TestExecutionContext(mTestCaseName);
         else
             Globals.getCurrentThreadContext().setTestName(method.getName());
 
-        getReportUtil().info("**************** Starting test : " + getClass().getSimpleName() +" - "+method.getName() + dataproviderDesc
+        getReportUtil().info("**************** Starting test : " + getClass().getSimpleName() +" - "+mTestCaseName
                 + " ****************");
         getReportUtil().info("***** Description "+method.getAnnotation(Test.class).description() +" ***********");
 
@@ -85,6 +88,7 @@ public abstract class BaseTest implements Base {
 
         updateTestStatusInReport(result);
 
+        //result.getTestClass().getName()
         System.out.println(String.format("Finished Test (%s) execution :: Is execution successful? : %s", testName,
                 result.isSuccess()));
 
@@ -179,5 +183,27 @@ public abstract class BaseTest implements Base {
         Thread.sleep(1000);
         String base64 = Base64.getEncoder().encodeToString(imageBytes);
         return base64;
+    }
+
+    public void updateTestNameForDataProvider(Method method, Object[] testData) {
+        String testCase = "";
+        if (testData != null && testData.length > 0) {
+            String _dyna_name = null;
+            //Check if test method has actually received required parameters
+            for (Object testParameter : testData) {
+                if (testParameter instanceof String) {
+                    _dyna_name = (String) testParameter;
+                    break;
+                }
+            }
+            if(_dyna_name!=null){
+                testCase = _dyna_name;
+            }
+        }
+        this.mTestCaseName = String.format("%s(%s)", method.getName(), testCase);
+    }
+    @Override
+    public String getTestName() {
+        return this.mTestCaseName;
     }
 }
