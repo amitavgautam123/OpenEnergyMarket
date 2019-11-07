@@ -45,9 +45,14 @@ public class FixedProcurementSuite extends BaseTest	{
     @Test
     public void verifyTenderResponsePage() throws Throwable {
     	tenderResponsePage = adminDashboardPage.
-    							navigateToTenderResponse();
-    	
-    }			
-                 
+    							clickOnTenderResponse().
+    							verifyQuoteByDateExist().
+    							selectFirstValueInQuoteByDate().
+    							verifyQuoteRequestDropDownExists().
+    							selectFirstValueQuoteRequest().
+    							verifyMeterForecastLinkExists();
     
+    
+    
+    }
 }

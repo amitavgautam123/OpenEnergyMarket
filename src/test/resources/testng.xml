@@ -13,6 +13,7 @@
             <package name="com.oem.PortfolioManager"/>
             <package name="com.oem.QuotesAndTenders"/>
             <package name="com.oem.Suits"/>
+            <package name="com.oem.FixedProcurement"/>
 
          
         </packages>

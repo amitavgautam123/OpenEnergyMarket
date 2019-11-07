@@ -44,7 +44,7 @@ public class TenderResponsePage extends BasePage {
 
     public TenderResponsePage verifyQuoteRequestDropDownExists() throws Throwable{
         Assert.assertTrue(isElementPresent(quoteRequestByIdDropDown),"quoteRequestByIdDropDown didnt appear");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         return this;
     }
 
@@ -71,7 +71,6 @@ public class TenderResponsePage extends BasePage {
 
     public TenderResponsePage verifyPopUpDialogue() throws Throwable{
         staticWait(2);
-        Thread.sleep(2000);
       //  driver.switchTo().alert();
         Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
         //driver.switchTo().
