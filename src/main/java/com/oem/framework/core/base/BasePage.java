@@ -230,7 +230,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//Sep 25, 2019
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();
 				break;
 			}
 			catch(Exception e)
@@ -252,7 +252,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//March 7, 2016
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();
 				break;
 			}
 			catch(Exception e)

@@ -30,40 +30,48 @@ public class TenderResponsePage extends BasePage {
         verifyQuoteByDateExist();
     }
 
-    public TenderResponsePage selectFirstValueInQuoteByDate(){
+    public TenderResponsePage selectFirstValueInQuoteByDate() throws Throwable{
         selectByIndex(quoteByDateDropDown,1);
+        Thread.sleep(2000);
         return this;
     }
 
-    public TenderResponsePage selectFirstValueQuoteRequest(){
+    public TenderResponsePage selectFirstValueQuoteRequest() throws Throwable{
         selectByIndex(quoteRequestByIdDropDown,1);
+        Thread.sleep(2000);
         return this;
     }
 
-    public TenderResponsePage verifyQuoteRequestDropDownExists(){
+    public TenderResponsePage verifyQuoteRequestDropDownExists() throws Throwable{
         Assert.assertTrue(isElementPresent(quoteRequestByIdDropDown),"quoteRequestByIdDropDown didnt appear");
+        Thread.sleep(2000);
         return this;
     }
 
-    public TenderResponsePage verifyMeterForecastLinkExists(){
+    public TenderResponsePage verifyMeterForecastLinkExists() throws Throwable{
         Assert.assertTrue(isElementPresent(meterForecastsLink,4),"meterForecastsLink didnt appear");
+        Thread.sleep(2000);
         return this;
     }
-    public TenderResponsePage clickMeterForecastLink(){
+    public TenderResponsePage clickMeterForecastLink() throws Throwable{
         click(meterForecastsLink);
+        Thread.sleep(2000);
         return this;
     }
-    public TenderResponsePage clickDownloadExcelLink(){
+    public TenderResponsePage clickDownloadExcelLink() throws Throwable{
         click(downloadExcel);
+        Thread.sleep(2000);
         return this;
     }
-    public TenderResponsePage clickCalculateConsumptions(){
+    public TenderResponsePage clickCalculateConsumptions() throws Throwable{
         click(calConsumptionsBtn);
+        Thread.sleep(2000);
         return this;
     }
 
-    public TenderResponsePage verifyPopUpDialogue(){
+    public TenderResponsePage verifyPopUpDialogue() throws Throwable{
         staticWait(2);
+        Thread.sleep(2000);
       //  driver.switchTo().alert();
         Assert.assertTrue(isElementPresent(popUpDialogue,3),"Popup Dialogue didn't appear");
         //driver.switchTo().
@@ -71,13 +79,15 @@ public class TenderResponsePage extends BasePage {
         return this;
     }
 
-    public TenderResponsePage setFirstDayConsumption(String value){
+    public TenderResponsePage setFirstDayConsumption(String value) throws Throwable{
         setValue(dayConsumption1,value);
+        Thread.sleep(2000);
         return this;
     }
 
-    public TenderResponsePage setFirstNightConsumption(String value){
+    public TenderResponsePage setFirstNightConsumption(String value) throws Throwable{
         setValue(nightConsumption1,value);
+        Thread.sleep(2000);
         return this;
     }
 }

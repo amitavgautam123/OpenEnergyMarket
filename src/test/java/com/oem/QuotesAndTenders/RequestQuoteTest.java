@@ -725,13 +725,13 @@ public class RequestQuoteTest extends BaseTest {
 	@Test	
 	public void QT_RAQ_TC_123_validateEditAdditionalReqOptionTenderSummaryPageTest() throws Throwable {
 		customerDashboardPage.
-		clickRequestQuote().
+		goToRequestQuote().
 		validateEditAdditionalReqOptionTenderSummaryPage();
 	}
 	@Test	
 	public void QT_RAQ_TC_124_validateEditRequestQuoteOptionTenderSummaryPageTest() throws Throwable {
 		customerDashboardPage.
-		clickRequestQuote().
+		goToRequestQuote().
 		validateEditQuoteOptionTenderSummaryPage();
 	}
 	@Test

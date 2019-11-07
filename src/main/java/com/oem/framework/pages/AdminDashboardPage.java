@@ -18,6 +18,7 @@ public class AdminDashboardPage extends HeaderPage {
     By user=By.xpath("//a[@id='user-link']");
 	By logout=By.xpath("//a[contains(text(),'Log out')]");
 	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+	By flexProfileAdmin=By.xpath("//a[@href='/FlexibleProfileAdmin/CustomerOverview']");
 	
     public CustomerDashboardPage impersonate(String email) throws Throwable{
         setValue(impersonateUsername,email);
@@ -51,6 +52,10 @@ public class AdminDashboardPage extends HeaderPage {
     	 click(tenderResponseLnk);
          return new TenderResponsePage();
     }
+    public TenderResponsePage clickOnTenderResponse() throws Throwable{
+   	 click(tenderResponseLnk);
+        return new TenderResponsePage();
+   }
 
 
 
@@ -89,6 +94,16 @@ public class AdminDashboardPage extends HeaderPage {
     public void refreshpage(){
 		driver.navigate().refresh();
 	}
+    public AdminDashboardPage goToflexProfileAdmin() throws Throwable{
+    	click(flexprocAdmin);
+    	Thread.sleep(2000);
+
+    	click(flexProfileAdmin);
+    	Thread.sleep(4000);
+    	FlexProfileAdminPage flexProfileAdminPage=new FlexProfileAdminPage();
+    	flexProfileAdminPage.isLoaded();
+    	return new FlexProfileAdminPage();
+    	}
 
     @Override
     protected void isLoaded() throws Error {

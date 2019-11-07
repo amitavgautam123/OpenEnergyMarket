@@ -54,19 +54,20 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 
 	@Test(dataProvider = "getHHdata2")
 	public void addHHMeterUsingDataProviderTest2(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
-			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, int date, int month, int year,
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String contEndDate,
 			String expectedConsumption, String capacity) throws Throwable {
 		customerDashboardPage.
 		refreshPropertyPortfolioMeterPage().
 		addHHMeterUsingDifferentTestData2(meterNoSecondField, meterNoThirdField, 
-				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, date, month, year, 
+				meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField, contEndDate, 
 				expectedConsumption, capacity); 
 	}
+	
 	@DataProvider
 	public Object[][] getHHdata2() {
-		Object[][] data = {{"456", "564", "10", "1289", "4022", "180", 12, 4, 2020, "", ""},				/*PM_PP_TC_021*/
-				{"456", "564", "10", "1289", "4022", "180", 17, 7, 2020, "3500", ""},						/*PM_PP_TC_023*/
-				{"456", "564", "10", "1289", "4022", "180", 24, 9, 2020, "", "7000"}};					/*PM_PP_TC_025*/					
+		Object[][] data = {{"456", "564", "10", "1289", "4022", "180", "12-May-2020", "", ""},				/*PM_PP_TC_021*/
+				{"456", "564", "10", "1289", "4022", "180", "17-Aug-2020", "3500", ""},						/*PM_PP_TC_023*/
+				{"456", "564", "10", "1289", "4022", "180", "24-Oct-2020", "", "7000"}};					/*PM_PP_TC_025*/					
 		return data;
 	}
   
@@ -168,44 +169,44 @@ public void PM_PP_TC_041_validateMandatoryFieldsContHistPopupEnteringDateTradedC
 }
 
 @Test(dataProvider = "getHHcontractHistoryData2")
-public void validateMandatoryFieldHHcontHistUsingDataProviderTest2(int day, int month, int year, String dayRate,
+public void validateMandatoryFieldHHcontHistUsingDataProviderTest2(String dateTraded, String dayRate,
 		String nightRate, String standingCharge, String capacityCharge, String contractedAnnualSpend)
 		throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
-	validateMandatoryFieldsContractHistoryPopupDataProvider2(day, month, year, dayRate,
+	validateMandatoryFieldsContractHistoryPopupDataProvider2(dateTraded, dayRate,
 			nightRate, standingCharge, capacityCharge, contractedAnnualSpend);
 }
 
 @DataProvider
 public Object[][] getHHcontractHistoryData2() {
-	Object[][] data = { { 20, 02, 2018, "25", "", "", "", "" }, // PM_PP_TC_042
-			{ 14, 02, 2018, "", "28", "", "", "" }, // PM_PP_TC_043
-			{ 28, 05, 2018, "", "", "48", "", "" }, // PM_PP_TC_044
-			{ 10, 9, 2018, "", "", "", "35", "" } }; // PM_PP_TC_045
+	Object[][] data = { { "20-Mar-2018", "25", "", "", "", "" }, // PM_PP_TC_042
+			{ "14-Mar-2018", "", "28", "", "", "" }, // PM_PP_TC_043
+			{ "28-Jun-2018", "", "", "48", "", "" }, // PM_PP_TC_044
+			{ "10-Sep-2018", "", "", "", "35", "" } }; // PM_PP_TC_045
 	return data;
 }
 
 @Test(dataProvider = "getHHcontractHistoryData3")
-public void validateMandatoryFieldHHcontHistUsingDataProviderTest3(int day, int month, int year, String dayRate,
+public void validateMandatoryFieldHHcontHistUsingDataProviderTest3(String date, String dayRate,
 		String nightRate, String standingCharge, String capacityCharge, String contractedAnnualSpend)
 		throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
-	validateMandatoryFieldsContractHistoryPopupDataProvider3(day, month, year, dayRate,
+	validateMandatoryFieldsContractHistoryPopupDataProvider3(date, dayRate,
 			nightRate, standingCharge, capacityCharge, contractedAnnualSpend);
 }
 
 @DataProvider
 public Object[][] getHHcontractHistoryData3() {
-	Object[][] data = { { 20, 02, 2018, "", "", "", "", "" }, // PM_PP_TC_041
-			{ 25, 4, 2018, "25", "", "", "", "" }, // PM_PP_TC_046
-			{ 14, 2, 2018, "", "28", "", "", "" }, // PM_PP_TC_047
-			{ 28, 5, 2018, "", "", "48", "", "" }, // PM_PP_TC_048
-			{ 10, 9, 2018, "", "", "", "35", "" }, // PM_PP_TC_049
-			{ 15, 7, 2018, "20", "18", "", "", "" }, // PM_PP_TC_050
-			{ 22, 1, 2018, "20", "", "32", "", "" }, // PM_PP_TC_051
-			{ 15, 7, 2018, "20", "", "", "45", "" } }; // PM_PP_TC_052
+	Object[][] data = { { "20-Mar-2018", "", "", "", "", "" }, // PM_PP_TC_041
+			{ "25-Apr-2018", "25", "", "", "", "" }, // PM_PP_TC_046
+			{ "14-Mar-2018", "", "28", "", "", "" }, // PM_PP_TC_047
+			{ "28-May-2018", "", "", "48", "", "" }, // PM_PP_TC_048
+			{ "10-Sep-2018", "", "", "", "35", "" }, // PM_PP_TC_049
+			{ "15-Jul-2018", "20", "18", "", "", "" }, // PM_PP_TC_050
+			{ "22-Feb-2018", "20", "", "32", "", "" }, // PM_PP_TC_051
+			{ "15-Aug-2018", "20", "", "", "45", "" }}; // PM_PP_TC_052
 	return data;
 }
 
@@ -267,14 +268,14 @@ public void PM_PP_TC_075_checkSavedDetailsAfterAddingNHHMeterTest() throws Throw
 	checkSavedDetailsAfterAddingNHHMeter();
 }
 
-/*
- * @Test public void PM_PP_TC_076() throws Throwable { LoginPage loginPage = new
- * LoginPage(); CustomerDashboardPage customerDashboardPage =
- * (CustomerDashboardPage) loginPage .login(); PropertyPortfolioMeterPage
- * propertyPortfolioMeterTest = (PropertyPortfolioMeterPage)
- * customerDashboardPage.goToPropertyPortfolioMeterPage();
- * propertyPortfolioMeterTest.checkSavedDetailsAfterAddingNHHMeter(); }
- */
+
+  @Test public void PM_PP_TC_076() throws Throwable { 
+	  customerDashboardPage.
+	  refreshPropertyPortfolioMeterPage().
+	  checkSavedDetailsAfterAddingNHHMeter(); 
+  }
+ 
+
 @Test
 public void PM_PP_TC_078_validateNHHdeleteMeterPopupTest() throws Throwable {
 	customerDashboardPage.
@@ -290,31 +291,34 @@ public void PM_PP_TC_079_validateDeleteNHHmeterTest() throws Throwable {
 }
 
 @Test(dataProvider = "getGasMeterData")
-public void validateMandatoryFieldAddGasMeterUsingDataProviderTest(String gasMeterNumber, String procurementType,
-		String expectedConsumption, String currentSupplier, int dayOfMonthOfContractEndDate,
-		int monthNumberOfContractEndDate, int yearOfContractEndDate, String currentAnnualSpend) throws Throwable {
+public void validateMandatoryFieldAddGasMeterUsingDataProviderTest(String gasMeterNumber, String expectedConsumption, 
+		 String contractEndDate, String currentAnnualSpend) throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
-	addGasMeterUsingDifferentTestData(gasMeterNumber, procurementType,
-			expectedConsumption, currentSupplier, dayOfMonthOfContractEndDate, monthNumberOfContractEndDate,
-			yearOfContractEndDate, currentAnnualSpend);
+	addGasMeterUsingDifferentTestData(gasMeterNumber, expectedConsumption, contractEndDate, currentAnnualSpend);
 }
 
 @DataProvider
 public Object[][] getGasMeterData() {
-	Object[][] data = { { "", "Fixed", "", "British Gas Business", 20, 4, 2021, "" }, /* PM_PP_TC_081 */
-			{ "2642342754", "Fixed", "", "D-ENERGi", 20, 5, 2020, "" }, /* PM_PP_TC_082 */
-			{ "6786342454", "Fixed Pass Through", "2200", "Corona Energy", 10, 3, 2020, "" }, /* PM_PP_TC_083 */
-			{ "2842342254", "Combined Flexible", "", "Corona Energy", 10, 3, 2020, "" }, /* PM_PP_TC_084 */
-			{ "2842342254", "Fixed", "3500", "Corona Energy", 10, 9, 2020, "" } }; /* PM_PP_TC_085 */
+	Object[][] data = { { "", "", "", "" }, 										/* PM_PP_TC_081 */
+			{ "2642342754", "", "", "" },	 										/* PM_PP_TC_082 */
+			{ "6786342454", "2200", "", "" }, 										/* PM_PP_TC_083 */
+			{ "2842342254", "", "10-Apr-2020", "" }}; 								/* PM_PP_TC_084 */
 	return data;
 }
+
 
 @Test
 public void PM_PP_TC_080_validateAddGasMeterPopupTest() throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
 	validateAddGasMeterPopup();
+}
+@Test
+public void PM_PP_TC_085_validateAddValidGasMeterTest() throws Throwable {
+	customerDashboardPage.
+	refreshPropertyPortfolioMeterPage().
+	checkSavedDetailsAfterAddingGasMeter();
 }
 
 @Test
@@ -372,4 +376,5 @@ public void PM_PP_TC_106_validateMeterRevertDeletionTest() throws Throwable {
 	refreshPropertyPortfolioMeterPage().
 	validateMeterRevertDeletion();
 }
+
 }

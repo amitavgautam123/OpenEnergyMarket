@@ -10,11 +10,10 @@
 
     <test name="Automation tests">
         <packages>
-  <!--           <package name="com.oem.PortfolioManager"/>
-            <package name="com.oem.QuotesAndTenders"/> -->
+            <package name="com.oem.PortfolioManager"/>
+            <package name="com.oem.QuotesAndTenders"/>
             <package name="com.oem.Suits"/>
 
-   <!--          <package name="com.oem.PortfolioManager"/> -->
          
         </packages>
     </test>
