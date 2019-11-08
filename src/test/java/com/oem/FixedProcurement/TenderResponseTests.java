@@ -19,7 +19,7 @@ public class TenderResponseTests extends BaseTest {
         adminDashboardPage=new LoginPage().loginAsAdmin();
         tenderResponsePage=adminDashboardPage.navigateToTenderResponse();
     }
-    @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
+  /*  @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
     public void verifyQuoteByDateDropDownExists() throws Throwable {
         tenderResponsePage
                 .verifyQuoteByDateExist();
@@ -107,7 +107,7 @@ public class TenderResponseTests extends BaseTest {
 
     }
 
-
+*/
 
    /* @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
     public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
@@ -138,7 +138,7 @@ public class TenderResponseTests extends BaseTest {
                 .verifyPopUpDialogue();
 
     }*/
-
+/*
     @DataProvider(name = "consumptionInput")
     public static Object[][] credentials() {
 
@@ -176,6 +176,19 @@ public class TenderResponseTests extends BaseTest {
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
+    }*/
+    @Test
+    public void verify() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstDayConsumption("40")
+        	.setFirstNightConsumption("50")
+        	.clickCalculateConsumptions()
+        	.verifyPopUpDialogue();
     }
+    
 }
 

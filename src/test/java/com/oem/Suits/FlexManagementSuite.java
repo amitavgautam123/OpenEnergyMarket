@@ -18,13 +18,14 @@ public class FlexManagementSuite extends BaseTest {
 
 	@BeforeClass(alwaysRun = true)
 	public void beforeHHSuite() throws Throwable {
-		customerDashboardPage = new LoginPage().login();
+		adminDashboardPage = new LoginPage().loginAsAdmin();
+		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();
 
 	}
 
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
-		customerDashboardPage.goToCompanyProfile().fillCompanyProfileGeneric();
+		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
 	}
 
 	@Test(priority = 2)

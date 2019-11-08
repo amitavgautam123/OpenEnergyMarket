@@ -39,6 +39,12 @@ public class AdminDashboardPage extends HeaderPage {
         click(impersonateBtn);
         return new CustomerDashboardPage();
     }
+    public CustomerDashboardPage impersonateFlexCustomer() throws Throwable{
+    	String EMAIL = getPropertyFileData("emailForFlex");
+        setValue(impersonateUsername, EMAIL);
+        click(impersonateBtn);
+        return new CustomerDashboardPage();
+    }
 
     public TenderOpenQuotesPage navigateToTenderQuotes() throws Throwable{
         click(fixedProcurementAdmin);

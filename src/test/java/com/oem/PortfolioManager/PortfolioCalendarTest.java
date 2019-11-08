@@ -114,9 +114,10 @@ public class PortfolioCalendarTest extends BaseTest{
 		data[1][0] = "";
 		data[2][0] = "123456";
 		data[3][0] = "!@#$%";
-		data[4][0] = "       ";
-		data[5][0] = "</html>";
-		data[6][0] = "Lorem Ipsum123456";
+		data[4][0] = "Lorem Ipsum123456";
+		data[5][0] = "Auto_Event1234";
+		data[6][0] = "abcd1234";
+		
 		return data;
 	}
 

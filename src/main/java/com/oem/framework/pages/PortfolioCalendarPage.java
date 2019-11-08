@@ -79,18 +79,20 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(eventDate);
 		Thread.sleep(1000);
 		selectFutureDateCalender(15, 3, 2020);
+		Thread.sleep(2000);
 		setValue(eventDescription, data);
+		Thread.sleep(2000);
 		click(saveBtn);
 		Thread.sleep(3000);
 		boolean eventAdditionStatus = isElementExistInDropDown(eventDes_AllRecords, data);
-		if(isElementPresent(serverError, 10)) {
+		if(isElementPresent(serverError, 6)) {
         	driver.navigate().back();
-        	softAssertion.assertTrue(false, "Server Error is displaying.");
+        	softAssertion.assertFalse(false, "Server Error is displaying.");
         }
 		refreshPage();
 		softAssertion.assertTrue(eventAdditionStatus, 
 				"The calendar event was not saved.");
-		softAssertion.assertAll();
+		
 	}
 	public void validateEventDescriptionPortfolioCaledarEntryPopup() throws InterruptedException
 	{

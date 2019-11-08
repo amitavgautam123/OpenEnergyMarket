@@ -314,7 +314,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(filterByWaterUtility);
 	}
 
-	public void Options_Water(String WaterMeter, String WaterContractD, String WaterSupplier) {
+	public void Options_Water(String WaterMeter, String WaterContractD, String WaterSupplier) throws Throwable {
 		switch (WaterMeter) {
 		case "zero":
 			selectingzerometers_Water();
@@ -331,6 +331,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		switch (WaterContractD) {
 		case "zero":
 			click(addNewContractDuration_Water);
+			Thread.sleep(2000);
 			click(addNewContractDuration_Water);
 			break;
 		case "multiple":
@@ -347,12 +348,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			selectingzerosupplier_Water();
 			break;
 		case "single":
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.sleep(2000);
 			selectingSinglesupplier_Water();
 			break;
 		case "multiple":
@@ -363,26 +359,30 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		}
 	}
 
-	public void ClickDate_Water() {
+	public void ClickDate_Water() throws Throwable {
 		click(date_Water);
+		Thread.sleep(3000);
 
 	}
 
-	public void selectingzerometers_Water() {
+	public void selectingzerometers_Water() throws Throwable {
 		click(allmeter_Water);
+		Thread.sleep(3000);
 	}
 
-	public void selectingSinglemeters_Water() {
+	public void selectingSinglemeters_Water() throws InterruptedException {
 		click(allmeter_Water);
-
+		Thread.sleep(3000);
 		click(firstMeter_Water);
+		Thread.sleep(3000);
 
 	}
 
-	public void selectingMultiplemeters_Water() {
+	public void selectingMultiplemeters_Water() throws InterruptedException {
 		click(allmeter_Water);
-
+		Thread.sleep(3000);
 		click(firstMeter_Water);
+		Thread.sleep(3000);
 		/*
 		 * click(secondMeter_Water); Reporter.log("Clicked on second Meter.", true);
 		 * click(thirdMeter_Water); Reporter.log( "Clicked on third Meter.", true);
@@ -391,45 +391,44 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void selectingsingleContractDur_Water() {
+	public void selectingsingleContractDur_Water() throws InterruptedException {
 		selectByIndex(firstContractDuration_Water, 02);
+		Thread.sleep(3000);
 
 	}
 
-	public void selectingMultipleContractDur_Water() {
+	public void selectingMultipleContractDur_Water() throws InterruptedException {
 		selectByIndex(firstContractDuration_Water, 02);
-
+		Thread.sleep(3000);
 		click(addNewContractDuration_Water);
+		Thread.sleep(3000);
 		selectByIndex(secondContractDuration_Water, 03);
-
+		Thread.sleep(3000);
 		click(addNewContractDuration_Water);
+		Thread.sleep(3000);
 		selectByIndex(thirdContractDuration_Water, 04);
-
+		Thread.sleep(3000);
 		click(addNewContractDuration_Water);
+		Thread.sleep(3000);
 		selectByIndex(fourthContractDuration_Water, 05);
-
+		Thread.sleep(3000);
 	}
 
-	public void selectingzerosupplier_Water() {
+	public void selectingzerosupplier_Water() throws InterruptedException {
 		click(choosSuppliers_Water);
+		Thread.sleep(3000);
 	}
 
-	public void selectingSinglesupplier_Water() {
+	public void selectingSinglesupplier_Water() throws InterruptedException {
 		click(choosSuppliers_Water);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Thread.sleep(3000);
 		click(firstSupplier_Water);
-
+		Thread.sleep(3000);
 	}
 
 	public void selectingMultiplesupplier_Water() {
 		click(choosSuppliers_Water);
-
+		
 		click(firstSupplier_Water);
 		click(secondSupplier_Water);
 		click(thirdSupplier_Water);
@@ -2856,7 +2855,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 	public void navigateBackFromQuoteSubmit() throws Throwable {
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		boolean urlStatus = driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
 		if(urlStatus) {
 			driver.navigate().back();
