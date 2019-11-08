@@ -11,8 +11,6 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
-
-
 public class VerifyTendersPage extends AdminDashboardPage	{
 
 	By filterAllUtility_VerifyTender = By
@@ -24,23 +22,23 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	By filterGasUtility_VerifyTender = By
 			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[4]");
 	By filterWaterUtility_VerifyTender = By
-			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");
-	
+			.xpath("//td[contains(text(), 'Filter by Utility')]/following-sibling::td[1]/div[5]");	
 	By allowSelectedBtn = By.xpath("//input[@value = 'Allow Selected']");
 	By allowSelectedBtnBottomPage = By.xpath(("(//input[@value = 'Allow Selected'])[2]"));
 	By blockSelectedBtn = By.xpath("//input[@value = 'Block Selected']");
 	By alertPopUpForNoSupplierSelection = By.xpath("//div[text() = 'Please select at least one supplier']");
-	
+	By requestDateHeading = By.xpath("//div[contains(text(),'Request Date')]/..");
 	
 	By hHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][1]");
 	By nHHUtility = By.xpath("//div[@class='meter-type-circle-tiny'][2]");
-	By gastility = By.xpath("//div[@class='meter-type-circle-tiny'][3]");
+	By gasUtility = By.xpath("//div[@class='meter-type-circle-tiny'][3]");
 	By waterUtility = By.xpath("//div[@class='meter-type-circle-tiny'][4]");
 
 	By noOfRowsInCustomer = By.xpath("//table[@id='verify-quote-requests']//tbody//tr");
 	By customer = By.xpath("//div[text()='Customer']");
 	By requestDate = By.xpath("//div[text()='Request Date']");
 	
+	String selectAll = "All";
 	String firstSelectedSupplierName = "British Gas Business";
 	String secondSelectedSupplierName = "Corona Energy";
 	String fourthSelectedSupplierName = "Dong Energy";
@@ -50,6 +48,12 @@ public class VerifyTendersPage extends AdminDashboardPage	{
         System.out.println("Executing isLoaded in Verify Tenders Page");
         Assert.assertTrue(isElementPresent(allowSelectedBtn),"Verify Tenders Page didn't appear.");    
     }
+	public VerifyTendersPage setRequestDateDescending() {
+		if(getAttribute(requestDateHeading, "aria-sort").equals("ascending")) {
+			click(requestDateHeading);
+		}
+		return this;
+	}
 	public String currentDate() {
 		LocalDate myObj1 = LocalDate.now(); // Create a date object
 
@@ -61,6 +65,11 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		int year = Integer.parseInt(date.substring(0, 4));
 		String currentDate = day + "/" + month + "/" + year;
 		return currentDate;
+	}
+	public VerifyTendersPage goToNHHmeterSection() throws Throwable {
+		click(filterNHHutility_VerifyTender);
+		Thread.sleep(1000);
+		return this;
 	}
 
 	public void verifyUtilityFilterPresenceVerifyTenders() {
@@ -85,15 +94,13 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 * @return
 	 */
 	public By findQuote(String companyName) {
-		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-				+ "']/preceding-sibling::td[text() = '" + companyName + "']");
+		By quote = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate() + "')]/"
+				+ "preceding-sibling::td[text() = '" + companyName + "']");
 		return quote;
 	}
 
 	public By downloadTenderDetailsButton(String companyName) {
-		By downloadBtn = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[3]/a");
+		By downloadBtn = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate() + "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[3]/a");
 		return downloadBtn;
 	}
 
@@ -106,8 +113,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By suppliersListForQuote(String companyName) {
 		By suppliers = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/label");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/label");
 		return suppliers;
 	}
 
@@ -119,8 +126,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By checkboxAllSupplierList(String companyName) {
 		By checkboxLst = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/input");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[5]/input");
 		return checkboxLst;
 	}
 
@@ -132,8 +139,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 */
 	public By checkboxMatrixPriceList(String companyName) {
 		By checkboxLst = By
-				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '" + currentDate()
-						+ "']/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[4]/input");
+				.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '" + currentDate()
+						+ "')]/preceding-sibling::td[text() = '" + companyName + "']/following-sibling::td[4]/input");
 		return checkboxLst;
 	}
 
@@ -145,8 +152,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	 * @param supplierName
 	 */
 	public By checkboxSupplier(String companyName, String supplierName) {
-		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[text() = '"
-				+ currentDate() + "']/preceding-sibling::td[text() = '" + companyName
+		By supCheckbox = By.xpath("//i[@class = 'icon-lightning icon-2x']/../following-sibling::td[contains(text(), '"
+				+ currentDate() + "')]/preceding-sibling::td[text() = '" + companyName
 				+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
@@ -154,22 +161,31 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_555";
+		String companyName = readExcelData("Sheet4", 1, 1);
 		click(filterHHutility_VerifyTender);
+		Reporter.log("Click on HH filter", true);
 		Thread.sleep(1000);
+		setRequestDateDescending();
+		Reporter.log("Request quote is set descending.", true);
+		Thread.sleep(1000);
+		click(checkboxSupplier(companyName, selectAll));
+		Reporter.log("Clicked on the checkbox for the supplier.", true);
+		scrollUp();
+		Thread.sleep(1000);
+		click(allowSelectedBtn);
+		Reporter.log("Clicked on allow selected button.", true); 
+		Thread.sleep(2000);
+		 
 		/*
-		 * click(checkboxSupplier(companyName, firstSelectedSupplierName));
-		 * Reporter.log("Clicked on the checkbox for the supplier.", true);
-		 * jse.executeScript("window.scrollBy(0,1000)"); Thread.sleep(1000);
-		 * click(allowSelectedBtnBottomPage);
-		 * Reporter.log("Clicked on allow selected button.", true); Thread.sleep(2000);
+		 * scrollToElement(findQuote(companyName)); boolean
+		 * supplierPresenceInListStatusAfterAllow =
+		 * isElementExistInList(suppliersListForQuote(companyName),
+		 * firstSelectedSupplierName);
+		 * Reporter.log("Checked if supplier name is displaying after allowing it.",
+		 * true); softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow,
+		 * "Supplier name is still displaying after allowing it.");
 		 */
-		scrollToElement(findQuote(companyName)); 
-		boolean supplierPresenceInListStatusAfterAllow = 
-				isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName);
-		Reporter.log("Checked if supplier name is displaying after allowing it.", true); 
-		softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");
-		softAssertion.assertAll();
+		
 		logout();
 	}
 	
@@ -179,59 +195,39 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	}
 
 	public void verifySuppliersPresence(String utility) throws Throwable {
-		SoftAssert softassert=new SoftAssert();
-		switch(utility){
+		switch (utility) {
 		case "HH":
-			click(hHUtility);
-			break;
+		Thread.sleep(3000);
+		click(hHUtility);
+		break;
 		case "nHH":
-			click(nHHUtility);
-			break;
+		click(nHHUtility);
+		break;
 		case "Gas":
-			click(gastility);
-			break;
+		click(gasUtility);
+		break;
 		case "Water":
-			click(waterUtility);
-			break;	
+		click(waterUtility);
+		break;
 		default:
-			System.out.println("Enter Correct Utility");
+		System.out.println("Enter Correct Utility");
 		}
-		
-		click(requestDate);//click on utility
+
+		click(requestDate);// click on utility
+		Thread.sleep(3000);
 		Reporter.log("Clicked Request Date", true);
-
-		int rows = noOfRowsOrCustomers();
-		
-
-	customerLoop:	for (int i = 1; i <= rows; i++) {
-			String customerName = driver
-					.findElement(By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[2]"))
-					.getText();
-			String expectedCustomer = readExcelData("sheet4", 1, 9);
-
-			
-			
-			if (customerName.contains(expectedCustomer)) {
-				List<WebElement> NoOfSupplier = driver.findElements(
-						By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[6]/label"));
-				int NoofsuppliersinPage = NoOfSupplier.size();
-				int suppliersNo = readExcelIntData("sheet5", 0, 1);
-				boolean equalSuppliersOrNot=(NoofsuppliersinPage-1) == suppliersNo;
-				
-					for (int j = 0; j < suppliersNo; j++) {
-						boolean trueelementpresent=NoOfSupplier.contains(readExcelData("sheet5", 1, j));
-						softassert.assertTrue(trueelementpresent,"Number Of Suppliers are Not Equal");
-					}
-					Reporter.log("All Suppliers are present", true);
-					driver.findElement(By.xpath("//table[@id='verify-quote-requests']//tbody//tr[" + i + "]//td[6]/input[1]")).click();
-					Reporter.log("Slected  All Suppliers", true);
-					break customerLoop;
-								
-			}
-
-		}
+		Thread.sleep(3000);
+		click(checkboxSupplier(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		Thread.sleep(3000);
 		click(allowSelectedBtn);
-		Reporter.log("Clicked On Allow Selected Button", true);
+	}
+	public void verifyTendersHomePage() {
+		Assert.assertTrue(isElementPresent(allowSelectedBtn), "Allow selected Button is Not Present");
+		Assert.assertTrue(isElementPresent(blockSelectedBtn), "Block selected Button is Not Present");
+		Assert.assertTrue(isElementPresent(hHUtility), "hHHUtility is Not Present");
+		Assert.assertTrue(isElementPresent(nHHUtility), "nHHUtility is Not Present");
+		Assert.assertTrue(isElementPresent(gasUtility), "GasUtility is Not Present");
+		Assert.assertTrue(isElementPresent(waterUtility), "WaterUtility is Not Present");
 	}
 	
 }

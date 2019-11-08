@@ -6,6 +6,7 @@ import com.oem.framework.core.TestExecutionContext;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -18,6 +19,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -152,6 +155,16 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(locator);
         new Select(driver.findElement(locator)).selectByValue(value);
     }
+    
+    public void selectByPartOfVisibleText(By locatorsOfOptions, String value) {
+    	List<WebElement> options = driver.findElements(locatorsOfOptions);
+    	for (WebElement option : options) {
+    	    if (option.getText().contains(value)) {
+    	        option.click();
+    	        break;
+    	    }
+    	}
+    }
 
     public boolean isElementPresent(By locator) {
     	return isElementPresent(locator,DEFAULT_EXPLICIT_WAIT);
@@ -219,7 +232,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//Sep 25, 2019
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();
 				break;
 			}
 			catch(Exception e)
@@ -241,7 +254,7 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		while(count<=60) 
 		{
 			try {
-				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();//March 7, 2016
+				driver.findElement(By.xpath("//td[@data-month = '" + monthNumber + "' and @data-year = '" + year + "']/a[text() = '" + dayOfMonth + "']")).click();
 				break;
 			}
 			catch(Exception e)
@@ -313,18 +326,23 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
    		wb.write(fos);
    		wb.close();
    	}
-    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable
-	{
-		FileInputStream fis = new FileInputStream("./data/testscriptData.xlsx");
-		Workbook wb = WorkbookFactory.create(fis);
-		Sheet sh = wb.getSheet(sheetName);
-		Row row = sh.getRow(rowNum);
-		Cell cel = row.getCell(celNum);
-		cel.setCellValue(data);
-		FileOutputStream fos = new FileOutputStream("./data/testscriptData.xlsx");		
-		wb.write(fos);
-		wb.close();
-	}
+    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable {
+    	FileInputStream fis = new FileInputStream("./data/testscriptdata.xlsx");
+    	//Workbook wb = WorkbookFactory.create(fis);
+    	XSSFWorkbook workbook = new XSSFWorkbook(fis);
+    	//Sheet sh = wb.getSheet(sheetName);
+    	XSSFSheet sheet = workbook.getSheet(sheetName);
+    	//Row row = sh.getRow(rowNum);
+    	Row row = sheet.createRow(rowNum);
+    	//Cell cel = row.getCell(celNum);
+    	Cell cell = row.createCell(celNum);
+    	//cel.setCellValue(data);
+    	//cell.setCellType(cell.setCellValue(data));
+    	cell.setCellValue(data);
+    	FileOutputStream fos = new FileOutputStream("./data/testscriptdata.xlsx");
+    	workbook.write(fos);
+    	workbook.close();
+    	}
     /**
      * Used to check if the dropdown contains the value
      * @param locator of dropdown
@@ -440,6 +458,14 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
 		int year = Integer.parseInt(date.substring(0, 4));
 		String currentDate = day + "/" + month + "/" + year;
 		return currentDate;
+	}
+    public String getCuttrentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date date = new Date();
+
+		String systemdate = dateFormat.format(date);
+		return systemdate;
 	}
 
 }

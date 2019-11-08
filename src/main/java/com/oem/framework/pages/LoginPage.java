@@ -54,6 +54,17 @@ public class LoginPage extends BasePage {
         else
         	throw new IOException("After login didn't show Customer Dashboard page");
     }
+    public CustomerDashboardPage loginForFlex() throws Exception  {
+    	String URL = getPropertyFileData("url");
+    	String EMAIL = getPropertyFileData("emailForFlex");
+    	String PASSWORD = getPropertyFileData("passwordForFlex");
+        loginUsing(URL,EMAIL,PASSWORD);
+
+        if(isCustomerDashboardPage())
+            return new CustomerDashboardPage();
+        else
+        	throw new IOException("After login didn't show Customer Dashboard page");
+    }
 
 
     public AdminDashboardPage loginAsAdmin() throws Exception  {

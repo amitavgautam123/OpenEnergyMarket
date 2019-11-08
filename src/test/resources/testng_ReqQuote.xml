@@ -7,9 +7,6 @@
     </listeners>
     <test name="Regression tests" thread-count="2" parallel="methods">
 
-        <packages>
-            <package name="com.oem.QuotesAndTenders"/>	
-            
-        </packages>
+        
     </test>
 </suite>

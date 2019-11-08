@@ -52,18 +52,20 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
     }
 	public PortfolioCalendarPage verifyCloseBtnPortfolioCalendarEntrypopup() throws InterruptedException{
 		click(addCalendarEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(close_PortfolioCalendarEntryPopup);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean status = driver.findElement(By.xpath("//h3[text() = 'Add new portfolio calendar entry']")).isDisplayed();
 		Assert.assertFalse(status, "Close button not working.");
 		return this;
     }
 	public void verifyDateInEventDate() throws Throwable {
 		click(addCalendarEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(eventDate);
+		Thread.sleep(1000);
 		selectFutureDateCalender(18, 6, 2020);
+		Thread.sleep(1000);
 		String dateData = getAttribute(eventDate, "value");
 		boolean dateDisplayStatus = dateData.contains("18/07/2020");
 		refreshPage();
@@ -77,28 +79,31 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		click(eventDate);
 		Thread.sleep(1000);
 		selectFutureDateCalender(15, 3, 2020);
-		setValue(eventDescription, data);
-		click(saveBtn);
 		Thread.sleep(2000);
+		setValue(eventDescription, data);
+		Thread.sleep(2000);
+		click(saveBtn);
+		Thread.sleep(3000);
 		boolean eventAdditionStatus = isElementExistInDropDown(eventDes_AllRecords, data);
-		if(isElementPresent(serverError, 10)) {
+		if(isElementPresent(serverError, 6)) {
         	driver.navigate().back();
-        	softAssertion.assertTrue(false, "Server Error is displaying.");
+        	softAssertion.assertFalse(false, "Server Error is displaying.");
         }
 		refreshPage();
 		softAssertion.assertTrue(eventAdditionStatus, 
 				"The calendar event was not saved.");
-		softAssertion.assertAll();
+		
 	}
 	public void validateEventDescriptionPortfolioCaledarEntryPopup() throws InterruptedException
 	{
 		click(addCalendarEntry);
 		Thread.sleep(2000);
 		click(eventDate);
+		Thread.sleep(2000);
 		selectFutureDateCalender(20, 4, 2020);
 		clearValue(eventDescription);
 		click(saveBtn);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean errMsgDisplayStatus = isElementPresent(eventDescriptionErrorMessage);
 		refreshPage();
 		Assert.assertTrue(errMsgDisplayStatus, "Error message for event description is not displaying.");
@@ -106,7 +111,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	public void validateDeleteEventPopup() throws InterruptedException
 	{
 		click(deleteEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean deletePopupDisplayStatus = isElementPresent(delete_popup);
 		refreshPage();
 		Assert.assertTrue(deletePopupDisplayStatus, "Delete popup is not displaying.");
@@ -114,9 +119,9 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	public void validateCancelBtnDeleteEventPopup() throws InterruptedException
 	{
 		click(deleteEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(delete_CancelBtn);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean status = isElementPresent(delete_popup);
 		refreshPage();
 		Assert.assertFalse(status, "Delete popup is still displaying.");		
@@ -126,7 +131,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		String date = getText(eventDate_firstRecord);
 		String desc = getText(eventDes_firstRecord);
 		click(deleteEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(delete_OkBtn);
 		Thread.sleep(2000);
 		boolean status = desc.equals(getText(eventDes_firstRecord)) && date.equals(getText(eventDate_firstRecord));
@@ -144,7 +149,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	public void validateCloseIconEditEventPopup() throws InterruptedException
 	{
 		click(editEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		//boolean editPopUpDisplayStatus1=driver.findElement(saveBtn).isDisplayed();
 		//System.out.println(editPopUpDisplayStatus1);
 		click(close_PortfolioCalendarEntryPopup);
@@ -158,11 +163,13 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	{
 		String desc = getText(eventDes_firstRecord);
 		click(editEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(eventDate);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		selectPrevDateCalender(20, 2, 2017);
+		Thread.sleep(1000);
 		click(saveBtn);
+		Thread.sleep(2000);
 		boolean status = getText(eventDate_firstRecord).equals("20/03/2017") && getText(eventDes_firstRecord).equals(desc);
 		refreshPage();
 		Assert.assertEquals(status, "Event is not showing proper description after editing date.");
@@ -171,22 +178,24 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 	{
 		String date = getText(eventDate_firstRecord);
 		click(editEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		setValue(eventDescription, "Bank holiday");
 		click(saveBtn);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		boolean status = getText(eventDes_firstRecord).equals("Bank holiday") && getText(eventDate).equals(date);
 		
 	}
 	public void validateErrorMessageAfterEnteringDuplicateCalenderEvents() throws Throwable{
 		click(addCalendarEntry);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(eventDate);
 		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		selectFutureDateCalender(20,11,2020);
+		Thread.sleep(2000);
 		setValue(eventDescription, "2025 year Event");
 		click(saveBtn);
+		Thread.sleep(2000);
 		//Entering date and Description For the second time with same Data 
 		click(addCalendarEntry);
 		Thread.sleep(2000);

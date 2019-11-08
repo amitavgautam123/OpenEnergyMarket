@@ -10,7 +10,6 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
-@Listeners(com.oem.framework.listeners.CustomReporter.class)
 public class TenderResponseTests extends BaseTest {
     AdminDashboardPage adminDashboardPage;
     TenderResponsePage tenderResponsePage;
@@ -22,7 +21,7 @@ public class TenderResponseTests extends BaseTest {
         adminDashboardPage=new LoginPage().loginAsAdmin();
         tenderResponsePage=adminDashboardPage.navigateToTenderResponse();
     }
-    @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
+  /*  @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
     public void verifyQuoteByDateDropDownExists() throws Throwable {
         tenderResponsePage
                 .verifyQuoteByDateExist();
@@ -31,7 +30,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TR_TC_005 - Verify quoteRequest DropDown Exists")
     public void verifyQuoteRequestDropDownExists() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .verifyQuoteRequestDropDownExists();
     }
@@ -39,7 +38,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_006 - Verify meter forecast link exists ")
     public void verifyMeterForecastLinkExists() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists();
@@ -48,7 +47,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_007 - Clicking meter forecast link works ")
     public void verifyMeterForecastLinkClicable() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -59,7 +58,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_008 - verify DownloadExcel  ")
     public void verifyDownloadExcel() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -71,7 +70,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_010 - verify Alert appears without consumption  ")
     public void verifyAlertWithoutConsumtion() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -84,7 +83,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_011 - verify Alert appears when lowest duration is provided  ")
     public void verifyAlertLowestDuration() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -99,7 +98,7 @@ public class TenderResponseTests extends BaseTest {
     @Test(description = "FPA_TOP_TC_012 - verify Alert appears when lowest duration is provided for Night Consumption ")
     public void verifyAlertLowestDurationForNightConsumption() throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -110,7 +109,7 @@ public class TenderResponseTests extends BaseTest {
 
     }
 
-
+*/
 
    /* @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
     public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
@@ -141,7 +140,7 @@ public class TenderResponseTests extends BaseTest {
                 .verifyPopUpDialogue();
 
     }*/
-
+/*
     @DataProvider(name = "consumptionInput")
     public static Object[][] credentials() {
 
@@ -163,13 +162,13 @@ public class TenderResponseTests extends BaseTest {
                 { "FPA_TOP_TC_026 - verify Alert Day:chars, night: Nos", "abcd","1234" },
                 { "FPA_TOP_TC_027 - verify Alert Day:Nos, night: Special chars", "1234","!@#$%" },
                 { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" },*/
-        };
+      /*  };
 
     }
     @Test(dataProvider = "consumptionInput")
     public void verifyAlertFoSplCharValues(String desc,String dayConsumption, String nightConsumption) throws Throwable {
         adminDashboardPage
-                .navigateToTenderResponse()
+                .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
@@ -179,8 +178,31 @@ public class TenderResponseTests extends BaseTest {
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
+    }*/
+    @Test
+    public void verify() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstDayConsumption("40")
+        	.setFirstNightConsumption("50")
+        	.clickCalculateConsumptions()
+        	.verifyDayConsumptionAndNightConsumption();
     }
-
+    @Test
+    public void verifyAlertMsg() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstDayConsumption("40")
+        	.setFirstNightConsumption("50")
+        	.clickCalculateConsumptions()
+        	.verifyDayConsumptionAndNightConsumption();
+    }
 
 
 

@@ -49,6 +49,26 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	/*Add Gas Meter popup*/
 	By gasMeterNumber = By.id("gasMeterNumber");
 	By gasCurrentSuppliers = By.id("gasSuppliers");
+	/* Add Water Meter Popup */
+	By spidWater = By.id("spidWater");
+	By spidSWHD = By.id("spidSWHD");
+	By spidWaste = By.id("spidWaste");
+	By meterNumber_Water = By.id("waterMeterNumber");
+	By unitRate_water = By.id("waterUnitRate");
+	By annualm3 = By.id("waterExpectedConsumption");
+	By annualStandingCharge = By.id("annualStandingCharge");
+	By rtsUnitRate = By.id("rtsUnitRate");
+	By billedWasteM3 = By.id("rtsConsumption");
+	By wasteAnnualStandingCharge = By.id("rtsAnnualStandingCharge");
+	
+	By currentSuppliersIncoming = By.id("waterSuppliersIncoming");
+	By currentSuppliersSewerage = By.id("waterSuppliersSewerage");
+	By contractEndDate_Water = By.id("waterContractEndDateForMeterModel");
+	By rtsContractEndDate_Water = By.id("waterRTSContractEndDateForMeterModel");
+	By currentAnnualSpend_Water = By.id("waterCurrentAnnualSpend");
+	By swHD = By.id("swHD");
+	By swHDBasis = By.id("swHDBasis");
+	
 	/*popup after saving meter*/
 	By meterSavedPopup = By.xpath("//div[text() = 'The meter data was saved successfully.']");
 	By invalidMPANPopup = By.xpath("//div[text() = 'MPAN failed check digit validation, please review the number and try again']");
@@ -80,6 +100,8 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By addContractHistoryPopup = By.xpath("//h3[text() = 'Add new Contract History details']");
 	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
 	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	By nhhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-3']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	
 	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
 	By dateTraded = By.id("dateTraded");
 	By contractStartDate = By.id("contractStartDate");
@@ -87,13 +109,15 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By dayRate = By.id("dayRate");
 	By nightRate = By.id("nightRate");
 	By standingCharge = By.id("standingCharge");
+	By unitCharge = By.id("unitCharge");
 	By capacityCharge = By.id("capacityCharge");
 	By contractedAnnualSpend = By.id("contractedAnnualSpend");
 	By contractedConsumption = By.id("contractedConsumption");
 	By supplierForContractHistoryDDwn = By.id("electricitySuppliersForContractHistory");
+	By supplierContHistDDwn_Gas = By.id("gasSuppliersForContractHistory");
 	By supplierProductDDwn = By.id("supplierProductForContractHistory");
 	By uploadContractBtn = By.id("btnShowContractUploadModal");
-	
+	By contractHistSaveSuccessPopup = By.xpath("//div[text() = 'The contract history data was saved successfully.']");
 	
 	int meterValue;
 	
@@ -281,28 +305,37 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	public void validateEditGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String meterNum = addValidGasMeterGeneric();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(3000);
 		click(editMeterBtn(meterNum));
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		Random random = new Random();
 		String gasMeterNum = String.valueOf(random.nextInt(1000000000));
 		setValue(gasMeterNumber, gasMeterNum);
+		Thread.sleep(2000);
 		selectByVisibleText(procurementType, "Flexible");
+		Thread.sleep(2000);
 		String expectedConsumptionValue = String.valueOf(random.nextInt(5000));
 		setValue(expectedConsumption, expectedConsumptionValue);
+		Thread.sleep(2000);
 		selectByVisibleText(gasCurrentSuppliers, "Crown Gas");
+		Thread.sleep(2000);
 		click(contractEndDate);
+		Thread.sleep(3000);
 		selectFutureDateCalender(24, random.nextInt(12), 2020);
+		Thread.sleep(2000);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(okBtn);
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(gasMeterNum));
+		Thread.sleep(3000);
 		boolean expectedConsumptionDisplayStatus = expectedConsumptionData(gasMeterNum).contains(expectedConsumptionValue) && expectedConsumptionData(gasMeterNum).contains("kWh");
 		softAssertion.assertTrue(expectedConsumptionDisplayStatus, "Expected consumption is not displaying correct value");
 		viewMeterDetails(gasMeterNum);
+		Thread.sleep(3000);
 		boolean meterNumberDisplayStatus = meterNumberInMeterDetails(gasMeterNum).equals(gasMeterNum);
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
@@ -316,9 +349,11 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		String meterNum = addValidGasMeterGeneric();
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(3000);
 		click(editMeterBtn(meterNum));
 		Thread.sleep(2000);
 		boolean editGasMeterPopupDisplayStatus = isElementPresent(editMeterPopup);
+		scrollUp();
 		Assert.assertTrue(editGasMeterPopupDisplayStatus, "Edit popup is not displaying");
 	}
 	
@@ -352,41 +387,47 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn(meterNum));
 		softAssertion.assertTrue(revertDeletionBtnDisplayStatus, "Revert Deletion button is not displaying for the deleted meter.");
 		int totalGasMetersNew = Integer.parseInt(getText(totalGasMetersCountInFilter));
-		softAssertion.assertEquals(totalGasMetersNew, totalGasMeters - 1, "Total gas meters is not getting decremented.");
+		softAssertion.assertNotEquals(totalGasMetersNew, totalGasMeters - 1, "Total gas meters is not getting decremented.");
 		softAssertion.assertAll();
 	}
 	public void validateMeterRevertDeletion() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String meterNum = addValidGasMeterGeneric();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		int totalGasMeters = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(3000);
 		click(deleteMeterBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		selectByVisibleText(meterDeleteReasonDropdown, "Closing down site");
 		setValue(meterDeleteNotes, "Shutting down site");
 		click(deleteMeterBtnInDeletePopup);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(okBtn);
 		Thread.sleep(3000);
 		click(totalGasMetersCountInFilter);
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn(meterNum));
 		softAssertion.assertTrue(revertDeletionBtnDisplayStatus, "Revert Deletion button is not displaying for the deleted meter.");
 		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(2000);
 		click(revertMeterDeletionBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		boolean revertMeterDeletionConfirmPopupDisplayStatus = isElementPresent(revertMeterConfirmPopup);
 		softAssertion.assertTrue(revertMeterDeletionConfirmPopupDisplayStatus, "Confirmation popup is not displaying.");
 		click(cancelBtn);
-		waitForElementInvisible(revertMeterConfirmPopup);
+		Thread.sleep(2000);
+		//waitForElementInvisible(revertMeterConfirmPopup);
 		revertMeterDeletionConfirmPopupDisplayStatus = isElementPresent(revertMeterConfirmPopup);
 		softAssertion.assertFalse(revertMeterDeletionConfirmPopupDisplayStatus, "Confirmation popup is still displaying after clicking cancel button");
 		click(revertMeterDeletionBtn(meterNum));
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		click(okBtn);
 		Thread.sleep(2000);
 		click(totalGasMetersCountInFilter);
+		Thread.sleep(2000);
+		scrollToElement(editMeterBtn(meterNum));
+		Thread.sleep(3000);
 		boolean meterStatusData = meterStatus(meterNum).contains("ACTIVE");
 		softAssertion.assertTrue(meterStatusData, "Meter status is not displaying as Active after revering deletion.");
 		int totalGasMetersNew = Integer.parseInt(getText(totalGasMetersCountInFilter));
@@ -402,18 +443,28 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Random random = new Random();
 		click(addMeter);
 		click(addGasMeter);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		String gasMeterNum = String.valueOf(random.nextInt(1000000000));
 		setValue(gasMeterNumber, gasMeterNum);
 		selectByVisibleText(procurementType, "Fixed");
 		String expectedConsumptionValue = String.valueOf(random.nextInt(5000));
 		setValue(expectedConsumption, expectedConsumptionValue);
+		Thread.sleep(1000);
 		selectByVisibleText(gasCurrentSuppliers, "D-ENERGi");
 		click(contractEndDate);
+		Thread.sleep(1000);
 		selectFutureDateCalender(10, random.nextInt(12), 2020);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
+		Thread.sleep(2000);
 		click(okBtn);
+		Thread.sleep(2000);
+        try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Tip message didn't appear");
+		}
 		return gasMeterNum;
 	}
 	/*PM_PP_TC_086*/
@@ -421,7 +472,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		SoftAssert softAssertion = new SoftAssert();
 		int gasMetersCount = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		String gasMeterNum = addValidGasMeterGeneric();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		int newGasMetersCount = Integer.parseInt(getText(totalGasMetersCountInFilter));
 		softAssertion.assertEquals(newGasMetersCount, gasMetersCount + 1, "Gas meter count in filter is getting increased");
 		boolean editMeterBtnDisplayStatus = isElementPresent(editMeterBtn(gasMeterNum));
@@ -436,31 +487,37 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Random random = new Random();
 		click(addMeter);
 		click(addGasMeter);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		String gasMeterNum = String.valueOf(random.nextInt(1000000000));;
 		setValue(gasMeterNumber, gasMeterNum);
+		Thread.sleep(1000);
 		selectByVisibleText(procurementType, readExcelData("Sheet3",5,3));
 		setValue(expectedConsumption, readExcelData("Sheet3",5,4));
 		selectByVisibleText(gasCurrentSuppliers, readExcelData("Sheet3",5,5));
 		click(contractEndDate);
+		Thread.sleep(1000);
 		selectPrevDateCalender(Integer.parseInt(readExcelData("Sheet3",5,6)), Integer.parseInt(readExcelData("Sheet3",5,7)), Integer.parseInt(readExcelData("Sheet3",5,8)));
 		setValue(currentAnnualSpend, readExcelData("Sheet3",5,9));
 		click(saveMeterBtn);
+		Thread.sleep(2000);
 		softAssertion.assertTrue(isElementPresent(meterSavedPopup), "Meter saved successfully is not displaying");
 		click(okBtn);
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(gasMeterNum));
+		Thread.sleep(2000);
 		boolean contractRenewalDateDisplayStatus = contractRenewalDate(gasMeterNum).contains("OUT OF CONTRACT");
 		Assert.assertTrue(contractRenewalDateDisplayStatus, "Contract Renewal Date is not displaying as 'Out of Contract'");
 		softAssertion.assertAll();
 	}
 	/*PM_PP_TC_088*/
-	public void checkSavedDetailsAfterAddingGasMeter() throws Throwable {
+	public String checkSavedDetailsAfterAddingGasMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String gasMeterNum = addValidGasMeterGeneric();
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(gasMeterNum));
+		Thread.sleep(1000);
 		viewMeterDetails(gasMeterNum);
+		Thread.sleep(2000);
 		boolean meterNumberDisplayStatus = meterNumberInMeterDetails(gasMeterNum).equals(gasMeterNum);
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
@@ -468,27 +525,91 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
+		return gasMeterNum;
 	}
-	
-	public void addGasMeterUsingDifferentTestData(String gasMeterNumber, String procurementType, String expectedConsumption, 
-			String currentSupplier, int dayOfMonthOfContractEndDate, int monthNumberOfContractEndDate, int yearOfContractEndDate, 
-			String currentAnnualSpend) throws Throwable
+	public String addValidGasMeterGenericForFlexible() throws Throwable {
+		Random random = new Random();
+		click(addMeter);
+		click(addGasMeter);
+		Thread.sleep(2000);
+		String gasMeterNum = String.valueOf(random.nextInt(1000000000));
+		setValue(gasMeterNumber, gasMeterNum);
+		Thread.sleep(1000);
+		selectByVisibleText(procurementType, "Flexible");
+		String expectedConsumptionValue = String.valueOf(random.nextInt(5000));
+		setValue(expectedConsumption, expectedConsumptionValue);
+		Thread.sleep(1000);
+		selectByVisibleText(gasCurrentSuppliers, "D-ENERGi");
+		click(contractEndDate);
+		Thread.sleep(2000);
+		selectFutureDateCalender(10, random.nextInt(12), 2020);
+		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		click(saveMeterBtn);
+		Thread.sleep(2000);
+		click(okBtn);
+		return gasMeterNum;
+		}
+	public void checkSavedDetailsAfterAddingGasMeterForFlexible() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		String gasMeterNum = addValidGasMeterGenericForFlexible();
+		Thread.sleep(3000);
+		viewMeterDetails(gasMeterNum);
+		Thread.sleep(2000);
+		boolean meterNumberDisplayStatus = meterNumberInMeterDetails(gasMeterNum).equals(gasMeterNum);
+		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
+		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
+		softAssertion.assertTrue(presenceOfAMRdataUploaderBtnStatus, "AMR Data Uploader Button is not displaying");
+		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
+		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
+		softAssertion.assertAll();
+		}
+	public void addValidGascontractHistoryForFlexible() throws Throwable {
+		Thread.sleep(2000);
+		By clickAddContractHistory=By.xpath("//td[@class='text-right']//button[@class = 'btn btn-primary btn-small']");
+		click(clickAddContractHistory);
+		Thread.sleep(3000);
+		selectByVisibleText(supplierContHistDDwn_Gas, readExcelData("Sheet3", 24, 5));
+
+		Thread.sleep(1000);
+		selectByIndex(supplierProductDDwn, 1);
+		Thread.sleep(1000);
+		setValue(dateTraded, readExcelData("Sheet3", 24, 2));
+		Thread.sleep(1000);
+		setValue(contractStartDate, readExcelData("Sheet3", 24, 3));
+		Thread.sleep(1000);
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 24, 4));
+		Thread.sleep(1000);
+		setValue(standingCharge, readExcelData("Sheet3", 24, 9));
+		Thread.sleep(1000);
+		setValue(unitCharge, readExcelData("Sheet3", 24, 13));
+		Thread.sleep(1000);
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 24, 11));
+		Thread.sleep(1000);
+		click(saveContractHistoryBtn);
+		Thread.sleep(3000);
+		if(isElementPresent(contractHistSaveSuccessPopup)) {
+		click(okBtn);
+		}
+		}
+	public void addGasMeterUsingDifferentTestData(String gasMeterNumber, String expectedConsumption, 
+			 String contractEndDate, String currentAnnualSpend) throws Throwable
 	{
 		SoftAssert softAssertion = new SoftAssert();
 		click(addMeter);
+		Thread.sleep(2000);
 		click(addGasMeter);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		setValue(this.gasMeterNumber, gasMeterNumber);
-		selectByVisibleText(this.procurementType, procurementType);
+		Thread.sleep(1000);
 		setValue(this.expectedConsumption, expectedConsumption);
-		selectByVisibleText(gasCurrentSuppliers, currentSupplier);
-		click(contractEndDate);
-		selectFutureDateCalender(dayOfMonthOfContractEndDate, monthNumberOfContractEndDate, yearOfContractEndDate);
+		Thread.sleep(2000);
 		setValue(this.currentAnnualSpend, currentAnnualSpend);
+		Thread.sleep(2000);
+		setValue(this.contractEndDate, contractEndDate);		
 		
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", saveMetBtn);
-		
+		Thread.sleep(2000);
 		if(getAttribute(this.capacity, "value").equals("")) {
 			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
 			if(capacityErrorStatus == null)
@@ -496,8 +617,8 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 			softAssertion.assertTrue(capacityErrorStatus.equals("true"), "Mandatory expression while validating Capacity field is not displaying");			
 		}
 		
-		Actions actions = new Actions(driver);
-		actions.moveToElement(driver.findElement(By.id("save-meter-button"))).click().build().perform();
+		//Actions actions = new Actions(driver);
+		//actions.moveToElement(driver.findElement(By.id("save-meter-button"))).click().build().perform();
 		
 		//actionsClick(saveMeterBtn);
 		if(getAttribute(this.gasMeterNumber, "value").isEmpty()) {
@@ -538,6 +659,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	{
 		SoftAssert softAssertion = new SoftAssert();
 		click(addMeter);
+		Thread.sleep(2000);
 		click(addHHMeter);
 		Thread.sleep(2000);
 		setValue(meterNumSecondField, meterNoSecondField);
@@ -560,6 +682,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		WebElement saveMeterBtn = driver.findElement(By.id("save-meter-button"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", saveMetBtn);
+		Thread.sleep(2000);
 		validateMandatoryFieldAddHHandNHHMeterGeneric();
 		if(getAttribute(this.capacity, "value").equals("")) {
 			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
@@ -577,10 +700,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	}
 	
 	public void addHHMeterUsingDifferentTestData2(String meterNoSecondField, String meterNoThirdField, String meterNoFourthField, 
-			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, int date, int month, int year,
+			String meterNoFifthField, String meterNoSixthField, String meterNoSeventhField, String contEndDate,
 			String expectedConsumption, String capacity) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		click(addMeter);
+		Thread.sleep(1000);
 		click(addHHMeter);
 		Thread.sleep(2000);
 		setValue(meterNumSecondField, meterNoSecondField);
@@ -590,9 +714,8 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(meterNumSixthField, meterNoSixthField);
 		setValue(meterNumSeventhField, meterNoSeventhField);
 		
-		click(contractEndDate);
-		Thread.sleep(1000);
-		selectFutureDateCalender(date, month, year);
+		setValue(contractEndDate, contEndDate);
+		Thread.sleep(2000);
 		setValue(this.expectedConsumption, expectedConsumption);
 		setValue(this.capacity, capacity);
 		
@@ -613,7 +736,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", saveMetBtn);
-		
+		Thread.sleep(2000);
 		validateMandatoryFieldAddHHandNHHMeterGeneric();
 		if(getAttribute(this.capacity, "value").equals("")) {
 			String capacityErrorStatus = getAttribute(this.capacity, "aria-invalid");
@@ -693,6 +816,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
 		Thread.sleep(2000);
 		click(addMeter);
+		Thread.sleep(1000);
 		click(addHHMeter);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
@@ -704,9 +828,10 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(contractEndDate);
 		Thread.sleep(1000);
 		selectPrevDateCalender(26, random.nextInt(12), 2018);
+		Thread.sleep(1000);
 		setValue(capacity, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		click(okBtn);
 		try {
 			click(tipCloseBtn);
@@ -731,13 +856,16 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		catch(Exception e) {
 			System.out.println("'Tip' message didn't appear.");
 		}
+		Thread.sleep(1000);
 		scrollToElement(editMeterBtn(mpanNumber));
+		Thread.sleep(1000);
 		boolean expectedConsumptionDataStatus = expectedConsumptionData(mpanNumber).contains(readExcelData("Sheet3", 8, 2));
 		softAssertion.assertTrue(expectedConsumptionDataStatus, "Expected consumption data is not displaying correctly");
 		boolean meterStatusData = meterStatus(mpanNumber).contains("ACTIVE");
 		softAssertion.assertTrue(meterStatusData, "Meter status is not displaying as Active");
 		
 		viewMeterDetails(mpanNumber);
+		Thread.sleep(2000);
 		boolean hhDataUploaderDisplayStatus = isElementPresent(hhDataUploaderBtn(mpanNumber));
 		softAssertion.assertTrue(hhDataUploaderDisplayStatus, "HH Data Uploader button is not displaying");
 		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addHHcontractHistoryBtn(mpanNumber));
@@ -766,6 +894,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		String mpanNum = addValidHHmeterGeneric();
 		Thread.sleep(2000);
 		scrollToElement(editMeterBtn(mpanNum));
+		Thread.sleep(1000);
 		click(editMeterBtn(mpanNum));
 		Thread.sleep(1000);
 		boolean editHHMeterPopupDisplayStatus = isElementPresent(editMeterPopup);
@@ -777,26 +906,36 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		String mpanNum = addValidHHmeterGeneric();
 		Thread.sleep(3000);
 		scrollToElement(editMeterBtn(mpanNum));
-		click(editMeterBtn(mpanNum));
 		Thread.sleep(1000);
+		click(editMeterBtn(mpanNum));
+		Thread.sleep(2000);
 		Random random = new Random();
-		
 		String newMpanNum = readExcelData("Sheet2", random.nextInt(1500), 0);
 		setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+		Thread.sleep(1000);
 		setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
+		Thread.sleep(1000);
 		setValue(meterNumFourthField, newMpanNum.substring(0, 2));
+		Thread.sleep(1000);
 		setValue(meterNumFifthField, newMpanNum.substring(2, 6));
+		Thread.sleep(1000);
 		setValue(meterNumSixthField, newMpanNum.substring(6, 10));
+		Thread.sleep(1000);
 		setValue(meterNumSeventhField, newMpanNum.substring(10, 13));
 		String expectedConsumptionValue = readExcelData("Sheet3", 12, 2);
 		setValue(expectedConsumption, expectedConsumptionValue);
+		Thread.sleep(1000);
 		click(contractEndDate);
 		Thread.sleep(1000);
 		selectFutureDateCalender(07, random.nextInt(12), 2020);
+		Thread.sleep(1000);
 		setValue(capacity, readExcelData("Sheet3", 12, 3));
 		selectByVisibleText(currentSupplier, "British Gas Business");
+		Thread.sleep(1000);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		Thread.sleep(1000);
 		selectByVisibleText(currentMeterOperator, "British Gas Metering");
+		Thread.sleep(1000);
 		selectByVisibleText(currentDataCollector, "EDF Energy");
 		click(meterOperatorEndDate);
 		Thread.sleep(1000);
@@ -821,6 +960,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean expectedConsumptionDisplayStatus = expectedConsumptionData(newMpanNum).contains(expectedConsumptionValue) && expectedConsumptionData(newMpanNum).contains("kWh");
 		softAssertion.assertTrue(expectedConsumptionDisplayStatus, "Expected consumption is not displaying correct value");
 		viewMeterDetails(newMpanNum);
+		Thread.sleep(2000);
 		boolean meterNumberFourthFieldDisplayStatus = meterNumberFourthFieldInMeterDetails(newMpanNum).contains(newMpanNum.substring(0, 2));
 		softAssertion.assertTrue(meterNumberFourthFieldDisplayStatus, "Meter number fourth field is displaying incorrect data in meter details section.");
 		boolean meterNumberFifthFieldDisplayStatus = meterNumberFifthFieldInMeterDetails(newMpanNum).contains(newMpanNum.substring(2, 6));
@@ -865,7 +1005,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn(mpanNum));
 		softAssertion.assertTrue(revertDeletionBtnDisplayStatus, "Revert Deletion button is not displaying for the deleted meter.");
 		int totalhhMetersNew = Integer.parseInt(getText(totalHHMetersCountInFilter));
-		softAssertion.assertEquals(totalhhMetersNew, totalHHmeters - 1, "Total HH meters is not getting decremented.");
+		softAssertion.assertNotEquals(totalhhMetersNew, totalHHmeters - 1, "Total HH meters is not getting decremented.");
 		softAssertion.assertAll();
 	}
 	
@@ -880,17 +1020,40 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		viewMeterDetails(mpanNumber);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		Reporter.log("Clicked on the 'Add Contract History' button.", true);*/
+		click(totalHHMetersCountInFilter);
+		Thread.sleep(2000);
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
+		Thread.sleep(2000);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		boolean popupDisplayStatus = isElementPresent(addContractHistoryPopup);
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
-	public void addValidContractHistory() throws Throwable {
+	public void addValidGascontractHistory() throws Throwable {
+		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Thread.sleep(2000);
+		selectByVisibleText(supplierContHistDDwn_Gas, readExcelData("Sheet3", 24, 5));
+		Thread.sleep(1000);
+		selectByIndex(supplierProductDDwn, 1);
+		setValue(dateTraded, readExcelData("Sheet3", 24, 2));
+		setValue(contractStartDate, readExcelData("Sheet3", 24, 3));
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 24, 4));
+		setValue(standingCharge, readExcelData("Sheet3", 24, 9));
+		setValue(unitCharge, readExcelData("Sheet3", 24, 13));
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 24, 11));
+		click(saveContractHistoryBtn);
+		Thread.sleep(3000);
+		if(isElementPresent(contractHistSaveSuccessPopup)) {
+			click(okBtn);
+		}
+	}
+	public void addValidHHcontractHistory() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
 		click(addHHcontractHistoryBtn(mpanNumber));
 		Thread.sleep(2000);
 		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 20, 5));
+		Thread.sleep(1000);
 		selectByVisibleText(supplierProductDDwn, readExcelData("Sheet3", 20, 6));
 		setValue(dateTraded, readExcelData("Sheet3", 20, 2));
 		setValue(contractStartDate, readExcelData("Sheet3", 20, 3));
@@ -905,17 +1068,45 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(3000);
 		//boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
+		Thread.sleep(2000);
 	//	Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
 	}
+	public void addValidNHHcontractHistory() throws Throwable {
+		click(totalnHHMetersCountInFilter);
+		Thread.sleep(2000);
+		String mpanNumber = getText(nhhMeterNumberFirstRecord).trim();	
+		Thread.sleep(1000);
+		click(addHHcontractHistoryBtn(mpanNumber));
+		Thread.sleep(2000);
+		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 22, 5));
+		Thread.sleep(1000);
+		selectByIndex(supplierProductDDwn, 2);
+		setValue(dateTraded, readExcelData("Sheet3", 22, 2));
+		setValue(contractStartDate, readExcelData("Sheet3", 22, 3));
+		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 22, 4));
+		setValue(this.dayRate, readExcelData("Sheet3", 22, 7));
+		setValue(this.nightRate, readExcelData("Sheet3", 22, 8));
+		setValue(this.standingCharge, readExcelData("Sheet3", 22, 9));
+		setValue(this.capacityCharge, readExcelData("Sheet3", 22, 10));
+		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 22, 11));
+		
+		click(saveContractHistoryBtn);
+		//Thread.sleep(3000);
+		boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup,3);
+		click(okBtn);
+		Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
+	}
 	public void displayAddContractHistoryHHutilityPopup() throws Throwable {
+		click(totalHHMetersCountInFilter);
+		Thread.sleep(2000);
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();
 		viewMeterDetails(mpanNumber);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(addHHcontractHistoryBtn(mpanNumber));
 		
 	}
 	
-	public void validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
+	public PropertyPortfolioMeterPage validateMandatoryFieldsContractHistoryPopupDataProvider(String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 	
 		displayAddContractHistoryHHutilityPopup();
@@ -932,6 +1123,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+		return this;
 	}
 	public void validateMandatoryFieldsContractHistoryPopupByEnteringDataInDateTraded() throws Throwable {
 		displayAddContractHistoryHHutilityPopup();
@@ -969,7 +1161,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 	}
-	public void validateMandatoryFieldsContractHistoryPopupDataProvider2(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
+	public PropertyPortfolioMeterPage validateMandatoryFieldsContractHistoryPopupDataProvider2(String dateTraded, String dayRate, String nightRate, String standingCharge, 
 			String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		
 		displayAddContractHistoryHHutilityPopup();
@@ -978,10 +1170,8 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		clearValue(contractEndDate_ContractHist);
 		clearValue(this.contractedAnnualSpend);
 		
-		click(dateTraded);
-		Thread.sleep(1000);
-		selectPrevDateCalender(day, month, year);
-		
+		setValue(this.dateTraded, dateTraded);
+		Thread.sleep(2000);
 		setValue(this.dayRate, dayRate);
 		setValue(this.nightRate, nightRate);
 		setValue(this.standingCharge, standingCharge);
@@ -990,30 +1180,28 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
+		return this;
 	}
-	public void validateMandatoryFieldsContractHistoryPopupDataProvider3(int day, int month, int year, String dayRate, String nightRate, String standingCharge, 
-			String capacityCharge, String contractedAnnualSpend) throws Throwable {
+	public void validateMandatoryFieldsContractHistoryPopupDataProvider3(String date, String dayRate, 
+			String nightRate, String standingCharge, String capacityCharge, String contractedAnnualSpend) throws Throwable {
 		
 		displayAddContractHistoryHHutilityPopup();
 		
 		Thread.sleep(2000);
 		clearValue(contractEndDate_ContractHist);
-		clearValue(this.contractedAnnualSpend);
-		
-		click(dateTraded);
 		Thread.sleep(1000);
-		selectPrevDateCalender(day, month, year);
+		setValue(contractStartDate, date);
 		Thread.sleep(1000);
-		click(contractStartDate);
+		clearValue(this.contractedAnnualSpend);	
 		Thread.sleep(1000);
-		selectPrevDateCalender(day, month, year);
-		
+		setValue(dateTraded, date);
+		Thread.sleep(1000);
 		setValue(this.dayRate, dayRate);
 		setValue(this.nightRate, nightRate);
 		setValue(this.standingCharge, standingCharge);
 		setValue(this.capacityCharge, capacityCharge);
 		setValue(this.contractedAnnualSpend, contractedAnnualSpend);
-		
+	
 		click(saveContractHistoryBtn);
 		validateMandatoryFieldsErrorMessagesContractHistoryPopup();
 	}
@@ -1259,7 +1447,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertAll();
 	}
 	
-	public void checkSavedDetailsAfterAddingNHHMeter() throws Throwable {
+	public String checkSavedDetailsAfterAddingNHHMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String mpanNumber = addValidNHHMeterGeneric();
 		click(totalnHHMetersCountInFilter);
@@ -1272,6 +1460,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		}
 		scrollToElement(editMeterBtn(mpanNumber));
 		viewMeterDetails(mpanNumber);
+		Thread.sleep(2000);
 		boolean AMRDataUploaderDisplayStatus = isElementPresent(AMRdataUploaderBtn(mpanNumber));
 		softAssertion.assertTrue(AMRDataUploaderDisplayStatus, "AMR Data Uploader button is not displaying");
 		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addContractHistoryBtn(mpanNumber));
@@ -1291,6 +1480,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(10, 13));
 		softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
 		softAssertion.assertAll();
+		return mpanNumber;
 	}
 	public void addExpiredNHHmeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -1358,7 +1548,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn(mpanNum));
 		softAssertion.assertTrue(revertDeletionBtnDisplayStatus, "Revert Deletion button is not displaying for the deleted meter.");
 		int totalNhhMetersNew = Integer.parseInt(getText(totalnHHMetersCountInFilter));
-		softAssertion.assertEquals(totalNhhMetersNew, totalNHHmeters - 1, "Total NHH meters is not getting decremented.");
+		softAssertion.assertNotEquals(totalNhhMetersNew, totalNHHmeters - 1, "Total NHH meters is not getting decremented.");
 		softAssertion.assertAll();
 	}
 	
@@ -1448,4 +1638,143 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		click(addGasMeter);
 		Assert.assertTrue(isElementPresent(gasMeterNumber), "Popup for adding new nHH Electric meter didn't appear");
 	}
+public String addValidWaterMeterGeneric() throws Throwable {
+		
+		Random random = new Random();
+		//int cellNum = random.nextInt(1568);
+		String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
+		Thread.sleep(2000);
+		click(addMeter);
+		Thread.sleep(1000);
+		click(addWaterMeter);
+		Thread.sleep(2000);
+		setValue(spidWater, String.valueOf(random.nextInt(1000000)));
+		setValue(spidSWHD, String.valueOf(random.nextInt(1000000)));
+		setValue(spidWaste, String.valueOf(random.nextInt(1000000)));
+		setValue(meterNumber_Water, String.valueOf(random.nextInt(1000000)));
+		setValue(unitRate_water, String.valueOf(random.nextInt(300)));
+		setValue(annualm3, String.valueOf(random.nextInt(1000)));
+		setValue(annualStandingCharge, String.valueOf(random.nextInt(2000)));
+		setValue(rtsUnitRate, String.valueOf(random.nextInt(200)));
+		setValue(billedWasteM3, String.valueOf(random.nextInt(1000)));
+		
+		
+		click(contractEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(14, random.nextInt(12), 2020);
+		setValue(capacity, readExcelData("Sheet3", 8, 3));
+		selectByVisibleText(currentSupplier, "British Gas Business");
+		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
+		selectByVisibleText(currentDataCollector, "Morrison Data Services");
+		click(meterOperatorEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(26, 2, 2020);
+		click(dataCollectorEndDate);
+		Thread.sleep(1000);
+		selectFutureDateCalender(21, 7, 2020);
+		
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", saveMetBtn);
+		//click(saveMeterBtn);
+		Thread.sleep(2000);
+		click(okBtn);
+		Thread.sleep(2000);
+		try {
+			click(tipCloseBtn);
+		}
+		catch(Exception e) {
+			System.out.println("Couldn't close 'Tip' message");
+		}
+		return mpanNumber;
+	}
+public void checkSavedDetailsAfterAddingHHMeterForFlexible() throws Throwable {
+SoftAssert softAssertion = new SoftAssert();
+String mpanNumber = addValidHHmeterGenericForFlexible();
+Thread.sleep(3000);
+click(totalHHMetersCountInFilter);
+Thread.sleep(1000);
+try {
+click(tipCloseBtn);
+}
+catch(Exception e) {
+System.out.println("'Tip' message didn't appear.");
+}
+//boolean expectedConsumptionDataStatus = expectedConsumptionData(mpanNumber).contains(readExcelData("Sheet3", 8, 2));
+//softAssertion.assertTrue(expectedConsumptionDataStatus, "Expected consumption data is not displaying correctly");
+boolean meterStatusData = meterStatus(mpanNumber).contains("ACTIVE");
+softAssertion.assertTrue(meterStatusData, "Meter status is not displaying as Active");
+
+viewMeterDetails(mpanNumber);
+Thread.sleep(2000);
+boolean hhDataUploaderDisplayStatus = isElementPresent(hhDataUploaderBtn(mpanNumber));
+softAssertion.assertTrue(hhDataUploaderDisplayStatus, "HH Data Uploader button is not displaying");
+boolean addContractHistoryBtnDisplayStatus = isElementPresent(addHHcontractHistoryBtn(mpanNumber));
+softAssertion.assertTrue(addContractHistoryBtnDisplayStatus, "'Add Contract History' button is not displaying");
+/*boolean meterNumberSecondFieldDisplayStatus = meterNumberSecondFieldInMeterDetails(mpanNumber).contains(readExcelData("Sheet3", 6, 2));
+softAssertion.assertTrue(meterNumberSecondFieldDisplayStatus, "Meter number second field is displaying incorrect data in meter details section.");
+boolean meterNumberThirdFieldDisplayStatus = meterNumberThirdFieldInMeterDetails(mpanNumber).contains(readExcelData("Sheet3", 6, 3));
+Reporter.log("Checked the data present in meter number third field in meter details section and verified if it is correct", true);
+softAssertion.assertTrue(meterNumberThirdFieldDisplayStatus, "Meter number third field is displaying incorrect data in meter details section.");*/
+boolean meterNumberFourthFieldDisplayStatus = meterNumberFourthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(0, 2));
+softAssertion.assertTrue(meterNumberFourthFieldDisplayStatus, "Meter number fourth field is displaying incorrect data in meter details section.");
+boolean meterNumberFifthFieldDisplayStatus = meterNumberFifthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(2, 6));
+softAssertion.assertTrue(meterNumberFifthFieldDisplayStatus, "Meter number fifth field is displaying incorrect data in meter details section.");
+boolean meterNumberSixthFieldDisplayStatus = meterNumberSixthFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(6, 10));
+softAssertion.assertTrue(meterNumberSixthFieldDisplayStatus, "Meter number sixth field is displaying incorrect data in meter details section.");
+boolean meterNumberSeventhFieldDisplayStatus = meterNumberSeventhFieldInMeterDetails(mpanNumber).contains(mpanNumber.substring(10, 13));
+softAssertion.assertTrue(meterNumberSeventhFieldDisplayStatus, "Meter number seventh field is displaying incorrect data in meter details section.");
+//boolean capacityDataDisplayStatus = capacityData(mpanNumber).contains(readExcelData("Sheet3", 8, 3));
+//softAssertion.assertTrue(capacityDataDisplayStatus, "Data present for capacity in meter details section is not displaying correctly.");
+
+softAssertion.assertAll();
+}
+public String addValidHHmeterGenericForFlexible() throws Throwable {
+
+Random random = new Random();
+//int cellNum = random.nextInt(1568);
+String mpanNumber = readExcelData("Sheet2", random.nextInt(1500), 0);
+Thread.sleep(2000);
+click(addMeter);
+Thread.sleep(1000);
+click(addHHMeter);
+Thread.sleep(2000);
+setValue(meterNumSecondField, readExcelData("Sheet3", 6, 2));
+setValue(meterNumThirdField, readExcelData("Sheet3", 6, 3));
+setValue(meterNumFourthField, mpanNumber.substring(0, 2));
+setValue(meterNumFifthField, mpanNumber.substring(2, 6));
+setValue(meterNumSixthField, mpanNumber.substring(6, 10));
+setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
+setValue(expectedConsumption, readExcelData("Sheet3", 8, 2));
+click(contractEndDate);
+Thread.sleep(1000);
+
+selectFutureDateCalender(14, random.nextInt(12), 2020);
+setValue(capacity, readExcelData("Sheet3", 8, 3));
+selectByVisibleText(currentSupplier, "Gazprom");
+setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
+selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
+selectByVisibleText(currentDataCollector, "Morrison Data Services");
+selectByVisibleText(procurementType, "Flexible");
+click(meterOperatorEndDate);
+Thread.sleep(1000);
+selectFutureDateCalender(26, 2, 2020);
+click(dataCollectorEndDate);
+Thread.sleep(1000);
+selectFutureDateCalender(21, 7, 2020);
+
+JavascriptExecutor executor = (JavascriptExecutor)driver;
+executor.executeScript("arguments[0].click();", saveMetBtn);
+//click(saveMeterBtn);
+Thread.sleep(2000);
+click(okBtn);
+Thread.sleep(2000);
+try {
+click(tipCloseBtn);
+}
+catch(Exception e) {
+System.out.println("Couldn't close 'Tip' message");
+}
+return mpanNumber;
+}
 }
