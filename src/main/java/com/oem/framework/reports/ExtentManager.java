@@ -6,10 +6,11 @@ import java.io.File;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.oem.framework.core.utils.TestUtil;
 
 public class ExtentManager {
     private static ExtentReports extent;
-    private static String reportFileName = "Test-Automation-Report"+".html";
+    private static String reportFileName = "Test-Automation-Report"+ TestUtil.getCurrentTime()+".html";
     private static String fileSeperator = System.getProperty("file.separator");
     private static String reportFilepath = System.getProperty("user.dir") +fileSeperator+ "ExtentReport";
     private static String reportFileLocation =  reportFilepath +fileSeperator+ reportFileName;

@@ -151,8 +151,7 @@ public abstract class BaseTest implements Base, ITest {
 
     private String getCurrentTime(){
 
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").format(new Date());
-        return timeStamp;
+       return TestUtil.getCurrentTime();
     }
     private void addScreenshotToReport(ITestResult result,String screenshot){
 

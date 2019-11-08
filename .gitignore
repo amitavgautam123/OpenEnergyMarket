@@ -7,6 +7,7 @@ out/
 *.png
 *.jpeg
 *.jpg
+*.pdf
 temp/
 test-output/
 target/

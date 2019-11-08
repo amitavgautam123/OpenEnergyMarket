@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TestUtil implements Base {
     static Logger logger= LoggerFactory.getLogger(TestUtil.class);
@@ -90,5 +92,11 @@ public class TestUtil implements Base {
         fout.write(screenshot);
         fout.flush();
         fout.close();
+    }
+
+    public static String getCurrentTime(){
+
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").format(new Date());
+        return timeStamp;
     }
 }

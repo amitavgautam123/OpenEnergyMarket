@@ -5,10 +5,10 @@
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-        <listener class-name="com.uttesh.pdfngreport.PDFReportListener" />
+        <listener class-name="com.oem.framework.listeners.CustomReporter"/>
     </listeners>
 
-    <test name="Automation tests">
+    <test name="OEM Regression Tests">
         <packages>
             <package name="com.oem.PortfolioManager"/>
             <package name="com.oem.QuotesAndTenders"/>
@@ -17,5 +17,8 @@
             <package name="com.oem.PortfolioManager"/>
          
         </packages>
+
     </test>
+
+
 </suite>

@@ -42,4 +42,22 @@ public class ConfigUtils implements Base {
         return propertyMap;
 
     }
+
+    public static HashMap<String, String> loadConfigs(String file) throws IOException {
+
+        HashMap<String, String> propertyMap = new HashMap<String, String>();
+
+        Properties p = new Properties();
+        FileInputStream inputStream = new FileInputStream(file);
+        p.load(inputStream);
+
+        propertyMap.putAll(p.entrySet()
+                .stream()
+                .collect(Collectors.toMap(e -> e.getKey().toString(),
+                        e -> e.getValue().toString())));
+        inputStream.close();
+
+        return propertyMap;
+
+    }
 }

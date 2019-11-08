@@ -1,38 +1,51 @@
 package com.oem.framework.listeners;
 
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
+import com.oem.framework.core.utils.ConfigUtils;
+import com.oem.framework.core.utils.TestUtil;
+import com.uttesh.pdfngreport.PDFReportListener;
+import org.apache.commons.io.FileUtils;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.testng.*;
+import org.testng.annotations.Test;
 import org.testng.xml.XmlSuite;
 
 
-public class CustomReporter implements IReporter {
+public class CustomReporter extends PDFReportListener implements IReporter {
     /**
      * Document
      */
     private Document document = null;
-
+    private String pdfTempFile="regression_tmp.pdf";
+    private String pdfFile="regression.pdf";
+    private String finalReportFile="regression"+TestUtil.getCurrentTime()+".pdf";
+    HashMap<String,String> configs;
     /**
      * PdfPTables
      */
     PdfPTable successTable = null;
 
-    public CustomReporter() {
+    public CustomReporter() throws IOException {
         this.document = new Document();
+        configs=ConfigUtils.loadConfigs("pdfngreport.properties");
         try {
-            PdfWriter.getInstance(this.document, new FileOutputStream("regression.pdf"));
+            PdfWriter.getInstance(this.document, new FileOutputStream(pdfTempFile));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public static enum TestCaseStatus {
@@ -131,6 +144,7 @@ public class CustomReporter implements IReporter {
      * @param outputFolder
      */
     public void generateReport(List<XmlSuite> list, List<ISuite> suites, String outputFolder) {
+        super.generateReport(list,suites,outputFolder);
         for (ISuite suite : suites) {
             String suiteName = suite.getName();
             Map<String, ISuiteResult> suiteResults = suite.getResults();
@@ -186,6 +200,21 @@ public class CustomReporter implements IReporter {
         }
         this.successTable.setSpacingBefore(15f);
         this.document.close();
+
+        try {
+            mergePDFDocs(pdfFile,configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf",pdfTempFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Merging of files failed");
+        }
+        File src=new File(pdfFile);
+        File dest=new File(finalReportFile);
+        try {
+            FileUtils.copyFile(src,dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("******************************* Failed to copy pdf file  **********************");
+        }
     }
 
 
@@ -226,4 +255,31 @@ public class CustomReporter implements IReporter {
         cell = new PdfPCell(new Paragraph(String.valueOf(classData.getFailedCount())));
         this.successTable.addCell(cell);
     }
+
+    private void mergePDFDocs(String destinationFile,String sourceFile1,String sourceFile2) throws IOException{
+        PDFMergerUtility pdfMerger = new PDFMergerUtility();
+        pdfMerger.setDestinationFileName(destinationFile);
+       // PDDocument f1=PDDocument.load(new File(sourceFile1));
+        pdfMerger.addSource(new File(sourceFile1));
+
+       // PDDocument f2=PDDocument.load(new File(sourceFile2));
+        pdfMerger.addSource(new File(sourceFile2));
+
+        pdfMerger.mergeDocuments();
+
+     /*   f1.close();
+        f2.close();*/
+       // merger.merge(firstSourcePdf, Arrays.asList(1, 5, 7, 1));
+       // PdfDocument secondSourcePdf = new PdfDocument(new PdfReader(SRC2));
+       // merger.merge(secondSourcePdf, Arrays.asList(1, 15));
+      //  merger.close();
+      //  firstSourcePdf.close();
+       // secondSourcePdf.close();
+        //pdf.close();
+    }
+
+   /* @Test
+    public void test() throws IOException {
+        mergePDFDocs("regression.pdf",configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf",pdfTempFile);
+    }*/
 }
