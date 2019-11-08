@@ -63,6 +63,11 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 	By hhSetup=By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
 	By nHHSetUp=By.xpath("//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
 	By gasSetUp=By.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	
+	By hhUtilitySetUpPro =By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By gasUtilitySetUpPro=By.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By nHHUtilitySetUpPro=By.xpath("//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	
 	static List<WebElement> suppliers; 
 	
 	public void clickHHReview(){
@@ -311,132 +316,60 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 		
 		
-		
-		By setUpProfileAtProfileStatus = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
-		boolean SetupProfile = isElementPresent(setUpProfileAtProfileStatus);
-		if (SetupProfile) {
-			System.out.println("Set Up Profile is present");
-		} else {
 
-			switch (SelectUtility) {
-
-			case "HH":
-				click_hhUtilityLink();
-				Thread.sleep(3000);
-				
-				if(isElementPresent(notAbleToCreateSetupProfile)){
-					FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-					flexAdmin.deleteProfile("HH");
-					
-					
-				}
-				break;
-
-			case "nHH":
-				click_nhhUtilityLink();
-				
-				if(isElementPresent(notAbleToCreateSetupProfile)){
-					FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-					flexAdmin.deleteProfile("nHH");
-					
-				}
-				break;
-			case "Gas":
-				click_gasUtilityLink();
-
-				if(isElementPresent(notAbleToCreateSetupProfile)){
-					FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-					flexAdmin.deleteProfile("Gas");
-					
-				}
-				break;
-			default:
-				System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
-			}
-
-		}
-		Thread.sleep(3000);
-		List rowsAfter = driver.findElements(rowCount);
-		int rowsAfterClick = rowsAfter.size();
 		switch (SelectUtility) {
+
 		case "HH":
+		if(isElementPresent(hhUtilitySetUpPro)){
+		click(hhUtilitySetUpPro);
+		}else{
+		click_hhUtilityLink();
+		click(hhUtilitySetUpPro);
+		Thread.sleep(3000);
 
-			System.out.println("No Of Flexible Purchasing Profiles Present Are :  " + rowsAfterClick);
-			Thread.sleep(3000);
+		if(isElementPresent(notAbleToCreateSetupProfile)){
+		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
+		flexAdmin.deleteProfile("HH");
 
-			firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
 
-				By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-				By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i
-						+ "]//td[2]//i[@data-original-title='Half Hourly Electric Profile']");
-				Thread.sleep(3000);
-				//String utilityHH = getText(presentUtility);
-				//table[@id='profiles-table']//tbody//tr[1]//td[2]//i[@data-original-title='Half Hourly Electric Profile']
-				String Text = getText(presentSetUpProfile);
-				Thread.sleep(3000);
-				//boolean utilityPresence = driver.findElement(presentUtility).isDisplayed();
-				if ((Text.contains("Setup Flexible Profile")) /*& (utilityPresence)*/) {
-					Thread.sleep(3000);
-					click(presentSetUpProfile);
-					Reporter.log("Clicked On Setup Flexible Profile Of HH Utility", true);
-					break firstLoop;
-				}
-
-			}
-			break;
-		case "nHH":
-			System.out.println("No Of Flexible Purchasing Profiles Present Are :  " + rowsAfterClick);
-			Thread.sleep(3000);
-
-			firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
-
-				By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-				By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i
-						+ "]//td[2]//i[@data-original-title='Gas Profile']");
-				Thread.sleep(3000);
-				String utilityHH = getText(presentUtility);
-
-				String Text = getText(presentSetUpProfile);
-				Thread.sleep(3000);
-				boolean utilityPresence = driver.findElement(presentUtility).isDisplayed();
-
-				if ((Text.contains("Setup Flexible Profile")) & (utilityPresence)) {
-					Thread.sleep(3000);
-					click(presentSetUpProfile);
-					Reporter.log("Clicked On Setup Flexible Profile", true);
-					break firstLoop;
-				}
-
-			}
-			break;
-		case "Gas":
-			System.out.println("No Of Flexible Purchasing Profiles Present Are :  " + rowsAfterClick);
-			Thread.sleep(3000);
-
-			firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
-
-				By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-				By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i
-						+ "]//td[2]//i[@data-original-title='Gas Profile']");
-				Thread.sleep(3000);
-				String utilityHH = getText(presentUtility);
-
-				String Text = getText(presentSetUpProfile);
-				Thread.sleep(3000);
-				boolean utilityPresence = driver.findElement(presentUtility).isDisplayed();
-
-				if ((Text.contains("Setup Flexible Profile")) & (utilityPresence)) {
-					Thread.sleep(3000);
-					click(presentSetUpProfile);
-					Reporter.log("Clicked On Setup Flexible Profile", true);
-					break firstLoop;
-				}
-
-			}
-			break;
-		default:
-			System.out.println("Please enter the Correct Spelling ie. HH or nHH or Gas");
 		}
+		}
+		break;
+
+		case "nHH":
+
+		if(isElementPresent(nHHUtilitySetUpPro)){
+		click(nHHUtilitySetUpPro);
+		}else{
+		click_nhhUtilityLink();
+		click(nHHUtilitySetUpPro);
+		if(isElementPresent(notAbleToCreateSetupProfile)){
+		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
+		flexAdmin.deleteProfile("nHH");
+
+		}
+		}
+		break;
+		case "Gas":
+		if(isElementPresent(gasUtilitySetUpPro)){
+		click(gasUtilitySetUpPro);
+		}else{
+
+		click_gasUtilityLink();
+		click(gasUtilitySetUpPro);
+		if(isElementPresent(notAbleToCreateSetupProfile)){
+		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
+		flexAdmin.deleteProfile("Gas");
+
+		}
+		}
+		break;
+		default:
+		System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+		}
+
+
+
 
 		click(yesContinue);
 		Reporter.log("Clicked on YesContinue Button.", true);
@@ -445,26 +378,26 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 		click_SaveButton();
 
-		
 
 		
+		scrollToElement(requestContractOffer);
 		List<WebElement> allSuppliers = driver.findElements(noOfSuppliers);
 		int i = 0;
 		//Traversing through the list and printing its Suppliers text 
 		for(WebElement supplier:allSuppliers){
-			Thread.sleep(3000);
-			setExcelData("Sheet5", 1, i, supplier.getText());
-			Thread.sleep(3000);
-			i++;
+		Thread.sleep(3000);
+		setExcelData("Sheet5", 1, i, supplier.getText());
+		Thread.sleep(3000);
+		i++;
 		}
-		
+
 
 		Thread.sleep(3000);
 		// forloopToSelectMultipleQuestions();
-
+		scrollToElement(requestContractOffer);
 		click(requestContractOffer);
 		Reporter.log("Clicked On Request Contract Offer ", true);
-	}
+		}
 	public List<WebElement> captureSuppliers(){
 		supplierList = driver.findElements(noOfSuppliers);
 		return supplierList;

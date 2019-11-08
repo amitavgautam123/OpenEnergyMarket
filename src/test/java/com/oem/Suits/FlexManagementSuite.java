@@ -23,7 +23,7 @@ public class FlexManagementSuite extends BaseTest {
 
 	}
 
-	@Test(priority = 1)
+	/*@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
 	}
@@ -57,7 +57,7 @@ public class FlexManagementSuite extends BaseTest {
 		abc.clickOnSetUpFlexibleProfile("HH");
 		customerDashboardPage.logOut();
 	}
-
+*/
 	@Test(priority = 8)
 	public void loginAsAdminAndverifyAdminHomePage() throws Throwable {
 		adminDashboardPage = new LoginPage().loginAsAdmin();
@@ -290,7 +290,7 @@ public class FlexManagementSuite extends BaseTest {
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
 		abc.logOut();
-		customerDashboardPage = new LoginPage().login();
+		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();//new LoginPage().login();
 		customerDashboardPage.goToFlexibleProfileManager();
 		FlexProfileManagerPage abc2 = new FlexProfileManagerPage();
 		abc2.verifyFlexibleProfileManager_HomePage();
@@ -316,7 +316,7 @@ public class FlexManagementSuite extends BaseTest {
 	@Test(priority = 33)
 	public void loginAsAdminAndimporesanateasCustomerAndRequestQuote() throws Throwable {
 		adminDashboardPage = new LoginPage().loginAsAdmin();
-		adminDashboardPage.impersonateCustomer();
+		adminDashboardPage.impersonateFlexCustomer();
 		CustomerDashboardPage customerDashboardPage1 = new CustomerDashboardPage();
 		customerDashboardPage1.verifyPortfolioManagerElementExists();
 		customerDashboardPage1.goToCompanyProfile();// .fillCompanyProfileGeneric();
@@ -342,9 +342,9 @@ public class FlexManagementSuite extends BaseTest {
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
 		abc.EnterValidDataInToTheTextFieldsHH();
 		abc.clicksubmitDetails();
-		abc.clickDashBoard();
+		//abc.clickDashBoard();
 		adminDashboardPage.clickAdminDashBoard();
-		adminDashboardPage.impersonateCustomer();
+		adminDashboardPage.impersonateFlexCustomer();
 		CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();
 		customerDashboardPage2.goToFlexibleProfileManager();
 		FlexProfileManagerPage flexRev = new FlexProfileManagerPage();
@@ -355,7 +355,7 @@ public class FlexManagementSuite extends BaseTest {
 	@Test(priority = 35)
 	public void verifyGasUtilityEndTOEndFunction() throws Throwable {
 		CustomerDashboardPage customerDashboardPage1 = new CustomerDashboardPage();
-		customerDashboardPage1 = new LoginPage().login();
+		customerDashboardPage1 = adminDashboardPage.impersonateFlexCustomer();
 
 		customerDashboardPage1.verifyPortfolioManagerElementExists();
 		customerDashboardPage1.goToCompanyProfile();// .fillCompanyProfileGeneric();
@@ -381,7 +381,7 @@ public class FlexManagementSuite extends BaseTest {
 		abc.clicksubmitDetails();
 		abc.logOut();
 		CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();
-		customerDashboardPage2 = new LoginPage().login();
+		customerDashboardPage2 = adminDashboardPage.impersonateFlexCustomer();
 		customerDashboardPage2.goToFlexibleProfileManager();
 		FlexProfileManagerPage abc2 = new FlexProfileManagerPage();
 		abc2.verifyQuoteRequestelemetsForGas();

@@ -3,6 +3,7 @@ package com.oem.framework.pages;
 import com.oem.framework.core.base.BasePage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class TenderResponsePage extends BasePage {
 
@@ -18,7 +19,7 @@ public class TenderResponsePage extends BasePage {
     By nightConsumption1=By.id("MeterForecasts_0__NightConsumption");
     By nightConsumption2 = By.id("MeterForecasts_1__NightConsumption");
     By okButton=By.xpath("//button[text()='OK'");
-
+    By popUpDialogue2 = By.xpath("//form[@class = 'vex-dialog-form']/div[contains(text(), 'Saving changes to the Meter Forecasts will result in the Fixed Calculations being re-calculated for cached entries.')]");
     By quoteIdDropDown=By.id("QuoteId");
 
 
@@ -104,9 +105,13 @@ public class TenderResponsePage extends BasePage {
         return this;
     }
     public void verifyDayConsumptionAndNightConsumption() {
+    	SoftAssert softAssertion = new SoftAssert();
+    	softAssertion.assertFalse(isElementPresent(popUpDialogue), "Popup dialogue is displaying.");
     	boolean correctDayConsumption2Status = getAttribute(dayConsumption2, "value").equals("80");
     	boolean correctNightConsumption2Status = getAttribute(nightConsumption2, "value").equals("100");
-    	Assert.assertTrue(correctDayConsumption2Status && correctNightConsumption2Status, "Day consumption and night consumption is displaying incorrect data.");
+    	softAssertion.assertTrue(correctDayConsumption2Status && correctNightConsumption2Status, "Day consumption and night consumption is displaying incorrect data.");
+    	softAssertion.assertAll();
     }
+    
 }
 

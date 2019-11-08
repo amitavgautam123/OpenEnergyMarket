@@ -187,7 +187,19 @@ public class TenderResponseTests extends BaseTest {
         	.setFirstDayConsumption("40")
         	.setFirstNightConsumption("50")
         	.clickCalculateConsumptions()
-        	.verifyPopUpDialogue();
+        	.verifyDayConsumptionAndNightConsumption();
+    }
+    @Test
+    public void verifyAlertMsg() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstDayConsumption("40")
+        	.setFirstNightConsumption("50")
+        	.clickCalculateConsumptions()
+        	.verifyDayConsumptionAndNightConsumption();
     }
     
 }

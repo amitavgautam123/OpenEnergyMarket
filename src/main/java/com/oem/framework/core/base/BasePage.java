@@ -19,6 +19,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -324,18 +326,23 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
    		wb.write(fos);
    		wb.close();
    	}
-    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable
-	{
-		FileInputStream fis = new FileInputStream("./data/testscriptData.xlsx");
-		Workbook wb = WorkbookFactory.create(fis);
-		Sheet sh = wb.getSheet(sheetName);
-		Row row = sh.getRow(rowNum);
-		Cell cel = row.getCell(celNum);
-		cel.setCellValue(data);
-		FileOutputStream fos = new FileOutputStream("./data/testscriptData.xlsx");		
-		wb.write(fos);
-		wb.close();
-	}
+    public void setExcelData(String sheetName, int rowNum, int celNum, String data) throws Throwable {
+    	FileInputStream fis = new FileInputStream("./data/testscriptdata.xlsx");
+    	//Workbook wb = WorkbookFactory.create(fis);
+    	XSSFWorkbook workbook = new XSSFWorkbook(fis);
+    	//Sheet sh = wb.getSheet(sheetName);
+    	XSSFSheet sheet = workbook.getSheet(sheetName);
+    	//Row row = sh.getRow(rowNum);
+    	Row row = sheet.createRow(rowNum);
+    	//Cell cel = row.getCell(celNum);
+    	Cell cell = row.createCell(celNum);
+    	//cel.setCellValue(data);
+    	//cell.setCellType(cell.setCellValue(data));
+    	cell.setCellValue(data);
+    	FileOutputStream fos = new FileOutputStream("./data/testscriptdata.xlsx");
+    	workbook.write(fos);
+    	workbook.close();
+    	}
     /**
      * Used to check if the dropdown contains the value
      * @param locator of dropdown
