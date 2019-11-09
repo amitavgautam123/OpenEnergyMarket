@@ -734,7 +734,7 @@ public class RequestQuoteTest extends BaseTest {
 		goToRequestQuote().
 		validateEditQuoteOptionTenderSummaryPage();
 	}
-	@Test
+	//@Test
 	public void QT_RAQ_TC_125_verifySupplierSelectionInTenderSummaryPage() throws Throwable {
 
 		customerDashboardPage.

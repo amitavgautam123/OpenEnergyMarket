@@ -157,6 +157,12 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 				+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
+	public By checkboxSupplierGas(String companyName, String supplierName) {
+		By supCheckbox = By.xpath("//i[@class = 'icon-gas icon-2x']/../following-sibling::td[contains(text(), '"
+		+ currentDate() + "')]/preceding-sibling::td[text() = '" + companyName
+		+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
+		return supCheckbox;
+	}
 	
 	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -199,12 +205,33 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		case "HH":
 		Thread.sleep(3000);
 		click(hHUtility);
+		Thread.sleep(2000);
+		click(requestDate);// click on utility
+		Thread.sleep(3000);
+		Reporter.log("Clicked Request Date", true);
+		Thread.sleep(3000);
+		click(checkboxSupplier(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		Thread.sleep(3000);
 		break;
 		case "nHH":
 		click(nHHUtility);
+		Thread.sleep(2000);
+		click(requestDate);// click on utility
+		Thread.sleep(3000);
+		Reporter.log("Clicked Request Date", true);
+		Thread.sleep(3000);
+		//click(checkboxSuppliernHH(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		Thread.sleep(3000);
 		break;
 		case "Gas":
 		click(gasUtility);
+		Thread.sleep(3000);
+		click(requestDate);// click on utility
+		Thread.sleep(3000);
+		Reporter.log("Clicked Request Date", true);
+		Thread.sleep(3000);
+		click(checkboxSupplierGas(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		Thread.sleep(3000);
 		break;
 		case "Water":
 		click(waterUtility);
@@ -213,14 +240,9 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		System.out.println("Enter Correct Utility");
 		}
 
-		click(requestDate);// click on utility
-		Thread.sleep(3000);
-		Reporter.log("Clicked Request Date", true);
-		Thread.sleep(3000);
-		click(checkboxSupplier(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
 		Thread.sleep(3000);
 		click(allowSelectedBtn);
-	}
+		}
 	public void verifyTendersHomePage() {
 		Assert.assertTrue(isElementPresent(allowSelectedBtn), "Allow selected Button is Not Present");
 		Assert.assertTrue(isElementPresent(blockSelectedBtn), "Block selected Button is Not Present");

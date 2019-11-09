@@ -17,7 +17,7 @@ public class AdminDashboardPage extends HeaderPage {
 
     By user=By.xpath("//a[@id='user-link']");
 	By logout=By.xpath("//a[contains(text(),'Log out')]");
-	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+	By dashBoard=By.linkText("Dashboard");
 	By flexProfileAdmin=By.xpath("//a[@href='/FlexibleProfileAdmin/CustomerOverview']");
 	
     public CustomerDashboardPage impersonate(String email) throws Throwable{

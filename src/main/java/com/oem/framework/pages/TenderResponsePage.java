@@ -11,6 +11,7 @@ public class TenderResponsePage extends BasePage {
     By quoteByDateDropDown =By.id("QuoteByDate");
     By quoteRequestByIdDropDown=By.id("QuoteRequestId");
     By meterForecastsLink=By.linkText("Meter Forecasts");
+    By meterForecastsHeading = By.xpath("//h2[contains(text(),'Meter Forecasts')]");
     By downloadExcel=By.linkText("Download Excel");
     By calConsumptionsBtn=By.id("calculate-consumptions-button");
     By popUpDialogue=By.xpath("//form[@class='vex-dialog-form']");
@@ -21,9 +22,11 @@ public class TenderResponsePage extends BasePage {
     By okButton=By.xpath("//button[text()='OK'");
     By popUpDialogue2 = By.xpath("//form[@class = 'vex-dialog-form']/div[contains(text(), 'Saving changes to the Meter Forecasts will result in the Fixed Calculations being re-calculated for cached entries.')]");
     By quoteIdDropDown=By.id("QuoteId");
+    By saveBtn = By.xpath("//button[@id = 'save-forecasts-button']");
+    By cancelBtn = By.xpath("//button[text() = 'Cancel']");
 
-
-
+    SoftAssert softAssertion = new SoftAssert();
+    
     public TenderResponsePage verifyQuoteByDateExist() throws Throwable {
         Assert.assertTrue(isElementPresent(quoteByDateDropDown),"quoteByDateDropDown didnt appear");
         Thread.sleep(4000);
@@ -112,6 +115,20 @@ public class TenderResponsePage extends BasePage {
     	softAssertion.assertTrue(correctDayConsumption2Status && correctNightConsumption2Status, "Day consumption and night consumption is displaying incorrect data.");
     	softAssertion.assertAll();
     }
-    
+    public TenderResponsePage saveDetails() throws Throwable{
+    	clearValue(dayConsumption1);
+        clearValue(nightConsumption1);
+    	scrollToElement(saveBtn);
+    	Thread.sleep(2000);
+        click(saveBtn);
+        Thread.sleep(2000);
+        boolean alertMsgDisplayStatus = isElementPresent(popUpDialogue2);
+        softAssertion.assertTrue(alertMsgDisplayStatus, "Alert popup is not displaying after clicking save btn.");
+        click(okButton);
+        Thread.sleep(2000);
+        boolean meterForecastsDisplayStatus = isElementPresent(meterForecastsHeading);
+        softAssertion.assertFalse(meterForecastsDisplayStatus, "Meter Forecast is still displaying.");
+        return this;
+    }
 }
 

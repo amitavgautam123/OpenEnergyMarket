@@ -426,23 +426,26 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(3000);
 	}
 
-	public void selectingMultiplesupplier_Water() {
+	public void selectingMultiplesupplier_Water() throws InterruptedException {
 		click(choosSuppliers_Water);
-		
+		Thread.sleep(3000);
 		click(firstSupplier_Water);
 		click(secondSupplier_Water);
 		click(thirdSupplier_Water);
+		scrollToElement(fifthSupplier_Water);
+		Thread.sleep(1000);
 		click(fourthSupplier_Water);
 		click(fifthSupplier_Water);
-
+		scrollUp();
 	}
 
 	// ===========================================Water===========================================================================
-	public void clickGasUtility() {
+	public void clickGasUtility() throws InterruptedException {
 		click(filterByGasUtility);
+		Thread.sleep(2000);
 	}
 
-	public void Options_Gas(String GasMeter, String GasContractD, String GasSupplier) {
+	public void Options_Gas(String GasMeter, String GasContractD, String GasSupplier) throws Throwable {
 		switch (GasMeter) {
 		case "zero":
 			selectingzerometers_Gas();
@@ -475,12 +478,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			selectingzerosupplier_Gas();
 			break;
 		case "single":
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.sleep(2000);
 			selectingSinglesupplier_Gas();
 			break;
 		case "multiple":
@@ -506,22 +504,26 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void selectingSinglemeters_Gas() {
+	public void selectingSinglemeters_Gas() throws Throwable {
 		click(allmeter_Gas);
+		Thread.sleep(2000);
 		click(firstMeter_Gas);
 	}
 
-	public void selectingMultiplemeters_Gas() {
+	public void selectingMultiplemeters_Gas() throws InterruptedException {
 		click(allmeter_Gas);
-
+		Thread.sleep(2000);
 		click(firstMeter_Gas);
-
+		scrollToElement(secondMeter_Gas);
+		Thread.sleep(2000);
 		click(secondMeter_Gas);
-
+		scrollToElement(thirdMeter_Gas);
+		Thread.sleep(2000);
 		click(thirdMeter_Gas);
-
+		scrollToElement(fourthMeter_Gas);
+		Thread.sleep(2000);
 		click(fourthMeter_Gas);
-
+		scrollUp();
 	}
 
 	public void selectingsingleContractDur_Gas() {
@@ -529,13 +531,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void selectingMultipleContractDur_Gas() {
+	public void selectingMultipleContractDur_Gas() throws Throwable {
 		selectByIndex(firstContractDuration_Gas, 02);
 		click(addNewContractDuration_Gas);
+		scrollToElement(secondMeter_Gas);
+		Thread.sleep(2000);
 		selectByIndex(secondContractDuration_Gas, 03);
 		click(addNewContractDuration_Gas);
+		Thread.sleep(2000);
 		selectByIndex(thirdContractDuration_Gas, 04);
 		click(addNewContractDuration_Gas);
+		Thread.sleep(2000);
 		selectByIndex(fourthContractDuration_Gas, 05);
 	}
 
@@ -543,27 +549,23 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(choosSuppliers_Gas);
 	}
 
-	public void selectingSinglesupplier_Gas() {
+	public void selectingSinglesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
-
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Thread.sleep(2000);
 		click(firstSupplier_gas);
 	}
 
-	public void selectingMultiplesupplier_Gas() {
+	public void selectingMultiplesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
-
+		Thread.sleep(2000);
 		click(firstSupplier_gas);
 		click(secondSupplier_gas);
+		scrollToElement(fifthSupplier_gas);
+		Thread.sleep(2000);
 		click(thirdSupplier_gas);
 		click(fourthSupplier_gas);
 		click(fifthSupplier_gas);
+		scrollUp();
 	}
 	// ============================================================================================
 
@@ -575,17 +577,21 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(meterAll_nHH);
 	}
 
-	public void selectingSinglemeters_nHH() {
+	public void selectingSinglemeters_nHH() throws InterruptedException {
 		click(meterAll_nHH);
+		Thread.sleep(2000);
 		click(Firstmeter_nHH);
 	}
 
-	public void selectingMultiplemeters_nHH() {
+	public void selectingMultiplemeters_nHH() throws Throwable {
 		click(meterAll_nHH);
+		Thread.sleep(2000);
 		click(Firstmeter_nHH);
+		scrollToElement(Fourthmeter_nHH);
 		click(Secondmeter_nHH);
 		click(thirdmeter_nHH);
 		click(Fourthmeter_nHH);
+		scrollUp();
 	}
 
 	public void selectingsingleContractDur_nHH() {
@@ -1290,7 +1296,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		navigateBackFromQuoteSubmit();
 	}
 
-	public void Options(String nHHMeter, String nHHContractD, String nHHSupplier) {
+	public void Options(String nHHMeter, String nHHContractD, String nHHSupplier) throws Throwable {
 		switch (nHHMeter) {
 		case "zero":
 			selectingzerometers_nHH();
@@ -1778,7 +1784,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		}
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_Gas() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		clickGasUtility();
 		Options_Gas("single", "zero", "zero");
@@ -1822,7 +1828,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		navigateBackFromQuoteSubmit();
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "multiple", "zero");
@@ -1832,7 +1838,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Gas() {
+	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Gas() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		clickGasUtility();
 		selectByIndex(firstContractDuration_Gas, 02);
@@ -1852,7 +1858,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "zero", "single");
@@ -1862,7 +1868,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "zero", "multiple");
@@ -2854,11 +2860,20 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		logout();
 		softAssertion.assertAll();
 	}
+	public void goToRequestQuotePage() throws Throwable{
+        click(quotesAndTenders);
+        Thread.sleep(2000);
+        click(requestAQuoteLink);
+    }
 	public void navigateBackFromQuoteSubmit() throws Throwable {
-		Thread.sleep(5000);
-		boolean urlStatus = driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
-		if(urlStatus) {
-			driver.navigate().back();
+		//Thread.sleep(8000);
+		//boolean urlStatus = driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
+		if(isElementPresent(tenderRequestSummary, 10)) {
+			Thread.sleep(2000);
+			goToRequestQuotePage();
+			//driver.navigate().back();
+			isElementPresent(requestAQuoteLink, 10);
+			Thread.sleep(2000);
 		}
 	}
 

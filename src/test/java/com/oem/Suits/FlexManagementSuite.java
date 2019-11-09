@@ -23,7 +23,7 @@ public class FlexManagementSuite extends BaseTest {
 
 	}
 
-	/*@Test(priority = 1)
+	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
 	}
@@ -57,7 +57,7 @@ public class FlexManagementSuite extends BaseTest {
 		abc.clickOnSetUpFlexibleProfile("HH");
 		customerDashboardPage.logOut();
 	}
-*/
+
 	@Test(priority = 8)
 	public void loginAsAdminAndverifyAdminHomePage() throws Throwable {
 		adminDashboardPage = new LoginPage().loginAsAdmin();
@@ -290,6 +290,8 @@ public class FlexManagementSuite extends BaseTest {
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
 		abc.logOut();
+		Thread.sleep(3000);
+		adminDashboardPage = new LoginPage().loginAsAdmin();
 		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();//new LoginPage().login();
 		customerDashboardPage.goToFlexibleProfileManager();
 		FlexProfileManagerPage abc2 = new FlexProfileManagerPage();
@@ -337,12 +339,12 @@ public class FlexManagementSuite extends BaseTest {
 
 	@Test(priority = 34)
 	public void verifyFlexTenderResponse_ReviewsuppliersubmittedQuoteusingImporsonate() throws Throwable {
-		// adminDashboardPage = new LoginPage().loginAsAdmin();
+		adminDashboardPage = new LoginPage().loginAsAdmin();
 		adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
 		abc.EnterValidDataInToTheTextFieldsHH();
 		abc.clicksubmitDetails();
-		//abc.clickDashBoard();
+		Thread.sleep(3000);
 		adminDashboardPage.clickAdminDashBoard();
 		adminDashboardPage.impersonateFlexCustomer();
 		CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();
@@ -354,6 +356,7 @@ public class FlexManagementSuite extends BaseTest {
 
 	@Test(priority = 35)
 	public void verifyGasUtilityEndTOEndFunction() throws Throwable {
+		adminDashboardPage = new LoginPage().loginAsAdmin();
 		CustomerDashboardPage customerDashboardPage1 = new CustomerDashboardPage();
 		customerDashboardPage1 = adminDashboardPage.impersonateFlexCustomer();
 
@@ -363,7 +366,7 @@ public class FlexManagementSuite extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.checkSavedDetailsAfterAddingGasMeterForFlexible();
 		propertyPortfolioMeterPage.addValidGascontractHistoryForFlexible();
-
+		Thread.sleep(3000);
 		customerDashboardPage1.goToFlexibleProfileManager();
 		FlexProfileManagerPage flex = new FlexProfileManagerPage();
 		flex.clickOnSetUpFlexibleProfile("Gas");
