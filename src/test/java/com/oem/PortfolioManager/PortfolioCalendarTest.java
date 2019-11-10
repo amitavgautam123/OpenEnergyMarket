@@ -21,7 +21,7 @@ public class PortfolioCalendarTest extends BaseTest{
     public void beforePortfolioCalendar() throws Throwable {
     	customerDashboardPage=new LoginPage().
     				login().
-    					goToPortfolioCalendar();
+    					goToPortfolioCalendar(); 
     }
 	@Test
 	public void PM_PC_TC_003_verifyPortfolioManagerElementExistsTest() throws Throwable {
