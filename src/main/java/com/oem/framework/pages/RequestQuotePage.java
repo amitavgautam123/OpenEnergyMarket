@@ -2870,10 +2870,11 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		//boolean urlStatus = driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
 		if(isElementPresent(tenderRequestSummary, 10)) {
 			Thread.sleep(2000);
-			goToRequestQuotePage();
+			driver.navigate().to("https://systest-portal.oem-testing.com/Quote/RequestQuote");
+			//goToRequestQuotePage();
 			//driver.navigate().back();
-			isElementPresent(requestAQuoteLink, 10);
-			Thread.sleep(2000);
+			//isElementPresent(requestAQuoteLink, 10);
+			Thread.sleep(4000);
 		}
 	}
 

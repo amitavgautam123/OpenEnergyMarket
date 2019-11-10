@@ -22,7 +22,7 @@ public class FlexManagementSuite extends BaseTest {
 		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();
 
 	}
-
+/*
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
@@ -44,13 +44,13 @@ public class FlexManagementSuite extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.addValidHHcontractHistory();
 	}
-
+*/
 	@Test(priority = 5)
 	public void goToFlexibleProfileManager() throws Throwable {
 		customerDashboardPage.goToFlexibleProfileManager();
 
 	}
-
+	
 	@Test(priority = 6)
 	public void requestForQuoteFlexProfileManagerTest() throws Throwable {
 		FlexProfileManagerPage abc = new FlexProfileManagerPage();
@@ -103,7 +103,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyMeterForeCastAfetrSelectingRequestQuote();
+		abc.verifyMeterForeCastAfetrSelectingRequestQuote("HH");
 		Thread.sleep(3000);
 
 	}
@@ -113,7 +113,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyElementsAfterClickingmeterforecast();
+		abc.verifyElementsAfterClickingmeterforecast("HH");
 		Thread.sleep(3000);
 
 	}
@@ -123,7 +123,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifymeterforecastafterenetringNoData();
+		abc.verifymeterforecastafterenetringNoData("HH");
 		Thread.sleep(3000);
 
 	}
@@ -133,7 +133,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifymeterforecastTextFields();
+		abc.verifymeterforecastTextFields("HH");
 		Thread.sleep(3000);
 
 	}
@@ -143,7 +143,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifymeterHHforecastafterenetringInvalidData();
+		abc.verifymeterHHforecastafterenetringInvalidData("HH");
 		Thread.sleep(3000);
 
 	}
@@ -153,7 +153,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingTextFieldNotacceptsAlphabetsIntoMeterHH();
+		abc.verifyingTextFieldNotacceptsAlphabetsIntoMeterHH("HH");
 		Thread.sleep(3000);
 
 	}
@@ -163,7 +163,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.enterInvalidDataSpecialCharctersIntoMeterHHForeCast();
+		abc.enterInvalidDataSpecialCharctersIntoMeterHHForeCast("HH");
 		Thread.sleep(3000);
 
 	}
@@ -173,7 +173,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingQuotesDropDwonAfterEnteringValidDataInMeterHHForeCast();
+		abc.verifyingQuotesDropDwonAfterEnteringValidDataInMeterHHForeCast("HH");
 		Thread.sleep(3000);
 
 	}
@@ -183,7 +183,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingQuotesInformationAfterSelectingHHDropDwon();
+		abc.verifyingQuotesInformationAfterSelectingHHDropDwon("HH");
 		Thread.sleep(3000);
 
 	}
@@ -193,7 +193,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingQuotesInformationHomePageAfterclickingQouteInformationLink();
+		abc.verifyingQuotesInformationHomePageAfterclickingQouteInformationLink("HH");
 		Thread.sleep(3000);
 
 	}
@@ -203,7 +203,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingFexQuoteInformationPageAfterEnteringNoData();
+		abc.verifyingFexQuoteInformationPageAfterEnteringNoData("HH");
 		Thread.sleep(3000);
 
 	}
@@ -213,7 +213,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyFlexQuoteInformationTextFields();
+		abc.verifyFlexQuoteInformationTextFields("HH");
 		Thread.sleep(3000);
 
 	}
@@ -223,7 +223,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingFexQuoteInformationPageAfterEnteringNegativeData();
+		abc.verifyingFexQuoteInformationPageAfterEnteringNegativeData("HH");
 		Thread.sleep(3000);
 
 	}
@@ -234,7 +234,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingFexQuoteInformationPageAfterEnteringSpecialData();
+		abc.verifyingFexQuoteInformationPageAfterEnteringSpecialData("HH");
 		Thread.sleep(3000);
 
 	}
@@ -245,7 +245,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage.refreshpage();
 		// adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.verifyingsubmitButtonAfterEnteringValidFexQuoteInformationAndclickingSave57();
+		abc.verifyingsubmitButtonAfterEnteringValidFexQuoteInformationAndclickingSave57("HH");
 		Thread.sleep(3000);
 
 	}
@@ -298,14 +298,7 @@ public class FlexManagementSuite extends BaseTest {
 		abc2.verifyFlexibleProfileManager_HomePage();
 	}
 
-	/*
-	 * //@Test(priority = 31) public void
-	 * FlexTenderResponsepAdminFlexProfileManagerTest() throws Throwable {
-	 * adminDashboardPage.goFlexTenderResponse(); FlexTenderResponsePage abc =
-	 * new FlexTenderResponsePage(); abc.selectByDate(); abc.logout();
-	 * 
-	 * }
-	 */
+	
 
 	@Test(priority = 32)
 	public void loginAdminandgotoFlexprofManagerandverifyQuoteRequestelemetsandacceptQuote() throws Throwable {
@@ -342,7 +335,7 @@ public class FlexManagementSuite extends BaseTest {
 		adminDashboardPage = new LoginPage().loginAsAdmin();
 		adminDashboardPage.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.EnterValidDataInToTheTextFieldsHH();
+		abc.EnterValidDataInToTheTextFieldsHH("HH");
 		abc.clicksubmitDetails();
 		Thread.sleep(3000);
 		adminDashboardPage.clickAdminDashBoard();
@@ -380,7 +373,7 @@ public class FlexManagementSuite extends BaseTest {
 
 		adminDashboardPage1.goFlexTenderResponse();
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.EnterValidDataInToTheTextFieldsGas();
+		abc.EnterValidDataInToTheTextFieldsGas("Gas");
 		abc.clicksubmitDetails();
 		abc.logOut();
 		CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();

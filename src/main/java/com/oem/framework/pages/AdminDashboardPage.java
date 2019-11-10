@@ -60,6 +60,7 @@ public class AdminDashboardPage extends HeaderPage {
     }
     public TenderResponsePage clickOnTenderResponse() throws Throwable{
    	 click(tenderResponseLnk);
+   	 Thread.sleep(3000);
         return new TenderResponsePage();
    }
 
@@ -88,7 +89,7 @@ public class AdminDashboardPage extends HeaderPage {
     	Assert.assertTrue(impersonatePresence, "Admin Home page is not displyed");
     }
     public void clickAdminDashBoard(){
-    	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+    	
     	click(dashBoard);
     	
     	}
@@ -109,7 +110,14 @@ public class AdminDashboardPage extends HeaderPage {
     	FlexProfileAdminPage flexProfileAdminPage=new FlexProfileAdminPage();
     	flexProfileAdminPage.isLoaded();
     	return new FlexProfileAdminPage();
-    	}
+    }
+    public AdminDashboardPage clickflexProfileAdmin() throws Throwable{
+    	click(flexProfileAdmin);
+    	Thread.sleep(4000);
+    	FlexProfileAdminPage flexProfileAdminPage=new FlexProfileAdminPage();
+    	flexProfileAdminPage.isLoaded();
+    	return new FlexProfileAdminPage();
+    }
 
     @Override
     protected void isLoaded() throws Error {

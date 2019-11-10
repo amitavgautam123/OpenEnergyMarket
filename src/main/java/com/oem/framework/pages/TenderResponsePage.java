@@ -13,6 +13,8 @@ public class TenderResponsePage extends BasePage {
     By meterForecastsLink=By.linkText("Meter Forecasts");
     By meterForecastsHeading = By.xpath("//h2[contains(text(),'Meter Forecasts')]");
     By downloadExcel=By.linkText("Download Excel");
+    By chooseFileBtn = By.id("ExcelFile");
+    By uploadBtn = By.xpath("//input[@value = 'Upload']");
     By calConsumptionsBtn=By.id("calculate-consumptions-button");
     By popUpDialogue=By.xpath("//form[@class='vex-dialog-form']");
     By dayConsumption1=By.id("MeterForecasts_0__DayConsumption");
@@ -75,9 +77,20 @@ public class TenderResponsePage extends BasePage {
         Thread.sleep(4000);
         return this;
     }
+    public TenderResponsePage verifyAfterClickingMeterForecastLink() throws Throwable{
+        softAssertion.assertTrue(isElementPresent(downloadExcel), "Download excel is not displaying.");
+        softAssertion.assertTrue(isElementPresent(chooseFileBtn), "Choose File button is not displaying.");
+        scrollToElement(saveBtn);
+        Thread.sleep(2000);
+        softAssertion.assertTrue(isElementPresent(saveBtn), "Download excel is not displaying.");
+        softAssertion.assertTrue(isElementPresent(calConsumptionsBtn), "Calculate consumption button is not displaying.");
+        softAssertion.assertAll();
+        return this;
+    }
     public TenderResponsePage clickDownloadExcelLink() throws Throwable{
         click(downloadExcel);
         Thread.sleep(4000);
+        Assert.assertTrue(isEnabled(downloadExcel), "Download excel is not enabled");
         return this;
     }
     public TenderResponsePage clickCalculateConsumptions() throws Throwable{
@@ -95,18 +108,41 @@ public class TenderResponsePage extends BasePage {
         click(By.xpath("//button[text()='OK']"));
         return this;
     }
-
-    public TenderResponsePage setFirstDayConsumption(String value) throws Throwable{
+    public By dayConsumptionForSpecificDuration(String duration) {
+    	By dayConsumption = By.xpath("//td[@class = 'grid-edit-cell duration' and text() = '" + duration + "']/following-sibling::td[@class = 'grid-edit-cell day-consumption']/input");
+    	return dayConsumption;
+    }
+    public By nightConsumptionForSpecificDuration(String duration) {
+    	By nightConsumption = By.xpath("//td[@class = 'grid-edit-cell duration' and text() = '" + duration + "']/following-sibling::td[@class = 'grid-edit-cell night-consumption']/input");
+    	return nightConsumption;
+    }
+    public By capacityForSpecificDuration(String duration) {
+    	By nightConsumption = By.xpath("//td[@class = 'grid-edit-cell duration' and text() = '" + duration + "']/following-sibling::td[@class = 'grid-edit-cell forecast-capacity']/input");
+    	return nightConsumption;
+    }
+    
+    public TenderResponsePage setFirstRowDayConsumption(String value) throws Throwable{
         setValue(dayConsumption1,value);
         Thread.sleep(4000);
         return this;
     }
 
-    public TenderResponsePage setFirstNightConsumption(String value) throws Throwable{
+    public TenderResponsePage setFirstRowNightConsumption(String value) throws Throwable{
         setValue(nightConsumption1,value);
         Thread.sleep(4000);
         return this;
     }
+    public TenderResponsePage setDayConsumptionChoosingDuration(String duration, String value) throws Throwable{
+        setValue(dayConsumptionForSpecificDuration(duration),value);
+        Thread.sleep(4000);
+        return this;
+    }
+    public TenderResponsePage setNightConsumptionChoosingDuration(String duration, String value) throws Throwable{
+        setValue(nightConsumptionForSpecificDuration(duration),value);
+        Thread.sleep(4.000);
+        return this;
+    }
+    
     public void verifyDayConsumptionAndNightConsumption() {
     	SoftAssert softAssertion = new SoftAssert();
     	softAssertion.assertFalse(isElementPresent(popUpDialogue), "Popup dialogue is displaying.");

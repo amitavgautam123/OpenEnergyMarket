@@ -1,6 +1,7 @@
 package com.oem.QuotesAndTenders;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.oem.framework.core.base.BaseTest;
@@ -19,7 +20,10 @@ public class RequestQuoteTest extends BaseTest {
 										login().
 										goToRequestQuote();
 	}
-
+	/*
+	 * @BeforeMethod public void beforeRequestQuote() { driver.na }
+	 */
+	
 	@Test
 	public void QT_RAQ_TC_003_validateRequestQuoteAndReviewQuotesPresenceTest() throws Throwable {
 		customerDashboardPage.
@@ -37,7 +41,7 @@ public class RequestQuoteTest extends BaseTest {
 	 * customerDashboardPage.goToPropertyPortfolio();//.goToRequestQuote();
 	 * propertyPortfolioPage.deleteAllSites(); //requestQuotePage.(); }
 	 */
-	@Test
+/*	@Test
 	public void QT_RAQ_TC_007_validateAllUtilitiesPresenceTest() throws Throwable {
 		customerDashboardPage.
 		clickRequestQuote().
@@ -92,7 +96,7 @@ public class RequestQuoteTest extends BaseTest {
 		clickRequestQuote().
 		validateAlertMessageWhen2ContractDurationsAreSame();
 	}
-	
+	*/
 	@Test
 	public void QT_RAQ_TC_016_selecting1SupplierValidateOtherMandatoryFieldsTest() throws Throwable {
 		customerDashboardPage.
