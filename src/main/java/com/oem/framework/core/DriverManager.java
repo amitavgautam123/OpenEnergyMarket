@@ -124,11 +124,14 @@ public class DriverManager implements Base {
         if(StringUtils.isEmpty(Globals.getConfig("ie.driver.path")))
             throw new IOException("ie.driver.path is not set");
         InternetExplorerOptions options=new InternetExplorerOptions();
+        options.introduceFlakinessByIgnoringSecurityDomains();
+        options.requireWindowFocus();
+
 
         System.setProperty("webdriver.ie.driver", Globals.getConfig("ie.driver.path"));
-//        DesiredCapabilities capabilities=DesiredCapabilities.firefox();
+        //DesiredCapabilities capabilities=DesiredCapabilities.internetExplorer();
 //        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        InternetExplorerDriver driver = new InternetExplorerDriver();
+        InternetExplorerDriver driver = new InternetExplorerDriver(options);
         driver.manage().window().maximize();
         return driver;
     }

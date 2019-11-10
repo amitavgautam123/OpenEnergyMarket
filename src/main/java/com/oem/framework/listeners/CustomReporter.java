@@ -16,9 +16,7 @@ import com.oem.framework.core.utils.TestUtil;
 import com.uttesh.pdfngreport.PDFReportListener;
 import org.apache.commons.io.FileUtils;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.testng.*;
-import org.testng.annotations.Test;
 import org.testng.xml.XmlSuite;
 
 
@@ -31,10 +29,11 @@ public class CustomReporter extends PDFReportListener implements IReporter {
     private String pdfFile="regression.pdf";
     private String finalReportFile="regression"+TestUtil.getCurrentTime()+".pdf";
     HashMap<String,String> configs;
+    static ClassData overallData;
     /**
      * PdfPTables
      */
-    PdfPTable successTable = null;
+    PdfPTable classLevelReportTable = null;
 
     public CustomReporter() throws IOException {
         this.document = new Document();
@@ -45,6 +44,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        overallData=new ClassData("Consolidated Data");
 
     }
 
@@ -99,6 +99,18 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         }
         public int getTotalCount(){
             return passCount+failedCount+skippedCount;
+        }
+
+        public void setPassCount(int passCount) {
+            this.passCount = passCount;
+        }
+
+        public void setFailedCount(int failedCount) {
+            this.failedCount = failedCount;
+        }
+
+        public void setSkippedCount(int skippedCount) {
+            this.skippedCount = skippedCount;
         }
 
         @Override
@@ -163,9 +175,12 @@ public class CustomReporter extends PDFReportListener implements IReporter {
                     incrementClassLevelResult(className, TestCaseStatus.FAILED);
                 for(String className:passedClasses)
                     incrementClassLevelResult(className, TestCaseStatus.PASS);
-
                 for(String className:skippedClasses)
                     incrementClassLevelResult(className, TestCaseStatus.SKIPPED);
+
+                overallData.setPassCount(overallData.getPassCount()+tc.getPassedTests().size());
+                overallData.setFailedCount(overallData.getFailedCount()+tc.getFailedTests().size());
+                overallData.setSkippedCount(overallData.getSkippedCount()+tc.getSkippedTests().size());
 
 
             }
@@ -181,24 +196,27 @@ public class CustomReporter extends PDFReportListener implements IReporter {
             e.printStackTrace();
         }
 
-        createPDFTable();
+        createPDFTableWithHeader();
 
         System.out.println("******************************* Generating Custom Report **********************");
         //
         for (Map.Entry<String, ClassData> entry : classDataMap.entrySet()) {
             System.out.println(entry.getKey()+" -  "+entry.getValue());
-            addClassLevelData(entry.getValue());
+            addClassLevelDataInPdfTable(entry.getValue());
         }
 
+        addSeparation("Consolidated Results",BaseColor.LIGHT_GRAY);
+        addConsolidatedData();
 
-
-        this.successTable.setSpacingBefore(15f);
+        this.classLevelReportTable.setSpacingBefore(15f);
         try {
-            this.document.add(this.successTable);
+            this.document.add(this.classLevelReportTable);
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        this.successTable.setSpacingBefore(15f);
+        this.classLevelReportTable.setSpacingBefore(15f);
+
+
         this.document.close();
 
         try {
@@ -218,42 +236,50 @@ public class CustomReporter extends PDFReportListener implements IReporter {
     }
 
 
-    private void createPDFTable(){
+    private void createPDFTableWithHeader(){
 
-        if (successTable == null) {
-            this.successTable = new PdfPTable(new float[]{.3f, .3f, .1f, .3f});
-            Paragraph p = new Paragraph("TEST Results", new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
+        if (classLevelReportTable == null) {
+            this.classLevelReportTable = new PdfPTable(new float[]{.3f, .3f, .1f, .2f,.3f});
+            /*Paragraph p = new Paragraph("TEST Results", new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
             p.setAlignment(Element.ALIGN_CENTER);
             PdfPCell cell = new PdfPCell(p);
-            cell.setColspan(4);
+            cell.setColspan(this.classLevelReportTable.getNumberOfColumns());
             cell.setBackgroundColor(BaseColor.GREEN);
-            this.successTable.addCell(cell);
-
+            this.classLevelReportTable.addCell(cell);*/
+            addSeparation("Test Results",BaseColor.GRAY);
+            PdfPCell cell;
             cell = new PdfPCell(new Paragraph("Class"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            this.successTable.addCell(cell);
+            this.classLevelReportTable.addCell(cell);
             cell = new PdfPCell(new Paragraph("Total Count"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            this.successTable.addCell(cell);
+            this.classLevelReportTable.addCell(cell);
             cell = new PdfPCell(new Paragraph("Pass Count"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            this.successTable.addCell(cell);
+            this.classLevelReportTable.addCell(cell);
             cell = new PdfPCell(new Paragraph("Failed Count"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            this.successTable.addCell(cell);
+            this.classLevelReportTable.addCell(cell);
+
+            cell = new PdfPCell(new Paragraph("Skipped Count"));
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            this.classLevelReportTable.addCell(cell);
         }
 
     }
 
-    private void addClassLevelData(ClassData classData){
+    private void addClassLevelDataInPdfTable(ClassData classData){
         PdfPCell cell = new PdfPCell(new Paragraph(classData.getClassName()));
-        this.successTable.addCell(cell);
+        this.classLevelReportTable.addCell(cell);
         cell = new PdfPCell(new Paragraph(String.valueOf(classData.getTotalCount())));
-        this.successTable.addCell(cell);
+        this.classLevelReportTable.addCell(cell);
         cell = new PdfPCell(new Paragraph(String.valueOf(classData.getPassCount())));
-        this.successTable.addCell(cell);
+        this.classLevelReportTable.addCell(cell);
         cell = new PdfPCell(new Paragraph(String.valueOf(classData.getFailedCount())));
-        this.successTable.addCell(cell);
+        this.classLevelReportTable.addCell(cell);
+
+        cell = new PdfPCell(new Paragraph(String.valueOf(classData.getSkippedCount())));
+        this.classLevelReportTable.addCell(cell);
     }
 
     private void mergePDFDocs(String destinationFile,String sourceFile1,String sourceFile2) throws IOException{
@@ -266,20 +292,24 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         pdfMerger.addSource(new File(sourceFile2));
 
         pdfMerger.mergeDocuments();
-
-     /*   f1.close();
-        f2.close();*/
-       // merger.merge(firstSourcePdf, Arrays.asList(1, 5, 7, 1));
-       // PdfDocument secondSourcePdf = new PdfDocument(new PdfReader(SRC2));
-       // merger.merge(secondSourcePdf, Arrays.asList(1, 15));
-      //  merger.close();
-      //  firstSourcePdf.close();
-       // secondSourcePdf.close();
-        //pdf.close();
     }
 
-   /* @Test
-    public void test() throws IOException {
-        mergePDFDocs("regression.pdf",configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf",pdfTempFile);
-    }*/
+    public void addSeparation(String title, BaseColor color){
+        Paragraph p = new Paragraph(title, new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
+        p.setAlignment(Element.ALIGN_CENTER);
+        PdfPCell cell = new PdfPCell(p);
+        cell.setColspan(this.classLevelReportTable.getNumberOfColumns());
+        cell.setBackgroundColor(color);
+        this.classLevelReportTable.addCell(cell);
+    }
+
+
+
+   public void addConsolidatedData(){
+       Paragraph p = new Paragraph("Consolidated Results", new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
+       p.setAlignment(Element.ALIGN_CENTER);
+       PdfPCell cell = new PdfPCell(p);
+       cell.setColspan(4);
+       addClassLevelDataInPdfTable(overallData);
+   }
 }
