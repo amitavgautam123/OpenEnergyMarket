@@ -1,6 +1,7 @@
 package com.oem.QuotesAndTenders;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.oem.framework.core.base.BaseTest;
@@ -19,7 +20,8 @@ public class RequestQuoteTest extends BaseTest {
 										login().
 										goToRequestQuote();
 	}
-
+	
+	
 	@Test
 	public void QT_RAQ_TC_003_validateRequestQuoteAndReviewQuotesPresenceTest() throws Throwable {
 		customerDashboardPage.
@@ -734,7 +736,7 @@ public class RequestQuoteTest extends BaseTest {
 		goToRequestQuote().
 		validateEditQuoteOptionTenderSummaryPage();
 	}
-	@Test
+	//@Test
 	public void QT_RAQ_TC_125_verifySupplierSelectionInTenderSummaryPage() throws Throwable {
 
 		customerDashboardPage.

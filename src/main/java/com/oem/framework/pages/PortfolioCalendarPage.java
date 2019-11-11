@@ -169,7 +169,7 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		selectPrevDateCalender(20, 2, 2017);
 		Thread.sleep(1000);
 		click(saveBtn);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		boolean status = getText(eventDate_firstRecord).equals("20/03/2017") && getText(eventDes_firstRecord).equals(desc);
 		refreshPage();
 		Assert.assertEquals(status, "Event is not showing proper description after editing date.");
@@ -204,10 +204,10 @@ public class PortfolioCalendarPage extends CustomerDashboardPage {
 		selectFutureDateCalender(20,11,2020);
 		setValue(eventDescription, "2025 year Event");
 		click(saveBtn);
-		
-		boolean text=driver.findElement(addCalendarEntry).isDisplayed();
+		Thread.sleep(3000);
+		boolean addEventDisplayStatus=driver.findElement(addCalendarEntry).isDisplayed();
 		refreshPage();
-		Assert.assertFalse(text, "No Alert Message Is Shown, Even After Entering Duplicate Event Dates ");	
+		Assert.assertFalse(addEventDisplayStatus, "No Alert Message Is Shown, Even After Entering Duplicate Event Dates ");	
 
 		
 		

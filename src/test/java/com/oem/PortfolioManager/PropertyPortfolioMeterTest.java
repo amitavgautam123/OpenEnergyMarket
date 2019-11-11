@@ -22,7 +22,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 										goToPropertyPortfolioMeterPage();
 	}
 
-	@Test
+	//@Test
 	public void PM_PP_TC_015_validateAddHHMeterPopupTest() throws Throwable {
 		customerDashboardPage.
 			refreshPropertyPortfolioMeterPage().

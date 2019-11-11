@@ -47,10 +47,23 @@ public class FixedProcurementSuite extends BaseTest	{
     	tenderResponsePage = adminDashboardPage.
     							clickOnTenderResponse().
     							verifyQuoteByDateExist().
-    							selectFirstValueInQuoteByDate().
+    							selectAssignedValueInQuoteByDate().
     							verifyQuoteRequestDropDownExists().
     							selectFirstValueQuoteRequest().
-    							verifyMeterForecastLinkExists();
+    							verifyMeterForecastLinkExists().
+    							clickMeterForecastLink().
+    				        	setFirstRowDayConsumption("70").
+    				        	setFirstRowNightConsumption("80").
+    				        	clickCalculateConsumptions().
+    				        	clickSaveBtn().
+    				        	verifyAlertMsgAfterClickingSaveBtn().
+    				        	clickOkBtnInAlertMsg().
+    				        	verifyQuoteDropdownPresence().
+    				        	selectFirstOptionQuoteDropdown().
+    				        	verifyQuoteInfoElementsPresence().
+    				        	enterDataInQuoteInfo().
+    				        	verifyMeterInfoElementsPresence().
+    				        	enterDataInMeterInfo();
     
     
     

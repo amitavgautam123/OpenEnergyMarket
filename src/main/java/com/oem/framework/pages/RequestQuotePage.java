@@ -426,23 +426,26 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		Thread.sleep(3000);
 	}
 
-	public void selectingMultiplesupplier_Water() {
+	public void selectingMultiplesupplier_Water() throws InterruptedException {
 		click(choosSuppliers_Water);
-		
+		Thread.sleep(3000);
 		click(firstSupplier_Water);
 		click(secondSupplier_Water);
 		click(thirdSupplier_Water);
+		scrollToElement(fifthSupplier_Water);
+		Thread.sleep(1000);
 		click(fourthSupplier_Water);
 		click(fifthSupplier_Water);
-
+		scrollUp();
 	}
 
 	// ===========================================Water===========================================================================
-	public void clickGasUtility() {
+	public void clickGasUtility() throws InterruptedException {
 		click(filterByGasUtility);
+		Thread.sleep(2000);
 	}
 
-	public void Options_Gas(String GasMeter, String GasContractD, String GasSupplier) {
+	public void Options_Gas(String GasMeter, String GasContractD, String GasSupplier) throws Throwable {
 		switch (GasMeter) {
 		case "zero":
 			selectingzerometers_Gas();
@@ -475,12 +478,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			selectingzerosupplier_Gas();
 			break;
 		case "single":
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.sleep(2000);
 			selectingSinglesupplier_Gas();
 			break;
 		case "multiple":
@@ -506,22 +504,26 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void selectingSinglemeters_Gas() {
+	public void selectingSinglemeters_Gas() throws Throwable {
 		click(allmeter_Gas);
+		Thread.sleep(2000);
 		click(firstMeter_Gas);
 	}
 
-	public void selectingMultiplemeters_Gas() {
+	public void selectingMultiplemeters_Gas() throws InterruptedException {
 		click(allmeter_Gas);
-
+		Thread.sleep(2000);
 		click(firstMeter_Gas);
-
+		scrollToElement(secondMeter_Gas);
+		Thread.sleep(2000);
 		click(secondMeter_Gas);
-
+		scrollToElement(thirdMeter_Gas);
+		Thread.sleep(2000);
 		click(thirdMeter_Gas);
-
+		scrollToElement(fourthMeter_Gas);
+		Thread.sleep(2000);
 		click(fourthMeter_Gas);
-
+		scrollUp();
 	}
 
 	public void selectingsingleContractDur_Gas() {
@@ -529,13 +531,17 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void selectingMultipleContractDur_Gas() {
+	public void selectingMultipleContractDur_Gas() throws Throwable {
 		selectByIndex(firstContractDuration_Gas, 02);
 		click(addNewContractDuration_Gas);
+		scrollToElement(secondMeter_Gas);
+		Thread.sleep(2000);
 		selectByIndex(secondContractDuration_Gas, 03);
 		click(addNewContractDuration_Gas);
+		Thread.sleep(2000);
 		selectByIndex(thirdContractDuration_Gas, 04);
 		click(addNewContractDuration_Gas);
+		Thread.sleep(2000);
 		selectByIndex(fourthContractDuration_Gas, 05);
 	}
 
@@ -543,27 +549,23 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(choosSuppliers_Gas);
 	}
 
-	public void selectingSinglesupplier_Gas() {
+	public void selectingSinglesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
-
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		Thread.sleep(2000);
 		click(firstSupplier_gas);
 	}
 
-	public void selectingMultiplesupplier_Gas() {
+	public void selectingMultiplesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
-
+		Thread.sleep(2000);
 		click(firstSupplier_gas);
 		click(secondSupplier_gas);
+		scrollToElement(fifthSupplier_gas);
+		Thread.sleep(2000);
 		click(thirdSupplier_gas);
 		click(fourthSupplier_gas);
 		click(fifthSupplier_gas);
+		scrollUp();
 	}
 	// ============================================================================================
 
@@ -575,17 +577,21 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(meterAll_nHH);
 	}
 
-	public void selectingSinglemeters_nHH() {
+	public void selectingSinglemeters_nHH() throws InterruptedException {
 		click(meterAll_nHH);
+		Thread.sleep(2000);
 		click(Firstmeter_nHH);
 	}
 
-	public void selectingMultiplemeters_nHH() {
+	public void selectingMultiplemeters_nHH() throws Throwable {
 		click(meterAll_nHH);
+		Thread.sleep(2000);
 		click(Firstmeter_nHH);
+		scrollToElement(Fourthmeter_nHH);
 		click(Secondmeter_nHH);
 		click(thirdmeter_nHH);
 		click(Fourthmeter_nHH);
+		scrollUp();
 	}
 
 	public void selectingsingleContractDur_nHH() {
@@ -1194,7 +1200,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void validatingAvailablityToVerfyAfterSelecting1MeterMultipleContract1Supplier() throws Throwable {
@@ -1204,7 +1210,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
 		// need to write further script to verify is it present at admin portal
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void validatingAvailablityToVerfyAfterSelecting1Meter1ContractMultipleSupplier() throws Throwable {
@@ -1213,7 +1219,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingSingleContractDuration();
 		SelectingMultipleSupplier();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		// need to write further script to verify is it present at admin portal
 	}
 
@@ -1223,7 +1229,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingMultipleContractDuration();
 		selectingSingleHHsupplier();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		// need to write further script to verify is it present at admin portal
 	}
 
@@ -1233,7 +1239,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingSingleContractDuration();
 		SelectingMultipleSupplier();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		// need to write further script to verify is it present at admin portal
 	}
 
@@ -1243,7 +1249,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingMultipleContractDuration();
 		SelectingMultipleSupplier();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		// need to write further script to verify is it present at admin portal
 	}
 
@@ -1253,7 +1259,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingMultipleContractDuration();
 		SelectingMultipleSupplier();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		// need to write further script to verify is it present at admin portal
 	}
 
@@ -1262,7 +1268,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickRenewableEnergy();
 		SelectingMultipleContractDuration();
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBefore() throws Throwable {
@@ -1278,7 +1284,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
 		softAssertion.assertAll();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void validatingAvailablityToVerfyAfterSelectingAllMeterAllContractAllSupplierAndSettingDatetoFuture() throws Throwable {
@@ -1287,10 +1293,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectingMultipleContractDuration();
 		EnterDate("05/10/2019");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
-	public void Options(String nHHMeter, String nHHContractD, String nHHSupplier) {
+	public void Options(String nHHMeter, String nHHContractD, String nHHSupplier) throws Throwable {
 		switch (nHHMeter) {
 		case "zero":
 			selectingzerometers_nHH();
@@ -1354,7 +1360,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1374,7 +1380,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1394,7 +1400,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1414,7 +1420,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1434,7 +1440,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1450,7 +1456,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForSelecting2SameContractDurations,
 				"Error message is not displaying for selecting 2 same contract durations.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1469,7 +1475,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				.contains("Please select contract duration");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
 				"Error message is not displaying for not entering contract duration.");
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1488,7 +1494,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				.contains("Please select contract duration");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingContractDuration,
 				"Error message is not displaying for not entering contract duration.");
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1503,7 +1509,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1518,7 +1524,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1534,7 +1540,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1548,7 +1554,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				.contains("Please select at least one meter for a quote request.");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any meter.");
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1562,7 +1568,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				.contains("Please select at least one meter for a quote request.");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any meter.");
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1576,7 +1582,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 				.contains("Please select at least one meter for a quote request.");
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingMeter,
 				"Error message is not displaying for not selecting any meter.");
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1591,7 +1597,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			e.printStackTrace();
 		}
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_SingleContractDurations_SingleSupplier_nHH() throws Throwable {
@@ -1599,7 +1605,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("multiple", "single", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_SingleMeters_MultipleContractDurations_SingleSupplier_nHH() throws Throwable {
@@ -1607,7 +1613,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("single", "multiple", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_SingleMeters_SingleContractDurations_MultipleSupplier_nHH() throws Throwable {
@@ -1615,7 +1621,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("single", "single", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_MultipleContractDurations_SingleSupplier_nHH() throws Throwable {
@@ -1623,7 +1629,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("multiple", "multiple", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_SingleContractDurations_MultipleSupplier_nHH() throws Throwable {
@@ -1631,7 +1637,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("multiple", "single", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_SingleMeters_MultipleContractDurations_MultipleSupplier_nHH() throws Throwable {
@@ -1639,7 +1645,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("single", "multiple", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_MultipleContractDurations_MultipleSupplier_nHH() throws Throwable {
@@ -1647,7 +1653,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		SelectElectricity_nHHUtility();
 		Options("multiple", "multiple", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void ValidatePresenceOfReqQuoteAtAdminPortalWhenSelecting_MultipleMeters_MultipleContractDurations_MultipleSupplier_ClcikRenewableEnergy_nHH()
@@ -1658,7 +1664,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		CkiclingRenewableEnergy_nHH();
 		Thread.sleep(5000);
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void validatingErrorMessageAfterSelectingAllMeterAllContractAllSupplierAndSettingDate5daysBefore_nHH()
@@ -1676,7 +1682,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 
 	}
@@ -1690,7 +1696,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		selectPrevDateCalender(10, 9, 2019);
 		Thread.sleep(10000);
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 
 	}
 
@@ -1715,7 +1721,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplayStatusForNotSelectingSuplier,
 				"Error message is not displaying for not selecting any supplier.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -1778,7 +1784,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		}
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_SingleMeter_ZeroContractDur_ZeroSupplier_Gas() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		clickGasUtility();
 		Options_Gas("single", "zero", "zero");
@@ -1809,7 +1815,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("null", "contract", "supplier");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_ZeroSupplier_Gas() throws Throwable {
@@ -1819,10 +1825,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("meter", "null", "supplier");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_ZeroSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "multiple", "zero");
@@ -1832,7 +1838,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Gas() {
+	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Gas() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		clickGasUtility();
 		selectByIndex(firstContractDuration_Gas, 02);
@@ -1852,7 +1858,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_SingleSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "zero", "single");
@@ -1862,7 +1868,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	}
 
-	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_Gas() {
+	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_ZeroContractDur_MultipleSupplier_Gas() throws Throwable {
 
 		clickGasUtility();
 		Options_Gas("zero", "zero", "multiple");
@@ -1879,7 +1885,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("null", "null", "supplier");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyErrorMessaegeWhenSelecting_SingleMeter_MultipleContractDur_ZeroSupplier_Gas() throws Throwable {
@@ -1889,7 +1895,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("null", "null", "supplier");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyErrorMessaegeWhenSelecting_MultipleMeter_SingleContractDur_ZeroSupplier_Gas() throws Throwable {
@@ -1900,7 +1906,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("null", "null", "supplier");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1911,7 +1917,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("meter", "null", "null");
-		navigateBackFromQuoteSubmit();
+		
 	}	
 
 	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_MultipleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1922,7 +1928,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("meter", "null", "null");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyErrorMessaegeWhenSelecting_ZeroMeter_SingleContractDur_MultipleSupplier_Gas() throws Throwable {
@@ -1933,7 +1939,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 
 		softassertfor_("meter", "null", "null");
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_SingleMeter_SingleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1941,7 +1947,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("single", "single", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_SingleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1949,7 +1955,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("multiple", "single", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_SingleMeter_MultipleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1957,7 +1963,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("single", "multiple", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_SingleMeter_SingleContractDur_MultipleSupplier_Gas() throws Throwable {
@@ -1965,7 +1971,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("single", "single", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_MultipleContractDur_SingleSupplier_Gas() throws Throwable {
@@ -1973,7 +1979,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("multiple", "multiple", "single");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_SingleContractDur_MultipleSupplier_Gas() throws Throwable {
@@ -1981,7 +1987,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("multiple", "single", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_SingleMeter_MultipleContractDur_MultipleSupplier_Gas() throws Throwable {
@@ -1989,7 +1995,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("single", "multiple", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_MultipleContractDur_MultipleSupplier_Gas() throws Throwable {
@@ -1997,7 +2003,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickGasUtility();
 		Options_Gas("multiple", "multiple", "multiple");
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyPresenceOfReqQouteAtAdminPortalAfter_Selecting_MultipleMeter_MultipleContractDur_MultipleSupplier_RenewableEnergy_Gas()
@@ -2009,7 +2015,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickrenewableEnergy_Gas();
 		Thread.sleep(5000);
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyAlertMessageWhenSelecting_5previousDateToCurrentDate_Gas() throws Throwable {
@@ -2027,7 +2033,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 		
 	}
@@ -2045,7 +2051,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			e.printStackTrace();
 		}
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyAlertMessageWhen_Selecting_DifferentCombinations_Of_Meter_ContractDuration_Supplier_Water(
@@ -2065,7 +2071,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		}
 		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 		softassertfor_(Meter, ContractDuration, Supplier);
 
 	}
@@ -2095,7 +2101,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		clickWaterUtility();
 		Options_Water(NoOfMeter, NoOfContractDur, NoOfSupplier);
 		ClickTopSubmitButton();
-		navigateBackFromQuoteSubmit();
+		
 	}
 
 	public void verifyAlertMesage_After_Selecting_DifferentCombinations_Of_Meter_ContractDuration_AndpreviousDate_Supplier_Water(
@@ -2114,7 +2120,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		softAssertion.assertTrue(errorMessageDisplyStatusForEnteringwrongDate,
 				"Error message is not displaying for Entring Wrong Date.");
 		// Assert.assertEquals(actual, expected)
-		navigateBackFromQuoteSubmit();
+		
 		softAssertion.assertAll();
 	}
 
@@ -2143,7 +2149,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		navigateBackFromQuoteSubmit();	
+			
 	}
 
 	public void verifyAlertmessageWhen2ContractDurations_selectsSameMonth_Water() {
@@ -2250,7 +2256,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		ClickTopSubmitButton();
 		Thread.sleep(3000);
 		boolean verifyTenderRequestSummaryURL = driver.getCurrentUrl().contains("RequestQuoteSubmit");
-		navigateBackFromQuoteSubmit();	
+			
 		Assert.assertTrue(verifyTenderRequestSummaryURL, "Incorrect URL is displaying.");
 	}
 
@@ -2854,12 +2860,20 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		logout();
 		softAssertion.assertAll();
 	}
-	public void navigateBackFromQuoteSubmit() throws Throwable {
-		Thread.sleep(5000);
-		boolean urlStatus = driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
-		if(urlStatus) {
-			driver.navigate().back();
-		}
-	}
+	public void goToRequestQuotePage() throws Throwable{
+        click(quotesAndTenders);
+        Thread.sleep(2000);
+        click(requestAQuoteLink);
+    }
+	/*
+	 * public void navigateBackFromQuoteSubmit() throws Throwable {
+	 * //Thread.sleep(8000); //boolean urlStatus =
+	 * driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
+	 * if(isElementPresent(tenderRequestSummary, 10)) { Thread.sleep(2000);
+	 * driver.navigate().to(
+	 * "https://systest-portal.oem-testing.com/Quote/RequestQuote");
+	 * //goToRequestQuotePage(); //driver.navigate().back();
+	 * //isElementPresent(requestAQuoteLink, 10); Thread.sleep(4000); } }
+	 */
 
 }

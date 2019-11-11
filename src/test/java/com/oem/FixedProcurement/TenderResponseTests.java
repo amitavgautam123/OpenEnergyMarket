@@ -21,7 +21,7 @@ public class TenderResponseTests extends BaseTest {
         adminDashboardPage=new LoginPage().loginAsAdmin();
         tenderResponsePage=adminDashboardPage.navigateToTenderResponse();
     }
-  /*  @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
+    @Test(description = "FPA_TR_TC_001,FPA_TR_TC_002,FPA_TR_TC_003,FPA_TR_TC_004 - Verify quote Request Dropdown Exists")
     public void verifyQuoteByDateDropDownExists() throws Throwable {
         tenderResponsePage
                 .verifyQuoteByDateExist();
@@ -88,7 +88,7 @@ public class TenderResponseTests extends BaseTest {
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstDayConsumption("0")
+                .setFirstRowDayConsumption("0")
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
@@ -103,15 +103,15 @@ public class TenderResponseTests extends BaseTest {
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstNightConsumption("0")
+                .setFirstRowNightConsumption("0")
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
     }
 
-*/
 
-   /* @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
+
+    @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
     public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
@@ -119,8 +119,8 @@ public class TenderResponseTests extends BaseTest {
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstDayConsumption("abc")
-                .setFirstNightConsumption("def")
+                .setFirstRowDayConsumption("abc")
+                .setFirstRowNightConsumption("def")
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
@@ -134,20 +134,20 @@ public class TenderResponseTests extends BaseTest {
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstDayConsumption("abc@#$%")
-                .setFirstNightConsumption("def")
+                .setFirstRowDayConsumption("abc@#$%")
+                .setFirstRowNightConsumption("def")
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
-    }*/
-/*
+    }
+
     @DataProvider(name = "consumptionInput")
     public static Object[][] credentials() {
 
         return new Object[][] {
                 { "FPA_TOP_TC_012 - verify Alert Night consumption:0", "10","0" },
                 { "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption", "abc","def" },
-                /*{ "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
+                { "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption", "abc@#$@!","def" },
                 { "FPA_TOP_TC_015 - verify Alert appears when SplCharts is provided for Night Consumption", "def","abc#$%!" },
                 { "FPA_TOP_TC_016 - verify Alert appears when SplCharts is provided for both", "@#$%","@#$%" },
                 { "FPA_TOP_TC_017 - verify Alert appears when SplCharts is provided for both", " ","@#$%" },
@@ -161,10 +161,11 @@ public class TenderResponseTests extends BaseTest {
                 { "FPA_TOP_TC_025 - verify Alert Day:Nos, night: chars", "1234","abc" },
                 { "FPA_TOP_TC_026 - verify Alert Day:chars, night: Nos", "abcd","1234" },
                 { "FPA_TOP_TC_027 - verify Alert Day:Nos, night: Special chars", "1234","!@#$%" },
-                { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" },*/
-      /*  };
+                { "FPA_TOP_TC_028 - verify Alert Day:Spl Chars, night: Nos", "!@#$%^","1234" }
+        };
 
     }
+    
     @Test(dataProvider = "consumptionInput")
     public void verifyAlertFoSplCharValues(String desc,String dayConsumption, String nightConsumption) throws Throwable {
         adminDashboardPage
@@ -173,41 +174,55 @@ public class TenderResponseTests extends BaseTest {
                 .selectFirstValueQuoteRequest()
                 .verifyMeterForecastLinkExists()
                 .clickMeterForecastLink()
-                .setFirstDayConsumption(dayConsumption)
-                .setFirstNightConsumption(nightConsumption)
+                .setFirstRowDayConsumption(dayConsumption)
+                .setFirstRowNightConsumption(nightConsumption)
                 .clickCalculateConsumptions()
                 .verifyPopUpDialogue();
 
-    }*/
+    }
+    //29, 30
     @Test
-    public void verify() throws Throwable {
+    public void verifyAutoFillingOfDayAndNightConsumption() throws Throwable {
     	adminDashboardPage
         	.clickOnTenderResponse()
         	.selectAssignedValueInQuoteByDate()
         	.selectFirstValueQuoteRequest()
         	.clickMeterForecastLink()
-        	.setFirstDayConsumption("40")
-        	.setFirstNightConsumption("50")
+        	.setFirstRowDayConsumption("40")
+        	.setFirstRowNightConsumption("50")
         	.clickCalculateConsumptions()
-        	.verifyDayConsumptionAndNightConsumption();
+        	.verifyAutoFillDayConsumptionAndNightConsumption();
     }
+    //31
     @Test
-    public void verifyAlertMsg() throws Throwable {
+    public void verifyAlertMsgForDayNightConsumption() throws Throwable {
     	adminDashboardPage
         	.clickOnTenderResponse()
         	.selectAssignedValueInQuoteByDate()
         	.selectFirstValueQuoteRequest()
         	.clickMeterForecastLink()
-        	.setFirstDayConsumption("40")
-        	.setFirstNightConsumption("50")
-        	.clickCalculateConsumptions()
-        	.verifyDayConsumptionAndNightConsumption();
+        	.setFirstRowDayConsumption("")
+        	.setFirstRowNightConsumption("")
+        	.validateClickingSaveBtnWithoutEnteringConsumption();
     }
-
-
-
-
-
+  //34
+    @Test
+    public void verifyAlertMsgAfterClickingCancelBtn() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstRowDayConsumption("40")
+        	.setFirstRowNightConsumption("50")
+        	.clickCalculateConsumptions().
+        	clickSaveBtn().
+        	clickCancelBtnInAlertMsg().
+        	verifyAlertMsgPresenceAfterClickingCancelBtn();
+    }
+    
 
 }
+
+
 

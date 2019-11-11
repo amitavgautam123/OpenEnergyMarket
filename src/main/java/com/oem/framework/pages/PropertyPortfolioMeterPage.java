@@ -38,6 +38,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By procurementType = By.id("procurementType");
 	By expectedConsumption = By.id("expectedConsumption");
 	By currentSupplier = By.id("electricitySuppliers");
+	By currentSupplier_Options = By.xpath("//select[@id = 'electricitySuppliers']/option");
 	By contractEndDate = By.id("contractEndDateForMeterModel");
 	By capacity = By.id("capacity");
 	By currentAnnualSpend = By.id("currentAnnualSpend");
@@ -768,6 +769,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(1000);
 		selectFutureDateCalender(14, random.nextInt(12), 2020);
 		setValue(capacity, readExcelData("Sheet3", 8, 3));
+		Thread.sleep(1000);
 		selectByVisibleText(currentSupplier, "British Gas Business");
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");

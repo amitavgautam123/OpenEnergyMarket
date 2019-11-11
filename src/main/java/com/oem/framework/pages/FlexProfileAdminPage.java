@@ -10,12 +10,20 @@ import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
 
 public class FlexProfileAdminPage extends AdminDashboardPage{
-
+	
+	By clickOk=By.xpath("//button[text()='OK']");
+	By setUpProfileAtProfileStatus = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
+	By setUpProfileAtProfileStatus1 = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
+	
+	
+	AdminDashboardPage adminDashboardPage;
+	
 	public boolean isComapanyPresent() throws Throwable{
 		By clickCompany= By.xpath("//h1[contains(text(),'"+readExcelData("sheet5",3,1)+"')]");
 		boolean trueOrFals=isElementPresent(clickCompany);
 		return trueOrFals;
 	}
+	
 
 	@Override
 	protected void isLoaded() throws Error {
@@ -45,15 +53,17 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 			int noOfHHProfiles=hhprofiles.size();
 			for(int i=1;i<noOfHHProfiles;i++){
 				click(hhProfileDelete);
+				click(clickOk);
 			}
-			adminDashboardPage.logOut();
+			//adminDashboardPage.logOut();
+			click(dashBoard);
+			Thread.sleep(4000);
+			adminDashboardPage.impersonateFlexCustomer();
 			CustomerDashboardPage customerDashboardPage1 =new CustomerDashboardPage();
-			customerDashboardPage1 = new LoginPage().login();
 			customerDashboardPage1.goToFlexibleProfileManager();
 			FlexProfileManagerPage flexproMang=new FlexProfileManagerPage();
-			By setUpProfileAtProfileStatus = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
 			flexproMang.click_hhUtilityLink();
-			org.testng.Assert.assertTrue(isElementPresent(setUpProfileAtProfileStatus), "SetUpProfile Element is not Not Present Even After Deleting Profiles");
+			Assert.assertTrue(isElementPresent(setUpProfileAtProfileStatus), "SetUpProfile Element is not Not Present Even After Deleting Profiles");
 				System.out.println("SetUpProfile Element is Present");
 			
 			
@@ -64,13 +74,15 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 			int noOfnHHProfiles=nhhprofiles.size();
 			for(int i=1;i<noOfnHHProfiles;i++){
 				click(nhhProfileDelete);
+				click(clickOk);
 			}
-			adminDashboardPage.logOut();
-			//CustomerDashboardPage customerDashboardPage =new CustomerDashboardPage();
-			customerDashboardPage1 = new LoginPage().login();
-			customerDashboardPage1.goToFlexibleProfileManager();
+			click(dashBoard);
+			Thread.sleep(4000);
+			adminDashboardPage.impersonateFlexCustomer();
+			CustomerDashboardPage customerDashboardPage2 =new CustomerDashboardPage();
+			customerDashboardPage2.goToFlexibleProfileManager();
 			FlexProfileManagerPage flexproMang1=new FlexProfileManagerPage();
-			By setUpProfileAtProfileStatus1 = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
+			
 			flexproMang1.click_nhhUtilityLink();
 			org.testng.Assert.assertTrue(isElementPresent(setUpProfileAtProfileStatus1), "SetUpProfile Element is not Not Present Even After Deleting Profiles");
 				System.out.println("SetUpProfile Element is Present");
@@ -82,15 +94,17 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 			int noOfgasProfiles=gasprofiles.size();
 			for(int i=1;i<noOfgasProfiles;i++){
 				click(gasProfileDelete);
+				click(clickOk);
 			}
-			adminDashboardPage.logOut();
-			//CustomerDashboardPage customerDashboardPage =new CustomerDashboardPage();
-			customerDashboardPage1 = new LoginPage().login();
-			customerDashboardPage1.goToFlexibleProfileManager();
+			click(dashBoard);
+			Thread.sleep(4000);
+			adminDashboardPage.impersonateFlexCustomer();
+			CustomerDashboardPage customerDashboardPage3 =new CustomerDashboardPage();
+			customerDashboardPage3.goToFlexibleProfileManager();
 			FlexProfileManagerPage flexproMang2=new FlexProfileManagerPage();
-			By setUpProfileAtProfileStatus2 = By.xpath("//tr//td[4]//a[@class='btn btn-info btn-block']");
+			
 			flexproMang2.click_gasUtilityLink();
-			org.testng.Assert.assertTrue(isElementPresent(setUpProfileAtProfileStatus2), "SetUpProfile Element is not Not Present Even After Deleting Profiles");
+			org.testng.Assert.assertTrue(isElementPresent(setUpProfileAtProfileStatus), "SetUpProfile Element is not Not Present Even After Deleting Profiles");
 				System.out.println("SetUpProfile Element is Present");
 			break;
 			
