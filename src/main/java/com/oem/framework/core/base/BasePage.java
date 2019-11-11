@@ -73,6 +73,11 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
         waitForElementPresent(by);
         driver.findElement(by).click();
     }
+    public boolean isEnabled(By by){
+        waitForElementPresent(by);
+        boolean enableStatus = driver.findElement(by).isEnabled();
+        return enableStatus;
+    }
     public void refreshPage() {
     	driver.navigate().refresh();
     }
@@ -165,7 +170,24 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
     	    }
     	}
     }
-
+    public void selectByPartOfVisibleText(By locatorsOfOptions, String value1, String value2) {
+    	List<WebElement> options = driver.findElements(locatorsOfOptions);
+    	for (WebElement option : options) {
+    	    if (option.getText().contains(value1) && option.getText().contains(value2)) {
+    	        option.click();
+    	        break;
+    	    }
+    	}
+    }
+    public void selectByPartOfVisibleText(By locatorsOfOptions, String value1, String value2, String value3) {
+    	List<WebElement> options = driver.findElements(locatorsOfOptions);
+    	for (WebElement option : options) {
+    	    if (option.getText().contains(value1) && option.getText().contains(value2) && option.getText().contains(value3)) {
+    	        option.click();
+    	        break;
+    	    }
+    	}
+    }
     public boolean isElementPresent(By locator) {
     	return isElementPresent(locator,DEFAULT_EXPLICIT_WAIT);
     }

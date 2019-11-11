@@ -86,9 +86,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	return this;
     }
     
-    public CompanyProfilePage verifyBlankRegisteredAddressError(String value) {
+    public CompanyProfilePage verifyBlankRegisteredAddressError(String value) throws Throwable {
     	setValue(companyRegisteredAddress, "");
         click(saveBtn);
+        Thread.sleep(2000);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(registeredAddressBlankError)) &&
                 getText(registeredAddressBlankError).trim().contains(value),"Registered address error actual value: "+getText(registeredAddressBlankError) +" but expected:"+value);
     	return this;
@@ -110,9 +111,10 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         return this;
     }
 
-    public CompanyProfilePage verifyCompanyNameError(String value) {
+    public CompanyProfilePage verifyCompanyNameError(String value) throws Throwable {
     	clearValue(companyName);
         click(saveBtn);
+        Thread.sleep(3000);
     	Assert.assertTrue(StringUtils.isNoneBlank(getText(companyNameError)) &&
                 getText(companyNameError).trim().contains(value),"Company Name error actual value: "+getText(companyNameError) +" but expected:"+value);
     	return this;
@@ -165,7 +167,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	boolean postCodeErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for postcode field is displaying", true);
         
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         boolean saveStatus  = isElementPresent(okBtn);
         if(isElementPresent(okBtn)) {
         	click(okBtn);
@@ -195,7 +197,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
     	Reporter.log("Strored the value of the aria-invalid attribute in a string variable", true);
     	boolean phoneErrorMsgDisplayStatus = errorStatus.equals("true");
     	Reporter.log("Checked if error message for phone field is displaying", true);
-    	Thread.sleep(2000);
+    	Thread.sleep(3000);
     	if(isElementPresent(okBtn)) {
         	click(okBtn);
         }
@@ -338,7 +340,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         click(saveBtn);
         Reporter.log("Clicked on save button", true);
         Thread.sleep(2000);
-        if(isElementPresent(serverError, 6)) {
+        if(isElementPresent(serverError, 10)) {
         	driver.navigate().back();
         	softAssertion.assertFalse(false, "Server Error is displaying.");
         }

@@ -28,6 +28,8 @@ public class CustomerDashboardPage extends HeaderPage {
     By flexReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[4]/a");
     By tradeReporting = By.xpath("//h3[contains(text(), 'Flex Management')]/following-sibling::ul/li[5]/a");
     
+    By forecasting = By.linkText("Forecasting");
+    
     By rightProfile=By.id("user-link");
     By logOut=By.xpath("//a[text()='Log out']");
 
@@ -127,11 +129,13 @@ public class CustomerDashboardPage extends HeaderPage {
         requestQuotePage.isLoaded();
         return requestQuotePage;
     }
-    public RequestQuotePage clickRequestQuote(){
-    	driver.navigate().refresh();
-        click(requestAQuoteLink);
+    public RequestQuotePage clickRequestQuote() throws Throwable	{
+    	driver.navigate().to("https://systest-portal.oem-testing.com/Quote/RequestQuote");
+    	Thread.sleep(4000);
+    	//driver.navigate().refresh();
+        //click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
-        requestQuotePage.isLoaded();
+        //requestQuotePage.isLoaded();
         return requestQuotePage;
     }
     
@@ -143,13 +147,27 @@ public class CustomerDashboardPage extends HeaderPage {
         reviewQuoteCustomerPage.isLoaded();
         return reviewQuoteCustomerPage;
     }
-    public CustomerDashboardPage goToFlexibleProfileManager() throws Throwable{
+    public FlexProfileManagerPage goToFlexibleProfileManager() throws Throwable{
         click(flexManagement);
         Thread.sleep(2000);
         click(flexProfileMgr);
         FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
         flexProfileManagerPage.isLoaded();
         return flexProfileManagerPage;
+    }
+    public FlexProfileManagerPage clickFlexibleProfileManager() throws Throwable{
+        click(flexProfileMgr);
+        Thread.sleep(4000);
+        FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+        flexProfileManagerPage.isLoaded();
+        return flexProfileManagerPage;
+    }
+    public ForecastingPage goToForecastingPage() throws Throwable{
+        click(forecasting);
+        Thread.sleep(2000);
+        ForecastingPage forecastingPage=new ForecastingPage();
+        forecastingPage.isLoaded();
+        return forecastingPage; 
     }
     public void logOut() throws Throwable{
     	click(rightProfile);

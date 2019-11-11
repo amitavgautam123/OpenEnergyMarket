@@ -24,9 +24,9 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 	By gasUtilityLink = By.id("gasUtility");
 
 	By notAbleToCreateSetupProfile = By.xpath("//a[text()='Return To Flexible Profile Manager']");
-	By notAbleToCreateSetUpProfile1=By.xpath("//h4[contains(text(),'We are sorry but your portfolio is not correctly set up to create a Flexible Profile.')]");
-	
-	
+	By notAbleToCreateSetUpProfile1 = By.xpath(
+			"//h4[contains(text(),'We are sorry but your portfolio is not correctly set up to create a Flexible Profile.')]");
+
 	By rowCount = By.xpath("//table[@id='profiles-table']//tbody//tr");
 	By yesContinue = By.xpath("//a[@id='proceed-btn']");
 	By QuestionsTextActual = By.xpath("//h3[contains(text(),'Questions')]");
@@ -40,8 +40,8 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 	By fullPriceAnalysis2ndRowElemets = By.xpath("//div[@id='full-price-analysis-tab']//tr[2]");
 	By supplierQutedButton = By.xpath("//a[contains(text(),'Supplier Quoted')]");
 	By supplier_quoted_tab2ndRowElements = By.xpath("//div[@id='supplier-quoted-tab']//tr[2]");
-	By acceptQuote=By.xpath("//input[@class='btn btn-success btn-block acceptQuoteBtn']");
-	By okAfterAccept=By.xpath("//a[@id='global-message-button-text']");
+	By acceptQuote = By.xpath("//input[@class='btn btn-success btn-block acceptQuoteBtn']");
+	By okAfterAccept = By.xpath("//a[@id='global-message-button-text']");
 
 	By editFlexibleProfile = By.xpath("//a[@class='btn btn-warning']");
 	By ReturnToFlexibleProfileManager = By.xpath("//a[@class='btn btn-primary']");
@@ -55,41 +55,51 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 	By noOfSuppliers = By.xpath("//div[@class='span3 profile-summay-supplier-container']/div");
 
-	By clickHHReview=By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Review Quotes']");
-	By clickGasReview=By.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Review Quotes']");
-	By eonImageSource=By.xpath("//img[@src='https://oemweb.s3.amazonaws.com/files/7face949-67d1-43ed-b378-2dce75fc7691-sq.jpg']");
-	By productName=By.xpath("//table//tbody//tr//td[2]");
-	
-	By hhSetup=By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	By nHHSetUp=By.xpath("//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	By gasSetUp=By.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	
-	By hhUtilitySetUpPro =By.xpath("//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	By gasUtilitySetUpPro=By.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	By nHHUtilitySetUpPro=By.xpath("//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
-	
-	static List<WebElement> suppliers; 
-	
-	public void clickHHReview(){
+	By clickHHReview = By.xpath(
+			"//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Review Quotes']");
+	By clickGasReview = By
+			.xpath("//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Review Quotes']");
+	By eonImageSource = By
+			.xpath("//img[@src='https://oemweb.s3.amazonaws.com/files/7face949-67d1-43ed-b378-2dce75fc7691-sq.jpg']");
+	By productName = By.xpath("//table//tbody//tr//td[2]");
+
+	By hhSetup = By.xpath(
+			"//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By nHHSetUp = By.xpath(
+			"//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By gasSetUp = By.xpath(
+			"//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+
+	By hhUtilitySetUpPro = By.xpath(
+			"//i[@data-original-title = 'Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By gasUtilitySetUpPro = By.xpath(
+			"//i[@data-original-title = 'Gas Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+	By nHHUtilitySetUpPro = By.xpath(
+			"//i[@data-original-title = 'Non Half Hourly Electric Profile']/../../following-sibling::td/a[text() = 'Setup Flexible Profile']");
+
+	static List<WebElement> suppliers;
+
+	public void clickHHReview() {
 		click(clickHHReview);
 		Reporter.log("Clicked On HHRewiew", true);
 	}
-	public void clickGasReview(){
+
+	public void clickGasReview() {
 		click(clickGasReview);
 		Reporter.log("Clicked On GasRewiew", true);
 	}
-	
+
 	private List<WebElement> supplierList = captureSuppliers();
-	public List<WebElement> getSupplierList(){
-		//List<WebElement> allElements 
-		//suppliers = driver.findElements(noOfSuppliers);
-		//for (WebElement element : suppliers) {			
-			//System.out.println(element.getText());
+
+	public List<WebElement> getSupplierList() {
+		// List<WebElement> allElements
+		// suppliers = driver.findElements(noOfSuppliers);
+		// for (WebElement element : suppliers) {
+		// System.out.println(element.getText());
 		return supplierList;
-		
+
 	}
-	
-	
+
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Flexible Profile Manager Page");
@@ -136,7 +146,7 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		Reporter.log("Clicked on RequestContractOffer Button.", true);
 	}
 
-	public void verifySubModulesPresenceInFlexmanagement() {
+	public FlexProfileManagerPage verifySubModulesPresenceInFlexmanagement() {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean flexProfileMgrPresenceStatus = isElementPresent(flexProfileMgr);
 		softAssertion.assertTrue(flexProfileMgrPresenceStatus, "Flexible Profile Manager is not displaying.");
@@ -155,6 +165,7 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		Reporter.log("Checked if Trade Reporting is displaying.", true);
 
 		softAssertion.assertAll();
+		return this;
 	}
 
 	public void click_hhUtilityLink() {
@@ -212,33 +223,40 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 	public void verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage(String SelectUtility)
 			throws Throwable {
-		SoftAssert softAssertion = new SoftAssert();
-		List rowsAfter = driver.findElements(rowCount);
-		int rowsAfterClick = rowsAfter.size();
+			switch (SelectUtility) {
 
-		System.out.println("No Of Rows Present After Clicking Utility " + rowsAfterClick);
-		Thread.sleep(3000);
-		firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
+			case "HH":
+			if(isElementPresent(hhUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(hhUtilitySetUpPro), "Set Up Profile is NOt Present for HH");
 
-			By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-			By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[2]//i");
-			Thread.sleep(3000);
-			String utilityHH = getText(presentUtility);
-
-			String Text = getText(presentSetUpProfile);
-			Thread.sleep(3000);
-			boolean trueOrFalse = Text.contains("Setup Flexible Profile");
-			if (trueOrFalse) {
-
-				softAssertion.assertTrue(trueOrFalse, "Setup Flexible Profile is Not Present");
-				Reporter.log("Checked For Presence of SetUp Flexible Profile", true);
-
-				softAssertion.assertAll();
-				break firstLoop;
+			}else{
+			click_hhUtilityLink();
+			Assert.assertTrue(isElementPresent(hhUtilitySetUpPro), "Set Up Profile is NOt Present for HH");
 			}
+			break;
 
-		}
-	}
+			case "nHH":
+
+			if(isElementPresent(nHHUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(nHHUtilitySetUpPro), "Set Up Profile is NOt Present for nHH");
+			}else{
+			click_nhhUtilityLink();
+			Assert.assertTrue(isElementPresent(nHHUtilitySetUpPro), "Set Up Profile is NOt Present for nHH");
+			}
+			break;
+			case "Gas":
+			if(isElementPresent(gasUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(gasUtilitySetUpPro), "Set Up Profile is NOt Present for Gas");
+			}else{
+
+			click_gasUtilityLink();
+			Assert.assertTrue(isElementPresent(gasUtilitySetUpPro), "Set Up Profile is NOt Present for Gas");
+			}
+			break;
+			default:
+			System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+			}
+			}
 
 	public void verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage(String SelectUtility) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -310,66 +328,68 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	
-	
 	public void clickOnSetUpFlexibleProfile(String SelectUtility) throws Throwable {
-
-		
-		
 
 		switch (SelectUtility) {
 
 		case "HH":
-		if(isElementPresent(hhUtilitySetUpPro)){
-		click(hhUtilitySetUpPro);
-		}else{
-		click_hhUtilityLink();
-		click(hhUtilitySetUpPro);
-		Thread.sleep(3000);
+			if (isElementPresent(hhUtilitySetUpPro)) {
+				click(hhUtilitySetUpPro);
+			} else {
+				click_hhUtilityLink();
+				Thread.sleep(2000);
+				//click(hhUtilitySetUpPro);
+				Thread.sleep(3000);
 
-		if(isElementPresent(notAbleToCreateSetupProfile)){
-		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-		flexAdmin.deleteProfile("HH");
+				if (isElementPresent(notAbleToCreateSetupProfile)) {
+					FlexProfileAdminPage flexAdmin = new FlexProfileAdminPage();
+					flexAdmin.deleteProfile("HH");
 
-
-		}
-		}
-		break;
+				}else {
+					click(hhUtilitySetUpPro);
+				}
+			}
+			break;
 
 		case "nHH":
 
-		if(isElementPresent(nHHUtilitySetUpPro)){
-		click(nHHUtilitySetUpPro);
-		}else{
-		click_nhhUtilityLink();
-		click(nHHUtilitySetUpPro);
-		if(isElementPresent(notAbleToCreateSetupProfile)){
-		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-		flexAdmin.deleteProfile("nHH");
+			if (isElementPresent(nHHUtilitySetUpPro)) {
+				click(nHHUtilitySetUpPro);
+			} else {
+				click_nhhUtilityLink();
+				Thread.sleep(2000);
+				//click(nHHUtilitySetUpPro);
+				if (isElementPresent(notAbleToCreateSetupProfile)) {
+					FlexProfileAdminPage flexAdmin = new FlexProfileAdminPage();
+					flexAdmin.deleteProfile("nHH");
 
-		}
-		}
-		break;
+				}
+				else {
+					click(nHHUtilitySetUpPro);
+				}
+			}
+			break;
 		case "Gas":
-		if(isElementPresent(gasUtilitySetUpPro)){
-		click(gasUtilitySetUpPro);
-		}else{
+			if (isElementPresent(gasUtilitySetUpPro)) {
+				click(gasUtilitySetUpPro);
+			} else {
 
-		click_gasUtilityLink();
-		click(gasUtilitySetUpPro);
-		if(isElementPresent(notAbleToCreateSetupProfile)){
-		FlexProfileAdminPage flexAdmin=new FlexProfileAdminPage();
-		flexAdmin.deleteProfile("Gas");
+				click_gasUtilityLink();
+				Thread.sleep(2000);
+				
+				if (isElementPresent(notAbleToCreateSetupProfile)) {
+					FlexProfileAdminPage flexAdmin = new FlexProfileAdminPage();
+					flexAdmin.deleteProfile("Gas");
 
-		}
-		}
-		break;
+				}
+				else {
+					click(gasUtilitySetUpPro);
+				}
+			}
+			break;
 		default:
-		System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+			System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
 		}
-
-
-
 
 		click(yesContinue);
 		Reporter.log("Clicked on YesContinue Button.", true);
@@ -378,27 +398,25 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 		click_SaveButton();
 
-
-		
 		scrollToElement(requestContractOffer);
 		List<WebElement> allSuppliers = driver.findElements(noOfSuppliers);
 		int i = 0;
-		//Traversing through the list and printing its Suppliers text 
-		for(WebElement supplier:allSuppliers){
-		Thread.sleep(3000);
-		setExcelData("Sheet5", 1, i, supplier.getText());
-		Thread.sleep(3000);
-		i++;
+		// Traversing through the list and printing its Suppliers text
+		for (WebElement supplier : allSuppliers) {
+			Thread.sleep(3000);
+			setExcelData("Sheet5", 1, i, supplier.getText());
+			Thread.sleep(3000);
+			i++;
 		}
-
 
 		Thread.sleep(3000);
 		// forloopToSelectMultipleQuestions();
 		scrollToElement(requestContractOffer);
 		click(requestContractOffer);
 		Reporter.log("Clicked On Request Contract Offer ", true);
-		}
-	public List<WebElement> captureSuppliers(){
+	}
+
+	public List<WebElement> captureSuppliers() {
 		supplierList = driver.findElements(noOfSuppliers);
 		return supplierList;
 	}
@@ -602,41 +620,50 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 	public void verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage(
 			String SelectUtility) throws Throwable {
 
-		SoftAssert softAssertion = new SoftAssert();
-		List rowsAfter = driver.findElements(rowCount);
-		int rowsAfterClick = rowsAfter.size();
+			switch (SelectUtility) {
 
-		Thread.sleep(3000);
-		firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
-
-			By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-			By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[2]//i");
+			case "HH":
+			if(isElementPresent(hhUtilitySetUpPro)){
+			click(hhUtilitySetUpPro);
+			}else{
+			click_hhUtilityLink();
+			click(hhUtilitySetUpPro);
 			Thread.sleep(3000);
-			String utilityHH = getText(presentUtility);
-
-			String Text = getText(presentSetUpProfile);
-			Thread.sleep(3000);
-			boolean trueOrFalse = Text.contains("Setup Flexible Profile");
-			if (trueOrFalse) {
-
-				click(presentSetUpProfile);
-				Reporter.log("clicked On  SetUp Flexible Profile", true);
-
-				click_No_GoBackToPropertyProfoli();
-				Thread.sleep(3000);
-				boolean titleOfPropertyProfoliPage = driver.getTitle().contains(PropertyPortfoli);
-				softAssertion.assertTrue(titleOfPropertyProfoliPage,
-						"Not Redirected To Property Profoli HomePage Page");
-				Reporter.log(
-						"Checked for Home Page Of Property Profoli After Selecting No-Go Back To Property Profoli Button. ",
-						true);
-				softAssertion.assertAll();
-				break firstLoop;
 			}
-		}
+			break;
 
+			case "nHH":
+
+			if(isElementPresent(nHHUtilitySetUpPro)){
+			click(nHHUtilitySetUpPro);
+			}else{
+			click_nhhUtilityLink();
+			click(nHHUtilitySetUpPro);
+
+			}
+			break;
+			case "Gas":
+			if(isElementPresent(gasUtilitySetUpPro)){
+			click(gasUtilitySetUpPro);
+			}else{
+
+			click_gasUtilityLink();
+			click(gasUtilitySetUpPro);
+
+			}
+			break;
+			default:
+			System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+			}
+			click_No_GoBackToPropertyProfoli();
+			Thread.sleep(3000);
+			boolean titleOfPropertyProfoliPage = driver.getTitle().contains(PropertyPortfoli);
+			Assert.assertTrue(titleOfPropertyProfoliPage,
+			"Not Redirected To Property Profoli HomePage Page");
+			Reporter.log(
+			"Checked for Home Page Of Property Profoli After Selecting No-Go Back To Property Profoli Button. ",
+			true);
 	}
-
 	public void verifyCustomerDashBoardHomePage() {
 		SoftAssert softAssertion = new SoftAssert();
 		String Title = "Dashboard | Open Energy Market";
@@ -683,7 +710,8 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 			}
 		}
 	}
-	public void clickReviewQuotes(String SelectUtility) throws Throwable{
+
+	public void clickReviewQuotes(String SelectUtility) throws Throwable {
 		List rowsAfter = driver.findElements(rowCount);
 		int rowsAfterClick = rowsAfter.size();
 		switch (SelectUtility) {
@@ -772,102 +800,111 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 			System.out.println("Please enter the Correct Spelling ie. HH or nHH or Gas");
 		}
 	}
-	public void verifyQuoteRequestelemets() throws Throwable{
+
+	public void verifyQuoteRequestelemets() throws Throwable {
 		clickHHReview();
 		SoftAssert softAssertion = new SoftAssert();
 		softAssertion.assertTrue(isElementPresent(eonImageSource), "EON image is Not Present");
-		String productNameFroexcel=readExcelData("Sheet5",23,1);
-		softAssertion.assertTrue(getText(productName).contains(productNameFroexcel), "Product Name Is Different(MisMatch) ");
-		By supplierContractCosstatust=By.xpath("//table//tbody//tr//td[4]//i");
-		By networksCostsstatu=By.xpath("//table//tbody//tr//td[5]//i");
-		By enviChargesstatus=By.xpath("//table//tbody//tr//td[6]//i");
-		
+		String productNameFroexcel = readExcelData("Sheet5", 23, 1);
+		softAssertion.assertTrue(getText(productName).contains(productNameFroexcel),
+				"Product Name Is Different(MisMatch) ");
+		By supplierContractCosstatust = By.xpath("//table//tbody//tr//td[4]//i");
+		By networksCostsstatu = By.xpath("//table//tbody//tr//td[5]//i");
+		By enviChargesstatus = By.xpath("//table//tbody//tr//td[6]//i");
+
 		By cclStatus = By.xpath("//table//tbody//tr//td[7]/i");
-		By paymentTermsstatus=By.xpath("//table//tbody//tr//td[8]//i");
-		By billingSetUpStatus=By.xpath("//table//tbody//tr//td[9]//i");
-		By passedCreditStatus=By.xpath("//table//tbody//tr//td[10]//i");
-		By acceptButton=By.xpath("//table//tbody//tr//td[11]//input");
-		
-		boolean supplierContractCostVerifystatust = getAttribute(supplierContractCosstatust, "class").equals("icon-close");
+		By paymentTermsstatus = By.xpath("//table//tbody//tr//td[8]//i");
+		By billingSetUpStatus = By.xpath("//table//tbody//tr//td[9]//i");
+		By passedCreditStatus = By.xpath("//table//tbody//tr//td[10]//i");
+		By acceptButton = By.xpath("//table//tbody//tr//td[11]//input");
+
+		boolean supplierContractCostVerifystatust = getAttribute(supplierContractCosstatust, "class")
+				.equals("icon-close");
 		softAssertion.assertTrue(supplierContractCostVerifystatust, "SupplierContractCost is displaying as selected");
-		
+
 		boolean networksCostsverifystatu = getAttribute(networksCostsstatu, "class").equals("icon-close");
-		softAssertion.assertTrue(networksCostsverifystatu, "NetworksCosts is displaying as selected");
-		
-		boolean envichargesVerifyStatus=getAttribute(enviChargesstatus, "class").equals("icon-close");
+		softAssertion.assertFalse(networksCostsverifystatu, "NetworksCosts is displaying as selected");
+
+		boolean envichargesVerifyStatus = getAttribute(enviChargesstatus, "class").equals("icon-close");
 		softAssertion.assertTrue(envichargesVerifyStatus, "Enivronmental Charges is displaying as selected");
 
 		boolean cclVerifyStatus = getAttribute(cclStatus, "class").equals("icon-checkmark");
 		softAssertion.assertTrue(cclVerifyStatus, "CCL is not displaying as selected");
-		
+
 		boolean paymentTermserifystatus = getAttribute(paymentTermsstatus, "class").equals("icon-close");
 		softAssertion.assertTrue(paymentTermserifystatus, "Payment Terms is displaying as selected");
 		boolean billingSetUpverifyStatus = getAttribute(billingSetUpStatus, "class").equals("icon-close");
 		softAssertion.assertTrue(billingSetUpverifyStatus, "BillingSetUp is displaying as selected");
 		boolean passedCreditverifyStatus = getAttribute(passedCreditStatus, "class").equals("icon-close");
 		softAssertion.assertTrue(passedCreditverifyStatus, "Passed Credit is displaying as selected");
-		boolean verifyacceptButton=isElementPresent(acceptButton);
+		boolean verifyacceptButton = isElementPresent(acceptButton);
 		softAssertion.assertTrue(verifyacceptButton, "Accept Button is not Present");
-		
-		
-		
-		
+
 		click(acceptButton);
 		Reporter.log("Clicked Accept Buutton", true);
-		By okButton=By.id("global-message-button-text");
+		By okButton = By.id("global-message-button-text");
 		Thread.sleep(5000);
 		click(okButton);
 		Reporter.log("Quote acceptenace has been passed and Clicked on Ok ");
 		softAssertion.assertAll();
 	}
-	public void verifyQuoteRequestelemetsForGas() throws Throwable{
+
+	public void verifyQuoteRequestelemetsForGas() throws Throwable {
 		clickGasReview();
 		SoftAssert softAssertion = new SoftAssert();
 		softAssertion.assertTrue(isElementPresent(eonImageSource), "EON image is Not Present");
-		String productNameFroexcel=readExcelData("Sheet5",23,1);
-		softAssertion.assertTrue(getText(productName).contains(productNameFroexcel), "Product Name Is Different(MisMatch) ");
-		By transportationandDistrbutionstatus=By.xpath("//table//tbody//tr//td[4]//i");
-		By unifiedGasstatus=By.xpath("//table//tbody//tr//td[5]//i");
-		By managementFeestatus=By.xpath("//table//tbody//tr//td[6]//i");
-		
+		String productNameFroexcel = readExcelData("Sheet5", 23, 1);
+		softAssertion.assertTrue(getText(productName).contains(productNameFroexcel),
+				"Product Name Is Different(MisMatch) ");
+		By transportationandDistrbutionstatus = By.xpath("//table//tbody//tr//td[4]//i");
+		By unifiedGasstatus = By.xpath("//table//tbody//tr//td[5]//i");
+		By managementFeestatus = By.xpath("//table//tbody//tr//td[6]//i");
+
 		By cclStatus = By.xpath("//table//tbody//tr//td[7]/i");
-		/*By paymentTermsstatus=By.xpath("//table//tbody//tr//td[8]//i");
-		By billingSetUpStatus=By.xpath("//table//tbody//tr//td[9]//i");
-		By passedCreditStatus=By.xpath("//table//tbody//tr//td[10]//i");*/
-		By acceptButton=By.xpath("//table//tbody//tr//td[8]//input");
-		
-		boolean TransAndDistVerifystatust = getAttribute(transportationandDistrbutionstatus, "class").equals("icon-close");
-		softAssertion.assertTrue(TransAndDistVerifystatust, "TransportationAndDistrbutionstatus is displaying as selected");
-		
+		/*
+		 * By paymentTermsstatus=By.xpath("//table//tbody//tr//td[8]//i"); By
+		 * billingSetUpStatus=By.xpath("//table//tbody//tr//td[9]//i"); By
+		 * passedCreditStatus=By.xpath("//table//tbody//tr//td[10]//i");
+		 */
+		By acceptButton = By.xpath("//table//tbody//tr//td[8]//input");
+
+		boolean TransAndDistVerifystatust = getAttribute(transportationandDistrbutionstatus, "class")
+				.equals("icon-close");
+		softAssertion.assertTrue(TransAndDistVerifystatust,
+				"TransportationAndDistrbutionstatus is displaying as selected");
+
 		boolean unifiedGasverifystatu = getAttribute(unifiedGasstatus, "class").equals("icon-close");
 		softAssertion.assertTrue(unifiedGasverifystatu, "UnifiedGasstatus is displaying as selected");
-		
-		boolean managementFeeVerifyStatus=getAttribute(managementFeestatus, "class").equals("icon-close");
+
+		boolean managementFeeVerifyStatus = getAttribute(managementFeestatus, "class").equals("icon-close");
 		softAssertion.assertTrue(managementFeeVerifyStatus, "ManagementFee is displaying as selected");
 
 		boolean cclVerifyStatus = getAttribute(cclStatus, "class").equals("icon-checkmark");
 		softAssertion.assertTrue(cclVerifyStatus, "CCL is not displaying as selected");
-		
-		/*boolean paymentTermserifystatus = getAttribute(paymentTermsstatus, "class").equals("icon-close");
-		softAssertion.assertTrue(paymentTermserifystatus, "Payment Terms is displaying as selected");
-		boolean billingSetUpverifyStatus = getAttribute(billingSetUpStatus, "class").equals("icon-close");
-		softAssertion.assertTrue(billingSetUpverifyStatus, "BillingSetUp is displaying as selected");
-		boolean passedCreditverifyStatus = getAttribute(passedCreditStatus, "class").equals("icon-close");
-		softAssertion.assertTrue(passedCreditverifyStatus, "Passed Credit is displaying as selected");*/
-		boolean verifyacceptButton=isElementPresent(acceptButton);
+
+		/*
+		 * boolean paymentTermserifystatus = getAttribute(paymentTermsstatus,
+		 * "class").equals("icon-close");
+		 * softAssertion.assertTrue(paymentTermserifystatus,
+		 * "Payment Terms is displaying as selected"); boolean billingSetUpverifyStatus
+		 * = getAttribute(billingSetUpStatus, "class").equals("icon-close");
+		 * softAssertion.assertTrue(billingSetUpverifyStatus,
+		 * "BillingSetUp is displaying as selected"); boolean passedCreditverifyStatus =
+		 * getAttribute(passedCreditStatus, "class").equals("icon-close");
+		 * softAssertion.assertTrue(passedCreditverifyStatus,
+		 * "Passed Credit is displaying as selected");
+		 */
+		boolean verifyacceptButton = isElementPresent(acceptButton);
 		softAssertion.assertTrue(verifyacceptButton, "Accept Button is not Present");
-		
-		
-		
-		
+
 		click(acceptButton);
 		Reporter.log("Clicked Accept Buutton", true);
-		By okButton=By.id("global-message-button-text");
+		By okButton = By.id("global-message-button-text");
 		click(okButton);
 		Reporter.log("Quote acceptenace has been passed and Clicked on Ok ");
-		
+
 		Thread.sleep(5000);
-		By acceptedButton=By.xpath("//input[@value = 'Accepted Quote']");
+		By acceptedButton = By.xpath("//input[@value = 'Accepted Quote']");
 		softAssertion.assertTrue(isElementPresent(acceptedButton), "Accepted Text Is Not Found");
 		softAssertion.assertAll();
 	}
