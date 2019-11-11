@@ -27,7 +27,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
     private Document document = null;
     private String pdfTempFile="regression_tmp.pdf";
     private String pdfFile="regression.pdf";
-    private String finalReportFile="regression"+TestUtil.getCurrentTime()+".pdf";
+    private String finalReportFile="OEM_Regression"+TestUtil.getCurrentTime()+".pdf";
     HashMap<String,String> configs;
     static ClassData overallData;
     /**
@@ -64,10 +64,11 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         }
     }
     class ClassData{
-        String className;
+        String className,simpleName;
         int passCount,failedCount,skippedCount;
         ClassData(String className){
             this.className=className;
+            this.simpleName=className.replace("com.oem.","");
             passCount=0;
             failedCount=0;
             skippedCount=0;
@@ -75,6 +76,10 @@ public class CustomReporter extends PDFReportListener implements IReporter {
 
         public String getClassName() {
             return className;
+        }
+
+        public String getSimpleName() {
+            return simpleName;
         }
 
         public int getPassCount() {
@@ -171,10 +176,12 @@ public class CustomReporter extends PDFReportListener implements IReporter {
                 List<String> skippedClasses=tc.getSkippedTests().getAllResults().stream().map(res -> res.getTestClass().getName())
                         .collect(Collectors.toList());
 
-                for(String className:failedClasses)
-                    incrementClassLevelResult(className, TestCaseStatus.FAILED);
                 for(String className:passedClasses)
                     incrementClassLevelResult(className, TestCaseStatus.PASS);
+
+                for(String className:failedClasses)
+                    incrementClassLevelResult(className, TestCaseStatus.FAILED);
+
                 for(String className:skippedClasses)
                     incrementClassLevelResult(className, TestCaseStatus.SKIPPED);
 
@@ -188,7 +195,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
 
 
         this.document.open();
-        Paragraph p = new Paragraph( " TESTNG RESULTS",
+        Paragraph p = new Paragraph( " OEM Regression Results",
                 FontFactory.getFont(FontFactory.HELVETICA, 20, Font.BOLD, new BaseColor(0, 0, 255)));
         try {
             this.document.add(p);
@@ -220,7 +227,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         this.document.close();
 
         try {
-            mergePDFDocs(pdfFile,configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf",pdfTempFile);
+            mergePDFDocs(pdfFile,pdfTempFile,configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Merging of files failed");
@@ -239,37 +246,37 @@ public class CustomReporter extends PDFReportListener implements IReporter {
     private void createPDFTableWithHeader(){
 
         if (classLevelReportTable == null) {
-            this.classLevelReportTable = new PdfPTable(new float[]{.3f, .3f, .1f, .2f,.3f});
+            this.classLevelReportTable = new PdfPTable(new float[]{.6f, .1f, .1f, .1f,.1f});
             /*Paragraph p = new Paragraph("TEST Results", new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
             p.setAlignment(Element.ALIGN_CENTER);
             PdfPCell cell = new PdfPCell(p);
             cell.setColspan(this.classLevelReportTable.getNumberOfColumns());
             cell.setBackgroundColor(BaseColor.GREEN);
             this.classLevelReportTable.addCell(cell);*/
-            addSeparation("Test Results",BaseColor.GRAY);
+            addSeparation("Class Level Results",BaseColor.GRAY);
             PdfPCell cell;
-            cell = new PdfPCell(new Paragraph("Class"));
+            cell = new PdfPCell(new Paragraph("Class Name"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             this.classLevelReportTable.addCell(cell);
-            cell = new PdfPCell(new Paragraph("Total Count"));
+            cell = new PdfPCell(new Paragraph("Total"));
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             this.classLevelReportTable.addCell(cell);
-            cell = new PdfPCell(new Paragraph("Pass Count"));
-            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell = new PdfPCell(new Paragraph("Pass"));
+            cell.setBackgroundColor(BaseColor.GREEN);
             this.classLevelReportTable.addCell(cell);
-            cell = new PdfPCell(new Paragraph("Failed Count"));
-            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell = new PdfPCell(new Paragraph("Fail"));
+            cell.setBackgroundColor(BaseColor.RED);
             this.classLevelReportTable.addCell(cell);
 
-            cell = new PdfPCell(new Paragraph("Skipped Count"));
-            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell = new PdfPCell(new Paragraph("Skip"));
+            cell.setBackgroundColor(BaseColor.YELLOW);
             this.classLevelReportTable.addCell(cell);
         }
 
     }
 
     private void addClassLevelDataInPdfTable(ClassData classData){
-        PdfPCell cell = new PdfPCell(new Paragraph(classData.getClassName()));
+        PdfPCell cell = new PdfPCell(new Paragraph(classData.getSimpleName()));
         this.classLevelReportTable.addCell(cell);
         cell = new PdfPCell(new Paragraph(String.valueOf(classData.getTotalCount())));
         this.classLevelReportTable.addCell(cell);
