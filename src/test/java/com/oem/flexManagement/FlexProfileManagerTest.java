@@ -27,7 +27,7 @@ public class FlexProfileManagerTest extends BaseTest {
 		  customerDashboardPage.clickPropertyPortfolio().addValidSiteGeneric();
 		  PropertyPortfolioMeterPage propertyPortfolioMeterPage = new
 		  PropertyPortfolioMeterPage();
-		  propertyPortfolioMeterPage.checkSavedDetailsAfterAddingHHMeter();
+		  propertyPortfolioMeterPage.checkSavedDetailsAfterAddingHHMeterForFlexible();
 		  propertyPortfolioMeterPage.addValidHHcontractHistory();
 		 
 		customerDashboardPage.goToFlexibleProfileManager();
