@@ -17,8 +17,9 @@ public class AdminDashboardPage extends HeaderPage {
 
     By user=By.xpath("//a[@id='user-link']");
 	By logout=By.xpath("//a[contains(text(),'Log out')]");
-	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+	By dashBoard=By.linkText("Dashboard");
 	By flexProfileAdmin=By.xpath("//a[@href='/FlexibleProfileAdmin/CustomerOverview']");
+	By flexReQouteTender=By.linkText("Flex Re-Quote Tender");
 	
     public CustomerDashboardPage impersonate(String email) throws Throwable{
         setValue(impersonateUsername,email);
@@ -60,6 +61,7 @@ public class AdminDashboardPage extends HeaderPage {
     }
     public TenderResponsePage clickOnTenderResponse() throws Throwable{
    	 click(tenderResponseLnk);
+   	 Thread.sleep(3000);
         return new TenderResponsePage();
    }
 
@@ -88,7 +90,7 @@ public class AdminDashboardPage extends HeaderPage {
     	Assert.assertTrue(impersonatePresence, "Admin Home page is not displyed");
     }
     public void clickAdminDashBoard(){
-    	By dashBoard=By.xpath("//li[@class='selected']//h3[1]");
+    	
     	click(dashBoard);
     	
     	}
@@ -109,6 +111,22 @@ public class AdminDashboardPage extends HeaderPage {
     	FlexProfileAdminPage flexProfileAdminPage=new FlexProfileAdminPage();
     	flexProfileAdminPage.isLoaded();
     	return new FlexProfileAdminPage();
+    }
+    public AdminDashboardPage clickflexProfileAdmin() throws Throwable{
+    	click(flexProfileAdmin);
+    	Thread.sleep(4000);
+    	FlexProfileAdminPage flexProfileAdminPage=new FlexProfileAdminPage();
+    	flexProfileAdminPage.isLoaded();
+    	return new FlexProfileAdminPage();
+    }
+    public AdminDashboardPage goToFlexReQuoteTenderPage() throws Throwable{
+    	click(flexprocAdmin);
+    	Thread.sleep(3000);
+
+    	click(flexReQouteTender);
+    	FlexReQuoteTenderPage flexReQuoteTenderPage=new FlexReQuoteTenderPage();
+    	flexReQuoteTenderPage.isLoaded();
+    	return new FlexReQuoteTenderPage();
     	}
 
     @Override
