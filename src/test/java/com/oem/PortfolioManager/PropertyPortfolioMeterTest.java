@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.oem.framework.core.base.BasePage;
 import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.CustomerDashboardPage;
 import com.oem.framework.pages.LoginPage;
@@ -12,7 +13,7 @@ import com.oem.framework.pages.PropertyPortfolioMeterPage;
 import com.oem.framework.pages.PropertyPortfolioPage;
 
 public class PropertyPortfolioMeterTest extends BaseTest {
-
+	BasePage basepage;
 	CustomerDashboardPage customerDashboardPage;
 
 	@BeforeClass(alwaysRun = true)
@@ -38,11 +39,20 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		addHHMeterUsingDifferentTestData(meterNoSecondField,
 				meterNoThirdField, meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField,
 				expectedConsumption, capacity);
+	/*	for(int i = 34; i<9; i++) {
+			basepage.readExcelData("Sheet3", i, 2), basepage.readExcelData("Sheet3", i, 3), basepage.readExcelData("Sheet3", i, 4),
+			basepage.readExcelData("Sheet3", i, 5), basepage.readExcelData("Sheet3", i, 6), basepage.readExcelData("Sheet3", i, 7),
+			basepage.readExcelData("Sheet3", i, 8), basepage.readExcelData("Sheet3", i, 9));
+		}*/
 	}
 
 	@DataProvider
 	public Object[][] getHHdata() {
-		Object[][] data = { { "", "", "", "", "", "", "", "" }, /* PM_PP_TC_016 */
+		Object[][] data = { 
+				
+				
+				
+				{ "", "", "", "", "", "", "", "" }, /* PM_PP_TC_016 */
 				{ "234", "456", "", "", "", "", "", "" }, /* PM_PP_TC_017 */
 				{ "", "", "10", "1289", "4022", "180", "", "" }, /* PM_PP_TC_018 */
 				{ "456", "564", "10", "1289", "4022", "180", "", "" }, /* PM_PP_TC_019 */

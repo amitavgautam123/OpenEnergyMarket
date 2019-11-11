@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
-public class TenderResponseTests extends BaseTest {
+public class TenderResponseTest extends BaseTest {
     AdminDashboardPage adminDashboardPage;
     TenderResponsePage tenderResponsePage;
     // Has to be set to prevent NullPointerException from reporters

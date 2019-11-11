@@ -10,6 +10,7 @@ import com.oem.framework.pages.FlexProfileManagerPage;
 import com.oem.framework.pages.FlexTenderResponsePage;
 import com.oem.framework.pages.LoginPage;
 import com.oem.framework.pages.PropertyPortfolioMeterPage;
+import com.oem.framework.pages.VerifyTendersPage;
 
 public class FlexProfileManagerTest extends BaseTest {
 	AdminDashboardPage adminDashboardPage;
@@ -101,22 +102,26 @@ public class FlexProfileManagerTest extends BaseTest {
 
 	@Test(priority = 10)
 	public void FlexProcurementFlexibleProfileManager_verifyingProfileCreation_In_FlexibleProfileMgrHomePage_HH()
-			throws Throwable {
-		customerDashboardPage.clickFlexibleProfileManager()
-				.verifyingProfileCreation_In_FlexibleProfileMgrHomePage("HH");
-		adminDashboardPage = new LoginPage().loginAsAdmin();
-		adminDashboardPage.goFlexTenderResponse();
-		FlexTenderResponsePage abc = new FlexTenderResponsePage();
-		abc.EnterValidDataInToTheTextFieldsHH();
-		abc.clicksubmitDetails();
-		Thread.sleep(3000);
-		adminDashboardPage.clickAdminDashBoard();
-		adminDashboardPage.impersonateFlexCustomer();
-		CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();
-		customerDashboardPage2.goToFlexibleProfileManager();
-		FlexProfileManagerPage flexRev = new FlexProfileManagerPage();
-		flexRev.verifyQuoteRequestelemets();
-		
+	throws Throwable {
+	customerDashboardPage.clickFlexibleProfileManager()
+	.verifyingProfileCreation_In_FlexibleProfileMgrHomePage("HH");
+	customerDashboardPage.clickUnImpersonateButton();
+	adminDashboardPage.goToVerifyTenders();
+	VerifyTendersPage veri = new VerifyTendersPage();
+	veri.verifySuppliersPresence("HH");
+	adminDashboardPage = new LoginPage().loginAsAdmin();
+	adminDashboardPage.goFlexTenderResponse();
+	FlexTenderResponsePage abc = new FlexTenderResponsePage();
+	abc.EnterValidDataInToTheTextFieldsHH();
+	abc.clicksubmitDetails();
+	Thread.sleep(3000);
+	adminDashboardPage.clickAdminDashBoard();
+	adminDashboardPage.impersonateFlexCustomer();
+	CustomerDashboardPage customerDashboardPage2 = new CustomerDashboardPage();
+	customerDashboardPage2.goToFlexibleProfileManager();
+	FlexProfileManagerPage flexRev = new FlexProfileManagerPage();
+	flexRev.verifyQuoteRequestelemets();
+
 	}
 
 	/*

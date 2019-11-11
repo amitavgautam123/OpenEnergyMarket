@@ -10,6 +10,9 @@ public class AdminDashboardPage extends HeaderPage {
     By fixedProcurementAdmin=By.xpath("//*[@id=\"accordian-menu\"]//h3[text()='Fixed Procurement Admin']");
     By tenderOpenQuotes=By.linkText("Tender Open Quotes");
     By tenderResponseLnk=By.linkText("Tender Response");
+    By tenderReQuoteLink = By.linkText("Tender Re-Quote");
+    By manageTendersLink = By.linkText("Manage Tenders");
+    By tenderHistoryLink = By.linkText("Tender History");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
     By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
     By flexprocAdmin=By.xpath("//h3[contains(text(),'Flex Procurement Admin')]");
@@ -64,6 +67,33 @@ public class AdminDashboardPage extends HeaderPage {
    	 Thread.sleep(3000);
         return new TenderResponsePage();
    }
+    public TenderRequotePage goToTenderReQuotePage() throws Throwable{
+    	click(fixedProcurementAdmin);
+   	 	Thread.sleep(2000);
+   	 	click(tenderReQuoteLink);
+   	 	Thread.sleep(3000);
+        TenderRequotePage tenderRequotePage=new TenderRequotePage();
+        tenderRequotePage.isLoaded();
+    	return tenderRequotePage;
+    }
+    public ManageTendersPage goToManageTendersPage() throws Throwable{
+    	click(fixedProcurementAdmin);
+   	 	Thread.sleep(2000);
+   	 	click(manageTendersLink);
+   	 	Thread.sleep(3000);
+        ManageTendersPage manageTendersPage=new ManageTendersPage();
+        manageTendersPage.isLoaded();
+    	return manageTendersPage;
+    }
+    public ManageTendersPage goToTenderHistoryPage() throws Throwable{
+    	click(fixedProcurementAdmin);
+   	 	Thread.sleep(2000);
+   	 	click(tenderHistoryLink);
+   	 	Thread.sleep(3000);
+        ManageTendersPage manageTendersPage=new ManageTendersPage();
+        manageTendersPage.isLoaded();
+    	return manageTendersPage;
+    }
 
 
 
@@ -127,7 +157,9 @@ public class AdminDashboardPage extends HeaderPage {
     	FlexReQuoteTenderPage flexReQuoteTenderPage=new FlexReQuoteTenderPage();
     	flexReQuoteTenderPage.isLoaded();
     	return new FlexReQuoteTenderPage();
-    	}
+    }
+    
+
 
     @Override
     protected void isLoaded() throws Error {
