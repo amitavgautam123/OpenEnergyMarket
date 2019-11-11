@@ -20,9 +20,7 @@ public class RequestQuoteTest extends BaseTest {
 										login().
 										goToRequestQuote();
 	}
-	/*
-	 * @BeforeMethod public void beforeRequestQuote() { driver.na }
-	 */
+	
 	
 	@Test
 	public void QT_RAQ_TC_003_validateRequestQuoteAndReviewQuotesPresenceTest() throws Throwable {
@@ -41,7 +39,7 @@ public class RequestQuoteTest extends BaseTest {
 	 * customerDashboardPage.goToPropertyPortfolio();//.goToRequestQuote();
 	 * propertyPortfolioPage.deleteAllSites(); //requestQuotePage.(); }
 	 */
-/*	@Test
+	@Test
 	public void QT_RAQ_TC_007_validateAllUtilitiesPresenceTest() throws Throwable {
 		customerDashboardPage.
 		clickRequestQuote().
@@ -96,7 +94,7 @@ public class RequestQuoteTest extends BaseTest {
 		clickRequestQuote().
 		validateAlertMessageWhen2ContractDurationsAreSame();
 	}
-	*/
+	
 	@Test
 	public void QT_RAQ_TC_016_selecting1SupplierValidateOtherMandatoryFieldsTest() throws Throwable {
 		customerDashboardPage.

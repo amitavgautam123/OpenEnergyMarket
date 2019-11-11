@@ -165,6 +165,7 @@ public class TenderResponseTests extends BaseTest {
         };
 
     }
+    
     @Test(dataProvider = "consumptionInput")
     public void verifyAlertFoSplCharValues(String desc,String dayConsumption, String nightConsumption) throws Throwable {
         adminDashboardPage
@@ -179,7 +180,7 @@ public class TenderResponseTests extends BaseTest {
                 .verifyPopUpDialogue();
 
     }
-    //30
+    //29, 30
     @Test
     public void verifyAutoFillingOfDayAndNightConsumption() throws Throwable {
     	adminDashboardPage
@@ -190,8 +191,9 @@ public class TenderResponseTests extends BaseTest {
         	.setFirstRowDayConsumption("40")
         	.setFirstRowNightConsumption("50")
         	.clickCalculateConsumptions()
-        	.verifyDayConsumptionAndNightConsumption();
+        	.verifyAutoFillDayConsumptionAndNightConsumption();
     }
+    //31
     @Test
     public void verifyAlertMsgForDayNightConsumption() throws Throwable {
     	adminDashboardPage
@@ -201,8 +203,24 @@ public class TenderResponseTests extends BaseTest {
         	.clickMeterForecastLink()
         	.setFirstRowDayConsumption("")
         	.setFirstRowNightConsumption("")
-        	.verifyDayConsumptionAndNightConsumption();
+        	.validateClickingSaveBtnWithoutEnteringConsumption();
     }
+  //34
+    @Test
+    public void verifyAlertMsgAfterClickingCancelBtn() throws Throwable {
+    	adminDashboardPage
+        	.clickOnTenderResponse()
+        	.selectAssignedValueInQuoteByDate()
+        	.selectFirstValueQuoteRequest()
+        	.clickMeterForecastLink()
+        	.setFirstRowDayConsumption("40")
+        	.setFirstRowNightConsumption("50")
+        	.clickCalculateConsumptions().
+        	clickSaveBtn().
+        	clickCancelBtnInAlertMsg().
+        	verifyAlertMsgPresenceAfterClickingCancelBtn();
+    }
+    
 
 }
 

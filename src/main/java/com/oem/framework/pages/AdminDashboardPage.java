@@ -19,6 +19,7 @@ public class AdminDashboardPage extends HeaderPage {
 	By logout=By.xpath("//a[contains(text(),'Log out')]");
 	By dashBoard=By.linkText("Dashboard");
 	By flexProfileAdmin=By.xpath("//a[@href='/FlexibleProfileAdmin/CustomerOverview']");
+	By flexReQouteTender=By.linkText("Flex Re-Quote Tender");
 	
     public CustomerDashboardPage impersonate(String email) throws Throwable{
         setValue(impersonateUsername,email);
@@ -118,6 +119,15 @@ public class AdminDashboardPage extends HeaderPage {
     	flexProfileAdminPage.isLoaded();
     	return new FlexProfileAdminPage();
     }
+    public AdminDashboardPage goToFlexReQuoteTenderPage() throws Throwable{
+    	click(flexprocAdmin);
+    	Thread.sleep(3000);
+
+    	click(flexReQouteTender);
+    	FlexReQuoteTenderPage flexReQuoteTenderPage=new FlexReQuoteTenderPage();
+    	flexReQuoteTenderPage.isLoaded();
+    	return new FlexReQuoteTenderPage();
+    	}
 
     @Override
     protected void isLoaded() throws Error {

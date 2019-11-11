@@ -129,11 +129,13 @@ public class CustomerDashboardPage extends HeaderPage {
         requestQuotePage.isLoaded();
         return requestQuotePage;
     }
-    public RequestQuotePage clickRequestQuote(){
-    	driver.navigate().refresh();
-        click(requestAQuoteLink);
+    public RequestQuotePage clickRequestQuote() throws Throwable	{
+    	driver.navigate().to("https://systest-portal.oem-testing.com/Quote/RequestQuote");
+    	Thread.sleep(4000);
+    	//driver.navigate().refresh();
+        //click(requestAQuoteLink);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
-        requestQuotePage.isLoaded();
+        //requestQuotePage.isLoaded();
         return requestQuotePage;
     }
     

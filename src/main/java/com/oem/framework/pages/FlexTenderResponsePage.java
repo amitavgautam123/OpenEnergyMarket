@@ -54,6 +54,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	By notifyCustomer=By.id("send-email");
 	By finalSubmitButton=By.id("submit-quote-button");
 	
+	By requestQuoteOptions=By.xpath("//select[@id='QuoteRequestId']/option");
+	
+	
 	@Override
 	protected void isLoaded() throws Error {
 		System.out.println("Executing isLoaded in Flexible Tender Response Page");
@@ -787,5 +790,85 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		By ele = By.xpath("//table[@id='meter-forecasts']//tbody//tr[" + i + "]//td[3]//input");
 		setValue(ele, Data);
 		}
+	}
+	public void EnterValidDataInToTheTextFieldsHH() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		click(requestQuote);
+		Thread.sleep(1000);
+		selectByPartOfVisibleText(requestQuote, "(HH)");
+		//selectByIndex(requestQuote, 1);
+
+		click(meterForeCast);
+		enterValidDataIntoMeterHHForeCast();
+		click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+		Thread.sleep(5000);
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+	}
+	public void EnterValidDataIntoTheTextFields() throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		selectByIndex(requestQuote, 1);
+		click(meterForeCast);
+		enterValidDataIntoMeterHHForeCast();
+		click(submitSave);
+		Thread.sleep(3000);
+
+		selectdesiredvalueFromDropDown(quotes, "EON");
+
+		click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+		click(secondSave);
+	}
+	public void clicksubmitDetailsToReOpenQuote() throws Throwable{
+		click(notifyCustomer);
+		click(finalSubmitButton);
+		click(OkButton);
+		//Using This Time and Date We Are ReOpening The Quote
+		//String date=getCuttrentDate();
+		setExcelData("Sheet8",1,0,getCuttrentDate());
+		Thread.sleep(3000);
+
+		By finalOk=By.xpath("//a[text()='Ok']");
+
+		click(finalOk);
+	}
+	public void EnterValidDataInToTheTextFieldsForReOpenTender(String utility) throws Throwable {
+
+		selectByValue(byDate, After15days);
+
+		Thread.sleep(2000);
+		//selectByIndex(requestQuote, 1);
+		selectByPartOfVisibleText(requestQuoteOptions,readExcelData("Sheet5",3,1),utility);
+		Thread.sleep(1000);
+		/*Select select = new Select(driver.findElement(requestQuote));
+		WebElement option = select.getFirstSelectedOption();
+		String defaultItem = option.getText();
+		Thread.sleep(1000);
+		setExcelData("Sheet8",1,0,defaultItem);*/
+
+		//click(meterForeCast);
+		//enterValidDataIntoMeterHHForeCast();
+		//click(submitSave);
+		Thread.sleep(3000);
+
+		//checking Is Supplier Is Present Or Not
+		selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
+
+		Thread.sleep(5000);
+		/*click(quoteInformation);
+		Thread.sleep(2000);
+		enterValidInToFlexHHUtilityQuoteInformation();
+
+		click(secondSave);*/
 		}
 }

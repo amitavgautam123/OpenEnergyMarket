@@ -22,7 +22,7 @@ public class FlexManagementSuite extends BaseTest {
 		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();
 
 	}
-/*
+
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
 		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
@@ -44,7 +44,7 @@ public class FlexManagementSuite extends BaseTest {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
 		propertyPortfolioMeterPage.addValidHHcontractHistory();
 	}
-*/
+
 	@Test(priority = 5)
 	public void goToFlexibleProfileManager() throws Throwable {
 		customerDashboardPage.goToFlexibleProfileManager();
@@ -253,8 +253,7 @@ public class FlexManagementSuite extends BaseTest {
 	@Test(priority = 28)
 	public void verifyconformatonpopAfterClikingSbmitButton() throws Throwable {
 
-		// adminDashboardPage.refreshpage();
-		// adminDashboardPage.goFlexTenderResponse();
+		
 		FlexTenderResponsePage abc = new FlexTenderResponsePage();
 		abc.verifyconformatonpopAfterClikingSbmitButton();
 		Thread.sleep(3000);

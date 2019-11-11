@@ -223,33 +223,40 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 
 	public void verifyingPresenceOfOptionToSetupFlexibleProfile_in_flexProfileMgrHomePage(String SelectUtility)
 			throws Throwable {
-		SoftAssert softAssertion = new SoftAssert();
-		List rowsAfter = driver.findElements(rowCount);
-		int rowsAfterClick = rowsAfter.size();
+			switch (SelectUtility) {
 
-		System.out.println("No Of Rows Present After Clicking Utility " + rowsAfterClick);
-		Thread.sleep(3000);
-		firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
+			case "HH":
+			if(isElementPresent(hhUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(hhUtilitySetUpPro), "Set Up Profile is NOt Present for HH");
 
-			By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-			By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[2]//i");
-			Thread.sleep(3000);
-			String utilityHH = getText(presentUtility);
-
-			String Text = getText(presentSetUpProfile);
-			Thread.sleep(3000);
-			boolean trueOrFalse = Text.contains("Setup Flexible Profile");
-			if (trueOrFalse) {
-
-				softAssertion.assertTrue(trueOrFalse, "Setup Flexible Profile is Not Present");
-				Reporter.log("Checked For Presence of SetUp Flexible Profile", true);
-
-				softAssertion.assertAll();
-				break firstLoop;
+			}else{
+			click_hhUtilityLink();
+			Assert.assertTrue(isElementPresent(hhUtilitySetUpPro), "Set Up Profile is NOt Present for HH");
 			}
+			break;
 
-		}
-	}
+			case "nHH":
+
+			if(isElementPresent(nHHUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(nHHUtilitySetUpPro), "Set Up Profile is NOt Present for nHH");
+			}else{
+			click_nhhUtilityLink();
+			Assert.assertTrue(isElementPresent(nHHUtilitySetUpPro), "Set Up Profile is NOt Present for nHH");
+			}
+			break;
+			case "Gas":
+			if(isElementPresent(gasUtilitySetUpPro)){
+			Assert.assertTrue(isElementPresent(gasUtilitySetUpPro), "Set Up Profile is NOt Present for Gas");
+			}else{
+
+			click_gasUtilityLink();
+			Assert.assertTrue(isElementPresent(gasUtilitySetUpPro), "Set Up Profile is NOt Present for Gas");
+			}
+			break;
+			default:
+			System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+			}
+			}
 
 	public void verifyingPresenceOfListOfMeters_In_FlexibleProfileMgrHomePage(String SelectUtility) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
@@ -613,41 +620,50 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 	public void verifyingProfileCreationAndSelectingNo_GoBackToPropertyProfoli_In_FlexibleProfileMgrHomePage(
 			String SelectUtility) throws Throwable {
 
-		SoftAssert softAssertion = new SoftAssert();
-		List rowsAfter = driver.findElements(rowCount);
-		int rowsAfterClick = rowsAfter.size();
+			switch (SelectUtility) {
 
-		Thread.sleep(3000);
-		firstLoop: for (int i = 1; i <= rowsAfterClick; i++) {
-
-			By presentSetUpProfile = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[4]//a[1]");
-			By presentUtility = By.xpath("//table[@id='profiles-table']//tbody//tr[" + i + "]//td[2]//i");
+			case "HH":
+			if(isElementPresent(hhUtilitySetUpPro)){
+			click(hhUtilitySetUpPro);
+			}else{
+			click_hhUtilityLink();
+			click(hhUtilitySetUpPro);
 			Thread.sleep(3000);
-			String utilityHH = getText(presentUtility);
-
-			String Text = getText(presentSetUpProfile);
-			Thread.sleep(3000);
-			boolean trueOrFalse = Text.contains("Setup Flexible Profile");
-			if (trueOrFalse) {
-
-				click(presentSetUpProfile);
-				Reporter.log("clicked On  SetUp Flexible Profile", true);
-
-				click_No_GoBackToPropertyProfoli();
-				Thread.sleep(3000);
-				boolean titleOfPropertyProfoliPage = driver.getTitle().contains(PropertyPortfoli);
-				softAssertion.assertTrue(titleOfPropertyProfoliPage,
-						"Not Redirected To Property Profoli HomePage Page");
-				Reporter.log(
-						"Checked for Home Page Of Property Profoli After Selecting No-Go Back To Property Profoli Button. ",
-						true);
-				softAssertion.assertAll();
-				break firstLoop;
 			}
-		}
+			break;
 
+			case "nHH":
+
+			if(isElementPresent(nHHUtilitySetUpPro)){
+			click(nHHUtilitySetUpPro);
+			}else{
+			click_nhhUtilityLink();
+			click(nHHUtilitySetUpPro);
+
+			}
+			break;
+			case "Gas":
+			if(isElementPresent(gasUtilitySetUpPro)){
+			click(gasUtilitySetUpPro);
+			}else{
+
+			click_gasUtilityLink();
+			click(gasUtilitySetUpPro);
+
+			}
+			break;
+			default:
+			System.out.println("Please Enetr HH or nHH or Gas Utilitys Correctly");
+			}
+			click_No_GoBackToPropertyProfoli();
+			Thread.sleep(3000);
+			boolean titleOfPropertyProfoliPage = driver.getTitle().contains(PropertyPortfoli);
+			Assert.assertTrue(titleOfPropertyProfoliPage,
+			"Not Redirected To Property Profoli HomePage Page");
+			Reporter.log(
+			"Checked for Home Page Of Property Profoli After Selecting No-Go Back To Property Profoli Button. ",
+			true);
 	}
-
 	public void verifyCustomerDashBoardHomePage() {
 		SoftAssert softAssertion = new SoftAssert();
 		String Title = "Dashboard | Open Energy Market";

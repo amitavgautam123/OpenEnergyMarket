@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.CustomerDashboardPage;
+import com.oem.framework.pages.LoginPage;
 
 public class ForecastingTest extends BaseTest	{
 
@@ -12,6 +13,7 @@ public class ForecastingTest extends BaseTest	{
 	
 	@BeforeClass
 	public void beforeForecasting() throws Throwable {
+		customerDashboardPage = new LoginPage().login();
 		customerDashboardPage.goToForecastingPage();
 	}
 	@Test
@@ -19,5 +21,11 @@ public class ForecastingTest extends BaseTest	{
 		customerDashboardPage.
 			goToForecastingPage().
 				verifyUtilityPresence();
+	}
+	@Test
+	public void verifyBySite() throws Throwable {
+		customerDashboardPage.
+		goToForecastingPage().
+		clickBySite();	
 	}
 }
