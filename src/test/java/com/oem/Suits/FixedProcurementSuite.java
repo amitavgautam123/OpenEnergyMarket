@@ -19,7 +19,7 @@ public class FixedProcurementSuite extends BaseTest	{
         adminDashboardPage=new LoginPage().loginAsAdmin();
         tenderOpenQuotesPage=adminDashboardPage.navigateToTenderQuotes();
     }
-    //@Test
+    @Test
     public void verifyQuoteRequestAndSupplierQuoteRequestDropDownExistsTest() throws Throwable {
         tenderOpenQuotesPage.
                 verifyQuoteRequestDropDownExist().
@@ -30,7 +30,7 @@ public class FixedProcurementSuite extends BaseTest	{
         		clickOpenQuotesBtn().
         		verifyErrorTextOpenQuotes();
     }
-    //@Test(dependsOnMethods = "verifyQuoteRequestAndSupplierQuoteRequestDropDownExistsTest")
+    @Test(dependsOnMethods = "verifyQuoteRequestAndSupplierQuoteRequestDropDownExistsTest")
     public void verifySupplierUploadTable() throws Throwable {
     	tenderOpenQuotesPage.
     			selectSecondValueInQuoteRequest().

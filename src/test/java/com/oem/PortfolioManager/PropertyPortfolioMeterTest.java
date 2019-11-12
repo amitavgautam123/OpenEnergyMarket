@@ -39,7 +39,7 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 		addHHMeterUsingDifferentTestData(meterNoSecondField,
 				meterNoThirdField, meterNoFourthField, meterNoFifthField, meterNoSixthField, meterNoSeventhField,
 				expectedConsumption, capacity);
-	/*	for(int i = 34; i<9; i++) {
+	/*	for(int i = 34; i<39; i++) {
 			basepage.readExcelData("Sheet3", i, 2), basepage.readExcelData("Sheet3", i, 3), basepage.readExcelData("Sheet3", i, 4),
 			basepage.readExcelData("Sheet3", i, 5), basepage.readExcelData("Sheet3", i, 6), basepage.readExcelData("Sheet3", i, 7),
 			basepage.readExcelData("Sheet3", i, 8), basepage.readExcelData("Sheet3", i, 9));
