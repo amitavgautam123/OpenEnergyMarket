@@ -68,19 +68,27 @@ public class AdminDashboardPage extends HeaderPage {
         return new TenderResponsePage();
    }
     public TenderRequotePage goToTenderReQuotePage() throws Throwable{
-    	click(fixedProcurementAdmin);
-   	 	Thread.sleep(2000);
+    	//click(fixedProcurementAdmin);
+   	 	//Thread.sleep(2000);
    	 	click(tenderReQuoteLink);
    	 	Thread.sleep(3000);
         TenderRequotePage tenderRequotePage=new TenderRequotePage();
         tenderRequotePage.isLoaded();
     	return tenderRequotePage;
     }
+    
     public ManageTendersPage goToManageTendersPage() throws Throwable{
     	click(fixedProcurementAdmin);
    	 	Thread.sleep(2000);
    	 	click(manageTendersLink);
    	 	Thread.sleep(3000);
+        ManageTendersPage manageTendersPage=new ManageTendersPage();
+        manageTendersPage.isLoaded();
+    	return manageTendersPage;
+    }
+    public ManageTendersPage navigateToManageTendersPage() throws Throwable{
+    	driver.navigate().to(getPropertyFileData("homePageUrl") + readExcelData("Sheet4", 1, 7));
+    	Thread.sleep(4000);
         ManageTendersPage manageTendersPage=new ManageTendersPage();
         manageTendersPage.isLoaded();
     	return manageTendersPage;

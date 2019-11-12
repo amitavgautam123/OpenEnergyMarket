@@ -11,6 +11,11 @@ public class ManageTendersPage extends AdminDashboardPage{
 	By gasUtilityFilter = By.xpath("//div[contains(@data-original-title, 'Gas')]");
 	By waterUtilityFilter = By.xpath("//div[contains(@data-original-title, 'Water')]");
 	
+	By hhList = By.xpath("//table[@id = 'close-quote-requests']/tbody/tr/td[@class = 'utility' and text() = 'HH']");
+	By gasList = By.xpath("//table[@id = 'close-quote-requests']/tbody/tr/td[@class = 'utility' and text() = 'Gas']");
+	By nHHList = By.xpath("//table[@id = 'close-quote-requests']/tbody/tr/td[@class = 'utility' and text() = 'nHH']");
+	
+	
 	
 	SoftAssert softAssertion = new SoftAssert();
 	
@@ -32,8 +37,42 @@ public class ManageTendersPage extends AdminDashboardPage{
 		softAssertion.assertTrue(isElementPresent(tenderResponseLnk), "Tender Response is not displaying.");
 		softAssertion.assertTrue(isElementPresent(tenderReQuoteLink), "Tender Requote is not displaying.");
 		softAssertion.assertTrue(isElementPresent(manageTendersLink), "Manage Tender is not displaying.");
+		softAssertion.assertTrue(isElementPresent(tenderHistoryLink), "Manage Tender is not displaying.");
 		softAssertion.assertAll();
 		return this;
 	}
+	public ManageTendersPage verifyHHutilityBind() throws Throwable {
+		click(hhUtilityFilter);
+		Thread.sleep(2000);
+		boolean nHHtendersPresenceStatus = isElementExistInList(hhList, "nHH");
+		softAssertion.assertFalse(nHHtendersPresenceStatus, "NHH tenders are dislaying in HH list");
+		boolean gasTendersPresenceStatus = isElementExistInList(hhList, "Gas");
+		softAssertion.assertFalse(gasTendersPresenceStatus, "Gas tenders are dislaying in HH list");
+		softAssertion.assertAll();
+		return this;
+	}
+	public ManageTendersPage verifyNHHutilityBind() throws Throwable {
+		click(nHHUtilityFilter);
+		Thread.sleep(2000);
+		boolean nHHtendersPresenceStatus = isElementExistInList(nHHList, "HH");
+		softAssertion.assertFalse(nHHtendersPresenceStatus, "HH tenders are dislaying in NHH list");
+		boolean gasTendersPresenceStatus = isElementExistInList(nHHList, "Gas");
+		softAssertion.assertFalse(gasTendersPresenceStatus, "Gas tenders are dislaying in NHH list");
+		softAssertion.assertAll();
+		return this;
+	}
+	public ManageTendersPage verifyGasUtilityBind() throws Throwable {
+		click(nHHUtilityFilter);
+		Thread.sleep(2000);
+		boolean hhTendersPresenceStatus = isElementExistInList(gasList, "HH");
+		softAssertion.assertFalse(hhTendersPresenceStatus, "HH tenders are dislaying in Gas list");
+		boolean nHHtendersPresenceStatus = isElementExistInList(gasList, "nHH");
+		softAssertion.assertFalse(nHHtendersPresenceStatus, "NHH tenders are dislaying in Gas list");
+		softAssertion.assertAll();
+		return this;
+	}
+	
+	
+	
 			
 }

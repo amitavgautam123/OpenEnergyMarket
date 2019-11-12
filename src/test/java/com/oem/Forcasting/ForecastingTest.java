@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.oem.framework.core.base.BaseTest;
 import com.oem.framework.pages.CustomerDashboardPage;
+import com.oem.framework.pages.ForecastingPage;
 import com.oem.framework.pages.LoginPage;
 
 public class ForecastingTest extends BaseTest	{
@@ -22,7 +23,7 @@ public class ForecastingTest extends BaseTest	{
 			goToForecastingPage().
 				verifyUtilityPresence();
 	}
-	//@Test(priority=2)
+	@Test(priority=2)
 	public void verifyBySite() throws Throwable {
 		customerDashboardPage.
 		goToForecastingPage().
@@ -42,9 +43,8 @@ public class ForecastingTest extends BaseTest	{
 	}
 	@Test(priority=6)
 	public void verifyOnlyHHutilityDetailAreDisplyed() throws Throwable{
-		customerDashboardPage.
-		goToForecastingPage().
-		verifyOnlyHHutilityDetailAreDisplyed();
+		ForecastingPage forecast=new ForecastingPage();
+		forecast.verifyOnlyHHutilityDetailAreDisplyed();
 	}
 	@Test(priority=5)
 	public void verifyOnlynHHutilityDetailAreDisplyed() throws Throwable{
@@ -52,7 +52,7 @@ public class ForecastingTest extends BaseTest	{
 		goToForecastingPage().
 		verifyOnlynHHutilityDetailAreDisplyed();
 	}
-	@Test(priority=7)
+	//@Test(priority=7)//when we click on gas it takes more Time to load some times it will be in loading mode only 
 	public void verifyOnlyGasutilityDetailAreDisplyed() throws Throwable{
 		customerDashboardPage.
 		goToForecastingPage().
@@ -64,6 +64,7 @@ public class ForecastingTest extends BaseTest	{
 		goToForecastingPage().
 		VerifyBudgetHomePageElements();
 	}
+	
 	@Test(priority=9)
 	public void verifyAlertMessageAfterClickingOnSaveChangesWithoutEntringanyData() throws Throwable, Throwable{
 		customerDashboardPage.
@@ -76,4 +77,34 @@ public class ForecastingTest extends BaseTest	{
 		goToForecastingPage().
 		VerifyAlertMessageOnClickingSaveChangesAndOKButtons();
 	}
+	@Test(priority=11)
+	public void verifyCostsAfterAddingSomePercentage() throws Throwable{
+		customerDashboardPage.
+		goToForecastingPage().verifyCostsAfterAddingSomePercentage();
+	}
+	@Test(priority=12)
+	public void verifyFallingMarketValueAfterAddingPercentage() throws Throwable{
+		customerDashboardPage.
+		goToForecastingPage().
+		verifyFallingMarketValueAfterAddingPercentage();
+	}
+	@Test(priority=13)
+	public void verifyAlertMesageAfetrclickingSaveChangesinBudgetHomePage() throws Throwable{
+		customerDashboardPage.
+		goToForecastingPage().
+		verifyAlertMesageAfetrclickingSaveChangesinBudgetHomePage();
+	}
+	@Test(priority=14)
+	public void verifyAlertMesageAfetrclickingForecastReportEnabledandClickingSaveChangesinBudgetHomePage() throws Throwable{
+		customerDashboardPage.
+		goToForecastingPage().
+		verifyAlertMesageAfetrclickingForecastReportEnabledandClickingSaveChangesinBudgetHomePage();
+	}
+	@Test(priority=15)
+	public void verifyAlertmsgAfterClickingHHTriwareAndForecastRepoetingEnabled() throws Throwable{
+		customerDashboardPage.
+		goToForecastingPage().
+		verifyAlertmsgAfterClickingHHTriwareAndForecastRepoetingEnabled();
+	}
+	
 }

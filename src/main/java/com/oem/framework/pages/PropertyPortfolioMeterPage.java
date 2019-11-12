@@ -457,7 +457,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		selectFutureDateCalender(10, random.nextInt(12), 2020);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		click(okBtn);
 		Thread.sleep(2000);
         try {
@@ -784,7 +784,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", saveMetBtn);
 		//click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		click(okBtn);
 		Thread.sleep(2000);
 		try {
@@ -1592,7 +1592,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		//Thread.sleep(4000);
 		click(saveMeterBtn);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		click(okBtn);
 		Thread.sleep(2000);
 		try {
@@ -1768,7 +1768,7 @@ selectFutureDateCalender(21, 7, 2020);
 JavascriptExecutor executor = (JavascriptExecutor)driver;
 executor.executeScript("arguments[0].click();", saveMetBtn);
 //click(saveMeterBtn);
-Thread.sleep(2000);
+Thread.sleep(4000);
 click(okBtn);
 Thread.sleep(2000);
 try {

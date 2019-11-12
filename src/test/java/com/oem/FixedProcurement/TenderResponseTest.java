@@ -95,7 +95,7 @@ public class TenderResponseTest extends BaseTest {
     }
 
 
-    @Test(description = "FPA_TOP_TC_012 - verify Alert appears when lowest duration is provided for Night Consumption ")
+    //@Test(description = "FPA_TOP_TC_012 - verify Alert appears when lowest duration is provided for Night Consumption ")
     public void verifyAlertLowestDurationForNightConsumption() throws Throwable {
         adminDashboardPage
                 .clickOnTenderResponse()
@@ -111,7 +111,7 @@ public class TenderResponseTest extends BaseTest {
 
 
 
-    @Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
+    //@Test(description = "FPA_TOP_TC_013 - verify Alert appears when NonInt is provided for Night Consumption ")
     public void verifyAlertForNonIntValuesForConsumption() throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
@@ -126,7 +126,7 @@ public class TenderResponseTest extends BaseTest {
 
     }
 
-    @Test(description = "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption ")
+    //@Test(description = "FPA_TOP_TC_014 - verify Alert appears when SplCharts is provided for Day Consumption ")
     public void verifyAlertFoSplCharValuesForConsumption() throws Throwable {
         adminDashboardPage
                 .navigateToTenderResponse()
@@ -220,8 +220,28 @@ public class TenderResponseTest extends BaseTest {
         	clickCancelBtnInAlertMsg().
         	verifyAlertMsgPresenceAfterClickingCancelBtn();
     }
-    
-
+    @Test
+    public void verifyCancelBtnForAlertMsgOnSubmitQuote() throws Throwable {
+    	adminDashboardPage
+    	.clickOnTenderResponse()
+    	.selectAssignedValueInQuoteByDate()
+    	.selectFirstValueQuoteRequest()
+    	.clickMeterForecastLink()
+    	.setFirstRowDayConsumption("40")
+    	.setFirstRowNightConsumption("50")
+    	.clickCalculateConsumptions().
+    	clickSaveBtn().
+    	verifyAlertMsgAfterClickingSaveBtn().
+    	clickOkBtnInAlertMsg().
+    	verifyQuoteDropdownPresence().
+    	selectFirstOptionQuoteDropdown().
+    	verifyQuoteInfoElementsPresence().
+    	enterDataInQuoteInfo().
+    	verifyMeterInfoElementsPresence().
+    	enterDataInMeterInfo().
+    	clickSubmitQuote().
+    	clickCancelBtnInAlertMsg();
+    }	
 }
 
 

@@ -68,4 +68,16 @@ public class FixedProcurementSuite extends BaseTest	{
     
     
     }
+    @Test
+	public void validateReopenQuoteFunctionality() throws Throwable {
+		adminDashboardPage.
+		goToTenderReQuotePage().
+		verifyQuoteDropDownPresence().
+		selectOptionFromQuoteDropDown().
+		clickReopenQuote().
+		verifyAlertMsgPresence().
+		validateCancelBtnInAlertMsg().
+		clickReopenQuote().
+		clickOkBtnInAlertMsg();
+	}
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
-
+import org.assertj.core.api.SoftAssertionError;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -34,6 +34,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	By gasUtility = By.xpath("//div[@class='meter-type-circle-tiny'][3]");
 	By waterUtility = By.xpath("//div[@class='meter-type-circle-tiny'][4]");
 
+	By okBtn = By.xpath("//button[text() = 'OK']");
+	
 	By noOfRowsInCustomer = By.xpath("//table[@id='verify-quote-requests']//tbody//tr");
 	By customer = By.xpath("//div[text()='Customer']");
 	By requestDate = By.xpath("//div[text()='Request Date']");
@@ -42,6 +44,8 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 	String firstSelectedSupplierName = "British Gas Business";
 	String secondSelectedSupplierName = "Corona Energy";
 	String fourthSelectedSupplierName = "Dong Energy";
+	
+	SoftAssert softAssertion = new SoftAssert();
 	
 	@Override
     protected void isLoaded() throws Error {
@@ -72,7 +76,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		return this;
 	}
 
-	public void verifyUtilityFilterPresenceVerifyTenders() {
+	public VerifyTendersPage verifyUtilityFilterPresenceVerifyTenders() {
 		SoftAssert softAssertion = new SoftAssert();
 		boolean allFilterPresenceStatus = isElementPresent(filterAllUtility_VerifyTender);
 		softAssertion.assertTrue(allFilterPresenceStatus, "All utilities filter is not displaying.");
@@ -85,6 +89,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		boolean waterFilterPresenceStatus = isElementPresent(filterWaterUtility_VerifyTender);
 		softAssertion.assertTrue(waterFilterPresenceStatus, "Water utility filter is not displaying.");
 		softAssertion.assertAll();
+		return this;
 	}
 
 	/**
@@ -251,5 +256,72 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		Assert.assertTrue(isElementPresent(gasUtility), "GasUtility is Not Present");
 		Assert.assertTrue(isElementPresent(waterUtility), "WaterUtility is Not Present");
 	}
-	
+	public void validateAllowAndBlockFunctionalityTenderTest() throws Throwable {
+		click(allowSelectedBtn);
+		String companyName = readExcelData("Sheet4", 1, 1);
+		 boolean alertPopupDisplayStatus =
+		  isElementPresent(alertPopUpForNoSupplierSelection);
+		  softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007 
+		  click(okBtn); 
+		  Reporter.log("Clicked on Ok button",
+		  true); 
+		  Thread.sleep(1000); 
+		  click(blockSelectedBtn); 
+		  Reporter.log("Clicked on Block selected button", true); 
+		  alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection); 
+		  Reporter.log("Checked if the alert message is displaying.", true);
+		  softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008 
+		  click(okBtn); 
+		  Reporter.log("Clicked on Ok button", true); 
+		  Thread.sleep(1000); 
+		  scrollToElement(findQuote(companyName)); 
+		  boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
+		  softAssertion.assertTrue(downloadTenderPresenceStatus, "Download tender button is not displaying.");//VT_TC_005 
+		  boolean supplier1PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName); 
+		  boolean supplier2PresenceStatus = isElementExistInList(suppliersListForQuote(companyName),
+		  secondSelectedSupplierName); boolean supplier4PresenceStatus =
+		  isElementExistInList(suppliersListForQuote(companyName),
+		  fourthSelectedSupplierName); boolean allSuppliersDisplayStatus =
+		  supplier1PresenceStatus && supplier2PresenceStatus &&
+		  supplier4PresenceStatus; softAssertion.assertTrue(allSuppliersDisplayStatus,
+		  "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006 
+		  boolean allCheckBoxSuppliersListEnabledStatus =
+		  checkboxListEnabledStatus(checkboxAllSupplierList(companyName)); 
+		  Reporter.log("Checked if all the checkbox for the suppliers are enabled in suppliers list." , true);
+		  softAssertion.assertTrue(allCheckBoxSuppliersListEnabledStatus, 
+				  "All checkbox for the suppliers are not enabled in suppliers list for the quote."); //VT_TC_009 
+		  boolean allCheckBoxMatrixPriceListEnabledStatus =
+		  checkboxListEnabledStatus(checkboxMatrixPriceList(companyName)); 
+		  Reporter.log("Checked if all the checkbox for the suppliers are enabled in matrix price list." , true);
+		  softAssertion.assertTrue(allCheckBoxMatrixPriceListEnabledStatus, "All checkbox for the suppliers are not enabled in matrix price list for the quote." );//VT_TC_012 "
+		  //block supplier
+		  click(checkboxSupplier(companyName, secondSelectedSupplierName));
+		  Reporter.log("Clicked on the checkbox for the supplier.", true);
+		  JavascriptExecutor jse = (JavascriptExecutor)driver;
+		  jse.executeScript("window.scrollBy(0,-2000)");
+		  //scrollToElement(blockSelectedBtn); 
+		  click(blockSelectedBtn);
+		  Reporter.log("Clicked on block selected button.", true); 
+		  Thread.sleep(2000);
+		  scrollToElement(findQuote(companyName)); boolean
+		  supplierPresenceInListStatusAfterBlock =
+		  isElementExistInList(suppliersListForQuote(companyName),
+		  firstSelectedSupplierName); 
+		  Reporter.log("Checked if supplier name is displaying after blocking it.", true);
+		  softAssertion.assertFalse(supplierPresenceInListStatusAfterBlock, "Supplier name is still displaying after blocking it.");
+		  
+		  //allow supplier 
+		  click(checkboxSupplier(companyName, firstSelectedSupplierName)); 
+		  Reporter.log("Clicked on the checkbox for the supplier.", true); 
+		  jse.executeScript("window.scrollBy(0,-2000)");
+		  Thread.sleep(1000); 
+		  click(allowSelectedBtn); 
+		  Reporter.log("Clicked on allow selected button.", true); 
+		  Thread.sleep(2000);
+		  scrollToElement(findQuote(companyName)); 
+		  boolean supplierPresenceInListStatusAfterAllow =
+		  isElementExistInList(suppliersListForQuote(companyName), secondSelectedSupplierName); 
+		  Reporter.log("Checked if supplier name is displaying after allowing it.", true);
+		  softAssertion.assertFalse(supplierPresenceInListStatusAfterAllow, "Supplier name is still displaying after allowing it.");		 
+	}
 }

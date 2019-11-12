@@ -2352,7 +2352,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(getPropertyFileData("url"));
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		loginAsAdmin();
+		//loginAsAdmin();
 		/*
 		 * click(verifyTenders); boolean verifyTendersDisplayStatus =
 		 * driver.getCurrentUrl().contains("/VerifyTenders");
@@ -2463,28 +2463,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		action.moveToElement(accountSettingsBtn).moveToElement(logoutBtn).click().build().perform();
 	}
 
-	public void loginAsAdmin() throws Throwable {
-		String URL = getPropertyFileData("url");
-		String EMAIL = getPropertyFileData("adminEmail");
-		String PASSWORD = getPropertyFileData("adminPassword");
-		driver.get(URL);
-		setValue(username, EMAIL);
-		setValue(pwd, PASSWORD);
-		click(signInBtn);
-	}
-
-	public String currentDate() {
-		LocalDate myObj1 = LocalDate.now(); // Create a date object
-
-		Object d1 = myObj1;
-		String date = d1.toString();
-
-		int day = Integer.parseInt(date.substring(8, 10));
-		int month = Integer.parseInt(date.substring(5, 7));
-		int year = Integer.parseInt(date.substring(0, 4));
-		String currentDate = day + "/" + month + "/" + year;
-		return currentDate;
-	}
+	
 
 	public void verifyUtilityFilterPresenceVerifyTenders() {
 		SoftAssert softAssertion = new SoftAssert();
@@ -2777,7 +2756,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestNHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_555";
+		String companyName = readExcelData("Sheet4", 1, 1);
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
 		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
 		jse.executeScript("window.scrollBy(0,-500)");
@@ -2818,7 +2797,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestGasQuoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = "Auto_Company_555";
+		String companyName = readExcelData("Sheet4", 1, 1);
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
 		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
 		jse.executeScript("window.scrollBy(0,-500)");
@@ -2860,20 +2839,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		logout();
 		softAssertion.assertAll();
 	}
-	public void goToRequestQuotePage() throws Throwable{
-        click(quotesAndTenders);
-        Thread.sleep(2000);
-        click(requestAQuoteLink);
-    }
-	/*
-	 * public void navigateBackFromQuoteSubmit() throws Throwable {
-	 * //Thread.sleep(8000); //boolean urlStatus =
-	 * driver.getCurrentUrl().contains("Quote/RequestQuoteSubmit");
-	 * if(isElementPresent(tenderRequestSummary, 10)) { Thread.sleep(2000);
-	 * driver.navigate().to(
-	 * "https://systest-portal.oem-testing.com/Quote/RequestQuote");
-	 * //goToRequestQuotePage(); //driver.navigate().back();
-	 * //isElementPresent(requestAQuoteLink, 10); Thread.sleep(4000); } }
-	 */
+	
+	
 
 }

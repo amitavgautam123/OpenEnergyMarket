@@ -130,7 +130,7 @@ public class CustomerDashboardPage extends HeaderPage {
         return requestQuotePage;
     }
     public RequestQuotePage clickRequestQuote() throws Throwable	{
-    	driver.navigate().to("https://systest-portal.oem-testing.com/Quote/RequestQuote");
+    	driver.navigate().to(getPropertyFileData("homePageUrl") + readExcelData("Sheet4", 1, 6));
     	Thread.sleep(4000);
     	//driver.navigate().refresh();
         //click(requestAQuoteLink);

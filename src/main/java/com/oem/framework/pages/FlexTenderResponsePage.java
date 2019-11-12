@@ -103,21 +103,20 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	}
 
-	public void verifyMeterForeCastAfetrSelectingRequestQuote(String utility) {
+	public void verifyMeterForeCastAfetrSelectingRequestQuote(String utility) throws Throwable {
 		selectByValue(byDate, After15days);
-		// selectdesiredvalueFromDropDown(byDate, After15days);
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		 //selectdesiredvalueFromDropDown(requestQuote, "HH");
 		Assert.assertTrue(isElementPresent(meterForeCast), "MeterForeCast Is Not Present");
 	}
 
 	public void verifyElementsAfterClickingmeterforecast(String utility) throws Throwable {
 		selectByValue(byDate, After15days);
-		// selectdesiredvalueFromDropDown(byDate, After15days);
-		//selectByIndex(requestQuote, 1);
+		
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		Thread.sleep(2000);
 		click(meterForeCast);
 
 		Assert.assertTrue(isElementPresent(meter_ElectricityTLosses), "meter_ElectricityTLosses Is Not Present");
@@ -127,10 +126,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifymeterforecastafterenetringNoData(String utility) throws Throwable {
 		selectByValue(byDate, After15days);
-		// selectdesiredvalueFromDropDown(byDate, After15days);
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		Thread.sleep(2000);
 		click(meterForeCast);
 
 		click(submitSave);
@@ -143,7 +141,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		SoftAssert softAssertion = new SoftAssert();
 		selectByValue(byDate, After15days);
 	
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		
 		click(meterForeCast);
 		/*
@@ -201,10 +201,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifymeterHHforecastafterenetringInvalidData(String utility) throws Throwable {
 		selectByValue(byDate, After15days);
-		// selectdesiredvalueFromDropDown(byDate, After15days);
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		Thread.sleep(2000);
 		click(meterForeCast);
 
 		enterInvalidDataIntoMeterHHForeCast();
@@ -215,10 +214,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 	public void verifyingTextFieldNotacceptsAlphabetsIntoMeterHH(String utility) throws Throwable {
 		selectByValue(byDate, After15days);
-		// selectdesiredvalueFromDropDown(byDate, After15days);
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// selectdesiredvalueFromDropDown(requestQuote, "HH");
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterInvalidDataAlphabetsIntoMeterHHForeCast();
 		click(submitSave);
@@ -230,8 +228,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
@@ -244,9 +243,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		//selectdesiredvalueFromDropDown(requestQuote, "HH");
+		Thread.sleep(2000);
 		if (isElementPresent(greenClick)) {
 			selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		} else {
@@ -268,8 +267,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		if (isElementPresent(greenClick)) {
 			selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		} else {
@@ -292,8 +292,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		if(isElementPresent(greenClick)){
 			selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		}else{
@@ -323,12 +324,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
-		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// click(meterForeCast);
-		// enterValidDataIntoMeterHHForeCast();
-		// click(submitSave);
 		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 
 		selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		click(quoteInformation);
@@ -348,12 +346,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
-		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// click(meterForeCast);
-		// enterValidDataIntoMeterHHForeCast();
-		// click(submitSave);
 		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 
 		selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		
@@ -383,8 +378,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	public void selectByDate(String utility) throws Throwable {
 
 		selectByVisibleText(byDate, After15days);
-		//selectByIndex(requestQuote, 01);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		// enterDataIntoMeterForeCast();
 		click(submitSave);
@@ -463,8 +459,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	public void enterInvalidDataSpecialCharctersIntoMeterHHForeCast(String utility) throws Throwable {
 
 		selectByValue(byDate, After15days);
-		//selectByIndex(requestQuote, 01);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		click(meterForeCast);
 
 		setValue(meter_ElectricityTLosses, "!@#$%^&");
@@ -499,6 +496,7 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 	}
 
 	public void enternegativeDataInToFlexHHUtilityQuoteInformation() throws Throwable {
+		Thread.sleep(2000);
 		setValue(tollerance, "-10");
 		setValue(productName, "-10");
 		setValue(renewableDiscount, "-10");
@@ -547,9 +545,11 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 		selectByValue(byDate, After15days);
 
 	
-		selectByPartOfVisibleText(requestQuoteOption,utility);
-	
 		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
+	
+		
 
 		selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		click(quoteInformation);
@@ -661,12 +661,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
-		selectByPartOfVisibleText(requestQuoteOption,utility);
-		// click(meterForeCast);
-		// enterValidDataIntoMeterHHForeCast();
-		// click(submitSave);
 		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 
 		selectdesiredvalueFromDropDown(quotes, readExcelData("Sheet5",0,1));
 		
@@ -701,8 +698,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
@@ -727,8 +725,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterDataIntoMeterGasForeCast();
 		click(submitSave);
@@ -753,8 +752,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		//selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
 		selectByPartOfVisibleText(requestQuoteOption,utility);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
@@ -795,11 +795,10 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		click(requestQuote);
-		Thread.sleep(1000);
-		selectByPartOfVisibleText(requestQuote, "(HH)");
-		//selectByIndex(requestQuote, 1);
-
+		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,"HH");
+		Thread.sleep(2000);
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);
@@ -816,7 +815,9 @@ public class FlexTenderResponsePage extends AdminDashboardPage {
 
 		selectByValue(byDate, After15days);
 
-		selectByIndex(requestQuote, 1);
+		Thread.sleep(3000);
+		selectByPartOfVisibleText(requestQuoteOption,"HH");
+		Thread.sleep(2000);
 		click(meterForeCast);
 		enterValidDataIntoMeterHHForeCast();
 		click(submitSave);

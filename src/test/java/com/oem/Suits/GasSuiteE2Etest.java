@@ -36,20 +36,20 @@ public class GasSuiteE2Etest extends BaseTest{
 				addValidSiteGeneric();
 	}
 	@Test(dependsOnMethods = { "addSiteTest" })
-	public void addHHmeterAndCheckSavedDetailsTest() throws Throwable {
+	public void addGasmeterAndCheckSavedDetailsTest() throws Throwable {
 		meterValue = customerDashboardPage.
 			refreshPropertyPortfolioMeterPage().
 			checkSavedDetailsAfterAddingGasMeter();
 		//meterValue=propertyPortfolioMeterPage.getSavedMeterValue();
 	}
-	@Test(dependsOnMethods = { "addHHmeterAndCheckSavedDetailsTest" })
-	public void addHHcontractHistoryTest() throws Throwable {
+	@Test(dependsOnMethods = { "addGasmeterAndCheckSavedDetailsTest" })
+	public void addGascontractHistoryTest() throws Throwable {
 		PropertyPortfolioMeterPage propertyPortfolioMeterPage = new PropertyPortfolioMeterPage();
 		//propertyPortfolioMeterPage.setMeterValue(meterValue);
 		propertyPortfolioMeterPage.addValidGascontractHistory();
 	}
 	
-	@Test(dependsOnMethods = { "addHHcontractHistoryTest" })
+	@Test(dependsOnMethods = { "addGascontractHistoryTest" })
 	public void requestQuoteAndVerifyTenderSummaryPageTest() throws Throwable {
 		customerDashboardPage.
 			goToRequestQuote().

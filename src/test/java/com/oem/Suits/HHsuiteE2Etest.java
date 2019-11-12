@@ -67,6 +67,7 @@ public class HHsuiteE2Etest extends BaseTest{
 				  						loginAsAdmin(); 
 		  adminDashboardPage.
 		  		goToVerifyTenders().
+		  		verifyUtilityFilterPresenceVerifyTenders().
 		  		verifyAllowSelectedFunctionalityTest(); 
 	  }
 	 
