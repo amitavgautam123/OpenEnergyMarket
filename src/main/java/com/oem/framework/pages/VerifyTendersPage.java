@@ -58,21 +58,9 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		}
 		return this;
 	}
-	public String currentDate() {
-		LocalDate myObj1 = LocalDate.now(); // Create a date object
-
-		Object d1 = myObj1;
-		String date = d1.toString();
-
-		int day = Integer.parseInt(date.substring(8, 10));
-		int month = Integer.parseInt(date.substring(5, 7));
-		int year = Integer.parseInt(date.substring(0, 4));
-		String currentDate = day + "/" + month + "/" + year;
-		return currentDate;
-	}
-	public VerifyTendersPage goToNHHmeterSection() throws Throwable {
+		public VerifyTendersPage goToNHHmeterSection() throws Throwable {
 		click(filterNHHutility_VerifyTender);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		return this;
 	}
 
@@ -168,7 +156,18 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
-	
+	public void verifyAllowSelectedWithoutSelectingAnySupplier() throws Throwable {
+		  click(allowSelectedBtn);
+		  Thread.sleep(3000);
+		  boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		  Assert.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007 
+	}
+	public void verifyBlockSelectedWithoutSelectingAnySupplier() throws Throwable {
+		  click(blockSelectedBtn);
+		  Thread.sleep(3000);
+		  boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		  Assert.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");
+	}
 	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -256,34 +255,24 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		Assert.assertTrue(isElementPresent(gasUtility), "GasUtility is Not Present");
 		Assert.assertTrue(isElementPresent(waterUtility), "WaterUtility is Not Present");
 	}
-	public void validateAllowAndBlockFunctionalityTenderTest() throws Throwable {
-		click(allowSelectedBtn);
-		String companyName = readExcelData("Sheet4", 1, 1);
-		 boolean alertPopupDisplayStatus =
-		  isElementPresent(alertPopUpForNoSupplierSelection);
-		  softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007 
-		  click(okBtn); 
-		  Reporter.log("Clicked on Ok button",
-		  true); 
-		  Thread.sleep(1000); 
-		  click(blockSelectedBtn); 
-		  Reporter.log("Clicked on Block selected button", true); 
-		  alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection); 
-		  Reporter.log("Checked if the alert message is displaying.", true);
-		  softAssertion.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_008 
-		  click(okBtn); 
-		  Reporter.log("Clicked on Ok button", true); 
-		  Thread.sleep(1000); 
+	public VerifyTendersPage downloadTendersPresenceStatus() throws Throwable {
+		  String companyName = readExcelData("Sheet4", 1, 1);
 		  scrollToElement(findQuote(companyName)); 
+		  Thread.sleep(3000);
 		  boolean downloadTenderPresenceStatus = isElementPresent(downloadTenderDetailsButton(companyName));
 		  softAssertion.assertTrue(downloadTenderPresenceStatus, "Download tender button is not displaying.");//VT_TC_005 
+		  return this;
+	}
+	public void validateAllowAndBlockFunctionalityTenderTest() throws Throwable {
+		  String companyName = readExcelData("Sheet4", 1, 1);
+		  scrollToElement(findQuote(companyName)); 
 		  boolean supplier1PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), firstSelectedSupplierName); 
-		  boolean supplier2PresenceStatus = isElementExistInList(suppliersListForQuote(companyName),
-		  secondSelectedSupplierName); boolean supplier4PresenceStatus =
-		  isElementExistInList(suppliersListForQuote(companyName),
-		  fourthSelectedSupplierName); boolean allSuppliersDisplayStatus =
-		  supplier1PresenceStatus && supplier2PresenceStatus &&
-		  supplier4PresenceStatus; softAssertion.assertTrue(allSuppliersDisplayStatus,
+		  boolean supplier2PresenceStatus = isElementExistInList(suppliersListForQuote(companyName), secondSelectedSupplierName); 
+		  boolean supplier4PresenceStatus = isElementExistInList(suppliersListForQuote(companyName),
+		  fourthSelectedSupplierName); 
+		  boolean allSuppliersDisplayStatus = supplier1PresenceStatus && supplier2PresenceStatus &&
+		  supplier4PresenceStatus; 
+		  softAssertion.assertTrue(allSuppliersDisplayStatus,
 		  "All suppliers are not dispaying for the quote in verify tenders.");//VT_TC_006 
 		  boolean allCheckBoxSuppliersListEnabledStatus =
 		  checkboxListEnabledStatus(checkboxAllSupplierList(companyName)); 
