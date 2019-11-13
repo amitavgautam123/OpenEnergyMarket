@@ -366,7 +366,7 @@ public class CompanyProfilePage extends CustomerDashboardPage {
         setValue(companyRegNum, "8173812323");
         Thread.sleep(1000);
         click(saveBtn);
-        Thread.sleep(3000);
+        Thread.sleep(4000);
         click(okBtn);
         Thread.sleep(2000);
 	}

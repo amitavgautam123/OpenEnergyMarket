@@ -35,6 +35,7 @@ public class AdminDashboardPage extends HeaderPage {
     	String EMAIL = getPropertyFileData("supplierEmail");
         setValue(impersonateUsername, EMAIL);
         click(impersonateBtn);
+        Thread.sleep(4000);
         return new SupplierDashboardPage();
     }
     public CustomerDashboardPage impersonateCustomer() throws Throwable{

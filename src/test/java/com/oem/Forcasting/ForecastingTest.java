@@ -66,7 +66,7 @@ public class ForecastingTest extends BaseTest	{
 	}
 	
 	@Test(priority=9)
-	public void verifyAlertMessageAfterClickingOnSaveChangesWithoutEntringanyData() throws Throwable, Throwable{
+	public void verifyAlertMsgAfterClickingSaveChangesWithoutEntringAnyData() throws Throwable, Throwable{
 		customerDashboardPage.
 		goToForecastingPage().
 		VerifyAlertMessageOnClickingSaveChangesButton();

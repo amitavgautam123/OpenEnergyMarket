@@ -81,7 +81,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 		Random random = new Random();
 		random.nextInt(1000);
 		click(addSite);		
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		setValue(siteName, "Auto_Domlur" + random.nextInt(1000));
 		Thread.sleep(2000);
 		setValue(address1, "Auto_G R Complex, No. 31, Ground & 1st Floor");
@@ -106,7 +106,7 @@ public class PropertyPortfolioPage extends CustomerDashboardPage {
 			WebElement saveSiteBtn = driver.findElement(By.id("save-btn"));
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", saveSiteBtn);
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		try {
 			click(tipCloseBtn);
 		}

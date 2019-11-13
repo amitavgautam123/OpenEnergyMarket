@@ -2725,31 +2725,35 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		scrollToElement(checkboxForMeter(readExcelData("Sheet4", 1, 4)));	
 		selectingSingleMeterModified((readExcelData("Sheet4", 1, 4)));
 		scrollUp();
+		Thread.sleep(2000);
 		SelectingSingleContractDuration();
 		click(tenderDateHH);
 		Thread.sleep(1000);
 		String tenderDate = "25/12/2019";
 		selectFutureDateCalender(25, 11, 2019);
+		Thread.sleep(2000);
 		selectingSingleHHsupplier();
 		Reporter.log("Selected suppliers.", true);
 		String selectedSupplierName = getText(FirstSupplier_BGB);
 		ClickTopSubmitButton();
 		Reporter.log("Clicked on submit button", true);
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
 		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
 				selectedSupplierName);
 		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
 
 		scrollToElement(confirmAndSubmit);
+		Thread.sleep(2000);
 		click(confirmAndSubmit);
 		Reporter.log("Clicked on confirm and submit button.", true);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
 		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus,
 				"Tender Submit Success Popup is not displaying.");
 		click(okBtn_TenderSummaryPage);
 		Reporter.log("Clicked on Ok button.", true);
+		Thread.sleep(2000);
 		logout();
 		softAssertion.assertAll();
 	}

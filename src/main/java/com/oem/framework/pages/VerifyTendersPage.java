@@ -174,14 +174,14 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		String companyName = readExcelData("Sheet4", 1, 1);
 		click(filterHHutility_VerifyTender);
 		Reporter.log("Click on HH filter", true);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		setRequestDateDescending();
 		Reporter.log("Request quote is set descending.", true);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(checkboxSupplier(companyName, selectAll));
 		Reporter.log("Clicked on the checkbox for the supplier.", true);
 		scrollUp();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		click(allowSelectedBtn);
 		Reporter.log("Clicked on allow selected button.", true); 
 		Thread.sleep(2000);

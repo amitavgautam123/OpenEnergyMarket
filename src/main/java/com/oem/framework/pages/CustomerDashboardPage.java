@@ -42,7 +42,7 @@ public class CustomerDashboardPage extends HeaderPage {
     
     public CompanyProfilePage goToCompanyProfile() throws Throwable	{
         click(portfolioMgr);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         click(companyProfile);
         CompanyProfilePage companyProfilePage=new CompanyProfilePage();
         companyProfilePage.isLoaded();
@@ -83,7 +83,7 @@ public class CustomerDashboardPage extends HeaderPage {
     
     public PropertyPortfolioPage clickPropertyPortfolio() throws AWTException, Throwable{
         click(propertyPortfolio);
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         PropertyPortfolioPage propertyPortfolioPage=new PropertyPortfolioPage();
         propertyPortfolioPage.isLoaded();
         return propertyPortfolioPage;
@@ -108,7 +108,7 @@ public class CustomerDashboardPage extends HeaderPage {
     }
     public PropertyPortfolioMeterPage refreshPropertyPortfolioMeterPage() throws Throwable{
         driver.navigate().refresh();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         try {
 			click(tipCloseBtn);
 		}
@@ -125,6 +125,7 @@ public class CustomerDashboardPage extends HeaderPage {
         click(quotesAndTenders);
         Thread.sleep(2000);
         click(requestAQuoteLink);
+        Thread.sleep(4000);
         RequestQuotePage requestQuotePage=new RequestQuotePage();
         requestQuotePage.isLoaded();
         return requestQuotePage;

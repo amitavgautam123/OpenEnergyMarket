@@ -130,7 +130,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		
 		click(submitPricesBtn(companyName, tenderDate, utility));
 		Reporter.log("Clicked on submit prices button.", true);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		boolean pageLoadedStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPrices");
 		Assert.assertTrue(pageLoadedStatus, "Submit price page is not displaying");
 		return this;

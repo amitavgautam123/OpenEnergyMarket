@@ -849,9 +849,9 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	public String checkSavedDetailsAfterAddingHHMeter() throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String mpanNumber = addValidHHmeterGeneric();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		click(totalHHMetersCountInFilter);
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		try {
 			click(tipCloseBtn);
 		}
@@ -867,7 +867,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(meterStatusData, "Meter status is not displaying as Active");
 		
 		viewMeterDetails(mpanNumber);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		boolean hhDataUploaderDisplayStatus = isElementPresent(hhDataUploaderBtn(mpanNumber));
 		softAssertion.assertTrue(hhDataUploaderDisplayStatus, "HH Data Uploader button is not displaying");
 		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addHHcontractHistoryBtn(mpanNumber));
@@ -1053,7 +1053,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 	public void addValidHHcontractHistory() throws Throwable {
 		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
 		click(addHHcontractHistoryBtn(mpanNumber));
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 20, 5));
 		Thread.sleep(1000);
 		selectByVisibleText(supplierProductDDwn, readExcelData("Sheet3", 20, 6));
@@ -1067,7 +1067,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 20, 11));
 		
 		click(saveContractHistoryBtn);
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		//boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
 		Thread.sleep(2000);

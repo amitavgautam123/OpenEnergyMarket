@@ -9,8 +9,9 @@ public class SupplierDashboardPage extends HeaderPage {
 	By tendersAndAlertsLink = By.xpath("//li[@data-action = 'Requests']/a/h3");
 	By reviewQuotesLink = By.xpath("//li[@id = 'sidebar-review-quotes']/a/h3");
 
-	public TendersAndAlertsPage goToTendersAndAlerts(){
+	public TendersAndAlertsPage goToTendersAndAlerts() throws Throwable{
         click(tendersAndAlertsLink);
+        Thread.sleep(4000);
         TendersAndAlertsPage tendersAndAlertsPage=new TendersAndAlertsPage();
         tendersAndAlertsPage.isLoaded();
         return tendersAndAlertsPage;
