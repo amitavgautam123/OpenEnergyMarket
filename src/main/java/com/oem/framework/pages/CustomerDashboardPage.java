@@ -164,7 +164,7 @@ public class CustomerDashboardPage extends HeaderPage {
     }
     public ForecastingPage goToForecastingPage() throws Throwable{
         click(forecasting);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         ForecastingPage forecastingPage=new ForecastingPage();
         forecastingPage.isLoaded();
         return forecastingPage; 

@@ -23,7 +23,7 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	By nextContactYear=By.id("txtFinancialYearStart");
 	By contractYearForAnalysis=By.id("ddlFinancialYear");
 	//By projectedCost=By.xpath("//td[@id='tdProjectedCosts']//div[@class='pull-left value odometer odometer-auto-theme']");
-	By bySite = By.linkText("By Site");
+	//By bySite = By.linkText("By Site");
 //inside BySitePage
 	By rowsite=By.xpath("//th[contains(text(),'Site')]");
 	By rowMPAN=By.xpath("//th[contains(text(),'MPAN')]");
@@ -74,12 +74,8 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	}
 	public ForecastingPage verifyGraphsDisplayAfterSelectingForcastingYear() throws Throwable {
 		selectByIndex(forecastYear, 0);
-		Thread.sleep(4000);
-		if(isElementPresent(forecastYear))
-		{
-			
-		}
-		else
+		Thread.sleep(5000);
+		if(isElementPresent(forecastYear) == false)
 		{
 			System.out.println("Current page is budget");
 		}
@@ -88,14 +84,14 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	public ForecastingPage verifyHHutility() throws Throwable {
 		click(hhUtility);
 		selectByVisibleText(forecastYear, "2020 - 2021");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		//softAssertion.assertTrue(isElementPresent(""), "");
 		return this;
 	}
 	public void clickBySite() throws Throwable {
-		Thread.sleep(3000);
-		System.out.println("By site display status = " + isElementPresent(bySite));
-		click(bySite);
+		Thread.sleep(5000);
+		System.out.println("By site display status = " + isElementPresent(bySiteButton));
+		click(bySiteButton);
 		
 		softAssertion.assertTrue(isElementPresent(rowsite), "Row Site Is Not Displyed at Bysite HomePage");
 		softAssertion.assertTrue(isElementPresent(rowMPAN), "Row MPAN Is Not Displyed at Bysite HomePage");
@@ -106,9 +102,9 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	public void verifyForecastCost(String year) throws Throwable{
 		Thread.sleep(5000);
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(nextContactYear);
-		
+		Thread.sleep(2000);
 		selectFutureDateCalender(1,2,2019);
 		selectByVisibleText(contractYearForAnalysis,year);
 		Thread.sleep(3000);
@@ -130,9 +126,9 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	public void verifyForecastCost1(String year) throws Throwable{
 		Thread.sleep(5000);
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		click(nextContactYear);
-		
+		Thread.sleep(2000);
 		selectFutureDateCalender(1,2,2019);
 		selectByVisibleText(contractYearForAnalysis,year);
 		Thread.sleep(3000);
@@ -152,25 +148,26 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		
 		
 	}
-	public void verifyOnlyHHutilityDetailAreDisplyed(){
+	public void verifyOnlyHHutilityDetailAreDisplyed() throws Throwable{
 		click(hhUtility);
-		
+		Thread.sleep(3000);
 		softAssertion.assertTrue(isElementPresent(overviewOrBySite),"Overview Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(bySiteButton), "BySite Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(hhAlertEnabled),"HH AlertElement is not present");
 		softAssertion.assertAll();
 	}
-	public void verifyOnlynHHutilityDetailAreDisplyed(){
+	public void verifyOnlynHHutilityDetailAreDisplyed() throws Throwable{
 		
 		click(nHHutility);
+		Thread.sleep(5000);
 		softAssertion.assertTrue(isElementPresent(overviewOrBySite),"Overview Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(bySiteButton), "BySite Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(nhhAlertEnabled), "NHH AlertElement Is Not Present");
 		softAssertion.assertAll();
 	}
-	public void verifyOnlyGasutilityDetailAreDisplyed(){
+	public void verifyOnlyGasutilityDetailAreDisplyed() throws Throwable{
 		click(gasUtility);
-		
+		Thread.sleep(5000);
 		softAssertion.assertTrue(isElementPresent(overviewOrBySite),"Overview Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(bySiteButton), "BySite Button is Not Displyed");
 		softAssertion.assertTrue(isElementPresent(gasAlertEnabled), "Gas AlertElement is Not Present");
@@ -191,27 +188,24 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	}
 	public void VerifyAlertMessageOnClickingSaveChangesButton() throws InterruptedException{
 		click(budgetsBtn);
-		Thread.sleep(3000);
-		
+		Thread.sleep(5000);
 		click(saveChanges);
-		
-		
+		Thread.sleep(5000);
 		Assert.assertTrue(isElementPresent(okAlertPopup),"Alert PopUp is Not Present");
 		click(cancelAlert);
 		
 	}
 	public void VerifyAlertMessageOnClickingSaveChangesAndOKButtons() throws InterruptedException{
 		click(budgetsBtn);
-		Thread.sleep(3000);
-		
+		Thread.sleep(5000);
 		click(saveChanges);
-		
-		
-		
+		Thread.sleep(5000);
+		softAssertion.assertTrue(isElementPresent(okAlertPopup),"savechagesSuccssAlert PopUp is Not Present");
 		click(okAlertPopup);
-		Thread.sleep(2000);
-		Assert.assertTrue(isElementPresent(okAlertPopup),"savechagesSuccssAlert PopUp is Not Present");
-		click(okAlertPopup);
+		//Thread.sleep(2000);
+		
+		//click(okAlertPopup);
+		softAssertion.assertAll();
 	}
 	public void verifyCostsAfterAddingSomePercentage() throws Throwable{
 		String budgetpercentage=readExcelData("Sheet8",3,1);
@@ -221,13 +215,10 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		int addraisingPercentage=Integer.parseInt(raisinggetpercentage);
 		
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(nextContactYear);
-		
+		Thread.sleep(2000);
 		selectFutureDateCalender(1,2,2019);
-		
-		
-		
 		String year = getText(currentContractYearCost);
 		String strInt=year.replace(",", "");
 		int curConYearCost = Integer.parseInt(strInt.replace(" ", ""));
@@ -236,7 +227,7 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		setValue(topBuggetText,budgetpercentage);
 		setValue(raisingMarketText,raisinggetpercentage);
 		click(fallingMarketText);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		String topbudget=getText(topBudgetCost);
 		String strInt1=topbudget.replace(",", "");
 		int actualtopBudgetCostint = Integer.parseInt(strInt1);
@@ -260,9 +251,9 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		int addfallingPercentage=Integer.parseInt(fallingmarktgetpercentage);
 		
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(nextContactYear);
-		
+		Thread.sleep(2000);
 		selectFutureDateCalender(1,2,2019);
 		
 		
@@ -275,7 +266,7 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		setValue(fallingMarketText,fallingmarktgetpercentage);
 		
 		click(topBudgetCost);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		String topbudget=getText(fallingMarketalertCost);
 		String strInt=topbudget.replace(",", "");
 		int actualtopfallingCostint = Integer.parseInt(strInt);
@@ -287,23 +278,23 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	}
 	public void verifyAlertMesageAfetrclickingSaveChangesinBudgetHomePage() throws Throwable{
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(secondSaveChanges);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		By savedsuccessfully=By.xpath("//div[contains(text(),'The changes were saved successfully.')]");
 		boolean truORfalse=getText(savedsuccessfully).contains("The changes were saved successfully.");
 		softAssertion.assertTrue(truORfalse, "No Alert is present after clicking last savechanges in budget Home page ");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(okAlertPopup);
 		softAssertion.assertAll();
 	}
 	public void verifyAlertMesageAfetrclickingForecastReportEnabledandClickingSaveChangesinBudgetHomePage() throws Throwable{
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(forecastingReportingEnabled);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(secondSaveChanges);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		boolean truORfalse=getText(alertToselectfrequency).contains("Please select a forecast reporting frequency before continuing...");
 		softAssertion.assertTrue(truORfalse, "No Alert is present after clicking on ForecastReportingEnabled check box and clicking  savechanges in budget Home page ");
 		Thread.sleep(2000);
@@ -312,13 +303,13 @@ public class ForecastingPage extends CustomerDashboardPage	{
 	}
 	public void verifyAlertmsgAfterClickingHHTriwareAndForecastRepoetingEnabled() throws Throwable{
 		click(budgetsBtn);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(hhAlertEnabled);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(forecastingReportingEnabled);
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		click(secondSaveChanges);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		boolean truORfalse=getText(alertToselectfrequency).contains("Please select a forecast reporting frequency before continuing...");
 		softAssertion.assertTrue(truORfalse, "No Alert is present after clicking on ForecastReportingEnabled check box and clicking  savechanges in budget Home page ");
 		Thread.sleep(2000);
