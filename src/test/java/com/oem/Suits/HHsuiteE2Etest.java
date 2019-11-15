@@ -68,6 +68,7 @@ public class HHsuiteE2Etest extends BaseTest{
 		  adminDashboardPage.
 		  		goToVerifyTenders().
 		  		verifyUtilityFilterPresenceVerifyTenders().
+		  		selectHHutilityFilter().
 		  		verifyAllowSelectedFunctionalityTest(); 
 	  }
 	 
@@ -80,9 +81,9 @@ public class HHsuiteE2Etest extends BaseTest{
 									verifyQuoteStatusDropdownExist().
 									validateQuoteRequestStatusDropdown().
 									verifyPresenceOfFilters().
-									verifyTenderPresenceInTendersAndAlertsTest().
-									navigateToSubmitPricePageTest().
-									verifySubmitPrice().
+									verifyHHTenderPresenceInTendersAndAlertsTest().
+									navigateToHHsubmitPricePageTest().
+									verifyHHsubmitPricePage().
 									verifySubmitPricesSuccessPage();
 	}
 	@Test(dependsOnMethods = { "verifySuppliersTendersAndQuotesTest" })

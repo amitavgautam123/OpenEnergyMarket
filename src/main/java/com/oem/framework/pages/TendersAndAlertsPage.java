@@ -110,7 +110,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		Assert.assertTrue(isElementPresent(supplierSummaryTable),"Supplier Summary table is not shown after impersonating");
 		return this;
 	}
-	public TendersAndAlertsPage verifyTenderPresenceInTendersAndAlertsTest() throws Throwable {
+	public TendersAndAlertsPage verifyHHTenderPresenceInTendersAndAlertsTest() throws Throwable {
 		String companyName = readExcelData("Sheet4", 1, 1);
 		String tenderDate = readExcelData("Sheet4", 1, 2);
 		String utility = readExcelData("Sheet4", 1, 3);
@@ -123,7 +123,31 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		return this;
 		
 	}
-	public TendersAndAlertsPage navigateToSubmitPricePageTest() throws Throwable {
+	public TendersAndAlertsPage verifyNHHTenderPresenceInTendersAndAlertsTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 2, 3);
+		
+		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate, utility));		
+		//click(submitPricesBtn(companyName, tenderDate, utility));
+		//Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(2000);
+		Assert.assertTrue(tenderDisplayStatus, "Tender is not displaying with InProgress status in Supplier account after verifying in admin panel");
+		return this;
+	}
+	public TendersAndAlertsPage verifyGasTenderPresenceInTendersAndAlertsTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 3, 3);
+		
+		boolean tenderDisplayStatus = isElementPresent(submitPricesBtn(companyName, tenderDate, utility));		
+		//click(submitPricesBtn(companyName, tenderDate, utility));
+		//Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(2000);
+		Assert.assertTrue(tenderDisplayStatus, "Tender is not displaying with InProgress status in Supplier account after verifying in admin panel");
+		return this;
+	}
+	public TendersAndAlertsPage navigateToHHsubmitPricePageTest() throws Throwable {
 		String companyName = readExcelData("Sheet4", 1, 1);
 		String tenderDate = readExcelData("Sheet4", 1, 2);
 		String utility = readExcelData("Sheet4", 1, 3);
@@ -136,7 +160,32 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		return this;
 		
 	}
-	public TendersAndAlertsPage verifySubmitPrice() throws Throwable {
+	public TendersAndAlertsPage navigateToNHHsubmitPricePageTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 2, 3);
+		
+		click(submitPricesBtn(companyName, tenderDate, utility));
+		Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(5000);
+		boolean pageLoadedStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPrices");
+		Assert.assertTrue(pageLoadedStatus, "Submit price page is not displaying");
+		return this;
+	}
+	public TendersAndAlertsPage navigateToGasSubmitPricePageTest() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		String utility = readExcelData("Sheet4", 3, 3);
+		
+		click(submitPricesBtn(companyName, tenderDate, utility));
+		Reporter.log("Clicked on submit prices button.", true);
+		Thread.sleep(5000);
+		boolean pageLoadedStatus = driver.getCurrentUrl().contains("SupplierQuotes/SubmitPrices");
+		Assert.assertTrue(pageLoadedStatus, "Submit price page is not displaying");
+		return this;
+		
+	}
+	public TendersAndAlertsPage verifyHHsubmitPricePage() throws Throwable {
 		String companyName = readExcelData("Sheet4", 1, 1);
 		String tenderDate = readExcelData("Sheet4", 1, 2);
 		SoftAssert softAssertion = new SoftAssert();
@@ -169,6 +218,45 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(uploadPriceBtnDisplayStatus, "Upload Price button is not displaying.");
 		//validateUploadPriceImproperData();
 		setValue(uploadPrice, readExcelData("Sheet6", 1, 6));
+		Thread.sleep(2000);
+		click(submitBtn);		
+		Thread.sleep(7000);
+		softAssertion.assertAll();
+		return this;	
+	}
+	public TendersAndAlertsPage verifyGasSubmitPricePage() throws Throwable {
+		String companyName = readExcelData("Sheet4", 1, 1);
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		SoftAssert softAssertion = new SoftAssert();
+		boolean clientNameDisplayStatus = getText(clientName).contains("Client: "+companyName);
+		softAssertion.assertTrue(clientNameDisplayStatus, "Client name is not displaying in 'Submit Prices' page.");
+		boolean commodityDisplayStatus = getText(commodityDetails).contains("Commodity: Gas");
+		softAssertion.assertTrue(commodityDisplayStatus, "Commodity is not displaying.");
+		boolean tenderDateDisplayStatus = getText(tenderDateDetails).contains(tenderDate);
+		softAssertion.assertTrue(tenderDateDisplayStatus, "Tender Date is not displaying correctly.");
+		//boolean quoteDropdownDisplayStatus = isElementPresent(quoteRequestStatusDropdown);
+		//softAssertion.assertTrue(quoteDropdownDisplayStatus, "Quote dropdown is not displaying.");
+		boolean durationDropdownDisplayStatus = isElementPresent(durationDropdown);
+		softAssertion.assertTrue(durationDropdownDisplayStatus, "Duration dropdown is not displaying correctly.");
+		selectByIndex(durationDropdown, 1);
+		Thread.sleep(2000);
+		scrollDown();
+		boolean toleranceEdtBoxDisplayStatus = isElementPresent(toleranceEdtBox,2);
+		softAssertion.assertTrue(toleranceEdtBoxDisplayStatus, "Tolerance edit box is not displaying after entering contract duration.");
+		setValue(toleranceEdtBox, readExcelData("Sheet6", 1, 2));
+		selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 3));
+		selectByIndex(creditStatusDropdown, 0);
+		setValue(commentsEdtBox, readExcelData("Sheet6", 1, 5));
+		Thread.sleep(1000);
+		selectByIndex(productDropdown, 2);
+		Thread.sleep(2000);
+		scrollDown();
+		//selectByVisibleText(creditStatusDropdown, readExcelData("Sheet6", 1, 4));
+		
+		boolean uploadPriceBtnDisplayStatus = isElementPresent(uploadPrice);
+		softAssertion.assertTrue(uploadPriceBtnDisplayStatus, "Upload Price button is not displaying.");
+		//validateUploadPriceImproperData();
+		setValue(uploadPrice, readExcelData("Sheet6", 2, 6));
 		Thread.sleep(2000);
 		click(submitBtn);		
 		Thread.sleep(7000);

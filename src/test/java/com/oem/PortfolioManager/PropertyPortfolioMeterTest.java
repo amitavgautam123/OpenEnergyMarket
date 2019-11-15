@@ -277,13 +277,6 @@ public void PM_PP_TC_075_checkSavedDetailsAfterAddingNHHMeterTest() throws Throw
 	refreshPropertyPortfolioMeterPage().
 	checkSavedDetailsAfterAddingNHHMeter();
 }
-
-
-  @Test public void PM_PP_TC_076() throws Throwable { 
-	  customerDashboardPage.
-	  refreshPropertyPortfolioMeterPage().
-	  checkSavedDetailsAfterAddingNHHMeter(); 
-  }
  
 
 @Test

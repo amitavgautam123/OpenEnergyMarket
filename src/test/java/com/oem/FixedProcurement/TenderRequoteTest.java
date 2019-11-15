@@ -16,7 +16,7 @@ public class TenderRequoteTest extends BaseTest{
 		adminDashboardPage = new LoginPage().loginAsAdmin();
 	}
 	@Test
-	public void validateReopenQuoteFunctionality() throws Throwable {
+	public void validateReQuoteFunctionality() throws Throwable {
 		adminDashboardPage.
 		goToTenderReQuotePage().
 		verifyQuoteDropDownPresence().

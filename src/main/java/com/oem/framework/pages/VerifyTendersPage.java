@@ -150,7 +150,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 				+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
 		return supCheckbox;
 	}
-	public By checkboxSupplierGas(String companyName, String supplierName) {
+	public By checkboxSupplier_Gas(String companyName, String supplierName) {
 		By supCheckbox = By.xpath("//i[@class = 'icon-gas icon-2x']/../following-sibling::td[contains(text(), '"
 		+ currentDate() + "')]/preceding-sibling::td[text() = '" + companyName
 		+ "']/following-sibling::td[4]/label[text() = '" + supplierName + "']/preceding-sibling::input[1]");
@@ -168,24 +168,46 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		  boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
 		  Assert.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");
 	}
-	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
-		SoftAssert softAssertion = new SoftAssert();
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		String companyName = readExcelData("Sheet4", 1, 1);
+	
+	public VerifyTendersPage selectHHutilityFilter() throws Throwable {
 		click(filterHHutility_VerifyTender);
 		Reporter.log("Click on HH filter", true);
 		Thread.sleep(2000);
 		setRequestDateDescending();
 		Reporter.log("Request quote is set descending.", true);
 		Thread.sleep(2000);
-		click(checkboxSupplier(companyName, selectAll));
+		return this;
+	}
+	public VerifyTendersPage selectNHHutilityFilter() throws Throwable {
+		click(filterNHHutility_VerifyTender);
+		Reporter.log("Click on NHH filter", true);
+		Thread.sleep(2000);
+		setRequestDateDescending();
+		Reporter.log("Request quote is set descending.", true);
+		Thread.sleep(2000);
+		return this;
+	}
+	public VerifyTendersPage selectGasUtilityFilter() throws Throwable {
+		click(filterGasUtility_VerifyTender);
+		Reporter.log("Click on Gas filter", true);
+		Thread.sleep(2000);
+		setRequestDateDescending();
+		Reporter.log("Request quote is set descending.", true);
+		Thread.sleep(2000);
+		return this;
+	}
+	
+	public void verifyAllowSelectedFunctionalityTest() throws Throwable {
+		SoftAssert softAssertion = new SoftAssert();
+		String companyName = readExcelData("Sheet4", 1, 1);
+		Thread.sleep(2000);
+		click(checkboxSupplier_Gas(companyName, selectAll));
 		Reporter.log("Clicked on the checkbox for the supplier.", true);
 		scrollUp();
 		Thread.sleep(2000);
 		click(allowSelectedBtn);
 		Reporter.log("Clicked on allow selected button.", true); 
-		Thread.sleep(2000);
-		 
+		Thread.sleep(2000);		 
 		/*
 		 * scrollToElement(findQuote(companyName)); boolean
 		 * supplierPresenceInListStatusAfterAllow =
@@ -234,7 +256,7 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		Thread.sleep(3000);
 		Reporter.log("Clicked Request Date", true);
 		Thread.sleep(3000);
-		click(checkboxSupplierGas(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
+		click(checkboxSupplier_Gas(readExcelData("Sheet5",3,1), readExcelData("Sheet5",0,1)));
 		Thread.sleep(3000);
 		break;
 		case "Water":

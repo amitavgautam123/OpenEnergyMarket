@@ -95,12 +95,13 @@ public class PortfolioCalendarTest extends BaseTest{
 	    clickPortfolioCalendar().
 	    validateEditEventChangingDescription();
 	}
-	@Test
-	public void PM_PC_TC_016_validateErrMsgEnteringDuplicateCalenderEventsTest() throws Throwable {
-		customerDashboardPage.
-	    clickPortfolioCalendar().
-	    validateErrorMessageAfterEnteringDuplicateCalenderEvents();
-	}
+
+	/*
+	 * //@Test public void
+	 * PM_PC_TC_016_validateErrMsgEnteringDuplicateCalenderEventsTest() throws
+	 * Throwable { customerDashboardPage. clickPortfolioCalendar().
+	 * validateErrorMessageAfterEnteringDuplicateCalenderEvents(); }
+	 */
 	@Test(dataProvider = "getData")
 	public void addCalendarEventUsingDataProviderTest(String description) throws Throwable {
 		customerDashboardPage.

@@ -61,8 +61,36 @@ public class NHHsuiteE2Etest extends BaseTest {
 									loginAsAdmin();
 		 adminDashboardPage.
 			goToVerifyTenders().
-				goToNHHmeterSection().
-					verifyAllowSelectedFunctionalityTest();
-			
+			selectNHHutilityFilter().
+			verifyAllowSelectedFunctionalityTest();			
+	}
+	@Test(dependsOnMethods = { "verifyTenderAdminPanelTest" })
+	public void verifySuppliersTendersAndQuotesTest() throws Throwable {
+		supplierDashboardPage = new LoginPage().
+									loginAsAdmin().
+									impersonateSupplier().
+									goToTendersAndAlerts().
+									verifyQuoteStatusDropdownExist().
+									validateQuoteRequestStatusDropdown().
+									verifyPresenceOfFilters().
+									verifyHHTenderPresenceInTendersAndAlertsTest().
+									navigateToHHsubmitPricePageTest().
+									verifyHHsubmitPricePage().
+									verifySubmitPricesSuccessPage();
+	}
+	@Test(dependsOnMethods = { "verifySuppliersTendersAndQuotesTest" })
+	public void verifyCustomerReviewQuotesTest() throws Throwable {
+		
+		  customerDashboardPage = new LoginPage(). 
+				  						login(); 
+		  customerDashboardPage.goToReviewQuotes().
+				  					verifyReviewQuotes().
+				  						acceptQuoteTest();
+		 
+		
+		/*
+		 * supplierDashboardPage = new LoginPage(). loginAsAdmin().
+		 * impersonateSupplier(). goToTendersAndAlerts(). goToReviewQuotes();
+		 */
 	}
 }

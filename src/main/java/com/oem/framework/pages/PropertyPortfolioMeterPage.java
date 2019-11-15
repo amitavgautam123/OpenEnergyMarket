@@ -102,6 +102,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	By hhMeterDetailsBtnFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[7]/a[4]");
 	By hhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-1']/div/div[1]/table/tbody/tr/td[2]/div[2]");
 	By nhhMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-3']/div/div[1]/table/tbody/tr/td[2]/div[2]");
+	By gasMeterNumberFirstRecord = By.xpath("//div[@id = 'meters-2']/div/div[1]/table/tbody/tr/td[2]/div[2]");
 	
 	By saveContractHistoryBtn = By.xpath("//form[@id='frmAddEditContractHistory']//button");
 	By dateTraded = By.id("dateTraded");
@@ -271,7 +272,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 	 * @param meterNumber
 	 * @return
 	 */
-	public By addContractHistoryBtn(String meterNumber) {
+	public By addNHHGasContractHistoryBtn(String meterNumber) {
 		By addContractHistBtn = By.xpath("//div[contains(text(), '" + meterNumber + "')]/../../../../following-sibling::div/div[1]/table/tbody/tr/td[4]/button");
 		return addContractHistBtn;
 	}
@@ -341,7 +342,7 @@ public class PropertyPortfolioMeterPage extends CustomerDashboardPage {
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAMRdataUploaderBtnStatus, "AMR Data Uploader Button is not displaying");
-		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
+		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addNHHGasContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
 	}
@@ -457,7 +458,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		selectFutureDateCalender(10, random.nextInt(12), 2020);
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		click(okBtn);
 		Thread.sleep(2000);
         try {
@@ -523,7 +524,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAMRdataUploaderBtnStatus, "AMR Data Uploader Button is not displaying");
-		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
+		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addNHHGasContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
 		return gasMeterNum;
@@ -560,7 +561,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		softAssertion.assertTrue(meterNumberDisplayStatus, "Meter number is not displaying in meter details section");
 		boolean presenceOfAMRdataUploaderBtnStatus = isElementPresent(AMRdataUploaderBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAMRdataUploaderBtnStatus, "AMR Data Uploader Button is not displaying");
-		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addContractHistoryBtn(gasMeterNum));
+		boolean presenceOfAddContractHistoryBtnStatus = isElementPresent(addNHHGasContractHistoryBtn(gasMeterNum));
 		softAssertion.assertTrue(presenceOfAddContractHistoryBtnStatus, "Add contract history Button is not displaying");
 		softAssertion.assertAll();
 		}
@@ -1032,8 +1033,8 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Assert.assertTrue(popupDisplayStatus, "Add Contract History popup is not displaying.");
 	}
 	public void addValidGascontractHistory() throws Throwable {
-		String mpanNumber = getText(hhMeterNumberFirstRecord).trim();		
-		click(addHHcontractHistoryBtn(mpanNumber));
+		String mpanNumber = getText(gasMeterNumberFirstRecord).trim();		
+		click(addNHHGasContractHistoryBtn(mpanNumber));
 		Thread.sleep(2000);
 		selectByVisibleText(supplierContHistDDwn_Gas, readExcelData("Sheet3", 24, 5));
 		Thread.sleep(1000);
@@ -1043,9 +1044,9 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 24, 4));
 		setValue(standingCharge, readExcelData("Sheet3", 24, 9));
 		setValue(unitCharge, readExcelData("Sheet3", 24, 13));
-		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 24, 11));
+		setValue(contractedAnnualSpend, readExcelData("Sheet3", 24, 11));
 		click(saveContractHistoryBtn);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		if(isElementPresent(contractHistSaveSuccessPopup)) {
 			click(okBtn);
 		}
@@ -1465,7 +1466,7 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(2000);
 		boolean AMRDataUploaderDisplayStatus = isElementPresent(AMRdataUploaderBtn(mpanNumber));
 		softAssertion.assertTrue(AMRDataUploaderDisplayStatus, "AMR Data Uploader button is not displaying");
-		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addContractHistoryBtn(mpanNumber));
+		boolean addContractHistoryBtnDisplayStatus = isElementPresent(addNHHGasContractHistoryBtn(mpanNumber));
 		softAssertion.assertTrue(addContractHistoryBtnDisplayStatus, "'Add Contract History' button is not displaying");
 		/*boolean meterNumberSecondFieldDisplayStatus = meterNumberSecondFieldInMeterDetails(mpanNumber).contains(readExcelData("Sheet3", 6, 2));
 		Reporter.log("Checked the data present in meter number second field in meter details section and verified if it is correct", true);

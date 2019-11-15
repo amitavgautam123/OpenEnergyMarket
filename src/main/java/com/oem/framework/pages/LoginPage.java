@@ -81,7 +81,7 @@ public class LoginPage extends BasePage {
     }
 
     private void loginUsing(String url, String uname, String password){
-        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     	driver.get(url);
         setValue(username, uname);
         setValue(pwd, password);

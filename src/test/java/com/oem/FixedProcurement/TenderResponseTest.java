@@ -45,7 +45,7 @@ public class TenderResponseTest extends BaseTest {
     }
 
     @Test(description = "FPA_TOP_TC_007 - Clicking meter forecast link works ")
-    public void verifyMeterForecastLinkClicable() throws Throwable {
+    public void verifyMeterForecastLinkClickable() throws Throwable {
         adminDashboardPage
                 .clickOnTenderResponse()
                 .selectFirstValueInQuoteByDate()

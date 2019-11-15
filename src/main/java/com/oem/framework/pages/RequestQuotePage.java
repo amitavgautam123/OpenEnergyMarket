@@ -233,7 +233,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By thirdMeter_Gas = By.xpath("//div[@id='collapseGasQuote_SiteMeters_0_']//li[3]");
 	By fourthMeter_Gas = By.xpath("//div[@id='collapseGasQuote_SiteMeters_0_']//li[4]");
 
-	By date_Gas = By.xpath("//input[@id='GasQuote_TenderDate']");
+	By tenderDate_Gas = By.xpath("//input[@id='GasQuote_TenderDate']");
 	By renewableEnergy_Gas = By.xpath("//div[@id='request-gas-quote']//label[contains(text(),'Renewable energy')]");
 	By addNewContractDuration_Gas = By.xpath(
 			"//div[@id='request-gas-quote']//p[@class='add-duration'][contains(text(),'Add new contract duration')]");
@@ -244,7 +244,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	By fourthContractDuration_Gas = By.xpath("//select[@id='GasQuote_Duration4']");
 
 	By choosSuppliers_Gas = By.xpath("//div[@id='request-gas-quote']//div[@id='selectall']");
-	By firstSupplier_gas = By.xpath("//div[@id='request-gas-quote']//section[@id='suppliers']//li[1]//label[1]");
+	By firstSupplier_gas_BGB = By.xpath("//div[@id='request-gas-quote']//section[@id='suppliers']//li[1]//label[1]");
 	By secondSupplier_gas = By.xpath("//div[@id='request-gas-quote']//section[@id='suppliers']//li[2]//label[1]");
 	By thirdSupplier_gas = By.xpath("//div[@id='request-gas-quote']//section[@id='suppliers']//li[3]//label[1]");
 	By fourthSupplier_gas = By.xpath("//div[@id='request-gas-quote']//section[@id='suppliers']//li[4]//label[1]");
@@ -495,7 +495,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 
 	public void ClickDate_Gas() {
-		click(date_Gas);
+		click(tenderDate_Gas);
 
 	}
 
@@ -508,6 +508,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(allmeter_Gas);
 		Thread.sleep(2000);
 		click(firstMeter_Gas);
+	}
+	public void selectingSingleGasMeterByMeterNum(String meterNumber) throws Throwable {
+		click(allmeter_Gas);
+		click(checkboxForMeter(meterNumber));
 	}
 
 	public void selectingMultiplemeters_Gas() throws InterruptedException {
@@ -552,13 +556,13 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void selectingSinglesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
 		Thread.sleep(2000);
-		click(firstSupplier_gas);
+		click(firstSupplier_gas_BGB);
 	}
 
 	public void selectingMultiplesupplier_Gas() throws Throwable {
 		click(choosSuppliers_Gas);
 		Thread.sleep(2000);
-		click(firstSupplier_gas);
+		click(firstSupplier_gas_BGB);
 		click(secondSupplier_gas);
 		scrollToElement(fifthSupplier_gas);
 		Thread.sleep(2000);
@@ -2311,7 +2315,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		 */
 		String companyName = "AGB3";
 		scrollToElement(checkboxForMeter("1012703797008"));// need to be replaced by mpanNum
-		selectingSingleMeterModified("1012703797008");// need to be replaced by mpanNum
+		selectingSingleHHmeterByMPANnum("1012703797008");// need to be replaced by mpanNum
 		jse.executeScript("window.scrollBy(0,-500)");
 		SelectingSingleContractDuration();
 		click(tenderDateHH);
@@ -2708,22 +2712,27 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		return checkboxMeter;
 	}
 
-	public void selectingSingleMeterModified(String mpan) {
+	public void selectingSingleHHmeterByMPANnum(String mpan) {
 		click(SelectAllChoosemeter);
 		click(checkboxForMeter(mpan));
 	}
+	
 	public RequestQuotePage goToNHHmetersSection() throws Throwable {
 		click(filterByNHHutility);
+		Thread.sleep(1000);
+		return this;
+	}
+	public RequestQuotePage goToGasMetersSection() throws Throwable {
+		click(filterByGasUtility);
 		Thread.sleep(1000);
 		return this;
 	}
 	//Used in HH Suite
 	public void requestHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = readExcelData("Sheet4", 1, 1);
 		scrollToElement(checkboxForMeter(readExcelData("Sheet4", 1, 4)));	
-		selectingSingleMeterModified((readExcelData("Sheet4", 1, 4)));
+		selectingSingleHHmeterByMPANnum((readExcelData("Sheet4", 1, 4)));
 		scrollUp();
 		Thread.sleep(2000);
 		SelectingSingleContractDuration();
@@ -2759,11 +2768,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 	public void requestNHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = readExcelData("Sheet4", 1, 1);
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
-		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
-		jse.executeScript("window.scrollBy(0,-500)");
+		selectingSingleHHmeterByMPANnum(meterNumber);// need to be replaced by mpanNum
+		scrollUp();
 		selectingsingleContractDur_nHH();
 		click(date_nHH);
 		Thread.sleep(1000);
@@ -2800,46 +2808,35 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	}
 	public void requestGasQuoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		String companyName = readExcelData("Sheet4", 1, 1);
-		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
-		selectingSingleMeterModified(meterNumber);// need to be replaced by mpanNum
-		jse.executeScript("window.scrollBy(0,-500)");
-		SelectingSingleContractDuration();
-		click(tenderDateHH);
+		String meterNumberGas = readExcelData("Sheet4", 2, 4);
+		scrollToElement(checkboxForMeter(meterNumberGas));// need to be replaced by mpanNum
+		selectingSingleGasMeterByMeterNum(meterNumberGas);// need to be replaced by mpanNum
+		scrollUp();
+		selectingsingleContractDur_Gas();
+		String tenderDate = readExcelData("Sheet4", 1, 2);
+		setValue(tenderDate_Gas, tenderDate);
 		Thread.sleep(1000);
-		String tenderDate = "12/11/2019";
-		selectFutureDateCalender(12, 10, 2019);
-		SelectingMultipleSupplier();
+		selectingSinglesupplier_Gas();
 		Reporter.log("Selected suppliers.", true);
 		String firstSelectedSupplierName = getText(FirstSupplier_BGB);
-		String secondSelectedSupplierName = getText(thirdSupplier_CoronaEnergy);
-		String thirdSelectedSupplierName = getText(fifthSupplier_DongEnergy);
-
 		ClickTopSubmitButton();
 		Reporter.log("Clicked on submit button", true);
-		Thread.sleep(3000);
-		scrollToElement(invitedSuppliersHeading_TenderSummaryPage);
+		Thread.sleep(5000);
+		scrollToElement(confirmAndSubmit);
+		Thread.sleep(2000);
 		boolean firstSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
 				firstSelectedSupplierName);
 		softAssertion.assertTrue(firstSupplierPresenceStatus, "Selected supplier is not displaying.");
-
-		boolean secondSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
-				secondSelectedSupplierName);
-		softAssertion.assertTrue(secondSupplierPresenceStatus, "Selected supplier is not displaying.");
-
-		boolean thirdSupplierPresenceStatus = isElementExistInList(invitedSuppliers_TenderSummaryPage,
-				thirdSelectedSupplierName);
-		softAssertion.assertTrue(thirdSupplierPresenceStatus, "Selected supplier is not displaying.");
-		scrollToElement(confirmAndSubmit);
 		click(confirmAndSubmit);
 		Reporter.log("Clicked on confirm and submit button.", true);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		boolean tenderSubmitSuccessPopupDisplayStatus = isElementPresent(quoteSubmitSuccessPopup);
 		softAssertion.assertTrue(tenderSubmitSuccessPopupDisplayStatus,
 				"Tender Submit Success Popup is not displaying.");
 		click(okBtn_TenderSummaryPage);
 		Reporter.log("Clicked on Ok button.", true);
+		Thread.sleep(2000);
 		logout();
 		softAssertion.assertAll();
 	}
