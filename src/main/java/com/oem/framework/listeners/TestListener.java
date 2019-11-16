@@ -47,6 +47,7 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         System.out.println("*** Executed " + result.getMethod().getMethodName() + " test successfully...");
         ExtentManager.getTest().log(Status.PASS, "Test passed");
+        ExtentManager.getInstance().flush();
     }
 
     public void onTestFailure(ITestResult result) {
@@ -56,6 +57,7 @@ public class TestListener implements ITestListener {
         ExtentManager.getTest().fail(result.getThrowable());
         String screenshot = TestUtil.takeScreenshot(result.getName() + "-" + getCurrentTime(), Globals.getCurrentThreadContext().getDriver());
         addScreenshotToReport(result, screenshot);
+        ExtentManager.getInstance().flush();
 
     }
 
@@ -65,6 +67,7 @@ public class TestListener implements ITestListener {
         ExtentManager.getTest().log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " SKIPPED ", ExtentColor.ORANGE));
         if(result.getThrowable()!=null)
             ExtentManager.getTest().skip(result.getThrowable());
+        ExtentManager.getInstance().flush();
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
