@@ -4,6 +4,7 @@ package com.oem.framework.listeners;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,25 +12,21 @@ import java.util.stream.Collectors;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.oem.framework.core.utils.ConfigUtils;
+import com.oem.framework.core.Globals;
 import com.oem.framework.core.utils.TestUtil;
-import com.uttesh.pdfngreport.PDFReportListener;
-import org.apache.commons.io.FileUtils;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
 
-public class CustomReporter extends PDFReportListener implements IReporter {
+public class CustomReporter implements IReporter {
     /**
      * Document
      */
     private Document document = null;
-    private String pdfTempFile="regression_tmp.pdf";
-    private String pdfFile="regression.pdf";
     private String finalReportFile="OEM_Regression"+TestUtil.getCurrentTime()+".pdf";
-    HashMap<String,String> configs;
     static ClassData overallData;
+    Date startDate,endDate;
     /**
      * PdfPTables
      */
@@ -37,14 +34,13 @@ public class CustomReporter extends PDFReportListener implements IReporter {
 
     public CustomReporter() throws IOException {
         this.document = new Document();
-        configs=ConfigUtils.loadConfigs("pdfngreport.properties");
         try {
-            PdfWriter.getInstance(this.document, new FileOutputStream(pdfTempFile));
+            PdfWriter.getInstance(this.document, new FileOutputStream(finalReportFile));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        overallData=new ClassData("Consolidated Data");
+        overallData=new ClassData("Total ");
 
     }
 
@@ -161,7 +157,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
      * @param outputFolder
      */
     public void generateReport(List<XmlSuite> list, List<ISuite> suites, String outputFolder) {
-        super.generateReport(list,suites,outputFolder);
+
         for (ISuite suite : suites) {
             String suiteName = suite.getName();
             Map<String, ISuiteResult> suiteResults = suite.getResults();
@@ -185,6 +181,8 @@ public class CustomReporter extends PDFReportListener implements IReporter {
                 for(String className:skippedClasses)
                     incrementClassLevelResult(className, TestCaseStatus.SKIPPED);
 
+                startDate=tc.getStartDate();
+                endDate=tc.getEndDate();
                 overallData.setPassCount(overallData.getPassCount()+tc.getPassedTests().size());
                 overallData.setFailedCount(overallData.getFailedCount()+tc.getFailedTests().size());
                 overallData.setSkippedCount(overallData.getSkippedCount()+tc.getSkippedTests().size());
@@ -197,8 +195,13 @@ public class CustomReporter extends PDFReportListener implements IReporter {
         this.document.open();
         Paragraph p = new Paragraph( " OEM Regression Results",
                 FontFactory.getFont(FontFactory.HELVETICA, 20, Font.BOLD, new BaseColor(0, 0, 255)));
+
+        Paragraph executionDetails = new Paragraph( "\n\nServer: "+ Globals.getConfig("homePageUrl") +"\nBrowser: " +Globals.getConfig("browser")
+                +"\nStart time: " +startDate+"\nEnd time: " +endDate,
+                FontFactory.getFont(FontFactory.HELVETICA, 9, Font.NORMAL, BaseColor.BLACK));
         try {
             this.document.add(p);
+            this.document.add(executionDetails);
         } catch (DocumentException e) {
             e.printStackTrace();
         }
@@ -226,20 +229,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
 
         this.document.close();
 
-        try {
-            mergePDFDocs(pdfFile,pdfTempFile,configs.get("pdfreport.outputdir")+ File.separator+configs.get("pdfreport.file.name")+".pdf");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Merging of files failed");
-        }
-        File src=new File(pdfFile);
-        File dest=new File(finalReportFile);
-        try {
-            FileUtils.copyFile(src,dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("******************************* Failed to copy pdf file  **********************");
-        }
+
     }
 
 
@@ -247,12 +237,7 @@ public class CustomReporter extends PDFReportListener implements IReporter {
 
         if (classLevelReportTable == null) {
             this.classLevelReportTable = new PdfPTable(new float[]{.6f, .1f, .1f, .1f,.1f});
-            /*Paragraph p = new Paragraph("TEST Results", new Font(Font.FontFamily.TIMES_ROMAN, Font.DEFAULTSIZE, Font.BOLD));
-            p.setAlignment(Element.ALIGN_CENTER);
-            PdfPCell cell = new PdfPCell(p);
-            cell.setColspan(this.classLevelReportTable.getNumberOfColumns());
-            cell.setBackgroundColor(BaseColor.GREEN);
-            this.classLevelReportTable.addCell(cell);*/
+
             addSeparation("Class Level Results",BaseColor.GRAY);
             PdfPCell cell;
             cell = new PdfPCell(new Paragraph("Class Name"));
@@ -292,10 +277,8 @@ public class CustomReporter extends PDFReportListener implements IReporter {
     private void mergePDFDocs(String destinationFile,String sourceFile1,String sourceFile2) throws IOException{
         PDFMergerUtility pdfMerger = new PDFMergerUtility();
         pdfMerger.setDestinationFileName(destinationFile);
-       // PDDocument f1=PDDocument.load(new File(sourceFile1));
         pdfMerger.addSource(new File(sourceFile1));
 
-       // PDDocument f2=PDDocument.load(new File(sourceFile2));
         pdfMerger.addSource(new File(sourceFile2));
 
         pdfMerger.mergeDocuments();

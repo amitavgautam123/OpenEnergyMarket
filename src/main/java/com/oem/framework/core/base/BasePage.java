@@ -302,11 +302,12 @@ public abstract class BasePage<T extends BasePage<T>> extends LoadableComponent<
      */
     public String getPropertyFileData(String key) throws Exception
     {
-    	FileInputStream fObj = new FileInputStream("./data/commonData.properties");
+        return Globals.getConfig(key);
+    	/*FileInputStream fObj = new FileInputStream("./data/commonData.properties");
     	Properties pObj = new Properties();
     	pObj.load(fObj);
     	String data = pObj.getProperty(key);
-    	return data;
+    	return data;*/
     }
     /**
      * Used to read data from excel sheet based on your arguments (testScriptData.xlsx) 

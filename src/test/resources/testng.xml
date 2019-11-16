@@ -6,15 +6,15 @@
         <listener class-name="org.uncommons.reportng.HTMLReporter" />
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
         <listener class-name="com.oem.framework.listeners.CustomReporter"/>
+        <listener class-name="com.oem.framework.listeners.TestListener" />
     </listeners>
 
     <test name="OEM Regression Tests">
         <packages>
             <package name="com.oem.PortfolioManager"/>
-     <!--        <package name="com.oem.QuotesAndTenders"/>
-            
+             <package name="com.oem.QuotesAndTenders"/>
             <package name="com.oem.FixedProcurement"/>
-			<package name="com.oem.Suits"/> -->
+			<package name="com.oem.Suits"/>
          
         </packages>
 

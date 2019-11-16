@@ -1,8 +1,6 @@
 package com.oem.framework.core;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.oem.framework.core.base.Base;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
@@ -10,7 +8,6 @@ import java.util.HashMap;
 
 public class TestExecutionContext implements Base {
     private String testName;
-    ExtentTest extentTest;
     private WebDriver driver;
     HashMap<String, String> configForExecutionEnvironment;
 
@@ -49,13 +46,10 @@ public class TestExecutionContext implements Base {
     }
 
 
-    public ExtentTest getExtentTest() {
-        return extentTest;
-    }
+
     public void setTestName(String testName){
         this.testName=testName;
-        if(StringUtils.isNotEmpty(this.testName))
-            extentTest = Globals.extent.createTest(this.testName);
+
 
     }
 }
