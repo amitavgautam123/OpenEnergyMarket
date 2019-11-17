@@ -37,7 +37,8 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	
 	//Submit price Success page
 	By confirmBtn = By.id("btn-confirm");
-
+	By siteHeading_RateSection = By.xpath("//table[@id='tabRates']//th[@class='text-left'][contains(text(),'Site')]");
+	
 	//Review Quotes Page
 	By currentContractTitle = By.xpath("//h3[text() = 'Current Contract ']");
 	By proposedQuotesTitle = By.xpath("//h3[text() = 'Proposed Quotes']");
@@ -286,7 +287,8 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(submitPricesSuccessPageDisplayStatus, "Submit price success page is not displaying.");
 		click(confirmBtn);
 		Thread.sleep(5000);
-		
+		boolean siteHeading = isElementPresent(siteHeading_RateSection);
+		softAssertion.assertTrue(siteHeading, "Price table is not displaying. Unable to confirm.");
 		softAssertion.assertAll();
 		return this;
 	}
@@ -296,8 +298,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		boolean currentContractDisplayStatus = isElementPresent(currentContractTitle);
 		softAssertion.assertTrue(currentContractDisplayStatus, "Current contract is not displaying.");
 		boolean proposedQuotesDisplayStatus = isElementPresent(proposedQuotesTitle);
-		softAssertion.assertTrue(proposedQuotesDisplayStatus, "Proposed Quote is not displaying.");		
-        
+		softAssertion.assertTrue(proposedQuotesDisplayStatus, "Proposed Quote is not displaying.");		 
 		softAssertion.assertAll();
 		return this;
     }

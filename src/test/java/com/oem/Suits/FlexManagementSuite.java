@@ -18,19 +18,25 @@ public class FlexManagementSuite extends BaseTest {
 
 	@BeforeClass(alwaysRun = true)
 	public void beforeHHSuite() throws Throwable {
-		adminDashboardPage = new LoginPage().loginAsAdmin();
-		customerDashboardPage = adminDashboardPage.impersonateFlexCustomer();
+		adminDashboardPage = new LoginPage().
+									loginAsAdmin();
+		customerDashboardPage = adminDashboardPage.
+									impersonateFlexCustomer();
 
 	}
 
 	@Test(priority = 1)
 	public void fillCompanyProfileTest() throws Throwable {
-		customerDashboardPage.goToCompanyProfile().fillCompanyProfile_Flexible();
+		customerDashboardPage.
+		goToCompanyProfile().
+		fillCompanyProfile_Flexible();
 	}
 
 	@Test(priority = 2)
 	public void addSiteTest() throws Throwable {
-		customerDashboardPage.clickPropertyPortfolio().addValidSiteGeneric();
+		customerDashboardPage.
+			clickPropertyPortfolio().
+				addValidSiteGeneric();
 	}
 
 	@Test(priority = 3)
