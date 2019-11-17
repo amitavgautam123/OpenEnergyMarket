@@ -13,7 +13,7 @@ import org.testng.annotations.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-
+@Listeners({com.oem.framework.listeners.CustomReporter.class,com.oem.framework.listeners.TestListener.class})
 public abstract class BaseTest implements Base, ITest {
 
     String mTestCaseName;
