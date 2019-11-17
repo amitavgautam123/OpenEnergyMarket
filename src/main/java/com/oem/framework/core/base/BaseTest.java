@@ -81,7 +81,7 @@ public abstract class BaseTest implements Base, ITest {
     private void cleanUpThread(long threadId) {
 
         Globals.getTestExecutionContext(threadId).getDriver().quit();
-        // Globals.remove(threadId);
+        Globals.remove(threadId);
 
     }
 
