@@ -134,12 +134,17 @@ public class CompanyProfileTest extends BaseTest {
 	  
 	  @Test public void
 	  PM_CP_TC_031_verifyRegisteredAddressErrorSpaceTestDataTest() throws Throwable
-	  { customerDashboardPage. clickCompanyProfile().
-	  verifyRegisteredAddressErrorSpaceTestData(); }
-	  
-	  @Test public void PM_CP_TC_032_verifyPostcodeWithSpaceTestDataTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  verifyPostcodeWithSpaceTestData(); }
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  verifyRegisteredAddressErrorSpaceTestData(); 
+	  }
+	  @Test 
+	  public void PM_CP_TC_032_verifyPostcodeWithSpaceTestDataTest() throws Throwable { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  verifyPostcodeWithSpaceTestData(); 
+	  }
 	  
 	  @Test(dataProvider = "getData") public void
 	  fillCompanyProfileWithDifferentDataTest(String compName, String addr, String

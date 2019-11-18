@@ -50,8 +50,6 @@ public class PropertyPortfolioMeterTest extends BaseTest {
 	public Object[][] getHHdata() {
 		Object[][] data = { 
 				
-				
-				
 				{ "", "", "", "", "", "", "", "" }, /* PM_PP_TC_016 */
 				{ "234", "456", "", "", "", "", "", "" }, /* PM_PP_TC_017 */
 				{ "", "", "10", "1289", "4022", "180", "", "" }, /* PM_PP_TC_018 */
@@ -352,7 +350,7 @@ public void PM_PP_TC_089_validateEditGasMeterPopupTest() throws Throwable {
 	validateEditGasMeterPopup();
 }
 
-@Test
+//@Test
 public void PM_PP_TC_090_validateEditGasMeterTest() throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
@@ -373,7 +371,7 @@ public void PM_PP_TC_092_validateDeleteGasMeterTest() throws Throwable {
 	validateDeleteGasMeter();
 }
 
-@Test
+//@Test
 public void PM_PP_TC_106_validateMeterRevertDeletionTest() throws Throwable {
 	customerDashboardPage.
 	refreshPropertyPortfolioMeterPage().
