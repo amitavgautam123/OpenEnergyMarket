@@ -116,14 +116,21 @@ public class CompanyProfileTest extends BaseTest {
 	  throws Throwable { customerDashboardPage. clickCompanyProfile().
 	  verifyDatePickerDisplayLOAExpiresDate(); }
 	  
-	  @Test public void PM_CP_TC_029_LOAExpiresDateSelectFutureDateTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  validateLOAExpiresDateSelectFutureDateTest(); }
+	  @Test 
+	  public void PM_CP_TC_029_LOAExpiresDateSelectFutureDateTest() throws Throwable 
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  validateLOAExpiresDateSelectFutureDateTest(); 
+	  }
 	  
-	  @Test public void
-	  PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable
-	  { customerDashboardPage. clickCompanyProfile().
-	  validateLOAPreviousDateSelectPreviousDateTest(); }
+	  @Test 
+	  public void PM_CP_TC_030_validateLOApreviousDateSelectPreviousDateTest() throws Throwable
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  validateLOAPreviousDateSelectPreviousDateTest(); 
+	  }
 	  
 	  @Test public void
 	  PM_CP_TC_031_verifyRegisteredAddressErrorSpaceTestDataTest() throws Throwable
