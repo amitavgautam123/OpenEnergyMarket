@@ -215,7 +215,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 
 	By date_nHH = By.xpath("//input[@id='ElectricityQuoteNhh_TenderDate']");
 	By ChooseSupplierAll_nHH = By.xpath("//div[@id='request-electricity-nhh-quote']//div[@id='selectall']");
-	By supplier01_nHH = By
+	By supplier01_nHH_BGB = By
 			.xpath("//div[@id='request-electricity-nhh-quote']//section[@id='suppliers']//li[1]//label[1]");
 	By supplier02_nHH = By
 			.xpath("//div[@id='request-electricity-nhh-quote']//section[@id='suppliers']//li[2]//label[1]");
@@ -623,13 +623,13 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void selectingSinglesupplier_nHH() {
 		click(ChooseSupplierAll_nHH);
 
-		click(supplier01_nHH);
+		click(supplier01_nHH_BGB);
 
 	}
 
 	public void selectingMultiplesupplier_nHH() {
 		click(ChooseSupplierAll_nHH);
-		click(supplier01_nHH);
+		click(supplier01_nHH_BGB);
 		click(supplier02_nHH);
 		click(supplier03_nHH);
 		click(supplier04_nHH);
@@ -2716,7 +2716,10 @@ public class RequestQuotePage extends CustomerDashboardPage {
 		click(SelectAllChoosemeter);
 		click(checkboxForMeter(mpan));
 	}
-	
+	public void selectingSingleNHHmeterByMPANnum(String mpan) {
+		click(meterAll_nHH);
+		click(checkboxForMeter(mpan));
+	}
 	public RequestQuotePage goToNHHmetersSection() throws Throwable {
 		click(filterByNHHutility);
 		Thread.sleep(1000);
@@ -2769,17 +2772,15 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestNHHquoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String companyName = readExcelData("Sheet4", 1, 1);
+		selectingSingleHHmeterByMPANnum((readExcelData("Sheet4", 1, 4)));
 		scrollToElement(checkboxForMeter(meterNumber));// need to be replaced by mpanNum
 		selectingSingleHHmeterByMPANnum(meterNumber);// need to be replaced by mpanNum
 		scrollUp();
 		selectingsingleContractDur_nHH();
-		click(date_nHH);
-		Thread.sleep(1000);
-		String tenderDate = "12/11/2019";
-		selectFutureDateCalender(12, 10, 2019);
-		selectingMultiplesupplier_nHH();
+		setValue(date_nHH, "25/12/2019");
+		selectingSinglesupplier_nHH();
 		Reporter.log("Selected suppliers.", true);
-		String firstSelectedSupplierName = getText(supplier01_nHH);
+		String firstSelectedSupplierName = getText(supplier01_nHH_BGB);
 		String secondSelectedSupplierName = getText(supplier03_nHH);
 		
 		ClickTopSubmitButton();
@@ -2809,7 +2810,7 @@ public class RequestQuotePage extends CustomerDashboardPage {
 	public void requestGasQuoteAndVerifyTenderSummaryPageTest(String meterNumber) throws Throwable {
 		SoftAssert softAssertion = new SoftAssert();
 		String companyName = readExcelData("Sheet4", 1, 1);
-		String meterNumberGas = readExcelData("Sheet4", 2, 4);
+		String meterNumberGas = readExcelData("Sheet4", 3, 4);
 		scrollToElement(checkboxForMeter(meterNumberGas));// need to be replaced by mpanNum
 		selectingSingleGasMeterByMeterNum(meterNumberGas);// need to be replaced by mpanNum
 		scrollUp();

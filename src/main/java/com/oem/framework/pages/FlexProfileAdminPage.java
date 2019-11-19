@@ -38,14 +38,14 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 		}
 	}
 	public void deleteProfile(String Utility) throws Throwable{
-		FlexProfileManagerPage flex=new FlexProfileManagerPage();
-		flex.logOut();
+		FlexProfileManagerPage flexProfileManagerPage=new FlexProfileManagerPage();
+		flexProfileManagerPage.logOut();
 		AdminDashboardPage adminDashboardPage =new AdminDashboardPage();
 		adminDashboardPage=new LoginPage().loginAsAdmin();
 		Thread.sleep(3000);
 		adminDashboardPage.goToflexProfileAdmin();
-		By clickCompany= By.xpath("//h1[contains(text(),'"+readExcelData("sheet5",3,1)+"')]");
-		click(clickCompany);
+		By company= By.xpath("//h1[contains(text(),'"+readExcelData("sheet5",3,1)+"')]");
+		click(company);
 		switch(Utility){
 		case "HH":
 			By hhProfileDelete=By.xpath("//span[contains(text(),'   Half Hourly Electric Profile')]/../following-sibling::td[7]/a[@style='display:block'][text()='Delete Profile']");
@@ -53,7 +53,9 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 			int noOfHHProfiles=hhprofiles.size();
 			for(int i=1;i<noOfHHProfiles;i++){
 				click(hhProfileDelete);
+				Thread.sleep(2000);
 				click(clickOk);
+				Thread.sleep(4000);
 			}
 			//adminDashboardPage.logOut();
 			click(dashBoard);

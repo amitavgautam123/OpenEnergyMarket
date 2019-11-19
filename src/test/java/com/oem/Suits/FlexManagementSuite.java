@@ -15,6 +15,7 @@ import com.oem.framework.pages.VerifyTendersPage;
 public class FlexManagementSuite extends BaseTest {
 	CustomerDashboardPage customerDashboardPage;
 	AdminDashboardPage adminDashboardPage;
+	FlexProfileManagerPage flexProfileManagerPage;
 
 	@BeforeClass(alwaysRun = true)
 	public void beforeHHSuite() throws Throwable {
@@ -59,8 +60,8 @@ public class FlexManagementSuite extends BaseTest {
 	
 	@Test(priority = 6)
 	public void requestForQuoteFlexProfileManagerTest() throws Throwable {
-		FlexProfileManagerPage abc = new FlexProfileManagerPage();
-		abc.clickOnSetUpFlexibleProfile("HH");
+		FlexProfileManagerPage flexProfileManagerPage = new FlexProfileManagerPage();
+		flexProfileManagerPage.clickOnSetUpFlexibleProfile("HH");
 		customerDashboardPage.logOut();
 	}
 

@@ -160,7 +160,7 @@ public class CompanyProfileTest extends BaseTest {
 				  {"      ", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
 				  {"</html>", "G R Complex, No. 31, Ground & 1st Floor, Kempegowda Service Rd, Domlur, Bengaluru, Karnataka", "123456", "7234823423", "123456"}, 
 				  {"Auto_Comp789", "123456789", "123456", "7234823423", "123456"}, 
-				  {"Auto_Company_145", "!@#$%^&*", "123456", "7234823423", "123456"}};
+				  {"Auto_Company_111", "!@#$%^&*", "123456", "7234823423", "123456"}};
 	  
 	  return data; }
 	 }

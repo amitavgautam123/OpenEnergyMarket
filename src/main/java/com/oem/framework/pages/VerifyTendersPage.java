@@ -160,12 +160,14 @@ public class VerifyTendersPage extends AdminDashboardPage	{
 		  click(allowSelectedBtn);
 		  Thread.sleep(3000);
 		  boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		  click(okBtn);
 		  Assert.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");//VT_TC_007 
 	}
 	public void verifyBlockSelectedWithoutSelectingAnySupplier() throws Throwable {
 		  click(blockSelectedBtn);
 		  Thread.sleep(3000);
 		  boolean alertPopupDisplayStatus = isElementPresent(alertPopUpForNoSupplierSelection);
+		  click(okBtn);
 		  Assert.assertTrue(alertPopupDisplayStatus, "Alert popup is not displaying");
 	}
 	

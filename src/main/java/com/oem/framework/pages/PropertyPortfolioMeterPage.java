@@ -453,9 +453,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(expectedConsumption, expectedConsumptionValue);
 		Thread.sleep(1000);
 		selectByVisibleText(gasCurrentSuppliers, "D-ENERGi");
-		click(contractEndDate);
-		Thread.sleep(1000);
-		selectFutureDateCalender(10, random.nextInt(12), 2020);
+		setValue(contractEndDate, "10-Nov-2020");
+		/*
+		 * click(contractEndDate); Thread.sleep(1000); selectFutureDateCalender(10,
+		 * random.nextInt(12), 2020);
+		 */
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
 		Thread.sleep(5000);
@@ -542,9 +544,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(expectedConsumption, expectedConsumptionValue);
 		Thread.sleep(1000);
 		selectByVisibleText(gasCurrentSuppliers, "D-ENERGi");
-		click(contractEndDate);
-		Thread.sleep(2000);
-		selectFutureDateCalender(10, random.nextInt(12), 2020);
+		setValue(contractEndDate, "10-Nov-2020");
+		/*
+		 * click(contractEndDate); Thread.sleep(2000); selectFutureDateCalender(10,
+		 * random.nextInt(12), 2020);
+		 */
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
 		Thread.sleep(2000);
@@ -766,9 +770,13 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		setValue(expectedConsumption, readExcelData("Sheet3", 8, 2));
-		click(contractEndDate);
-		Thread.sleep(1000);
-		selectFutureDateCalender(14, random.nextInt(12), 2020);
+		setValue(contractEndDate, "14-Apr-2020");
+		/*
+		 * click(contractEndDate); 
+		 * Thread.sleep(1000); 
+		 * selectFutureDateCalender(14,
+		 * random.nextInt(12), 2020);
+		 */
 		setValue(capacity, readExcelData("Sheet3", 8, 3));
 		Thread.sleep(1000);
 		selectByVisibleText(currentSupplier, "British Gas Business");
@@ -828,9 +836,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		setValue(expectedConsumption, String.valueOf(random.nextInt(5000)));
-		click(contractEndDate);
+		setValue(contractEndDate, "26-Dec-2018");
+		
+		/*click(contractEndDate);
 		Thread.sleep(1000);
-		selectPrevDateCalender(26, random.nextInt(12), 2018);
+		selectPrevDateCalender(26, random.nextInt(12), 2018);*/
 		Thread.sleep(1000);
 		setValue(capacity, String.valueOf(random.nextInt(5000)));
 		click(saveMeterBtn);
@@ -1079,23 +1089,23 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		Thread.sleep(2000);
 		String mpanNumber = getText(nhhMeterNumberFirstRecord).trim();	
 		Thread.sleep(1000);
-		click(addHHcontractHistoryBtn(mpanNumber));
+		click(addNHHGasContractHistoryBtn(mpanNumber));
 		Thread.sleep(2000);
 		selectByVisibleText(supplierForContractHistoryDDwn, readExcelData("Sheet3", 22, 5));
 		Thread.sleep(1000);
-		selectByIndex(supplierProductDDwn, 2);
+		selectByIndex(supplierProductDDwn, 1);
 		setValue(dateTraded, readExcelData("Sheet3", 22, 2));
 		setValue(contractStartDate, readExcelData("Sheet3", 22, 3));
 		setValue(contractEndDate_ContractHist, readExcelData("Sheet3", 22, 4));
 		setValue(this.dayRate, readExcelData("Sheet3", 22, 7));
 		setValue(this.nightRate, readExcelData("Sheet3", 22, 8));
 		setValue(this.standingCharge, readExcelData("Sheet3", 22, 9));
-		setValue(this.capacityCharge, readExcelData("Sheet3", 22, 10));
+		//setValue(this.capacityCharge, readExcelData("Sheet3", 22, 10));
 		setValue(this.contractedAnnualSpend, readExcelData("Sheet3", 22, 11));
 		
 		click(saveContractHistoryBtn);
-		//Thread.sleep(3000);
-		boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup,3);
+		Thread.sleep(3000);
+		boolean contractHistSaveStatus = isElementPresent(contractHistSaveSuccessPopup);
 		click(okBtn);
 		Assert.assertTrue(contractHistSaveStatus, "Contract History was not saved successfully.");
 	}
@@ -1586,9 +1596,11 @@ boolean revertDeletionBtnDisplayStatus = isElementPresent(revertMeterDeletionBtn
 		setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 		selectByVisibleText(procurementType, "Fixed");
 		setValue(expectedConsumption, String.valueOf(random.nextInt(5000)));
-		click(contractEndDate);
-		Thread.sleep(1000);
-		selectFutureDateCalender(14, random.nextInt(12), 2020);
+		setValue(contractEndDate, "16-Jun-2020");
+		/*
+		 * click(contractEndDate); Thread.sleep(1000); selectFutureDateCalender(14,
+		 * random.nextInt(12), 2020);
+		 */
 		selectByVisibleText(currentSupplier, "Gazprom");
 		setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 		//Thread.sleep(4000);
@@ -1749,22 +1761,28 @@ setValue(meterNumFifthField, mpanNumber.substring(2, 6));
 setValue(meterNumSixthField, mpanNumber.substring(6, 10));
 setValue(meterNumSeventhField, mpanNumber.substring(10, 13));
 setValue(expectedConsumption, readExcelData("Sheet3", 8, 2));
-click(contractEndDate);
-Thread.sleep(1000);
-
-selectFutureDateCalender(14, random.nextInt(12), 2020);
+setValue(contractEndDate, "14-Apr-2020");
+/*
+		 * click(contractEndDate); Thread.sleep(1000);
+		 * 
+		 * selectFutureDateCalender(14, random.nextInt(12), 2020);
+		 */
 setValue(capacity, readExcelData("Sheet3", 8, 3));
 selectByVisibleText(currentSupplier, "Gazprom");
 setValue(currentAnnualSpend, String.valueOf(random.nextInt(5000)));
 selectByVisibleText(currentMeterOperator, "E.ON UK Energy Services Ltd");
 selectByVisibleText(currentDataCollector, "Morrison Data Services");
 selectByVisibleText(procurementType, "Flexible");
-click(meterOperatorEndDate);
-Thread.sleep(1000);
-selectFutureDateCalender(26, 2, 2020);
-click(dataCollectorEndDate);
-Thread.sleep(1000);
-selectFutureDateCalender(21, 7, 2020);
+setValue(meterOperatorEndDate, "26-Mar-2020");
+		/*
+		 * click(meterOperatorEndDate); Thread.sleep(1000); selectFutureDateCalender(26,
+		 * 2, 2020);
+		 */
+setValue(dataCollectorEndDate, "21-Aug-2020");
+		/*
+		 * click(dataCollectorEndDate); Thread.sleep(1000); selectFutureDateCalender(21,
+		 * 7, 2020);
+		 */
 
 JavascriptExecutor executor = (JavascriptExecutor)driver;
 executor.executeScript("arguments[0].click();", saveMetBtn);

@@ -14,7 +14,7 @@ public class AdminDashboardPage extends HeaderPage {
     By manageTendersLink = By.linkText("Manage Tenders");
     By tenderHistoryLink = By.linkText("Tender History");
     By tenderQuoteDropDown =By.id("QuoteRequestsForDate");
-    By verifyTenders = By.xpath("//li[@data-action = 'VerifyTenders']/a");
+    By verifyTenders = By.linkText("Verify Tenders");//By.xpath("//li[@data-action = 'VerifyTenders']/a");
     By flexprocAdmin=By.xpath("//h3[contains(text(),'Flex Procurement Admin')]");
     By flexTenderResponse=By.xpath("//li[5]//ul[1]//li[1]//a[1]");
 

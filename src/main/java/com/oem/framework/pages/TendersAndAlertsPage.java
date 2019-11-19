@@ -1,6 +1,8 @@
 package com.oem.framework.pages;
 
+import java.io.IOException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
@@ -29,6 +31,7 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 	By creditStatusDropdown = By.id("CreditStatus");
 	By productDropdown = By.id("SelectedProductId");
 	By commentsEdtBox = By.id("Comments");
+	By template_SubmitPrice = By.xpath("//a[text() = 'pre-populated template']");
 	By uploadPrice = By.id("FileUpload");
 	By submitBtn = By.xpath("//button[text() = 'Submit']");
 	By pleaseUploadAFilePopup = By.xpath("//div[text() = 'Please upload a file']");
@@ -258,6 +261,23 @@ public class TendersAndAlertsPage extends SupplierDashboardPage{
 		softAssertion.assertTrue(uploadPriceBtnDisplayStatus, "Upload Price button is not displaying.");
 		//validateUploadPriceImproperData();
 		setValue(uploadPrice, readExcelData("Sheet6", 2, 6));
+		
+		/*
+		String sourceLocation = getAttribute(template_SubmitPrice, "href");
+		String wget_command = "cmd /c C:\\Wget\\wget.exe -P D: " + sourceLocation;
+		
+		try 
+		{
+	        Process exec = Runtime.getRuntime().exec(wget_command);
+	        int exitVal = exec.waitFor();
+	        System.out.println("Exit value: " + exitVal);
+	    } 
+		catch (InterruptedException | IOException ex) 
+		{
+	        System.out.println(ex.toString());
+	    }
+		Reporter.log("Clicked on prepopulated submit price template.", true);
+		*/
 		Thread.sleep(2000);
 		click(submitBtn);		
 		Thread.sleep(7000);

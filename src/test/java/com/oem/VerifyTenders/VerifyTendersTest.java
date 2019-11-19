@@ -20,13 +20,13 @@ public class VerifyTendersTest extends BaseTest{
 	}
 	@Test
 	public void verifyAllowSelectedWithoutSelectingAnySupplier() throws Throwable {
-		verifyTendersPage.
+		adminDashboardPage.
 		goToVerifyTenders().
 		verifyAllowSelectedWithoutSelectingAnySupplier();
 	}
 	@Test
 	public void verifyBlockSelectedWithoutSelectingAnySupplier() throws Throwable {
-		verifyTendersPage.
+		adminDashboardPage.
 		goToVerifyTenders().
 		verifyBlockSelectedWithoutSelectingAnySupplier();
 	}

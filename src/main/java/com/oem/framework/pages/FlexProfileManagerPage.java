@@ -328,18 +328,18 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		softAssertion.assertAll();
 	}
 
-	public void clickOnSetUpFlexibleProfile(String SelectUtility) throws Throwable {
+	public void clickOnSetUpFlexibleProfile(String selectUtility) throws Throwable {
 
-		switch (SelectUtility) {
+		switch (selectUtility) {
 
 		case "HH":
 			if (isElementPresent(hhUtilitySetUpPro)) {
 				click(hhUtilitySetUpPro);
 			} else {
 				click_hhUtilityLink();
-				Thread.sleep(2000);
+				//Thread.sleep(2000);
 				//click(hhUtilitySetUpPro);
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 
 				if (isElementPresent(notAbleToCreateSetupProfile)) {
 					FlexProfileAdminPage flexAdmin = new FlexProfileAdminPage();
@@ -403,9 +403,9 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		int i = 0;
 		// Traversing through the list and printing its Suppliers text
 		for (WebElement supplier : allSuppliers) {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			setExcelData("Sheet5", 1, i, supplier.getText());
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			i++;
 		}
 
@@ -556,28 +556,18 @@ public class FlexProfileManagerPage extends CustomerDashboardPage {
 		}
 	}
 
-	public void forloopToSelectMultipleQuestions() {
+	public void forloopToSelectMultipleQuestions() throws Throwable {
 
 		for (int i = 0; i < 10; i++) {
 
 			if (i % 2 == 0) {
 				driver.findElement(By.xpath("//div[@id='question-container-" + i + "']//div[1]//label[1]")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Thread.sleep(3000);
 				Reporter.log("clicked on " + i + "Question and 1 Option.", true);
 			} else {
 
 				driver.findElement(By.xpath("//div[@id='question-container-" + i + "']//div[2]//label[1]")).click();
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Thread.sleep(3000);
 				Reporter.log("clicked on " + i + "Question and 2 Option.", true);
 			}
 		}
