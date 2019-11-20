@@ -36,44 +36,69 @@ public class CompanyProfileTest extends BaseTest {
 	@Test
 	public void PM_CP_TC_004_verifyRegisteredAddressInputsTest() throws Throwable {
 
-		customerDashboardPage.clickCompanyProfile().verifyRegisteredAddressInputs();
+		customerDashboardPage.clickCompanyProfile().
+		verifyRegisteredAddressInputs();
 	}
 
 	@Test
 	public void PM_CP_TC_005_verifyRegisteredAddressExceedingMaxLengthErrorTest() throws Throwable {
 
-		customerDashboardPage.clickCompanyProfile().verifyRegisteredAddressExceedingMaxLengthError(
+		customerDashboardPage.clickCompanyProfile().
+		verifyRegisteredAddressExceedingMaxLengthError(
 				"The field Registered address must be a string with a maximum length of 200");
 	}
 
 	
-	  @Test public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  verifyBlankRegisteredAddressError("Registered address field is required"); }
+	  @Test 
+	  public void PM_CP_TC_006_verifyBlankRegisteredAddressErrorTest() throws Throwable 
+	  { 
+		  customerDashboardPage. clickCompanyProfile().
+		  verifyBlankRegisteredAddressError("Registered address field is required"); }
 	  
-	  @Test public void PM_CP_TC_007_verifyCompanyNameBlankErrorTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  verifyCompanyNameError("The Company name field is required."); }
+	  @Test 
+	  public void PM_CP_TC_007_verifyCompanyNameBlankErrorTest() throws Throwable 
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  verifyCompanyNameError("The Company name field is required."); 
+	  }
+	  @Test 
+	  public void PM_CP_TC_008_validateCompanyNameAlphabeticAcceptanceTest() throws Throwable 
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  validateCompanyNameAlphabeticAcceptance(); 
+	  }
 	  
-	  @Test public void PM_CP_TC_008_validateCompanyNameAlphabeticAcceptanceTest()
-	  throws Throwable { customerDashboardPage. clickCompanyProfile().
-	  validateCompanyNameAlphabeticAcceptance(); }
+	  @Test 
+	  public void PM_CP_TC_009_verifyBlankPostcodeErrorTest() throws Throwable 
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  verifyBlankPostcodeError("Postcode field is required"); 
+	  }
 	  
-	  @Test public void PM_CP_TC_009_verifyBlankPostcodeErrorTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  verifyBlankPostcodeError("Postcode field is required"); }
+	  @Test 
+	  public void PM_CP_TC_010_validatePostcodeSpecialSymbolTest() throws Throwable 
+	  { 
+		  customerDashboardPage. 
+		  clickCompanyProfile().
+		  validatePostcodeSpecialSymbolTest(); 
+	  }
 	  
-	  @Test public void PM_CP_TC_010_validatePostcodeSpecialSymbolTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  validatePostcodeSpecialSymbolTest(); }
+	  @Test 
+	  public void PM_CP_TC_011_validatePostcodeNumericDataTest() throws Throwable 
+	  { 
+		  customerDashboardPage.clickCompanyProfile().
+		  validatePostcodeNumericDataTest(); 
+	  }
 	  
-	  @Test public void PM_CP_TC_011_validatePostcodeNumericDataTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  validatePostcodeNumericDataTest(); }
-	  
-	  @Test public void PM_CP_TC_012_validateIfPhoneFieldMandatoryTest() throws
-	  Throwable { customerDashboardPage. clickCompanyProfile().
-	  validateIfPhoneFieldMandatory(); }
+	  @Test 
+	  public void PM_CP_TC_012_validateIfPhoneFieldMandatoryTest() throws Throwable 
+	  { 
+		  customerDashboardPage.clickCompanyProfile().
+		  						validateIfPhoneFieldMandatory(); 
+	  }
 	  
 	  @Test public void PM_CP_TC_013_validatePhoneFieldAlphabeticTestData() throws
 	  Throwable { customerDashboardPage. clickCompanyProfile().

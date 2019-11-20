@@ -202,8 +202,10 @@ public class ForecastingPage extends CustomerDashboardPage	{
 		Thread.sleep(5000);
 		softAssertion.assertTrue(isElementPresent(okAlertPopup),"savechagesSuccssAlert PopUp is Not Present");
 		click(okAlertPopup);
-		//Thread.sleep(2000);
-		
+		Thread.sleep(40000);
+		//waitForElementPresent(okAlertPopup, 40);
+		click(okAlertPopup);
+		Thread.sleep(5000);
 		//click(okAlertPopup);
 		softAssertion.assertAll();
 	}

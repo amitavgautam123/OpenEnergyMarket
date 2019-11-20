@@ -4,32 +4,30 @@
     <parameter name="pdfngreport-properties" value="./pdfngreport.properties" />
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter" />
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-        <!-- <listener class-name="com.oem.framework.listeners.CustomReporter"/> -->
-        
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />        
     </listeners>
 
     <test name="OEM Regression Tests">
       <classes>
-      <class name="com.oem.Suits.FlexManagementSuite"/>
+      <!-- <class name="com.oem.Suits.FlexManagementSuite"/>
       <class name="com.oem.Suits.FlexReQuoteTenderTest"/>
-      <class name="com.oem.flexManagement.FlexProfileManagerTest"/>
-      <class name="com.oem.PortfolioManager.CompanyProfileTest"/>
-      <class name="com.oem.QuotesAndTenders.RequestQuoteTest"/>
-      <class name="com.oem.PortfolioManager.PropertyPortfolioMeterTest"/>
+      <class name="com.oem.flexManagement.FlexProfileManagerTest"/> -->
+      <!-- <class name="com.oem.PortfolioManager.CompanyProfileTest"/> -->
+      <!-- <class name="com.oem.QuotesAndTenders.RequestQuoteTest"/>
+      <class name="com.oem.PortfolioManager.PropertyPortfolioMeterTest"/> -->
       <class name="com.oem.Suits.GasSuiteE2Etest"/>
-      <class name="com.oem.PortfolioManager.PortfolioCalendarTest"/>
+      <!-- <class name="com.oem.PortfolioManager.PortfolioCalendarTest"/>
       <class name="com.oem.FixedProcurement.TenderRequoteTest"/>
-      <class name="com.oem.suppliers.TendersAndAlertsTest"/>
+      <class name="com.oem.suppliers.TendersAndAlertsTest"/> -->
       <class name="com.oem.VerifyTenders.VerifyTendersTest"/>
       
-      <class name="com.oem.Suits.HHsuiteE2Etest"/>
+      <!-- <class name="com.oem.Suits.HHsuiteE2Etest"/>
       <class name="com.oem.Suits.FixedProcurementSuite"/>
       <class name="com.oem.Forcasting.ForecastingTest"/>
       <class name="com.oem.PortfolioManager.PropertyPortfolioTest"/>
       <class name="com.oem.FixedProcurement.ManageTendersTest"/>
       <class name="com.oem.FixedProcurement.TenderResponseTest"/>
-      <class name="com.oem.Suits.NHHsuiteE2Etest"/>
+      <class name="com.oem.Suits.NHHsuiteE2Etest"/> -->
       
       
     </classes>

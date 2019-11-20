@@ -52,6 +52,8 @@ public class FlexProfileAdminPage extends AdminDashboardPage{
 			List<WebElement> hhprofiles =driver.findElements(hhProfileDelete);
 			int noOfHHProfiles=hhprofiles.size();
 			for(int i=1;i<noOfHHProfiles;i++){
+				scrollToElement(hhProfileDelete);
+				Thread.sleep(1000);
 				click(hhProfileDelete);
 				Thread.sleep(2000);
 				click(clickOk);

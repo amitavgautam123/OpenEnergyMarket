@@ -80,7 +80,8 @@ public class ForecastingTest extends BaseTest	{
 	@Test(priority=11)
 	public void verifyCostsAfterAddingSomePercentage() throws Throwable{
 		customerDashboardPage.
-		goToForecastingPage().verifyCostsAfterAddingSomePercentage();
+		goToForecastingPage().
+		verifyCostsAfterAddingSomePercentage();
 	}
 	@Test(priority=12)
 	public void verifyFallingMarketValueAfterAddingPercentage() throws Throwable{
